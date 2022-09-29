@@ -1,0 +1,15 @@
+---
+en:
+  search: Search
+
+  # generic
+  generic: Generic Information
+
+  # contract
+  contract: Contract
+
+  # spot
+  spot: Spot
+
+  # transfer
+  transfer: Transfer
