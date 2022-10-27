@@ -91,7 +91,6 @@ under the License.
         color: #B0B8DB;
         font-size: 15px;
         text-decoration: none;
-        line-height: 23px;
         padding: 0 20px;
         vertical-align: middle;
         transform: translate(0, -3px);
@@ -99,7 +98,7 @@ under the License.
 
       .con a.selected {
         border-bottom: 2px solid transparent;
-        border-color: #FFB11A;
+        border-color: #3d7eff;
         color: #fff;
       }
 
@@ -222,20 +221,30 @@ under the License.
       <% end %>
 
       <ul class="con">
-        <li>
-          <div class="dropdown">
-            <button class="dropbtn"><%=t(:earn_crypto)%>
-              <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="dropdown-content">
-               <a href="<%= (I18n.locale.to_s == 'en') ? "" : "/"+I18n.locale.to_s%>/earn_crypto/wealth_manage" ><%=t(:wealth_manage)%></a>
-            </div>
-          </div>
-        </li>
+         <!-- GENERIC -->
+         <% if page_classes.end_with?("generic_index") %>
+           <li><a href="/generic" class="selected"><%=t(:generic)%></a></li>
+         <% else %>
+           <li><a href="/generic"><%=t(:generic)%></a></li>
+         <% end %>
+
+         <!-- Contract -->
+         <% if page_classes.end_with?("contract_index") %>
+           <li><a href="/contract" class="selected"><%=t(:contract)%></a></li>
+         <% else %>
+           <li><a href="/contract"><%=t(:contract)%></a></li>
+         <% end %>
+
+         <!-- SPOT -->
+         <% if page_classes.end_with?("spot_index") %>
+           <li><a href="/spot" class="selected"><%=t(:spot)%></a></li>
+         <% else %>
+           <li><a href="/spot"><%=t(:spot)%></a></li>
+         <% end %>
       </ul>
 
     </div>
-    <a class="international" id="international" href="javascript:void(0);"><%=t(:international)%></a>
+   <!-- <a class="international" id="international" href="javascript:void(0);"><%=t(:international)%></a> -->
   </header>
   <!-- Navigation bar END -->
 
@@ -334,17 +343,17 @@ under the License.
       $(".con a").removeClass("selected");
       $(this).addClass("selected")
     });
-    $("#international").click(function(){
-      $this = $(this);
-      var currentUrl = window.location.href;
-      if ($this.text() == 'English') {
-        window.location=currentUrl.replace(/\/zh-my/,"");
-      } else {
-        if (currentUrl.indexOf("earn_crypto") > -1) {
-	        window.location=currentUrl.replace(/\/((?:testnet\/)?earn_crypto)/,"/zh-my/$1");
-        }
-      }
-    });
+#     $("#international").click(function(){
+#       $this = $(this);
+#       var currentUrl = window.location.href;
+#       if ($this.text() == 'English') {
+#         window.location=currentUrl.replace(/\/zh-my/,"");
+#       } else {
+#         if (currentUrl.indexOf("earn_crypto") > -1) {
+# 	        window.location=currentUrl.replace(/\/((?:testnet\/)?earn_crypto)/,"/zh-my/$1");
+#         }
+#       }
+#     });
 </script>
 
 </html>

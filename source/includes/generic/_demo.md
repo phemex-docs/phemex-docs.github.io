@@ -4,9 +4,6 @@ t(:predict_para)
 ## t(:order_buy)
 > t(:codequote_curlExample)
 
-```console
-```
-
 ```java
 class HelloWorld {
     public static void main(String[] args) {
@@ -17,7 +14,7 @@ class HelloWorld {
 
 > t(:codequote_responseExample)
 
-```javascript
+```java
 {
     "code": 0,
     "msg": "",

@@ -1,16 +1,8 @@
 ---
 en:
+  #general
   international: 中文
   search: Search
-  introduction: Group And Resources
-  intro_para:
-    <p><a href="https://www.phemex.com/">Phemex</a> API and WebSocket documentation provides guidance to help you access Phemex's endpoints, their expected outputs, and common errors.</p>
-  resources: API Resources and Support Channels
-  intro_para_resources:
-    <ul class="phemex-community">
-    <li><img src="/images/favicon.ico" height="14", width="14"> <a href="https://github.com/phemex-docs/phemex-docs.github.io"><strong>Phemex Docs</strong></a> - <strong>Learn more about exchange mechanisms here!</strong>
-    </ul>
-
   codequote_curlExample: Request Example
   codequote_responseExample: Response Example
   httprequest: HTTP Request
@@ -24,20 +16,8 @@ en:
   ret_msg: Message
   ret_data: Data
 
-  # Error Code
-  errors: Errors
-  errors_intro: The Phemex API uses the following HTTP codes and error codes<span>:</span>
-  errorcode_meaning: Meaning
-  spot_http_200: Request is valid
-  spot_http_403: Access denied
-  spot_http_404: Request path not found
-  err_62010: Coupon does not exist
-  err_62011: Coupon and product does not match
-  err_62012: Conditions for using coupon not met
-
-  # Predict
+  # demo
   earn_crypto: Earn Crypto
-  wealth_manage: Wealth Manage
   predict: Predict
   predict_para: APIs for Predict Products
   order_buy: Make predictions for a product
@@ -45,3 +25,12 @@ en:
   currency: currency
   amount_ev: amount ev value
   predict_option_id: option id
+
+  #generic
+  generic: Generic Info
+
+  #contract
+  contract: Contract
+
+  #spot
+  spot: Spot
