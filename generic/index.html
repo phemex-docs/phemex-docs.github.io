@@ -687,10 +687,10 @@
         <ul class="search-results"></ul>
       <ul id="toc" class="toc-list-h1">
           <li>
-            <a href="#t-predict" class="toc-h1 toc-link" data-title="Predict">Predict</a>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#t-order_buy" class="toc-h2 toc-link" data-title="Make predictions for a product">Make predictions for a product</a>
+                    <a href="#general-information" class="toc-h2 toc-link" data-title="General information">General information</a>
                   </li>
               </ul>
           </li>
@@ -719,9 +719,16 @@ clipboard.on('error', function(e) {
     console.log(e);
 });
 </script>
-<h1 id='t-predict'>Predict</h1>
+<h1 id='introduction'>Introduction</h1>
 <p>APIs for Predict Products</p>
-<h2 id='t-order_buy'>Make predictions for a product</h2>
+<h2 id='general-information'>General information</h2>
+<ul>
+<li>Phemex provides HTTP Rest API for client to operate Orders, all endpoints return a JSON object.</li>
+<li>The default Rest API base endpoint is: <strong>https://api.phemex.com</strong>. The High rate limit Rest API base endpoint is: <strong>https://vapi.phemex.com</strong>. Or for the testnet is:  <strong>https://testnet-api.phemex.com</strong> </li>
+<li>Phemex provides WebSocket API for client to receive market data, order and position updates.</li>
+<li>The WebSocket API url is: <strong>wss://phemex.com/ws</strong>. The High rate limit WebSocket API url is: <strong>wss://vapi.phemex.com/ws</strong>. Or for the testnet is:  <strong>wss://testnet.phemex.com/ws</strong> </li>
+</ul>
+
 <blockquote>
 <p>Request Example</p>
 </blockquote>
