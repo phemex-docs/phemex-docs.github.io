@@ -237,8 +237,9 @@
         line-height: 50px;
       }
       img.logo {
-        width: 161px;
-        height: 40px;
+        padding: 24px 24px 8px;
+        width: 211px;
+        height: 60px;
         vertical-align: middle;
       }
       .con {
@@ -635,7 +636,7 @@
   color: #859900;
 }
     </style>
-    <link href="../../stylesheets/screen-91887dde.css" rel="stylesheet" media="screen" />
+    <link href="../../stylesheets/screen-d5302000.css" rel="stylesheet" media="screen" />
     <link href="../../stylesheets/print-41ffbffc.css" rel="stylesheet" media="print" />
       <script src="../../javascripts/all-52d563e0.js"></script>
     <script>
@@ -643,54 +644,38 @@
     </script>
   </head>
 
-
-
-  <!-- Navigation bar START -->
-  <header class="top-nav">
-    <div class="top-menu">
+  <body class="zh-my zh-my_generic zh-my_generic_index" data-languages="[]">
+    <a href="#" id="nav-button" class="">
+    <span> NAV <img src="images/navbar.png" alt=""> </span>
+    </a>
+    <div class="toc-wrapper">
         <a href="" class="logo-link" target="_self">
           <img src="../../images/logo-e10cba0f.svg" class="logo" alt="" />
         </a>
-
-      <ul class="con">
-         <!-- GENERIC -->
-           <li><a href="/generic" class="selected">translation missing: zh-my.generic</a></li>
-
-         <!-- Contract -->
-           <li><a href="/contract">translation missing: zh-my.contract</a></li>
-
-         <!-- SPOT -->
-           <li><a href="/spot">translation missing: zh-my.spot</a></li>
-
-         <!-- Transfer -->
-           <li><a href="/transfer">translation missing: zh-my.transfer</a></li>
-      </ul>
-
-    </div>
-   <!-- <a class="international" id="international" href="javascript:void(0);">translation missing: zh-my.international</a> -->
-  </header>
-  <!-- Navigation bar END -->
-
-
-
-  <body class="zh-my zh-my_generic zh-my_generic_index" data-languages="[]">
-    <a href="#" id="nav-button">
-      <span>
-        NAV
-        <img src="../../images/navbar-cad8cdcb.png" alt="" />
-      </span>
-    </a>
-    <div class="toc-wrapper">
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="translation missing: zh-my.search">
         </div>
         <ul class="search-results"></ul>
       <ul id="toc" class="toc-list-h1">
           <li>
-            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+            <a href="#overview" class="toc-h1 toc-link" data-title="Overview">Overview</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#general-api-information" class="toc-h2 toc-link" data-title="General API Information">General API Information</a>
+                  </li>
+                  <li>
+                    <a href="#rate-limits" class="toc-h2 toc-link" data-title="Rate Limits">Rate Limits</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#ip-ratelimit" class="toc-h3 toc-link" data-title="IP Ratelimit">IP Ratelimit</a>
+                          </li>
+                          <li>
+                            <a href="#api-ratelimit-rules" class="toc-h3 toc-link" data-title="API RateLimit Rules">API RateLimit Rules</a>
+                          </li>
+                          <li>
+                            <a href="#api-groups" class="toc-h3 toc-link" data-title="Api Groups">Api Groups</a>
+                          </li>
+                      </ul>
                   </li>
                   <li>
                     <a href="#contact-us" class="toc-h2 toc-link" data-title="Contact Us">Contact Us</a>
@@ -719,7 +704,9 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='introduction'>Introduction</h1><h2 id='general-api-information'>General API Information</h2>
+        <h1 id='overview'>Overview</h1>
+<p>Welcome to the <a href="https://phemex.com">Phemex</a> API documentation. We offer REST and Websocket APIs to interact with our systems.</p>
+<h2 id='general-api-information'>General API Information</h2>
 <ul>
 <li>Rest API base endpoints:
 
@@ -737,6 +724,211 @@
 </ul></li>
 <li>Phemex provides HTTP Rest API for client to operate Orders, all endpoints return a JSON object.</li>
 </ul>
+<h2 id='rate-limits'>Rate Limits</h2>
+<ul>
+<li>In order to protect the exchange, Phemex apply <code>API RateLimit</code> and <code>IP Ratelimit</code> on all requests.</li>
+<li>Rest API has a request capacity in one minute window on user basis.</li>
+<li>IP has request capacity in 5 minutes window.</li>
+<li>Ratelimit of API is <strong>independant</strong> of that in WEB/APP, so if one get ratelimited in API, one can place/cancel orders via WEB or APP.</li>
+</ul>
+<h3 id='ip-ratelimit'>IP Ratelimit</h3>
+<p>Currently Phemex restrict every IP 5,000 request in 5 minutes window.
+   If exceeded this IP capacity, the user would be blocked in the following 5 minutes.</p>
+<h3 id='api-ratelimit-rules'>API RateLimit Rules</h3>
+<ul>
+<li>All Phemex APIs are divided into 3 groups, <code>contract</code>, <code>spotOrder</code> and <code>others</code>.</li>
+<li>All APIs in the same group share a request capacity.</li>
+<li>Every API consume request shares at its own weight.</li>
+<li>If exceeded the ratelimit, http status 429 will returned, together with a reset seconds header <code>x-ratelimit-retry-after-&lt;groupName&gt;</code></li>
+<li>Ratelimit headers
+Below headers are returned with API response. Postfix <code>-&lt;groupName&gt;</code> is empty if group is others</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Header name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x-ratelimit-remaining-<em>groupName</em></td>
+<td>Remaining request permits in this minute</td>
+</tr>
+<tr>
+<td>x-ratelimit-capacity-<em>groupName</em></td>
+<td>Request ratelimit capacity</td>
+</tr>
+<tr>
+<td>x-ratelimit-retry-after-<em>groupName</em></td>
+<td>Reset timeout in seconds for current ratelimited user</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>Group capacity</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Group Name</th>
+<th>Capacity</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Contract</td>
+<td>500/minute</td>
+</tr>
+<tr>
+<td>SpotOrder</td>
+<td>500/minute</td>
+</tr>
+<tr>
+<td>Others</td>
+<td>100/minute</td>
+</tr>
+</tbody></table>
+<h3 id='api-groups'>Api Groups</h3>
+<ul>
+<li>Contract group
+Contract group is for contract trading, it contains following api.</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Path</th>
+<th>Method</th>
+<th>Weight</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>/orders</td>
+<td>POST</td>
+<td>1</td>
+<td>Place new order</td>
+</tr>
+<tr>
+<td>/orders/replace</td>
+<td>PUT</td>
+<td>1</td>
+<td>Amend order</td>
+</tr>
+<tr>
+<td>/orders/cancel</td>
+<td>DELETE</td>
+<td>1</td>
+<td>Cancel order</td>
+</tr>
+<tr>
+<td>/orders/all</td>
+<td>DELETE</td>
+<td>3</td>
+<td>Cancel all order by symbol</td>
+</tr>
+<tr>
+<td>/orders</td>
+<td>DELETE</td>
+<td>1</td>
+<td>cancel orders</td>
+</tr>
+<tr>
+<td>/orders/activeList</td>
+<td>GET</td>
+<td>1</td>
+<td>Query open orders by symbol</td>
+</tr>
+<tr>
+<td>/orders/active</td>
+<td>GET</td>
+<td>1</td>
+<td>Query open order by orderID</td>
+</tr>
+<tr>
+<td>/accounts/accountPositions</td>
+<td>GET</td>
+<td>1</td>
+<td>Query account &amp; position by currency</td>
+</tr>
+<tr>
+<td>/accounts/positions</td>
+<td>GET</td>
+<td>25</td>
+<td>Query positions with un-realized-pnl</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>SpotOrder group
+SpotOrder group is for spot trading, which contains following api.</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Path</th>
+<th>Method</th>
+<th>Weight</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>/spot/orders</td>
+<td>POST</td>
+<td>1</td>
+<td>Place spot order</td>
+</tr>
+<tr>
+<td>/spot/orders</td>
+<td>PUT</td>
+<td>1</td>
+<td>Amend spot order</td>
+</tr>
+<tr>
+<td>/spot/orders</td>
+<td>DELETE</td>
+<td>2</td>
+<td>Cancel spot order</td>
+</tr>
+<tr>
+<td>/spot/orders/all</td>
+<td>DELETE</td>
+<td>2</td>
+<td>Cancel spot orders by symbol</td>
+</tr>
+<tr>
+<td>/spot/orders/active</td>
+<td>GET</td>
+<td>1</td>
+<td>Query open spot order</td>
+</tr>
+<tr>
+<td>/spot/orders</td>
+<td>GET</td>
+<td>1</td>
+<td>Query all open spot orders by symbol</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>Others
+APIs which is not in contract or spotOrder group is categorized into other group.
+Because the number of interfaces in Other group may grow over time, the list below is not exhausted, the items in the table highlight interfaces that has weight other than 1, or interfaces that Phemex deems important. </li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Path</th>
+<th>Method</th>
+<th>Weight</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>/exchange/public/md/kline</td>
+<td>GET</td>
+<td>10</td>
+<td>kline query</td>
+</tr>
+</tbody></table>
 <h2 id='contact-us'>Contact Us</h2>
 <ul>
 <li><a href="https://t.me/Phemex_API">Phemex API Telegram Group</a></li>
@@ -1496,17 +1688,6 @@
       $(".con a").removeClass("selected");
       $(this).addClass("selected")
     });
-#     $("#international").click(function(){
-#       $this = $(this);
-#       var currentUrl = window.location.href;
-#       if ($this.text() == 'English') {
-#         window.location=currentUrl.replace(/\/zh-my/,"");
-#       } else {
-#         if (currentUrl.indexOf("earn_crypto") > -1) {
-# 	        window.location=currentUrl.replace(/\/((?:testnet\/)?earn_crypto)/,"/zh-my/$1");
-#         }
-#       }
-#     });
 </script>
 
 </html>
