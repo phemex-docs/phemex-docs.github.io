@@ -635,7 +635,7 @@
   color: #859900;
 }
     </style>
-    <link href="../stylesheets/screen-952b4996.css" rel="stylesheet" media="screen" />
+    <link href="../stylesheets/screen-91887dde.css" rel="stylesheet" media="screen" />
     <link href="../stylesheets/print-41ffbffc.css" rel="stylesheet" media="print" />
       <script src="../javascripts/all-52d563e0.js"></script>
     <script>
@@ -654,23 +654,26 @@
 
       <ul class="con">
          <!-- GENERIC -->
-           <li><a href="/generic" class="selected">Generic Info</a></li>
+           <li><a href="/generic" class="selected">Generic Information</a></li>
 
          <!-- Contract -->
            <li><a href="/contract">Contract</a></li>
 
          <!-- SPOT -->
            <li><a href="/spot">Spot</a></li>
+
+         <!-- Transfer -->
+           <li><a href="/transfer">Transfer</a></li>
       </ul>
 
     </div>
-   <!-- <a class="international" id="international" href="javascript:void(0);">中文</a> -->
+   <!-- <a class="international" id="international" href="javascript:void(0);">translation missing: en.international</a> -->
   </header>
   <!-- Navigation bar END -->
 
 
 
-  <body class="generic generic_index" data-languages="[&quot;java&quot;]">
+  <body class="generic generic_index" data-languages="[]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -678,9 +681,6 @@
       </span>
     </a>
     <div class="toc-wrapper">
-        <div class="lang-selector">
-              <a href="#" data-language-name="java">java</a>
-        </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
@@ -692,136 +692,801 @@
                   <li>
                     <a href="#general-api-information" class="toc-h2 toc-link" data-title="General API Information">General API Information</a>
                   </li>
+                  <li>
+                    <a href="#contact-us" class="toc-h2 toc-link" data-title="Contact Us">Contact Us</a>
+                  </li>
+                  <li>
+                    <a href="#ccxt-integration" class="toc-h2 toc-link" data-title="CCXT Integration">CCXT Integration</a>
+                  </li>
+                  <li>
+                    <a href="#code-samples" class="toc-h2 toc-link" data-title="Code Samples">Code Samples</a>
+                  </li>
+                  <li>
+                    <a href="#error-codes" class="toc-h2 toc-link" data-title="Error Codes">Error Codes</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#cxlrejreason-field" class="toc-h3 toc-link" data-title="CxlRejReason Field">CxlRejReason Field</a>
+                          </li>
+                          <li>
+                            <a href="#bizerror-field" class="toc-h3 toc-link" data-title="BizError Field">BizError Field</a>
+                          </li>
+                      </ul>
+                  </li>
               </ul>
           </li>
       </ul>
-        <ul class="toc-footer">
-            <li><a href='https://github.com/lord/slate'>Documentation Powered by Slate</a></li>
-        </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <!---
-Clipboard script
--->
-
-<script src="../dist/clipboard.min-f99f064d.js"></script>
-
-<script>
-var clipboard = new ClipboardJS('.clipboard_button');
-
-clipboard.on('success', function(e) {
-    console.log(e);
-});
-
-clipboard.on('error', function(e) {
-    console.log(e);
-});
-</script>
-<h1 id='introduction'>Introduction</h1><h2 id='general-api-information'>General API Information</h2>
+        <h1 id='introduction'>Introduction</h1><h2 id='general-api-information'>General API Information</h2>
 <ul>
+<li>Rest API base endpoints:
+
+<ul>
+<li>Default endpoint: <strong>https://api.phemex.com</strong></li>
+<li>High ratelimit endpoint: <strong>https://vapi.phemex.com</strong></li>
+<li>TestNet endpoint: <strong>https://testnet-api.phemex.com</strong></li>
+</ul></li>
+<li>WebSocket API base endpoints:
+
+<ul>
+<li>Default endpoint: <strong>wss://phemex.com/ws</strong></li>
+<li>High ratelimit endpoint: <strong>wss://vapi.phemex.com/ws</strong></li>
+<li>TestNet endpoint: <strong>wss://testnet.phemex.com/ws</strong></li>
+</ul></li>
 <li>Phemex provides HTTP Rest API for client to operate Orders, all endpoints return a JSON object.</li>
-<li>The default Rest API base endpoint is: <strong>https://api.phemex.com</strong>. The High rate limit Rest API base endpoint is: <strong>https://vapi.phemex.com</strong>. Or for the testnet is:  <strong>https://testnet-api.phemex.com</strong> </li>
-<li>Phemex provides WebSocket API for client to receive market data, order and position updates.</li>
-<li>The WebSocket API url is: <strong>wss://phemex.com/ws</strong>. The High rate limit WebSocket API url is: <strong>wss://vapi.phemex.com/ws</strong>. Or for the testnet is:  <strong>wss://testnet.phemex.com/ws</strong> </li>
 </ul>
-
-<blockquote>
-<p>Request Example</p>
-</blockquote>
-<div class="highlight"><pre class="highlight java tab-java"><code><span class="kd">class</span> <span class="nc">HelloWorld</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hello, World!"</span><span class="o">);</span> 
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div>
-<blockquote>
-<p>Response Example</p>
-</blockquote>
-<div class="highlight"><pre class="highlight java tab-java"><code><span class="o">{</span>
-    <span class="s">"code"</span><span class="o">:</span> <span class="mi">0</span><span class="o">,</span>
-    <span class="s">"msg"</span><span class="o">:</span> <span class="s">""</span><span class="o">,</span>
-    <span class="s">"data"</span><span class="o">:</span> <span class="o">{</span>
-      <span class="s">"transactionTime"</span><span class="o">:</span> <span class="mi">1660702505000</span><span class="o">,</span>
-      <span class="s">"transferAmountEv"</span><span class="o">:</span> <span class="mi">1000000000</span><span class="o">,</span>
-      <span class="s">"status"</span><span class="o">:</span> <span class="s">"Ok"</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div>
-<p class="fake_header">HTTP Request</p>
-
-<p>GET
-<code><span id=svAccount>/phemex-predict/order/buy</span></code>
-<button class="clipboard_button" data-clipboard-action="copy" data-clipboard-target="#svAccount"><img src="../images/copy_to_clipboard-ff25494f.png" height=15 width=15></img></button></p>
-
-<p class="fake_header">Request Parameters</p>
-
+<h2 id='contact-us'>Contact Us</h2>
+<ul>
+<li><a href="https://t.me/Phemex_API">Phemex API Telegram Group</a></li>
+<li><a href="https://phemex.com/support">Phemex Customer Support</a></li>
+</ul>
+<h2 id='ccxt-integration'>CCXT Integration</h2>
+<ul>
+<li>CCXT is our authorized SDK provider and you may access the Phemex API through CCXT. For more information, please visit: https://ccxt.trade.</li>
+<li>CCXT GitHub: https://github.com/ccxt/ccxt</li>
+</ul>
+<h2 id='code-samples'>Code Samples</h2>
+<ul>
+<li>Java Sample Client: <em>https://github.com/phemex/java-client</em></li>
+</ul>
+<h2 id='error-codes'>Error Codes</h2><h3 id='cxlrejreason-field'>CxlRejReason Field</h3>
 <table><thead>
 <tr>
-<th style="text-align: left">Parameter</th>
-<th style="text-align: left">Required</th>
-<th style="text-align: left">Type</th>
-<th>Comment</th>
+<th>Code</th>
+<th>Reason</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">productId</td>
-<td style="text-align: left">true</td>
-<td style="text-align: left">number</td>
-<td>product id</td>
+<td>100</td>
+<td>CE_NO_ENOUGH_QTY</td>
+<td>Qty is not enough</td>
 </tr>
 <tr>
-<td style="text-align: left">currency</td>
-<td style="text-align: left">true</td>
-<td style="text-align: left">string</td>
-<td>currency</td>
+<td>101</td>
+<td>CE_WILLCROSS</td>
+<td>Passive order rejected due to price may cross</td>
 </tr>
 <tr>
-<td style="text-align: left">amountEv</td>
-<td style="text-align: left">true</td>
-<td style="text-align: left">number</td>
-<td>amount ev value</td>
+<td>116</td>
+<td>CE_NO_ENOUGH_BASE_QTY</td>
+<td>Base-qty is not enough in spot-trading</td>
 </tr>
 <tr>
-<td style="text-align: left">optionId</td>
-<td style="text-align: left">true</td>
-<td style="text-align: left">number</td>
-<td>option id</td>
+<td>117</td>
+<td>CE_NO_ENOUGH_QUOTE_QTY</td>
+<td>Quote-qty is not enough in spot-trading</td>
 </tr>
 </tbody></table>
-
-<p class="fake_header">Response Parameters</p>
-
+<h3 id='bizerror-field'>BizError Field</h3>
 <table><thead>
 <tr>
-<th style="text-align: left">Parameter</th>
-<th style="text-align: left">Type</th>
-<th>Comment</th>
+<th>Code</th>
+<th>Message</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">code</td>
-<td style="text-align: left">number</td>
-<td>Code</td>
+<td>19999</td>
+<td>REQUEST_IS_DUPLICATED</td>
+<td>Duplicated request ID</td>
 </tr>
 <tr>
-<td style="text-align: left">msg</td>
-<td style="text-align: left">string</td>
-<td>Message</td>
+<td>10001</td>
+<td>OM_DUPLICATE_ORDERID</td>
+<td>Duplicated order ID</td>
 </tr>
 <tr>
-<td style="text-align: left">data</td>
-<td style="text-align: left">Object</td>
-<td>Data</td>
+<td>10002</td>
+<td>OM_ORDER_NOT_FOUND</td>
+<td>Cannot find order ID</td>
+</tr>
+<tr>
+<td>10003</td>
+<td>OM_ORDER_PENDING_CANCEL</td>
+<td>Cannot cancel while order is already in pending cancel status</td>
+</tr>
+<tr>
+<td>10004</td>
+<td>OM_ORDER_PENDING_REPLACE</td>
+<td>Cannot cancel while order is already in pending cancel status</td>
+</tr>
+<tr>
+<td>10005</td>
+<td>OM_ORDER_PENDING</td>
+<td>Cannot cancel while order is already in pending cancel status</td>
+</tr>
+<tr>
+<td>11001</td>
+<td>TE_NO_ENOUGH_AVAILABLE_BALANCE</td>
+<td>Insufficient available balance</td>
+</tr>
+<tr>
+<td>11002</td>
+<td>TE_INVALID_RISK_LIMIT</td>
+<td>Invalid risk limit value</td>
+</tr>
+<tr>
+<td>11003</td>
+<td>TE_NO_ENOUGH_BALANCE_FOR_NEW_RISK_LIMIT</td>
+<td>Insufficient available balance</td>
+</tr>
+<tr>
+<td>11004</td>
+<td>TE_INVALID_LEVERAGE</td>
+<td>Invalid input or new leverage is over maximum allowed leverage</td>
+</tr>
+<tr>
+<td>11005</td>
+<td>TE_NO_ENOUGH_BALANCE_FOR_NEW_LEVERAGE</td>
+<td>Insufficient available balance</td>
+</tr>
+<tr>
+<td>11006</td>
+<td>TE_CANNOT_CHANGE_POSITION_MARGIN_WITHOUT_POSITION</td>
+<td>Position size is zero. Cannot change margin</td>
+</tr>
+<tr>
+<td>11007</td>
+<td>TE_CANNOT_CHANGE_POSITION_MARGIN_FOR_CROSS_MARGIN</td>
+<td>Cannot change margin under CrossMargin</td>
+</tr>
+<tr>
+<td>11008</td>
+<td>TE_CANNOT_REMOVE_POSITION_MARGIN_MORE_THAN_ADDED</td>
+<td>Exceeds the maximum removable Margin</td>
+</tr>
+<tr>
+<td>11009</td>
+<td>TE_CANNOT_REMOVE_POSITION_MARGIN_DUE_TO_UNREALIZED_PNL</td>
+<td>Exceeds the maximum removable Margin</td>
+</tr>
+<tr>
+<td>11010</td>
+<td>TE_CANNOT_ADD_POSITION_MARGIN_DUE_TO_NO_ENOUGH_AVAILABLE_BALANCE</td>
+<td>Insufficient available balance</td>
+</tr>
+<tr>
+<td>11011</td>
+<td>TE_REDUCE_ONLY_ABORT</td>
+<td>Cannot accept reduce only order</td>
+</tr>
+<tr>
+<td>11012</td>
+<td>TE_REPLACE_TO_INVALID_QTY</td>
+<td>Order quantity Error</td>
+</tr>
+<tr>
+<td>11013</td>
+<td>TE_CONDITIONAL_NO_POSITION</td>
+<td>Position size is zero. Cannot determine conditional order&#39;s quantity</td>
+</tr>
+<tr>
+<td>11014</td>
+<td>TE_CONDITIONAL_CLOSE_POSITION_WRONG_SIDE</td>
+<td>Close position conditional order has the same side</td>
+</tr>
+<tr>
+<td>11015</td>
+<td>TE_CONDITIONAL_TRIGGERED_OR_CANCELED</td>
+<td></td>
+</tr>
+<tr>
+<td>11016</td>
+<td>TE_ADL_NOT_TRADING_REQUESTED_ACCOUNT</td>
+<td>Request is routed to the wrong trading engine</td>
+</tr>
+<tr>
+<td>11017</td>
+<td>TE_ADL_CANNOT_FIND_POSITION</td>
+<td>Cannot find requested position on current account</td>
+</tr>
+<tr>
+<td>11018</td>
+<td>TE_NO_NEED_TO_SETTLE_FUNDING</td>
+<td>The current account does not need to pay a funding fee</td>
+</tr>
+<tr>
+<td>11019</td>
+<td>TE_FUNDING_ALREADY_SETTLED</td>
+<td>The current account already pays the funding fee</td>
+</tr>
+<tr>
+<td>11020</td>
+<td>TE_CANNOT_TRANSFER_OUT_DUE_TO_BONUS</td>
+<td>Withdraw to wallet needs to remove all remaining bonus. However if bonus is used by position or order cost, withdraw fails.</td>
+</tr>
+<tr>
+<td>11021</td>
+<td>TE_INVALID_BONOUS_AMOUNT</td>
+<td>Invalid bonus amount</td>
+</tr>
+<tr>
+<td>11022</td>
+<td>TE_REJECT_DUE_TO_BANNED</td>
+<td>Account is banned</td>
+</tr>
+<tr>
+<td>11023</td>
+<td>TE_REJECT_DUE_TO_IN_PROCESS_OF_LIQ</td>
+<td>Account is in the process of liquidation</td>
+</tr>
+<tr>
+<td>11024</td>
+<td>TE_REJECT_DUE_TO_IN_PROCESS_OF_ADL</td>
+<td>Account is in the process of auto-deleverage</td>
+</tr>
+<tr>
+<td>11025</td>
+<td>TE_ROUTE_ERROR = 11025</td>
+<td>Request is routed to the wrong trading engine</td>
+</tr>
+<tr>
+<td>11026</td>
+<td>TE_UID_ACCOUNT_MISMATCH</td>
+<td></td>
+</tr>
+<tr>
+<td>11027</td>
+<td>TE_SYMBOL_INVALID</td>
+<td>Invalid number ID or name</td>
+</tr>
+<tr>
+<td>11028</td>
+<td>TE_CURRENCY_INVALID</td>
+<td>Invalid currency ID or name</td>
+</tr>
+<tr>
+<td>11029</td>
+<td>TE_ACTION_INVALID</td>
+<td>Unrecognized request type</td>
+</tr>
+<tr>
+<td>11030</td>
+<td>TE_ACTION_BY_INVALID</td>
+<td></td>
+</tr>
+<tr>
+<td>11031</td>
+<td>TE_SO_NUM_EXCEEDS</td>
+<td>Number of total conditional orders exceeds the max limit</td>
+</tr>
+<tr>
+<td>11032</td>
+<td>TE_AO_NUM_EXCEEDS</td>
+<td>Number of total active orders exceeds the max limit</td>
+</tr>
+<tr>
+<td>11033</td>
+<td>TE_ORDER_ID_DUPLICATE</td>
+<td>Details:Duplicated order ID</td>
+</tr>
+<tr>
+<td>11034</td>
+<td>TE_SIDE_INVALID</td>
+<td>Details:Invalid side</td>
+</tr>
+<tr>
+<td>11035</td>
+<td>TE_ORD_TYPE_INVALID</td>
+<td>Details:Invalid OrderType</td>
+</tr>
+<tr>
+<td>11036</td>
+<td>TE_TIME_IN_FORCE_INVALID</td>
+<td>Details:Invalid TimeInForce</td>
+</tr>
+<tr>
+<td>11037</td>
+<td>TE_EXEC_INST_INVALID</td>
+<td>Details:Invalid ExecType</td>
+</tr>
+<tr>
+<td>11038</td>
+<td>TE_TRIGGER_INVALID</td>
+<td>Details:Invalid trigger type</td>
+</tr>
+<tr>
+<td>11039</td>
+<td>TE_STOP_DIRECTION_INVALID</td>
+<td>Details:Invalid stop direction type</td>
+</tr>
+<tr>
+<td>11040</td>
+<td>TE_NO_MARK_PRICE</td>
+<td>Cannot get valid mark price to create conditional order</td>
+</tr>
+<tr>
+<td>11041</td>
+<td>TE_NO_INDEX_PRICE</td>
+<td>Cannot get valid index price to create conditional order</td>
+</tr>
+<tr>
+<td>11042</td>
+<td>TE_NO_LAST_PRICE</td>
+<td>Cannot get valid last market price to create conditional order</td>
+</tr>
+<tr>
+<td>11043</td>
+<td>TE_RISING_TRIGGER_DIRECTLY</td>
+<td>Conditional order would be triggered immediately</td>
+</tr>
+<tr>
+<td>11044</td>
+<td>TE_FALLING_TRIGGER_DIRECTLY</td>
+<td>Conditional order would be triggered immediately</td>
+</tr>
+<tr>
+<td>11045</td>
+<td>TE_TRIGGER_PRICE_TOO_LARGE</td>
+<td>Conditional order trigger price is too high</td>
+</tr>
+<tr>
+<td>11046</td>
+<td>TE_TRIGGER_PRICE_TOO_SMALL</td>
+<td>Conditional order trigger price is too low</td>
+</tr>
+<tr>
+<td>11047</td>
+<td>TE_BUY_TP_SHOULD_GT_BASE</td>
+<td>TakeProfit BUY conditional order trigger price needs to be greater than reference price</td>
+</tr>
+<tr>
+<td>11048</td>
+<td>TE_BUY_SL_SHOULD_LT_BASE</td>
+<td>StopLoss BUY condition order price needs to be less than the reference price</td>
+</tr>
+<tr>
+<td>11049</td>
+<td>TE_BUY_SL_SHOULD_GT_LIQ</td>
+<td>StopLoss BUY condition order price needs to be greater than liquidation price or it will not trigger</td>
+</tr>
+<tr>
+<td>11050</td>
+<td>TE_SELL_TP_SHOULD_LT_BASE</td>
+<td>TakeProfit SELL conditional order trigger price needs to be less than reference price</td>
+</tr>
+<tr>
+<td>11051</td>
+<td>TE_SELL_SL_SHOULD_LT_LIQ</td>
+<td>StopLoss SELL condition order price needs to be less than liquidation price or it will not trigger</td>
+</tr>
+<tr>
+<td>11052</td>
+<td>TE_SELL_SL_SHOULD_GT_BASE</td>
+<td>StopLoss SELL condition order price needs to be greater than the reference price</td>
+</tr>
+<tr>
+<td>11053</td>
+<td>TE_PRICE_TOO_LARGE</td>
+<td>Order price is too large</td>
+</tr>
+<tr>
+<td>11054</td>
+<td>TE_PRICE_WORSE_THAN_BANKRUPT</td>
+<td>Order price cannot be more aggressive than bankrupt price if this order has instruction to close a position</td>
+</tr>
+<tr>
+<td>11055</td>
+<td>TE_PRICE_TOO_SMALL</td>
+<td>Order price is too low</td>
+</tr>
+<tr>
+<td>11056</td>
+<td>TE_QTY_TOO_LARGE</td>
+<td>Order quantity is too large</td>
+</tr>
+<tr>
+<td>11057</td>
+<td>TE_QTY_NOT_MATCH_REDUCE_ONLY</td>
+<td>Does not allow ReduceOnly order without position</td>
+</tr>
+<tr>
+<td>11058</td>
+<td>TE_QTY_TOO_SMALL</td>
+<td>Order quantity is too small</td>
+</tr>
+<tr>
+<td>11059</td>
+<td>TE_TP_SL_QTY_NOT_MATCH_POS</td>
+<td>Position size is zero. Cannot accept any TakeProfit or StopLoss order</td>
+</tr>
+<tr>
+<td>11060</td>
+<td>TE_SIDE_NOT_CLOSE_POS</td>
+<td>TakeProfit or StopLoss order has wrong side. Cannot close position</td>
+</tr>
+<tr>
+<td>11061</td>
+<td>TE_ORD_ALREADY_PENDING_CANCEL</td>
+<td>Repeated cancel request</td>
+</tr>
+<tr>
+<td>11062</td>
+<td>TE_ORD_ALREADY_CANCELED</td>
+<td>Order is already canceled</td>
+</tr>
+<tr>
+<td>11063</td>
+<td>TE_ORD_STATUS_CANNOT_CANCEL</td>
+<td>Order is not able to be canceled under current status</td>
+</tr>
+<tr>
+<td>11064</td>
+<td>TE_ORD_ALREADY_PENDING_REPLACE</td>
+<td>Replace request is rejected because order is already in pending replace status</td>
+</tr>
+<tr>
+<td>11065</td>
+<td>TE_ORD_REPLACE_NOT_MODIFIED</td>
+<td>Replace request does not modify any parameters of the order</td>
+</tr>
+<tr>
+<td>11066</td>
+<td>TE_ORD_STATUS_CANNOT_REPLACE</td>
+<td>Order is not able to be replaced under current status</td>
+</tr>
+<tr>
+<td>11067</td>
+<td>TE_CANNOT_REPLACE_PRICE</td>
+<td>Market conditional order cannot change price</td>
+</tr>
+<tr>
+<td>11068</td>
+<td>TE_CANNOT_REPLACE_QTY</td>
+<td>Condtional order for closing position cannot change order quantity, since the order quantity is determined by position size already</td>
+</tr>
+<tr>
+<td>11069</td>
+<td>TE_ACCOUNT_NOT_IN_RANGE</td>
+<td>The account ID in the request is not valid or is not in the range of the current process</td>
+</tr>
+<tr>
+<td>11070</td>
+<td>TE_SYMBOL_NOT_IN_RANGE</td>
+<td>The symbol is invalid</td>
+</tr>
+<tr>
+<td>11071</td>
+<td>TE_ORD_STATUS_CANNOT_TRIGGER</td>
+<td></td>
+</tr>
+<tr>
+<td>11072</td>
+<td>TE_TKFR_NOT_IN_RANGE</td>
+<td>The fee value is not valid</td>
+</tr>
+<tr>
+<td>11073</td>
+<td>TE_MKFR_NOT_IN_RANGE</td>
+<td>The fee value is not valid</td>
+</tr>
+<tr>
+<td>11074</td>
+<td>TE_CANNOT_ATTACH_TP_SL</td>
+<td>Order request cannot contain TP/SL parameters when the account already has positions</td>
+</tr>
+<tr>
+<td>11075</td>
+<td>TE_TP_TOO_LARGE</td>
+<td>TakeProfit price is too large</td>
+</tr>
+<tr>
+<td>11076</td>
+<td>TE_TP_TOO_SMALL</td>
+<td>TakeProfit price is too small</td>
+</tr>
+<tr>
+<td>11077</td>
+<td>TE_TP_TRIGGER_INVALID</td>
+<td>Invalid trigger type</td>
+</tr>
+<tr>
+<td>11078</td>
+<td>TE_SL_TOO_LARGE</td>
+<td>StopLoss price is too large</td>
+</tr>
+<tr>
+<td>11079</td>
+<td>TE_SL_TOO_SMALL</td>
+<td>StopLoss price is too small</td>
+</tr>
+<tr>
+<td>11080</td>
+<td>TE_SL_TRIGGER_INVALID</td>
+<td>Invalid trigger type</td>
+</tr>
+<tr>
+<td>11081</td>
+<td>TE_RISK_LIMIT_EXCEEDS</td>
+<td>Total potential position breaches current risk limit</td>
+</tr>
+<tr>
+<td>11082</td>
+<td>TE_CANNOT_COVER_ESTIMATE_ORDER_LOSS</td>
+<td>The remaining balance cannot cover the potential unrealized PnL for this new order</td>
+</tr>
+<tr>
+<td>11083</td>
+<td>TE_TAKE_PROFIT_ORDER_DUPLICATED</td>
+<td>TakeProfit order already exists</td>
+</tr>
+<tr>
+<td>11084</td>
+<td>TE_STOP_LOSS_ORDER_DUPLICATED</td>
+<td>StopLoss order already exists</td>
+</tr>
+<tr>
+<td>11085</td>
+<td>TE_CL_ORD_ID_DUPLICATE</td>
+<td>ClOrdId is duplicated</td>
+</tr>
+<tr>
+<td>11086</td>
+<td>TE_PEG_PRICE_TYPE_INVALID</td>
+<td>PegPriceType is invalid</td>
+</tr>
+<tr>
+<td>11087</td>
+<td>TE_BUY_TS_SHOULD_LT_BASE</td>
+<td>The trailing order&#39;s StopPrice should be less than the current last price</td>
+</tr>
+<tr>
+<td>11088</td>
+<td>TE_BUY_TS_SHOULD_GT_LIQ</td>
+<td>The traling order&#39;s StopPrice should be greater than the current liquidation price</td>
+</tr>
+<tr>
+<td>11089</td>
+<td>TE_SELL_TS_SHOULD_LT_LIQ</td>
+<td>The traling order&#39;s StopPrice should be greater than the current last price</td>
+</tr>
+<tr>
+<td>11090</td>
+<td>TE_SELL_TS_SHOULD_GT_BASE</td>
+<td>The traling order&#39;s StopPrice should be less than the current liquidation price</td>
+</tr>
+<tr>
+<td>11091</td>
+<td>TE_BUY_REVERT_VALUE_SHOULD_LT_ZERO</td>
+<td>The PegOffset should be less than zero</td>
+</tr>
+<tr>
+<td>11092</td>
+<td>TE_SELL_REVERT_VALUE_SHOULD_GT_ZERO</td>
+<td>The PegOffset should be greater than zero</td>
+</tr>
+<tr>
+<td>11093</td>
+<td>TE_BUY_TTP_SHOULD_ACTIVATE_ABOVE_BASE</td>
+<td>The activation price should be greater than the current last price</td>
+</tr>
+<tr>
+<td>11094</td>
+<td>TE_SELL_TTP_SHOULD_ACTIVATE_BELOW_BASE</td>
+<td>The activation price should be less than the current last price</td>
+</tr>
+<tr>
+<td>11095</td>
+<td>TE_TRAILING_ORDER_DUPLICATED</td>
+<td>A trailing order exists already</td>
+</tr>
+<tr>
+<td>11096</td>
+<td>TE_CLOSE_ORDER_CANNOT_ATTACH_TP_SL</td>
+<td>An order to close position cannot have trailing instruction</td>
+</tr>
+<tr>
+<td>11097</td>
+<td>TE_CANNOT_FIND_WALLET_OF_THIS_CURRENCY</td>
+<td>This crypto is not supported</td>
+</tr>
+<tr>
+<td>11098</td>
+<td>TE_WALLET_INVALID_ACTION</td>
+<td>Invalid action on wallet</td>
+</tr>
+<tr>
+<td>11099</td>
+<td>TE_WALLET_VID_UNMATCHED</td>
+<td>Wallet operation request has a wrong wallet vid</td>
+</tr>
+<tr>
+<td>11100</td>
+<td>TE_WALLET_INSUFFICIENT_BALANCE</td>
+<td>Wallet has insufficient balance</td>
+</tr>
+<tr>
+<td>11101</td>
+<td>TE_WALLET_INSUFFICIENT_LOCKED_BALANCE</td>
+<td>Locked balance in wallet is not enough for unlock/withdraw request</td>
+</tr>
+<tr>
+<td>11102</td>
+<td>TE_WALLET_INVALID_DEPOSIT_AMOUNT</td>
+<td>Deposit amount must be greater than zero</td>
+</tr>
+<tr>
+<td>11103</td>
+<td>TE_WALLET_INVALID_WITHDRAW_AMOUNT</td>
+<td>Withdraw amount must be less than zero</td>
+</tr>
+<tr>
+<td>11104</td>
+<td>TE_WALLET_REACHED_MAX_AMOUNT</td>
+<td>Deposit makes wallet exceed max amount allowed</td>
+</tr>
+<tr>
+<td>11105</td>
+<td>TE_PLACE_ORDER_INSUFFICIENT_BASE_BALANCE</td>
+<td>Insufficient funds in base wallet</td>
+</tr>
+<tr>
+<td>11106</td>
+<td>TE_PLACE_ORDER_INSUFFICIENT_QUOTE_BALANCE</td>
+<td>Insufficient funds in quote wallet</td>
+</tr>
+<tr>
+<td>11107</td>
+<td>TE_CANNOT_CONNECT_TO_REQUEST_SEQ</td>
+<td>TradingEngine failed to connect with CrossEngine</td>
+</tr>
+<tr>
+<td>11108</td>
+<td>TE_CANNOT_REPLACE_OR_CANCEL_MARKET_ORDER</td>
+<td>Cannot replace/amend market order</td>
+</tr>
+<tr>
+<td>11109</td>
+<td>TE_CANNOT_REPLACE_OR_CANCEL_IOC_ORDER</td>
+<td>Cannot replace/amend ImmediateOrCancel order</td>
+</tr>
+<tr>
+<td>11110</td>
+<td>TE_CANNOT_REPLACE_OR_CANCEL_FOK_ORDER</td>
+<td>Cannot replace/amend FillOrKill order</td>
+</tr>
+<tr>
+<td>11111</td>
+<td>TE_MISSING_ORDER_ID</td>
+<td>OrderId is missing</td>
+</tr>
+<tr>
+<td>11112</td>
+<td>TE_QTY_TYPE_INVALID</td>
+<td>QtyType is invalid</td>
+</tr>
+<tr>
+<td>11113</td>
+<td>TE_USER_ID_INVALID</td>
+<td>UserId is invalid</td>
+</tr>
+<tr>
+<td>11114</td>
+<td>TE_ORDER_VALUE_TOO_LARGE</td>
+<td>Order value is too large</td>
+</tr>
+<tr>
+<td>11115</td>
+<td>TE_ORDER_VALUE_TOO_SMALL</td>
+<td>Order value is too small</td>
+</tr>
+<tr>
+<td>11116</td>
+<td>TE_BO_NUM_EXCEEDS</td>
+<td>The total count of brakcet orders should equal or less than 5</td>
+</tr>
+<tr>
+<td>11117</td>
+<td>TE_BO_CANNOT_HAVE_BO_WITH_DIFF_SIDE</td>
+<td>All bracket orders should have the same Side.</td>
+</tr>
+<tr>
+<td>11118</td>
+<td>TE_BO_TP_PRICE_INVALID</td>
+<td>Bracker order take profit price is invalid</td>
+</tr>
+<tr>
+<td>11119</td>
+<td>TE_BO_SL_PRICE_INVALID</td>
+<td>Bracker order stop loss price is invalid</td>
+</tr>
+<tr>
+<td>11120</td>
+<td>TE_BO_SL_TRIGGER_PRICE_INVALID</td>
+<td>Bracker order stop loss trigger price is invalid</td>
+</tr>
+<tr>
+<td>11121</td>
+<td>TE_BO_CANNOT_REPLACE</td>
+<td>Cannot replace bracket order.</td>
+</tr>
+<tr>
+<td>11122</td>
+<td>TE_BO_BOTP_STATUS_INVALID</td>
+<td>Bracket take profit order status is invalid</td>
+</tr>
+<tr>
+<td>11123</td>
+<td>TE_BO_CANNOT_PLACE_BOTP_OR_BOSL_ORDER</td>
+<td>Cannot place bracket take profit order</td>
+</tr>
+<tr>
+<td>11124</td>
+<td>TE_BO_CANNOT_REPLACE_BOTP_OR_BOSL_ORDER</td>
+<td>Cannot place bracket stop loss order</td>
+</tr>
+<tr>
+<td>11125</td>
+<td>TE_BO_CANNOT_CANCEL_BOTP_OR_BOSL_ORDER</td>
+<td>Cannot cancel bracket sl/tp order</td>
+</tr>
+<tr>
+<td>11126</td>
+<td>TE_BO_DONOT_SUPPORT_API</td>
+<td>Doesn&#39;t support bracket order via API</td>
+</tr>
+<tr>
+<td>11128</td>
+<td>TE_BO_INVALID_EXECINST</td>
+<td>ExecInst value is invalid</td>
+</tr>
+<tr>
+<td>11129</td>
+<td>TE_BO_MUST_BE_SAME_SIDE_AS_POS</td>
+<td>Bracket order should have the same side as position&#39;s side</td>
+</tr>
+<tr>
+<td>11130</td>
+<td>TE_BO_WRONG_SL_TRIGGER_TYPE</td>
+<td>Bracket stop loss order trigger type is invalid</td>
+</tr>
+<tr>
+<td>11131</td>
+<td>TE_BO_WRONG_TP_TRIGGER_TYPE</td>
+<td>Bracket take profit order trigger type is invalid</td>
+</tr>
+<tr>
+<td>11132</td>
+<td>TE_BO_ABORT_BOSL_DUE_BOTP_CREATE_FAILED</td>
+<td>Cancel bracket stop loss order due failed to create take profit order.</td>
+</tr>
+<tr>
+<td>11133</td>
+<td>TE_BO_ABORT_BOSL_DUE_BOPO_CANCELED</td>
+<td>Cancel bracket stop loss order due main order canceled.</td>
+</tr>
+<tr>
+<td>11134</td>
+<td>TE_BO_ABORT_BOTP_DUE_BOPO_CANCELED</td>
+<td>Cancel bracket take profit order due main order canceled.</td>
 </tr>
 </tbody></table>
 
       </div>
       <div class="dark-box">
-          <div class="lang-selector">
-                <a href="#" data-language-name="java">java</a>
-          </div>
       </div>
     </div>
   </body>
