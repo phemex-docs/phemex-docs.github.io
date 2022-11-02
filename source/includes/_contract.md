@@ -59,164 +59,6 @@ Fields with post-fix "Ep", "Er" or "Ev" have been scaled based on symbol setting
 * Fields with post-fix "Er" are scaled ratios, `ratioScale` in [products](#query-product-information)
 * Fields with post-fix "Ev" are scaled values, `valueScale` of `settleCurrency` in [products](#query-product-information) 
 
-#### Trading Symbols
- Symbol          | Price scale | Ratio scale | Value scale | Settlement currency 
------------------|-------------|-------------|-------------|---------------------
- BTCUSD          |  10,000     | 100,000,000 | 100,000,000 | BTC                
- cETHUSD         |  10,000     | 100,000,000 | 100,000,000 | ETH                
- BTCUSD          |  10,000     | 100,000,000 | 10,000      | BTC
- cETHUSD         |  10,000     | 100,000,000 | 10,000      | ETH
- ETHUSD          |  10,000     | 100,000,000 | 10,000      | USD
- XRPUSD          |  10,000     | 100,000,000 | 10,000      | USD
- LINKUSD         |  10,000     | 100,000,000 | 10,000      | USD
- XTZUSD          |  10,000     | 100,000,000 | 10,000      | USD
- LTCUSD          |  10,000     | 100,000,000 | 10,000      | USD
- ADAUSD          |  10,000     | 100,000,000 | 10,000      | USD
- BCHUSD          |  10,000     | 100,000,000 | 10,000      | USD
- COMPUSD         |  10,000     | 100,000,000 | 10,000      | USD
- YFIUSD          |  10,000     | 100,000,000 | 10,000      | USD
- ALGOUSD         |  10,000     | 100,000,000 | 10,000      | USD
- TRXUSD          |  10,000     | 100,000,000 | 10,000      | USD
- EOSUSD          |  10,000     | 100,000,000 | 10,000      | USD
- ONTUSD          |  10,000     | 100,000,000 | 10,000      | USD
- NEOUSD          |  10,000     | 100,000,000 | 10,000      | USD
- DOTUSD          |  10,000     | 100,000,000 | 10,000      | USD
- UNIUSD          |  10,000     | 100,000,000 | 10,000      | USD
- AAVEUSD         |  10,000     | 100,000,000 | 10,000      | USD
- DOGEUSD         |  10,000     | 100,000,000 | 10,000      | USD
- BATUSD          |  10,000     | 100,000,000 | 10,000      | USD
- CHZUSD          |  10,000     | 100,000,000 | 10,000      | USD
- MANAUSD         |  10,000     | 100,000,000 | 10,000      | USD
- ENJUSD          |  10,000     | 100,000,000 | 10,000      | USD
- SUSHIUSD        |  10,000     | 100,000,000 | 10,000      | USD
- SNXUSD          |  10,000     | 100,000,000 | 10,000      | USD
- GRTUSD          |  10,000     | 100,000,000 | 10,000      | USD
- MKRUSD          |  10,000     | 100,000,000 | 10,000      | USD
- ZECUSD          |  10,000     | 100,000,000 | 10,000      | USD
- FILUSD          |  10,000     | 100,000,000 | 10,000      | USD
- KSMUSD          |  10,000     | 100,000,000 | 10,000      | USD
- XMRUSD          |  10,000     | 100,000,000 | 10,000      | USD
- QTUMUSD         |  10,000     | 100,000,000 | 10,000      | USD
- XLMUSD          |  10,000     | 100,000,000 | 10,000      | USD
- ATOMUSD         |  10,000     | 100,000,000 | 10,000      | USD
- SOLUSD          |  10,000     | 100,000,000 | 10,000      | USD
- uBTCUSD         |  10,000     | 100,000,000 | 10,000      | USD
- ZILUSD          |  10,000     | 100,000,000 | 10,000      | USD
- GMTUSD          |  10,000     | 100,000,000 | 10,000      | USD
- BNBUSD          |  10,000     | 100,000,000 | 10,000      | USD
- AVAXUSD         |  10,000     | 100,000,000 | 10,000      | USD
- u100VETUSD      |  10,000     | 100,000,000 | 10,000      | USD
- WAVESUSD        |  10,000     | 100,000,000 | 10,000      | USD
- u100000SHIBUSD  |  10,000     | 100,000,000 | 10,000      | USD
- u100IOSTUSD     |  10,000     | 100,000,000 | 10,000      | USD
- ETCUSD          |  10,000     | 100,000,000 | 10,000      | USD
- SANDUSD         |  10,000     | 100,000,000 | 10,000      | USD
- APEUSD          |  10,000     | 100,000,000 | 10,000      | USD
- MATICUSD        |  10,000     | 100,000,000 | 10,000      | USD
- GALAUSD         |  10,000     | 100,000,000 | 10,000      | USD
- AXSUSD          |  10,000     | 100,000,000 | 10,000      | USD
- NEARUSD         |  10,000     | 100,000,000 | 10,000      | USD
- u100JASMYUSD    |  10,000     | 100,000,000 | 10,000      | USD
- LRCUSD          |  10,000     | 100,000,000 | 10,000      | USD
- THETAUSD        |  10,000     | 100,000,000 | 10,000      | USD
- FTMUSD          |  10,000     | 100,000,000 | 10,000      | USD
- SRMUSD          |  10,000     | 100,000,000 | 10,000      | USD
- u100SLPUSD      |  10,000     | 100,000,000 | 10,000      | USD
- DYDXUSD         |  10,000     | 100,000,000 | 10,000      | USD
- CRVUSD          |  10,000     | 100,000,000 | 10,000      | USD
- DASHUSD         |  10,000     | 100,000,000 | 10,000      | USD
- ICPUSD          |  10,000     | 100,000,000 | 10,000      | USD
- KLAYUSD         |  10,000     | 100,000,000 | 10,000      | USD
- ONEUSD          |  10,000     | 100,000,000 | 10,000      | USD
- ALICEUSD        |  10,000     | 100,000,000 | 10,000      | USD
- u100PEOPLEUSD   |  10,000     | 100,000,000 | 10,000      | USD
- SKLUSD          |  10,000     | 100,000,000 | 10,000      | USD
- IMXUSD          |  10,000     | 100,000,000 | 10,000      | USD
- KNCUSD          |  10,000     | 100,000,000 | 10,000      | USD
- u1000000NFTUSD  |  10,000     | 100,000,000 | 10,000      | USD
- RUNEUSD         |  10,000     | 100,000,000 | 10,000      | USD
- ASTRUSD         |  10,000     | 100,000,000 | 10,000      | USD
- EGLDUSD         |  10,000     | 100,000,000 | 10,000      | USD
- GLMRUSD         |  10,000     | 100,000,000 | 10,000      | USD
- FTTUSD          |  10,000     | 100,000,000 | 10,000      | USD
- OMGUSD          |  10,000     | 100,000,000 | 10,000      | USD
- DAOUSD          |  10,000     | 100,000,000 | 10,000      | USD
- GALUSD          |  10,000     | 100,000,000 | 10,000      | USD
- CELOUSD         |  10,000     | 100,000,000 | 10,000      | USD
- KAVAUSD         |  10,000     | 100,000,000 | 10,000      | USD
- FLOWUSD         |  10,000     | 100,000,000 | 10,000      | USD
- OGNUSD          |  10,000     | 100,000,000 | 10,000      | USD
- u1000HOTUSD     |  10,000     | 100,000,000 | 10,000      | USD
- 1INCHUSD        |  10,000     | 100,000,000 | 10,000      | USD
- BALUSD          |  10,000     | 100,000,000 | 10,000      | USD
- MINAUSD         |  10,000     | 100,000,000 | 10,000      | USD
- BNXUSD          |  10,000     | 100,000,000 | 10,000      | USD
- SXPUSD          |  10,000     | 100,000,000 | 10,000      | USD
- BAKEUSD         |  10,000     | 100,000,000 | 10,000      | USD
- CHRUSD          |  10,000     | 100,000,000 | 10,000      | USD
- COTIUSD         |  10,000     | 100,000,000 | 10,000      | USD
- ZRXUSD          |  10,000     | 100,000,000 | 10,000      | USD
- WOOUSD          |  10,000     | 100,000,000 | 10,000      | USD
- DODOUSD         |  10,000     | 100,000,000 | 10,000      | USD
- C98USD          |  10,000     | 100,000,000 | 10,000      | USD
- ENSUSD          |  10,000     | 100,000,000 | 10,000      | USD
- RENUSD          |  10,000     | 100,000,000 | 10,000      | USD
- MASKUSD         |  10,000     | 100,000,000 | 10,000      | USD
- ARUSD           |  10,000     | 100,000,000 | 10,000      | USD
- BITUSD          |  10,000     | 100,000,000 | 10,000      | USD
- u100ANKRUSD     |  10,000     | 100,000,000 | 10,000      | USD
- u100ARPAUSD     |  10,000     | 100,000,000 | 10,000      | USD
- u100CELRUSD     |  10,000     | 100,000,000 | 10,000      | USD
- u1000RSRUSD     |  10,000     | 100,000,000 | 10,000      | USD
- u1000REEFUSD    |  10,000     | 100,000,000 | 10,000      | USD
- u100RVNUSD      |  10,000     | 100,000,000 | 10,000      | USD
- u1000DENTUSD    |  10,000     | 100,000,000 | 10,000      | USD
- MOVRUSD         |  10,000     | 100,000,000 | 10,000      | USD
- OCEANUSD        |  10,000     | 100,000,000 | 10,000      | USD
- RAYUSD          |  10,000     | 100,000,000 | 10,000      | USD
- AUDIOUSD        |  10,000     | 100,000,000 | 10,000      | USD
- CVXUSD          |  10,000     | 100,000,000 | 10,000      | USD
- ZENUSD          |  10,000     | 100,000,000 | 10,000      | USD
- MTLUSD          |  10,000     | 100,000,000 | 10,000      | USD
- LPTUSD          |  10,000     | 100,000,000 | 10,000      | USD
- u100IOTXUSD     |  10,000     | 100,000,000 | 10,000      | USD
- STORJUSD        |  10,000     | 100,000,000 | 10,000      | USD
- CVCUSD          |  10,000     | 100,000,000 | 10,000      | USD
- INJUSD          |  10,000     | 100,000,000 | 10,000      | USD
- u100LINAUSD     |  10,000     | 100,000,000 | 10,000      | USD
- TOMOUSD         |  10,000     | 100,000,000 | 10,000      | USD
- u100XEMUSD      |  10,000     | 100,000,000 | 10,000      | USD
- AGLDUSD         |  10,000     | 100,000,000 | 10,000      | USD
- ILVUSD          |  10,000     | 100,000,000 | 10,000      | USD
- YGGUSD          |  10,000     | 100,000,000 | 10,000      | USD
- SFPUSD          |  10,000     | 100,000,000 | 10,000      | USD
- GTCUSD          |  10,000     | 100,000,000 | 10,000      | USD
- LITUSD          |  10,000     | 100,000,000 | 10,000      | USD
- CTKUSD          |  10,000     | 100,000,000 | 10,000      | USD
- API3USD         |  10,000     | 100,000,000 | 10,000      | USD
- u100ACHUSD      |  10,000     | 100,000,000 | 10,000      | USD
- OPUSD           |  10,000     | 100,000,000 | 10,000      | USD
- u100ROSEUSD     |  10,000     | 100,000,000 | 10,000      | USD
- u1000LEVERUSD   |  10,000     | 100,000,000 | 10,000      | USD
- LDOUSD          |  10,000     | 100,000,000 | 10,000      | USD
- FLMUSD          |  10,000     | 100,000,000 | 10,000      | USD
- YFIIUSD         |  10,000     | 100,000,000 | 10,000      | USD
- HNTUSD          |  10,000     | 100,000,000 | 10,000      | USD
- ALPHAUSD        |  10,000     | 100,000,000 | 10,000      | USD
- u1000SPELLUSD   |  10,000     | 100,000,000 | 10,000      | USD
- STGUSD          |  10,000     | 100,000,000 | 10,000      | USD
- FOOTBALLUSD     |  10,000     | 100,000,000 | 10,000      | USD
- u1000LUNCUSD    |  10,000     | 100,000,000 | 10,000      | USD
- PROSUSD         |  10,000     | 100,000,000 | 10,000      | USD
- u100SWEATUSD    |  10,000     | 100,000,000 | 10,000      | USD
- FLUXUSD         |  10,000     | 100,000,000 | 10,000      | USD
- u100TRYBUSD     |  10,000     | 100,000,000 | 10,000      | USD
- PAXGUSD         |  10,000     | 100,000,000 | 10,000      | USD
- LUNA2USD        |  10,000     | 100,000,000 | 10,000      | USD
- QNTUSD          |  10,000     | 100,000,000 | 10,000      | USD
- APTUSD          |  10,000     | 100,000,000 | 10,000      | USD
- GMXUSD          |  10,000     | 100,000,000 | 10,000      | USD
-
 ## Common Constants
 
 * Order Type
@@ -276,7 +118,10 @@ Fields with post-fix "Ep", "Er" or "Ev" have been scaled based on symbol setting
 GET /public/products 
 ```
 
-## Place Order (GET request with query string)
+* Contract symbols are defined in `.products[]` with **type=Perpetual**.
+* Contract risklimit information are defined in `.risklimits[]`.
+
+## Place Order (PUT request with query string)
 
 > Request format
 
@@ -324,7 +169,7 @@ PUT /orders/create?clOrdID=<clOrdID>&symbol=<symbol>&reduceOnly=<reduceOnly>&clo
 
 | Field | Type | Required | Description | Possible values |
 |-------|-------|--------|--------------|-----------------|
-| symbol | String | Yes | Which symbol to place order | [Trading Symbols](#trading-symbols) | 
+| symbol | String | Yes | Which symbol to place order |  | 
 | clOrdID | String | Yes | client order id, max length is 40| |
 | side |  Enum | Yes | Order direction, Buy or Sell | Buy, Sell | 
 | orderQty | Integer | Yes | Order quantity | |
@@ -394,7 +239,7 @@ GET /md/orderbook?symbol=<symbol>
 | priceEp     | Integer| Scaled book level price                    |              |
 | size        | Integer| Scaled book level size                     |              |
 | sequence    | Integer| current message sequence                   |              |
-| symbol      | String | Contract symbol name                       | [Trading Symbols](#trading-symbols) |
+| symbol      | String | Contract symbol name                       |              |
 
 > Request sample
 
@@ -442,7 +287,7 @@ GET /md/orderbook?symbol=BTCUSD
 
 ## Query Kline
 
-* Please be noted that kline interfaces have [rate limits](#rate-limits) rule,  please check the Other group under [api groups](#api-groups)
+> Request format
 
 ```
 GET /exchange/public/md/v2/kline?symbol=<symbol>&resolution=<resolution>&limit=<limit>
@@ -461,6 +306,8 @@ GET /exchange/public/md/v2/kline?symbol=<symbol>&resolution=<resolution>&limit=<
   }
 }
 ```
+
+* Please be noted that kline interfaces have [rate limits](#rate-limits) rule,  please check the Other group under [api groups](#api-groups)
 
 | Field      | Type    | Required | Description     | Possible Values                         |
 |------------|---------|----------|-----------------|-----------------------------------------|
@@ -506,8 +353,6 @@ GET /exchange/public/md/kline?symbol=<symbol>&to=<to>&from=<from>&resolution=<re
 
 ```
 
-
-
 | Field       | Type    | Required    | Description            | Possible Values                                                                                                |
 |-------------|---------|-------------|------------------------|----------------------------------------------------------------------------------------------------------------|
 |symbol       | String  | Yes         | symbol name            | BTCUSD,ETHUSD,uBTCUSD,cETHUSD,XRPUSD...                                                                        | 
@@ -518,7 +363,7 @@ GET /exchange/public/md/kline?symbol=<symbol>&to=<to>&from=<from>&resolution=<re
 
 ## Query Recent Trades
 
-> Request
+> Request format
 
 ```
 GET /md/trade?symbol=<symbol>
@@ -526,7 +371,7 @@ GET /md/trade?symbol=<symbol>
 
 | Field       | Type   | Description                                | Possible values |
 |-------------|--------|--------------------------------------------|--------------|
-| symbol      | String | Contract symbol name                       | [Trading Symbols](#trading-symbols) |
+| symbol      | String | Contract symbol name                       |              |
 
 > Response format
 
@@ -552,15 +397,6 @@ GET /md/trade?symbol=<symbol>
   }
 }
 ```
-
-| Field       | Type   | Description                                | Possible values |
-|-------------|--------|--------------------------------------------|--------------|
-| timestamp   | Integer| Timestamp in nanoseconds                   |              |
-| side        | String | Trade side string                          | Buy, Sell    |
-| priceEp     | Integer| Scaled trade price                         |              |
-| size        | Integer| Scaled trade size                          |              |
-| sequence    | Integer| Current message sequence                   |              |
-| symbol      | String | Contract symbol name                       | [Trading Symbols](#trading-symbols) |
 
 > Message sample
 
@@ -592,9 +428,18 @@ GET /md/trade?symbol=BTCUSD
 }
 ```
 
+| Field       | Type   | Description                                | Possible values |
+|-------------|--------|--------------------------------------------|--------------|
+| timestamp   | Integer| Timestamp in nanoseconds                   |              |
+| side        | String | Trade side string                          | Buy, Sell    |
+| priceEp     | Integer| Scaled trade price                         |              |
+| size        | Integer| Scaled trade size                          |              |
+| sequence    | Integer| Current message sequence                   |              |
+| symbol      | String | Contract symbol name                       |              |
+
 ## Query 24 Hours Ticker
 
-> Request
+> Request format
 
 ```
 GET v1/md/ticker/24hr?symbol=<symbol>
@@ -602,9 +447,9 @@ GET v1/md/ticker/24hr?symbol=<symbol>
 
 | Field       | Type   | Description                                | Possible values |
 |-------------|--------|--------------------------------------------|--------------|
-| symbol      | String | Contract symbol name                       | [Trading Symbols](#trading-symbols) |
+| symbol      | String | Contract symbol name                       |              |
 
-> Response:
+> Response format
 
 ```
 {
@@ -630,23 +475,8 @@ GET v1/md/ticker/24hr?symbol=<symbol>
 }
 ```
 
-| Field         | Type   | Description                                | Possible values |
-|---------------|--------|--------------------------------------------|--------------|
-| open priceEp  | Integer| The scaled open price in last 24 hours     |              |
-| high priceEp  | Integer| The scaled highest price in last 24 hours  |              |
-| low priceEp   | Integer| The scaled lowest price in last 24 hours   |              |
-| close priceEp | Integer| The scaled close price in last 24 hours    |              |
-| index priceEp | Integer| Scaled index price                         |              |
-| mark priceEp  | Integer| Scaled mark price                          |              |
-| open interest | Integer| current open interest                      |              |
-| funding rateEr| Integer| Scaled funding rate                        |              |
-| predicated funding rateEr| Integer| Scaled predicated funding rate  |              |
-| timestamp     | Integer| Timestamp in nanoseconds                   |              |
-| symbol        | String | Contract symbol name                       | [Trading Symbols](#trading-symbols) |
-| turnoverEv    | Integer| The scaled turnover value in last 24 hours |              |
-| volume        | Integer| Symbol trade volume in last 24 hours       |              |
-
 > Request sample
+
 ```
 GET v1/md/ticker/24hr?symbol=BTCUSD
 ```
@@ -675,9 +505,25 @@ GET v1/md/ticker/24hr?symbol=BTCUSD
 }
 ```
 
+| Field         | Type   | Description                                | Possible values |
+|---------------|--------|--------------------------------------------|--------------|
+| open priceEp  | Integer| The scaled open price in last 24 hours     |              |
+| high priceEp  | Integer| The scaled highest price in last 24 hours  |              |
+| low priceEp   | Integer| The scaled lowest price in last 24 hours   |              |
+| close priceEp | Integer| The scaled close price in last 24 hours    |              |
+| index priceEp | Integer| Scaled index price                         |              |
+| mark priceEp  | Integer| Scaled mark price                          |              |
+| open interest | Integer| current open interest                      |              |
+| funding rateEr| Integer| Scaled funding rate                        |              |
+| predicated funding rateEr| Integer| Scaled predicated funding rate  |              |
+| timestamp     | Integer| Timestamp in nanoseconds                   |              |
+| symbol        | String | Contract symbol name                       |              |
+| turnoverEv    | Integer| The scaled turnover value in last 24 hours |              |
+| volume        | Integer| Symbol trade volume in last 24 hours       |              |
+
 ## Query History Trades By symbol
 
-> Response
+> Request format
 
 ```
 GET /exchange/public/nomics/trades?market=<symbol>&since=<since>
@@ -685,7 +531,7 @@ GET /exchange/public/nomics/trades?market=<symbol>&since=<since>
 
 | Field  | Type     | Description                                                       | Possible values                   |
 |--------|----------|-------------------------------------------------------------------|-----------------------------------|
-| market | String   | the market of symbol                                              |[Trading Symbols](#trading-symbols) |
+| market | String   | the market of symbol                                              |                                   |
 | since  | String   | Last id of response field, 0-0-0 is from the very initial trade   | default 0-0-0                     |
 | start  | Integer  | Epoch time in milli-seconds of range start                        |                                   |
 | end    | Integer  | Epoch time in milli-seconds of range end                          |                                   |
@@ -712,7 +558,7 @@ GET /exchange/public/nomics/trades?market=<symbol>&since=<since>
 * Query History trades by symbol
 * RateLimit of this api is 5 per second
 
-* Response sample
+> Response sample
 
 ```json
 {
@@ -800,18 +646,6 @@ GET /exchange/public/nomics/trades?market=<symbol>&since=<since>
 
 ```
 
-> Response sample
-
-```json
-{
-  "error": null,
-  "id": 0,
-  "result": {
-    "status": "success"
-  }
-}
-```
-
 Public channels like trade/orderbook/kline are published publicly without user authentication.
 While for private channels like account/position/order data, the client should send user.auth message to Data Gateway to authenticate the session.
 
@@ -824,8 +658,6 @@ While for private channels like account/position/order data, the client should s
 
 ## Subscribe OrderBook 
 
-Subscribe orderbook update messages with **depth = 30 and interval = 20ms**.
-
 > Request format
 
 ```
@@ -837,6 +669,8 @@ Subscribe orderbook update messages with **depth = 30 and interval = 20ms**.
   ]
 }
 ```
+
+Subscribe orderbook update messages with **depth = 30 and interval = 20ms**.
 
 On each successful subscription, DataGW will immediately send the current Order Book (with default depth=30) snapshot to client and all later order book updates will be published. 
 
@@ -854,8 +688,6 @@ On each successful subscription, DataGW will immediately send the current Order 
 
 ## Subscribe Full OrderBook 
 
-Subscribe orderbook update messages with **full depth and interval = 100ms**.
-
 > Request format
 
 ```
@@ -868,6 +700,8 @@ Subscribe orderbook update messages with **full depth and interval = 100ms**.
   ]
 }
 ```
+
+Subscribe orderbook update messages with **full depth and interval = 100ms**.
 
 On each successful subscription, DataGW will immediately send the current full Order Book snapshot to client and all later order book updates will be published. 
 
@@ -994,18 +828,6 @@ DataGW publishes order book message with types: incremental, snapshot. Snapshot 
 }
 ```
 
-> Response sample
-
-```json
-{
-  "error": null,
-  "id": 0,
-  "result": {
-    "status": "success"
-  }
-}
-```
-
 It unsubscribes all orderbook related subscriptions.
 
 ## Subscribe Trade
@@ -1033,18 +855,6 @@ On each successful subscription, DataGW will send the 200 history trades immedia
   "params": [
     "BTCUSD"
   ]
-}
-```
-
-> Response sample
-
-```json
-{
-  "error": null,
-  "id": 0,
-  "result": {
-    "status": "success"
-  }
 }
 ```
 
@@ -1166,18 +976,6 @@ DataGW publishes trade message with types: incremental, snapshot. Incremental me
 
 It unsubscribes all trade subscriptions or for a single symbol.
 
-> Response sample
-
-```json
-{
-  "error": null,
-  "id": 0,
-  "result": {
-    "status": "success"
-  }
-}
-```
-
 ## Subscribe Kline
 
 > Request format
@@ -1205,18 +1003,6 @@ On each successful subscription, DataGW will send the 1000 history klines immedi
     "BTCUSD",
     86400
   ]
-}
-```
-
-> Response sample: subscribe 1-day kline
-
-```json
-{
-  "error": null,
-  "id": 0,
-  "result": {
-    "status": "success"
-  }
 }
 ```
 
@@ -1930,7 +1716,7 @@ On each successful subscription, DataGW will publish 24-hour ticker metrics for 
 | funding rateEr| Integer| Scaled funding rate                        |              |
 | predicated funding rateEr| Integer| Scaled predicated funding rate  |              |
 | timestamp     | Integer| Timestamp in nanoseconds                   |              |
-| symbol        | String | Contract symbol name                       | [Trading Symbols](#trading-symbols) |
+| symbol        | String | Contract symbol name                       |              |
 | turnoverEv    | Integer| The scaled turnover value in last 24 hours |              |
 | volume        | Integer| Symbol trade volume in last 24 hours       |              |
   
@@ -1954,167 +1740,9 @@ i.e. `index` symbol follows a pattern `.<BASECURRENCY>`,
      predicated funding rate's symbol follows a pattern `.<BASECURRENCY>FR`,
      while funding rate symbol follows a pattern `.<BASECURRENCY>FR8H`
 * Price is retrieved by subscribing symbol tick.
-* all available symbols (pfr=predicated funding rate)
-
- symbol          | index symbol  |  mark symbol   | pfr symbol      | funding rate symbol |
------------------|---------------|----------------|-----------------|---------------------|
- BTCUSD          | .BTC          | .MBTC          | .BTCFR          | .BTCFR8H
- cETHUSD         | .cETH         | .McETH         | .cETHFR         | .cETHFR8H
- ETHUSD          | .ETH          | .METH          | .ETHFR          | .ETHFR8H
- XRPUSD          | .XRP          | .MXRP          | .XRPFR          | .XRPFR8H
- LINKUSD         | .LINK         | .MLINK         | .LINKFR         | .LINKFR8H
- XTZUSD          | .XTZ          | .MXTZ          | .XTZFR          | .XTZFR8H
- LTCUSD          | .LTC          | .MLTC          | .LTCFR          | .LTCFR8H
- ADAUSD          | .ADA          | .MADA          | .ADAFR          | .ADAFR8H
- BCHUSD          | .BCH          | .MBCH          | .BCHFR          | .BCHFR8H
- COMPUSD         | .COMP         | .MCOMP         | .COMPFR         | .COMPFR8H
- YFIUSD          | .YFI          | .MYFI          | .YFIFR          | .YFIFR8H
- ALGOUSD         | .ALGO         | .MALGO         | .ALGOFR         | .ALGOFR8H
- TRXUSD          | .TRX          | .MTRX          | .TRXFR          | .TRXFR8H
- EOSUSD          | .EOS          | .MEOS          | .EOSFR          | .EOSFR8H
- ONTUSD          | .ONT          | .MONT          | .ONTFR          | .ONTFR8H
- NEOUSD          | .NEO          | .MNEO          | .NEOFR          | .NEOFR8H
- DOTUSD          | .DOT          | .MDOT          | .DOTFR          | .DOTFR8H
- UNIUSD          | .UNI          | .MUNI          | .UNIFR          | .UNIFR8H
- AAVEUSD         | .AAVE         | .MAAVE         | .AAVEFR         | .AAVEFR8H
- DOGEUSD         | .DOGE         | .MDOGE         | .DOGEFR         | .DOGEFR8H
- BATUSD          | .BAT          | .MBAT          | .BATFR          | .BATFR8H
- CHZUSD          | .CHZ          | .MCHZ          | .CHZFR          | .CHZFR8H
- MANAUSD         | .MANA         | .MMANA         | .MANAFR         | .MANAFR8H
- ENJUSD          | .ENJ          | .MENJ          | .ENJFR          | .ENJFR8H
- SUSHIUSD        | .SUSHI        | .MSUSHI        | .SUSHIFR        | .SUSHIFR8H
- SNXUSD          | .SNX          | .MSNX          | .SNXFR          | .SNXFR8H
- GRTUSD          | .GRT          | .MGRT          | .GRTFR          | .GRTFR8H
- MKRUSD          | .MKR          | .MMKR          | .MKRFR          | .MKRFR8H
- ZECUSD          | .ZEC          | .MZEC          | .ZECFR          | .ZECFR8H
- FILUSD          | .FIL          | .MFIL          | .FILFR          | .FILFR8H
- KSMUSD          | .KSM          | .MKSM          | .KSMFR          | .KSMFR8H
- XMRUSD          | .XMR          | .MXMR          | .XMRFR          | .XMRFR8H
- QTUMUSD         | .QTUM         | .MQTUM         | .QTUMFR         | .QTUMFR8H
- XLMUSD          | .XLM          | .MXLM          | .XLMFR          | .XLMFR8H
- ATOMUSD         | .ATOM         | .MATOM         | .ATOMFR         | .ATOMFR8H
- SOLUSD          | .SOL          | .MSOL          | .SOLFR          | .SOLFR8H
- uBTCUSD         | .uBTC         | .MuBTC         | .uBTCFR         | .uBTCFR8H
- ZILUSD          | .ZIL          | .MZIL          | .ZILFR          | .ZILFR8H
- GMTUSD          | .GMT          | .MGMT          | .GMTFR          | .GMTFR8H
- BNBUSD          | .BNB          | .MBNB          | .BNBFR          | .BNBFR8H
- AVAXUSD         | .AVAX         | .MAVAX         | .AVAXFR         | .AVAXFR8H
- u100VETUSD      | .u100VET      | .Mu100VET      | .u100VETFR      | .u100VETFR8H
- WAVESUSD        | .WAVES        | .MWAVES        | .WAVESFR        | .WAVESFR8H
- u100000SHIBUSD  | .u100000SHIB  | .Mu100000SHIB  | .u100000SHIBFR  | .u100000SHIBFR8H
- u100IOSTUSD     | .u100IOST     | .Mu100IOST     | .u100IOSTFR     | .u100IOSTFR8H
- ETCUSD          | .ETC          | .METC          | .ETCFR          | .ETCFR8H
- SANDUSD         | .SAND         | .MSAND         | .SANDFR         | .SANDFR8H
- APEUSD          | .APE          | .MAPE          | .APEFR          | .APEFR8H
- MATICUSD        | .MATIC        | .MMATIC        | .MATICFR        | .MATICFR8H
- GALAUSD         | .GALA         | .MGALA         | .GALAFR         | .GALAFR8H
- AXSUSD          | .AXS          | .MAXS          | .AXSFR          | .AXSFR8H
- NEARUSD         | .NEAR         | .MNEAR         | .NEARFR         | .NEARFR8H
- u100JASMYUSD    | .u100JASMY    | .Mu100JASMY    | .u100JASMYFR    | .u100JASMYFR8H
- LRCUSD          | .LRC          | .MLRC          | .LRCFR          | .LRCFR8H
- THETAUSD        | .THETA        | .MTHETA        | .THETAFR        | .THETAFR8H
- FTMUSD          | .FTM          | .MFTM          | .FTMFR          | .FTMFR8H
- SRMUSD          | .SRM          | .MSRM          | .SRMFR          | .SRMFR8H
- u100SLPUSD      | .u100SLP      | .Mu100SLP      | .u100SLPFR      | .u100SLPFR8H
- DYDXUSD         | .DYDX         | .MDYDX         | .DYDXFR         | .DYDXFR8H
- CRVUSD          | .CRV          | .MCRV          | .CRVFR          | .CRVFR8H
- DASHUSD         | .DASH         | .MDASH         | .DASHFR         | .DASHFR8H
- ICPUSD          | .ICP          | .MICP          | .ICPFR          | .ICPFR8H
- KLAYUSD         | .KLAY         | .MKLAY         | .KLAYFR         | .KLAYFR8H
- ONEUSD          | .ONE          | .MONE          | .ONEFR          | .ONEFR8H
- ALICEUSD        | .ALICE        | .MALICE        | .ALICEFR        | .ALICEFR8H
- u100PEOPLEUSD   | .u100PEOPLE   | .Mu100PEOPLE   | .u100PEOPLEFR   | .u100PEOPLEFR8H
- SKLUSD          | .SKL          | .MSKL          | .SKLFR          | .SKLFR8H
- IMXUSD          | .IMX          | .MIMX          | .IMXFR          | .IMXFR8H
- KNCUSD          | .KNC          | .MKNC          | .KNCFR          | .KNCFR8H
- u1000000NFTUSD  | .u1000000NFT  | .Mu1000000NFT  | .u1000000NFTFR  | .u1000000NFTFR8H
- RUNEUSD         | .RUNE         | .MRUNE         | .RUNEFR         | .RUNEFR8H
- ASTRUSD         | .ASTR         | .MASTR         | .ASTRFR         | .ASTRFR8H
- EGLDUSD         | .EGLD         | .MEGLD         | .EGLDFR         | .EGLDFR8H
- GLMRUSD         | .GLMR         | .MGLMR         | .GLMRFR         | .GLMRFR8H
- FTTUSD          | .FTT          | .MFTT          | .FTTFR          | .FTTFR8H
- OMGUSD          | .OMG          | .MOMG          | .OMGFR          | .OMGFR8H
- DAOUSD          | .DAO          | .MDAO          | .DAOFR          | .DAOFR8H
- GALUSD          | .GAL          | .MGAL          | .GALFR          | .GALFR8H
- CELOUSD         | .CELO         | .MCELO         | .CELOFR         | .CELOFR8H
- KAVAUSD         | .KAVA         | .MKAVA         | .KAVAFR         | .KAVAFR8H
- FLOWUSD         | .FLOW         | .MFLOW         | .FLOWFR         | .FLOWFR8H
- OGNUSD          | .OGN          | .MOGN          | .OGNFR          | .OGNFR8H
- u1000HOTUSD     | .u1000HOT     | .Mu1000HOT     | .u1000HOTFR     | .u1000HOTFR8H
- 1INCHUSD        | .1INCH        | .M1INCH        | .1INCHFR        | .1INCHFR8H
- BALUSD          | .BAL          | .MBAL          | .BALFR          | .BALFR8H
- MINAUSD         | .MINA         | .MMINA         | .MINAFR         | .MINAFR8H
- BNXUSD          | .BNX          | .MBNX          | .BNXFR          | .BNXFR8H
- SXPUSD          | .SXP          | .MSXP          | .SXPFR          | .SXPFR8H
- BAKEUSD         | .BAKE         | .MBAKE         | .BAKEFR         | .BAKEFR8H
- CHRUSD          | .CHR          | .MCHR          | .CHRFR          | .CHRFR8H
- COTIUSD         | .COTI         | .MCOTI         | .COTIFR         | .COTIFR8H
- ZRXUSD          | .ZRX          | .MZRX          | .ZRXFR          | .ZRXFR8H
- WOOUSD          | .WOO          | .MWOO          | .WOOFR          | .WOOFR8H
- DODOUSD         | .DODO         | .MDODO         | .DODOFR         | .DODOFR8H
- C98USD          | .C98          | .MC98          | .C98FR          | .C98FR8H
- ENSUSD          | .ENS          | .MENS          | .ENSFR          | .ENSFR8H
- RENUSD          | .REN          | .MREN          | .RENFR          | .RENFR8H
- MASKUSD         | .MASK         | .MMASK         | .MASKFR         | .MASKFR8H
- ARUSD           | .AR           | .MAR           | .ARFR           | .ARFR8H
- BITUSD          | .BIT          | .MBIT          | .BITFR          | .BITFR8H
- u100ANKRUSD     | .u100ANKR     | .Mu100ANKR     | .u100ANKRFR     | .u100ANKRFR8H
- u100ARPAUSD     | .u100ARPA     | .Mu100ARPA     | .u100ARPAFR     | .u100ARPAFR8H
- u100CELRUSD     | .u100CELR     | .Mu100CELR     | .u100CELRFR     | .u100CELRFR8H
- u1000RSRUSD     | .u1000RSR     | .Mu1000RSR     | .u1000RSRFR     | .u1000RSRFR8H
- u1000REEFUSD    | .u1000REEF    | .Mu1000REEF    | .u1000REEFFR    | .u1000REEFFR8H
- u100RVNUSD      | .u100RVN      | .Mu100RVN      | .u100RVNFR      | .u100RVNFR8H
- u1000DENTUSD    | .u1000DENT    | .Mu1000DENT    | .u1000DENTFR    | .u1000DENTFR8H
- MOVRUSD         | .MOVR         | .MMOVR         | .MOVRFR         | .MOVRFR8H
- OCEANUSD        | .OCEAN        | .MOCEAN        | .OCEANFR        | .OCEANFR8H
- RAYUSD          | .RAY          | .MRAY          | .RAYFR          | .RAYFR8H
- AUDIOUSD        | .AUDIO        | .MAUDIO        | .AUDIOFR        | .AUDIOFR8H
- CVXUSD          | .CVX          | .MCVX          | .CVXFR          | .CVXFR8H
- ZENUSD          | .ZEN          | .MZEN          | .ZENFR          | .ZENFR8H
- MTLUSD          | .MTL          | .MMTL          | .MTLFR          | .MTLFR8H
- LPTUSD          | .LPT          | .MLPT          | .LPTFR          | .LPTFR8H
- u100IOTXUSD     | .u100IOTX     | .Mu100IOTX     | .u100IOTXFR     | .u100IOTXFR8H
- STORJUSD        | .STORJ        | .MSTORJ        | .STORJFR        | .STORJFR8H
- CVCUSD          | .CVC          | .MCVC          | .CVCFR          | .CVCFR8H
- INJUSD          | .INJ          | .MINJ          | .INJFR          | .INJFR8H
- u100LINAUSD     | .u100LINA     | .Mu100LINA     | .u100LINAFR     | .u100LINAFR8H
- TOMOUSD         | .TOMO         | .MTOMO         | .TOMOFR         | .TOMOFR8H
- u100XEMUSD      | .u100XEM      | .Mu100XEM      | .u100XEMFR      | .u100XEMFR8H
- AGLDUSD         | .AGLD         | .MAGLD         | .AGLDFR         | .AGLDFR8H
- ILVUSD          | .ILV          | .MILV          | .ILVFR          | .ILVFR8H
- YGGUSD          | .YGG          | .MYGG          | .YGGFR          | .YGGFR8H
- SFPUSD          | .SFP          | .MSFP          | .SFPFR          | .SFPFR8H
- GTCUSD          | .GTC          | .MGTC          | .GTCFR          | .GTCFR8H
- LITUSD          | .LIT          | .MLIT          | .LITFR          | .LITFR8H
- CTKUSD          | .CTK          | .MCTK          | .CTKFR          | .CTKFR8H
- API3USD         | .API3         | .MAPI3         | .API3FR         | .API3FR8H
- u100ACHUSD      | .u100ACH      | .Mu100ACH      | .u100ACHFR      | .u100ACHFR8H
- OPUSD           | .OP           | .MOP           | .OPFR           | .OPFR8H
- u100ROSEUSD     | .u100ROSE     | .Mu100ROSE     | .u100ROSEFR     | .u100ROSEFR8H
- u1000LEVERUSD   | .u1000LEVER   | .Mu1000LEVER   | .u1000LEVERFR   | .u1000LEVERFR8H
- LDOUSD          | .LDO          | .MLDO          | .LDOFR          | .LDOFR8H
- FLMUSD          | .FLM          | .MFLM          | .FLMFR          | .FLMFR8H
- YFIIUSD         | .YFII         | .MYFII         | .YFIIFR         | .YFIIFR8H
- HNTUSD          | .HNT          | .MHNT          | .HNTFR          | .HNTFR8H
- ALPHAUSD        | .ALPHA        | .MALPHA        | .ALPHAFR        | .ALPHAFR8H
- u1000SPELLUSD   | .u1000SPELL   | .Mu1000SPELL   | .u1000SPELLFR   | .u1000SPELLFR8H
- STGUSD          | .STG          | .MSTG          | .STGFR          | .STGFR8H
- FOOTBALLUSD     | .FOOTBALL     | .MFOOTBALL     | .FOOTBALLFR     | .FOOTBALLFR8H
- u1000LUNCUSD    | .u1000LUNC    | .Mu1000LUNC    | .u1000LUNCFR    | .u1000LUNCFR8H
- PROSUSD         | .PROS         | .MPROS         | .PROSFR         | .PROSFR8H
- u100SWEATUSD    | .u100SWEAT    | .Mu100SWEAT    | .u100SWEATFR    | .u100SWEATFR8H
- FLUXUSD         | .FLUX         | .MFLUX         | .FLUXFR         | .FLUXFR8H
- u100TRYBUSD     | .u100TRYB     | .Mu100TRYB     | .u100TRYBFR     | .u100TRYBFR8H
- PAXGUSD         | .PAXG         | .MPAXG         | .PAXGFR         | .PAXGFR8H
- LUNA2USD        | .LUNA2        | .MLUNA2        | .LUNA2FR        | .LUNA2FR8H
- QNTUSD          | .QNT          | .MQNT          | .QNTFR          | .QNTFR8H
- APTUSD          | .APT          | .MAPT          | .APTFR          | .APTFR8H
- GMXUSD          | .GMX          | .MGMX          | .GMXFR          | .GMXFR8H
-
+* all available symbols in [products](#query-product-information)
 
 ## Tick Message
-
-A price tick event message.
 
 > Message format
 

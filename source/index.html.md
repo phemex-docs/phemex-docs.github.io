@@ -1,9 +1,6 @@
 ---
 title: Phemex API Reference
 
-language_tabs:
-  - json
-
 includes:
   - generic
   - contract

@@ -11,6 +11,7 @@ License for the specific language governing permissions and limitations
 under the License.
 %>
 <% language_tabs = current_page.data.language_tabs || [] %>
+<% $head_count = {} %>
 <% page_content = yield %>
 <%
   if current_page.data.includes
