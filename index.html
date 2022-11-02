@@ -644,7 +644,7 @@
     </script>
   </head>
 
-  <body class="index" data-languages="[&quot;json&quot;]">
+  <body class="index" data-languages="[]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -655,9 +655,6 @@
         <a href="https://phemex.com" class="logo-link" target="_self">
           <img src="images/logo-e10cba0f.svg" class="logo" alt="" />
         </a>
-        <div class="lang-selector">
-              <a href="#" data-language-name="json">json</a>
-        </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
@@ -2448,9 +2445,9 @@ Because the number of interfaces in Other group may grow over time, the list bel
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h2 id='query-kline'>Query Kline</h2>
-<ul>
-<li>Please be noted that kline interfaces have <a href="#rate-limits">rate limits</a> rule,  please check the Other group under <a href="#api-groups">api groups</a></li>
-</ul>
+<blockquote>
+<p>Request format</p>
+</blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>GET /exchange/public/md/v2/kline?symbol=&lt;symbol&gt;&amp;resolution=&lt;resolution&gt;&amp;limit=&lt;limit&gt;
 
 </code></pre></div>
@@ -2466,6 +2463,10 @@ Because the number of interfaces in Other group may grow over time, the list bel
   }
 }
 </code></pre></div>
+<ul>
+<li>Please be noted that kline interfaces have <a href="#rate-limits">rate limits</a> rule,  please check the Other group under <a href="#api-groups">api groups</a></li>
+</ul>
+
 <table><thead>
 <tr>
 <th>Field</th>
@@ -2920,7 +2921,7 @@ Because the number of interfaces in Other group may grow over time, the list bel
 </tbody></table>
 <h2 id='query-history-trades-by-symbol'>Query History Trades By symbol</h2>
 <blockquote>
-<p>Response</p>
+<p>Request format</p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>GET /exchange/public/nomics/trades?market=&lt;symbol&gt;&amp;since=&lt;since&gt;
 </code></pre></div>
@@ -5617,9 +5618,6 @@ While for private channels like account/position/order data, the client should s
 <h1 id='transfer-rest-api'>Transfer REST API</h1>
       </div>
       <div class="dark-box">
-          <div class="lang-selector">
-                <a href="#" data-language-name="json">json</a>
-          </div>
       </div>
     </div>
   </body>
