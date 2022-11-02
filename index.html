@@ -238,7 +238,7 @@
       }
       img.logo {
         padding: 24px 24px 8px;
-        width: 211px;
+        width: 181px;
         height: 60px;
         vertical-align: middle;
       }
@@ -636,7 +636,7 @@
   color: #859900;
 }
     </style>
-    <link href="stylesheets/screen-d5302000.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/screen-21df3573.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print-41ffbffc.css" rel="stylesheet" media="print" />
       <script src="javascripts/all-52d563e0.js"></script>
     <script>
@@ -644,12 +644,20 @@
     </script>
   </head>
 
-  <body class="index" data-languages="[]">
-    <a href="#" id="nav-button" class="">
-    <span> NAV <img src="images/navbar-cad8cdcb.png" alt=""> </span>
+  <body class="index" data-languages="[&quot;json&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar-cad8cdcb.png" alt="" />
+      </span>
     </a>
     <div class="toc-wrapper">
-        <img src="images/logo-e10cba0f.svg" class="logo" alt="" />
+        <a href="https://phemex.com" class="logo-link" target="_self">
+          <img src="images/logo-e10cba0f.svg" class="logo" alt="" />
+        </a>
+        <div class="lang-selector">
+              <a href="#" data-language-name="json">json</a>
+        </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
@@ -662,13 +670,24 @@
                     <a href="#general-api-information" class="toc-h2 toc-link" data-title="General API Information">General API Information</a>
                   </li>
                   <li>
+                    <a href="#rest-api-standards" class="toc-h2 toc-link" data-title="REST API Standards">REST API Standards</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#http-return-codes" class="toc-h3 toc-link" data-title="HTTP Return Codes">HTTP Return Codes</a>
+                          </li>
+                          <li>
+                            <a href="#rest-response-format" class="toc-h3 toc-link" data-title="REST Response format">REST Response format</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
                     <a href="#rate-limits" class="toc-h2 toc-link" data-title="Rate Limits">Rate Limits</a>
                       <ul class="toc-list-h3">
                           <li>
-                            <a href="#ip-ratelimit" class="toc-h3 toc-link" data-title="IP Ratelimit">IP Ratelimit</a>
+                            <a href="#ip-rate-limits" class="toc-h3 toc-link" data-title="IP Rate Limits">IP Rate Limits</a>
                           </li>
                           <li>
-                            <a href="#api-ratelimit-rules" class="toc-h3 toc-link" data-title="API RateLimit Rules">API RateLimit Rules</a>
+                            <a href="#rest-api-rate-limit-rules" class="toc-h3 toc-link" data-title="REST API Rate Limit Rules">REST API Rate Limit Rules</a>
                           </li>
                           <li>
                             <a href="#api-groups" class="toc-h3 toc-link" data-title="Api Groups">Api Groups</a>
@@ -699,9 +718,143 @@
           </li>
           <li>
             <a href="#contract" class="toc-h1 toc-link" data-title="Contract">Contract</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#rest-api" class="toc-h2 toc-link" data-title="REST API">REST API</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#endpoint-security-type" class="toc-h3 toc-link" data-title="Endpoint security type">Endpoint security type</a>
+                              <ul class="toc-list-h4">
+                                  <li>
+                                    <a href="#signature-example-1-http-get-request" class="toc-h4 toc-link" data-title="Signature Example 1: HTTP GET Request">Signature Example 1: HTTP GET Request</a>
+                                  </li>
+                                  <li>
+                                    <a href="#singature-example-2-http-get-request-with-multiple-query-string" class="toc-h4 toc-link" data-title="Singature Example 2: HTTP GET Request with multiple query string">Singature Example 2: HTTP GET Request with multiple query string</a>
+                                  </li>
+                                  <li>
+                                    <a href="#signature-example-3-http-post-request" class="toc-h4 toc-link" data-title="Signature Example 3: HTTP POST Request">Signature Example 3: HTTP POST Request</a>
+                                  </li>
+                              </ul>
+                          </li>
+                          <li>
+                            <a href="#request-response-field-explaination" class="toc-h3 toc-link" data-title="Request/Response field explaination">Request/Response field explaination</a>
+                              <ul class="toc-list-h4">
+                                  <li>
+                                    <a href="#leverage" class="toc-h4 toc-link" data-title="Leverage">Leverage</a>
+                                  </li>
+                                  <li>
+                                    <a href="#cross-margin-mode" class="toc-h4 toc-link" data-title="Cross Margin Mode">Cross Margin Mode</a>
+                                  </li>
+                                  <li>
+                                    <a href="#isolated-margin-mode" class="toc-h4 toc-link" data-title="Isolated Margin Mode">Isolated Margin Mode</a>
+                                  </li>
+                              </ul>
+                          </li>
+                          <li>
+                            <a href="#price-ratio-value-scales" class="toc-h3 toc-link" data-title="Price/Ratio/Value Scales">Price/Ratio/Value Scales</a>
+                              <ul class="toc-list-h4">
+                                  <li>
+                                    <a href="#trading-symbols" class="toc-h4 toc-link" data-title="Trading Symbols">Trading Symbols</a>
+                                  </li>
+                              </ul>
+                          </li>
+                          <li>
+                            <a href="#common-constants" class="toc-h3 toc-link" data-title="Common Constants">Common Constants</a>
+                          </li>
+                          <li>
+                            <a href="#query-product-information" class="toc-h3 toc-link" data-title="Query Product Information">Query Product Information</a>
+                          </li>
+                          <li>
+                            <a href="#place-order-get-request-with-query-string" class="toc-h3 toc-link" data-title="Place Order (GET request with query string)">Place Order (GET request with query string)</a>
+                          </li>
+                          <li>
+                            <a href="#query-order-book" class="toc-h3 toc-link" data-title="Query Order Book">Query Order Book</a>
+                          </li>
+                          <li>
+                            <a href="#query-kline" class="toc-h3 toc-link" data-title="Query Kline">Query Kline</a>
+                          </li>
+                          <li>
+                            <a href="#query-recent-trades" class="toc-h3 toc-link" data-title="Query Recent Trades">Query Recent Trades</a>
+                          </li>
+                          <li>
+                            <a href="#query-24-hours-ticker" class="toc-h3 toc-link" data-title="Query 24 Hours Ticker">Query 24 Hours Ticker</a>
+                          </li>
+                          <li>
+                            <a href="#query-history-trades-by-symbol" class="toc-h3 toc-link" data-title="Query History Trades By symbol">Query History Trades By symbol</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                    <a href="#websocket-api" class="toc-h2 toc-link" data-title="Websocket API">Websocket API</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#heartbeat" class="toc-h3 toc-link" data-title="Heartbeat">Heartbeat</a>
+                          </li>
+                          <li>
+                            <a href="#user-authentication" class="toc-h3 toc-link" data-title="User Authentication">User Authentication</a>
+                          </li>
+                          <li>
+                            <a href="#subscribe-orderbook" class="toc-h3 toc-link" data-title="Subscribe OrderBook">Subscribe OrderBook</a>
+                          </li>
+                          <li>
+                            <a href="#orderbook-message" class="toc-h3 toc-link" data-title="OrderBook Message">OrderBook Message</a>
+                          </li>
+                          <li>
+                            <a href="#unsubscribe-orderbook" class="toc-h3 toc-link" data-title="Unsubscribe OrderBook">Unsubscribe OrderBook</a>
+                          </li>
+                          <li>
+                            <a href="#subscribe-trade" class="toc-h3 toc-link" data-title="Subscribe Trade">Subscribe Trade</a>
+                          </li>
+                          <li>
+                            <a href="#trade-message" class="toc-h3 toc-link" data-title="Trade Message">Trade Message</a>
+                          </li>
+                          <li>
+                            <a href="#unsubscribe-trade" class="toc-h3 toc-link" data-title="Unsubscribe Trade">Unsubscribe Trade</a>
+                          </li>
+                          <li>
+                            <a href="#subscribe-kline" class="toc-h3 toc-link" data-title="Subscribe Kline">Subscribe Kline</a>
+                          </li>
+                          <li>
+                            <a href="#kline-message" class="toc-h3 toc-link" data-title="Kline Message">Kline Message</a>
+                          </li>
+                          <li>
+                            <a href="#unsubscribe-kline" class="toc-h3 toc-link" data-title="Unsubscribe Kline">Unsubscribe Kline</a>
+                          </li>
+                          <li>
+                            <a href="#subscribe-account-order-position-aop" class="toc-h3 toc-link" data-title="Subscribe Account-Order-Position (AOP)">Subscribe Account-Order-Position (AOP)</a>
+                          </li>
+                          <li>
+                            <a href="#account-order-position-aop-message" class="toc-h3 toc-link" data-title="Account-Order-Position (AOP) Message">Account-Order-Position (AOP) Message</a>
+                          </li>
+                          <li>
+                            <a href="#unsubscribe-account-order-position-aop" class="toc-h3 toc-link" data-title="Unsubscribe Account-Order-Position (AOP)">Unsubscribe Account-Order-Position (AOP)</a>
+                          </li>
+                          <li>
+                            <a href="#subscribe-24-hours-ticker" class="toc-h3 toc-link" data-title="Subscribe 24 Hours Ticker">Subscribe 24 Hours Ticker</a>
+                          </li>
+                          <li>
+                            <a href="#24-hours-ticker-message" class="toc-h3 toc-link" data-title="24-Hours Ticker Message">24-Hours Ticker Message</a>
+                          </li>
+                          <li>
+                            <a href="#subscribe-price-tick" class="toc-h3 toc-link" data-title="Subscribe Price Tick">Subscribe Price Tick</a>
+                          </li>
+                          <li>
+                            <a href="#tick-message" class="toc-h3 toc-link" data-title="Tick Message">Tick Message</a>
+                          </li>
+                      </ul>
+                  </li>
+              </ul>
           </li>
           <li>
             <a href="#spot" class="toc-h1 toc-link" data-title="Spot">Spot</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#rest-api" class="toc-h2 toc-link" data-title="REST API">REST API</a>
+                  </li>
+                  <li>
+                    <a href="#websocket-api" class="toc-h2 toc-link" data-title="Websocket API">Websocket API</a>
+                  </li>
+              </ul>
           </li>
           <li>
             <a href="#transfer" class="toc-h1 toc-link" data-title="Transfer">Transfer</a>
@@ -731,6 +884,43 @@
 </ul></li>
 <li>Phemex provides HTTP Rest API for client to operate Orders, all endpoints return a JSON object.</li>
 </ul>
+<h2 id='rest-api-standards'>REST API Standards</h2><h3 id='http-return-codes'>HTTP Return Codes</h3>
+<ul>
+<li>HTTP <code>401</code> return code is used when unauthenticated</li>
+<li>HTTP <code>403</code> return code is used when lack of priviledge.</li>
+<li>HTTP <code>429</code> return code is used when breaking a request rate limit.</li>
+<li>HTTP <code>5XX</code> return codes are used for Phemex internal errors. Note: This doesn&#39;t means the operation failed, the execution status is <strong>UNKNOWN</strong> and could be Succeed.</li>
+</ul>
+<h3 id='rest-response-format'>REST Response format</h3>
+<ul>
+<li>All restful API except <strong><em>starting</em></strong> with <code>/md</code> shares same response format.</li>
+</ul>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "code": &lt;code&gt;,
+  "msg": &lt;msg&gt;,
+  "data": &lt;data&gt;
+}
+
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code</td>
+<td>0 means <code>success</code>, non-zero means <code>error</code></td>
+</tr>
+<tr>
+<td>msg</td>
+<td>when code is non-zero, it gives short error description</td>
+</tr>
+<tr>
+<td>data</td>
+<td>operation dependant</td>
+</tr>
+</tbody></table>
 <h2 id='rate-limits'>Rate Limits</h2>
 <ul>
 <li>In order to protect the exchange, Phemex apply <code>API RateLimit</code> and <code>IP Ratelimit</code> on all requests.</li>
@@ -738,11 +928,12 @@
 <li>IP has request capacity in 5 minutes window.</li>
 <li>Ratelimit of API is <strong>independant</strong> of that in WEB/APP, so if one get ratelimited in API, one can place/cancel orders via WEB or APP.</li>
 </ul>
-<h3 id='ip-ratelimit'>IP Ratelimit</h3>
+<h3 id='ip-rate-limits'>IP Rate Limits</h3>
 <p>Currently Phemex restrict every IP 5,000 request in 5 minutes window.
    If exceeded this IP capacity, the user would be blocked in the following 5 minutes.</p>
-<h3 id='api-ratelimit-rules'>API RateLimit Rules</h3>
+<h3 id='rest-api-rate-limit-rules'>REST API Rate Limit Rules</h3>
 <ul>
+<li><a href="https://phemex.com/user-guides/order-spamming-limitations">Order spamming limitations</a></li>
 <li>All Phemex APIs are divided into 3 groups, <code>contract</code>, <code>spotOrder</code> and <code>others</code>.</li>
 <li>All APIs in the same group share a request capacity.</li>
 <li>Every API consume request shares at its own weight.</li>
@@ -949,6 +1140,9 @@ Because the number of interfaces in Other group may grow over time, the list bel
 <h2 id='code-samples'>Code Samples</h2>
 <ul>
 <li>Java Sample Client: <em>https://github.com/phemex/java-client</em></li>
+<li>Python Sample Client: <em>https://github.com/phemex/phemex-python-api</em></li>
+<li>NodeJS Sample Client: <em>https://github.com/phemex/phemex-node-example</em></li>
+<li>C++ Market Data Sample Client: <em>https://github.com/phemex/phemex-cpp-api</em></li>
 </ul>
 <h2 id='error-codes'>Error Codes</h2><h3 id='cxlrejreason-field'>CxlRejReason Field</h3>
 <table><thead>
@@ -1683,9 +1877,4684 @@ Because the number of interfaces in Other group may grow over time, the list bel
 <td>Cancel bracket take profit order due main order canceled.</td>
 </tr>
 </tbody></table>
-<h1 id='contract'>Contract</h1><h1 id='spot'>Spot</h1><h1 id='transfer'>Transfer</h1>
+<h1 id='contract'>Contract</h1><h2 id='rest-api'>REST API</h2><h3 id='endpoint-security-type'>Endpoint security type</h3>
+<ul>
+<li>Each API call must be signed and pass to server in HTTP header <code>x-phemex-request-signature</code>.</li>
+<li>Endpoints use <code>HMAC SHA256</code> signatures. The <code>HMAC SHA256 signature</code> is a keyed <code>HMAC SHA256</code> operation. Use your <code>apiSecret</code> as the key and the string <code>URL Path + QueryString + Expiry + body )</code> as the value for the HMAC operation.</li>
+<li><code>apiSecret</code> = <code>Base64::urlDecode(API Secret)</code></li>
+<li>The <code>signature</code> is <strong>case sensitive</strong>.</li>
+</ul>
+<h4 id='signature-example-1-http-get-request'>Signature Example 1: HTTP GET Request</h4>
+<ul>
+<li>API REST Request URL: https://api.phemex.com/accounts/accountPositions?currency=BTC
+
+<ul>
+<li>Request Path: /accounts/accountPositions</li>
+<li>Request Query: currency=BTC</li>
+<li>Request Body: <null></li>
+<li>Request Expiry: 1575735514</li>
+<li>Signature: HMacSha256( /accounts/accountPositions + currency=BTC + 1575735514 )</li>
+</ul></li>
+</ul>
+<h4 id='singature-example-2-http-get-request-with-multiple-query-string'>Singature Example 2: HTTP GET Request with multiple query string</h4>
+<ul>
+<li>API REST Request URL: https://api.phemex.com/orders/activeList?ordStatus=New&amp;ordStatus=PartiallyFilled&amp;ordStatus=Untriggered&amp;symbol=BTCUSD 
+
+<ul>
+<li>Request Path: /orders/activeList</li>
+<li>Request Query: ordStatus=New&amp;ordStatus=PartiallyFilled&amp;ordStatus=Untriggered&amp;symbol=BTCUSD</li>
+<li>Request Body: <null></li>
+<li>Request Expire: 1575735951</li>
+<li>Signature: HMacSha256(/orders/activeList + ordStatus=New&amp;ordStatus=PartiallyFilled&amp;ordStatus=Untriggered&amp;symbol=BTCUSD + 1575735951)</li>
+<li>signed string is <code>/orders/activeListordStatus=New&amp;ordStatus=PartiallyFilled&amp;ordStatus=Untriggered&amp;symbol=BTCUSD1575735951</code></li>
+</ul></li>
+</ul>
+<h4 id='signature-example-3-http-post-request'>Signature Example 3: HTTP POST Request</h4>
+<ul>
+<li>API REST Request URL: https://api.phemex.com/orders
+
+<ul>
+<li>Request Path: /orders</li>
+<li>Request Query: <null></li>
+<li>Request Body: {&quot;symbol&quot;:&quot;BTCUSD&quot;,&quot;clOrdID&quot;:&quot;uuid-1573058952273&quot;,&quot;side&quot;:&quot;Sell&quot;,&quot;priceEp&quot;:93185000,&quot;orderQty&quot;:7,&quot;ordType&quot;:&quot;Limit&quot;,&quot;reduceOnly&quot;:false,&quot;timeInForce&quot;:&quot;GoodTillCancel&quot;,&quot;takeProfitEp&quot;:0,&quot;stopLossEp&quot;:0}</li>
+<li>Request Expiry: 1575735514</li>
+<li>Signature: HMacSha256( /orders + 1575735514 + {&quot;symbol&quot;:&quot;BTCUSD&quot;,&quot;clOrdID&quot;:&quot;uuid-1573058952273&quot;,&quot;side&quot;:&quot;Sell&quot;,&quot;priceEp&quot;:93185000,&quot;orderQty&quot;:7,&quot;ordType&quot;:&quot;Limit&quot;,&quot;reduceOnly&quot;:false,&quot;timeInForce&quot;:&quot;GoodTillCancel&quot;,&quot;takeProfitEp&quot;:0,&quot;stopLossEp&quot;:0})</li>
+<li>signed string is <code>/orders1575735514{&quot;symbol&quot;:&quot;BTCUSD&quot;,&quot;clOrdID&quot;:&quot;uuid-1573058952273&quot;,&quot;side&quot;:&quot;Sell&quot;,&quot;priceEp&quot;:93185000,&quot;orderQty&quot;:7,&quot;ordType&quot;:&quot;Limit&quot;,&quot;reduceOnly&quot;:false,&quot;timeInForce&quot;:&quot;GoodTillCancel&quot;,&quot;takeProfitEp&quot;:0,&quot;stopLossEp&quot;:0}</code></li>
+</ul></li>
+</ul>
+<h3 id='request-response-field-explaination'>Request/Response field explaination</h3><h4 id='leverage'>Leverage</h4>
+<ul>
+<li>The absolute value of <code>leverageEr</code> determines initial-margin-rate, i.e. <code>initialMarginRate = 1/abs(leverage)</code></li>
+<li>The sign of <code>leverageEr</code> indicates margin mode, i.e. <code>leverage &lt;= 0</code> means <code>cross-margin-mode</code>, <code>leverage &gt; 0</code> means <code>isolated-margin-mode</code>.</li>
+<li>The result of setting <code>leverageEr</code> to <code>0</code> is leverage to maximum leverage supported by user selected risklimit, and margin-mode is <code>cross-margin-mode</code>.</li>
+</ul>
+<h4 id='cross-margin-mode'>Cross Margin Mode</h4>
+<ul>
+<li><code>Position margin</code> includes two parts, one part is balance assigned to position, another part is account available balance. </li>
+<li>Position in cross-margin-mode may be affected by other position, because account available balance is shared among all positions in cross mode.</li>
+</ul>
+<h4 id='isolated-margin-mode'>Isolated Margin Mode</h4>
+<ul>
+<li><code>Position margin</code> only includes balance assgined to position, by default it is initial-margin. </li>
+<li>Position in isolatd-margin-mode is independent of other positions.</li>
+</ul>
+<h3 id='price-ratio-value-scales'>Price/Ratio/Value Scales</h3>
+<p>Fields with post-fix &quot;Ep&quot;, &quot;Er&quot; or &quot;Ev&quot; have been scaled based on symbol setting.
+* Fields with post-fix &quot;Ep&quot; are scaled prices, <code>priceScale</code> in <a href="#query-product-information">products</a>
+* Fields with post-fix &quot;Er&quot; are scaled ratios, <code>ratioScale</code> in <a href="#query-product-information">products</a>
+* Fields with post-fix &quot;Ev&quot; are scaled values, <code>valueScale</code> of <code>settleCurrency</code> in <a href="#query-product-information">products</a> </p>
+<h5 id='trading-symbols'>Trading Symbols</h5>
+<table><thead>
+<tr>
+<th>Symbol</th>
+<th>Price scale</th>
+<th>Ratio scale</th>
+<th>Value scale</th>
+<th>Settlement currency</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>BTCUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>100,000,000</td>
+<td>BTC</td>
+</tr>
+<tr>
+<td>cETHUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>100,000,000</td>
+<td>ETH</td>
+</tr>
+<tr>
+<td>BTCUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>BTC</td>
+</tr>
+<tr>
+<td>cETHUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>ETH</td>
+</tr>
+<tr>
+<td>ETHUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>XRPUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>LINKUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>XTZUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>LTCUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>ADAUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>BCHUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>COMPUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>YFIUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>ALGOUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>TRXUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>EOSUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>ONTUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>NEOUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>DOTUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>UNIUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>AAVEUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>DOGEUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>BATUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>CHZUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>MANAUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>ENJUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>SUSHIUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>SNXUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>GRTUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>MKRUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>ZECUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>FILUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>KSMUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>XMRUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>QTUMUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>XLMUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>ATOMUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>SOLUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>uBTCUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>ZILUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>GMTUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>BNBUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>AVAXUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>u100VETUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>WAVESUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>u100000SHIBUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>u100IOSTUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>ETCUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>SANDUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>APEUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>MATICUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>GALAUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>AXSUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>NEARUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>u100JASMYUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>LRCUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>THETAUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>FTMUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>SRMUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>u100SLPUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>DYDXUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>CRVUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>DASHUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>ICPUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>KLAYUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>ONEUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>ALICEUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>u100PEOPLEUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>SKLUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>IMXUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>KNCUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>u1000000NFTUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>RUNEUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>ASTRUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>EGLDUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>GLMRUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>FTTUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>OMGUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>DAOUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>GALUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>CELOUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>KAVAUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>FLOWUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>OGNUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>u1000HOTUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>1INCHUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>BALUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>MINAUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>BNXUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>SXPUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>BAKEUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>CHRUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>COTIUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>ZRXUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>WOOUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>DODOUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>C98USD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>ENSUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>RENUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>MASKUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>ARUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>BITUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>u100ANKRUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>u100ARPAUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>u100CELRUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>u1000RSRUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>u1000REEFUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>u100RVNUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>u1000DENTUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>MOVRUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>OCEANUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>RAYUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>AUDIOUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>CVXUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>ZENUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>MTLUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>LPTUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>u100IOTXUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>STORJUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>CVCUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>INJUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>u100LINAUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>TOMOUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>u100XEMUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>AGLDUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>ILVUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>YGGUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>SFPUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>GTCUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>LITUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>CTKUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>API3USD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>u100ACHUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>OPUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>u100ROSEUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>u1000LEVERUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>LDOUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>FLMUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>YFIIUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>HNTUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>ALPHAUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>u1000SPELLUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>STGUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>FOOTBALLUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>u1000LUNCUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>PROSUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>u100SWEATUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>FLUXUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>u100TRYBUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>PAXGUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>LUNA2USD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>QNTUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>APTUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>GMXUSD</td>
+<td>10,000</td>
+<td>100,000,000</td>
+<td>10,000</td>
+<td>USD</td>
+</tr>
+</tbody></table>
+<h3 id='common-constants'>Common Constants</h3>
+<ul>
+<li>Order Type</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Order Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Limit</td>
+<td>--</td>
+</tr>
+<tr>
+<td>Market</td>
+<td>--</td>
+</tr>
+<tr>
+<td>Stop</td>
+<td>--</td>
+</tr>
+<tr>
+<td>StopLimit</td>
+<td>--</td>
+</tr>
+<tr>
+<td>MarketIfTouched</td>
+<td>--</td>
+</tr>
+<tr>
+<td>LimitIfTouched</td>
+<td>--</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>Order Status</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Order Status</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Untriggered</td>
+<td>Conditional order waiting to be triggered</td>
+</tr>
+<tr>
+<td>Triggered</td>
+<td>Conditional order being triggered</td>
+</tr>
+<tr>
+<td>Rejected</td>
+<td>Order rejected</td>
+</tr>
+<tr>
+<td>New</td>
+<td>Order placed in cross engine</td>
+</tr>
+<tr>
+<td>PartiallyFilled</td>
+<td>Order partially filled</td>
+</tr>
+<tr>
+<td>Filled</td>
+<td>Order fully filled</td>
+</tr>
+<tr>
+<td>Canceled</td>
+<td>Order canceled</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>TimeInForce</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>TimeInForce</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>GoodTillCancel</td>
+<td>--</td>
+</tr>
+<tr>
+<td>PostOnly</td>
+<td>--</td>
+</tr>
+<tr>
+<td>ImmediateOrCancel</td>
+<td>--</td>
+</tr>
+<tr>
+<td>FillOrKill</td>
+<td>--</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>Execution instruction</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Execution Instruction</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ReduceOnly</td>
+<td>reduce position size, never increase position size</td>
+</tr>
+<tr>
+<td>CloseOnTrigger</td>
+<td>close the position</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>Trigger Source</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Trigger</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ByMarkPrice</td>
+<td>trigger by mark price</td>
+</tr>
+<tr>
+<td>ByLastPrice</td>
+<td>trigger by last price</td>
+</tr>
+</tbody></table>
+<h3 id='query-product-information'>Query Product Information</h3>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /public/products 
+</code></pre></div><h3 id='place-order-get-request-with-query-string'>Place Order (GET request with query string)</h3>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>PUT /orders/create?clOrdID=&lt;clOrdID&gt;&amp;symbol=&lt;symbol&gt;&amp;reduceOnly=&lt;reduceOnly&gt;&amp;closeOnTrigger=&lt;closeOnTrigger&gt;&amp;orderQty=&lt;orderQty&gt;&amp;displayQty=&lt;displayQty&gt;&amp;ordType=&lt;ordType&gt;&amp;priceEp=&lt;priceEp&gt;&amp;side=&lt;side&gt;&amp;text=&lt;text&gt;&amp;timeInForce=&lt;timeInForce&gt;&amp;stopPxEp=&lt;stopPxEp&gt;&amp;takeProfitEp=&lt;takeProfitEp&gt;&amp;stopLossEp=&lt;stopLossEp&gt;&amp;pegOffsetValueEp=&lt;pegOffsetValueEp&gt;&amp;pegPriceType=&lt;pegPriceType&gt;&amp;trailingStopEp=&lt;trailingStopEp&gt;&amp;triggerType=&lt;triggerType&gt;&amp;tpTrigger=&lt;tpTrigger&gt;&amp;tpSlTs=&lt;tpSlTs&gt;&amp;slTrigger=&lt;slTrigger&gt;
+</code></pre></div>
+<blockquote>
+<p>Response sample</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"bizError"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ab90a08c-b728-4b6b-97c4-36fa497335bf"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clOrdID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"137e1928-5d25-fecd-dbd1-705ded659a4f"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSD"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sell"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"actionTimeNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">1580547265848034600</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"transactTimeNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"priceEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">98970000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">9897</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"displayQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timeInForce"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"reduceOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stopPxEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"closedPnlEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"closedPnl"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"closedSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"cumQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"cumValueEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"cumValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"leavesQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"leavesValueEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">10104</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"leavesValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00010104</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stopPx"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stopDirection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UNSPECIFIED"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"ordStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Created"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Possible values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>String</td>
+<td>Yes</td>
+<td>Which symbol to place order</td>
+<td><a href="#trading-symbols">Trading Symbols</a></td>
+</tr>
+<tr>
+<td>clOrdID</td>
+<td>String</td>
+<td>Yes</td>
+<td>client order id, max length is 40</td>
+<td></td>
+</tr>
+<tr>
+<td>side</td>
+<td>Enum</td>
+<td>Yes</td>
+<td>Order direction, Buy or Sell</td>
+<td>Buy, Sell</td>
+</tr>
+<tr>
+<td>orderQty</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>Order quantity</td>
+<td></td>
+</tr>
+<tr>
+<td>priceEp</td>
+<td>Integer</td>
+<td>-</td>
+<td>Scaled price, required for limit order</td>
+<td></td>
+</tr>
+<tr>
+<td>ordType</td>
+<td>Enum</td>
+<td>-</td>
+<td>default to Limit</td>
+<td>Market, Limit, Stop, StopLimit, MarketIfTouched, LimitIfTouched</td>
+</tr>
+<tr>
+<td>stopPxEp</td>
+<td>Integer</td>
+<td>-</td>
+<td>Trigger price for stop orders</td>
+<td></td>
+</tr>
+<tr>
+<td>timeInForce</td>
+<td>Enum</td>
+<td>-</td>
+<td>Time in force. default to GoodTillCancel</td>
+<td>GoodTillCancel, ImmediateOrCancel, FillOrKill, PostOnly</td>
+</tr>
+<tr>
+<td>reduceOnly</td>
+<td>Boolean</td>
+<td>-</td>
+<td>whether reduce position side only. Enable this flag, i.e. reduceOnly=true, position side won&#39;t change</td>
+<td>true, false</td>
+</tr>
+<tr>
+<td>closeOnTrigger</td>
+<td>Boolean</td>
+<td>-</td>
+<td>implicitly reduceOnly, plus cancel other orders in the same direction(side) when necessary</td>
+<td>true, false</td>
+</tr>
+<tr>
+<td>triggerType</td>
+<td>Enum</td>
+<td>-</td>
+<td>Trigger source, whether trigger by mark price, index price or last price</td>
+<td>ByMarkPrice, ByLastPrice</td>
+</tr>
+<tr>
+<td>takeProfitEp</td>
+<td>Integer</td>
+<td>-</td>
+<td>Scaled take profit price</td>
+<td></td>
+</tr>
+<tr>
+<td>stopLossEp</td>
+<td>Integer</td>
+<td>-</td>
+<td>Scaled stop loss price</td>
+<td></td>
+</tr>
+<tr>
+<td>slTrigger</td>
+<td>Enum</td>
+<td>-</td>
+<td>Trigger source, by mark-price or last-price</td>
+<td>ByMarkPrice, ByLastPrice</td>
+</tr>
+<tr>
+<td>tpTrigger</td>
+<td>Enum</td>
+<td>-</td>
+<td>Trigger source, by mark-price or last-price</td>
+<td>ByMarkPrice, ByLastPrice</td>
+</tr>
+<tr>
+<td>pegOffsetValueEp</td>
+<td>Integer</td>
+<td>-</td>
+<td>Trailing offset from current price. Negative value when position is long, positive when position is short</td>
+<td></td>
+</tr>
+<tr>
+<td>pegPriceType</td>
+<td>Enum</td>
+<td>-</td>
+<td>Trailing order price type</td>
+<td>TrailingStopPeg, TrailingTakeProfitPeg</td>
+</tr>
+</tbody></table>
+<h3 id='query-order-book'>Query Order Book</h3>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /md/orderbook?symbol=&lt;symbol&gt;
+</code></pre></div>
+<blockquote>
+<p>Response format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "error": null,
+  "id": 0,
+  "result": {
+    "book": {
+      "asks": [
+        [
+          &lt;priceEp&gt;,
+          &lt;size&gt;
+        ],
+        .
+        .
+        .
+      ],
+      "bids": [
+        [
+          &lt;priceEp&gt;,
+          &lt;size&gt;
+        ],
+        .
+        .
+        .
+      ],
+    ]
+    },
+    "depth": 30,
+    "sequence": &lt;sequence&gt;,
+    "timestamp": &lt;timestamp&gt;,
+    "symbol": "&lt;symbol&gt;",
+    "type": "snapshot"
+  }
+}
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Possible values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>timestamp</td>
+<td>Integer</td>
+<td>Timestamp in nanoseconds</td>
+<td></td>
+</tr>
+<tr>
+<td>priceEp</td>
+<td>Integer</td>
+<td>Scaled book level price</td>
+<td></td>
+</tr>
+<tr>
+<td>size</td>
+<td>Integer</td>
+<td>Scaled book level size</td>
+<td></td>
+</tr>
+<tr>
+<td>sequence</td>
+<td>Integer</td>
+<td>current message sequence</td>
+<td></td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>String</td>
+<td>Contract symbol name</td>
+<td><a href="#trading-symbols">Trading Symbols</a></td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Request sample</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /md/orderbook?symbol=BTCUSD
+</code></pre></div>
+<blockquote>
+<p>Response sample</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"book"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"asks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">87705000</span><span class="p">,</span><span class="w">
+          </span><span class="mi">1000000</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">87710000</span><span class="p">,</span><span class="w">
+          </span><span class="mi">200000</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"bids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">87700000</span><span class="p">,</span><span class="w">
+          </span><span class="mi">2000000</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">87695000</span><span class="p">,</span><span class="w">
+          </span><span class="mi">200000</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"depth"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="mi">455476965</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1583555482434235628</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSD"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"snapshot"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='query-kline'>Query Kline</h3>
+<ul>
+<li>Please be noted that kline interfaces have <a href="#rate-limits">rate limits</a> rule,  please check the Other group under <a href="#api-groups">api groups</a></li>
+</ul>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /exchange/public/md/v2/kline?symbol=&lt;symbol&gt;&amp;resolution=&lt;resolution&gt;&amp;limit=&lt;limit&gt;
+
+</code></pre></div>
+<blockquote>
+<p>Response format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "code": 0,
+  "msg": "OK",
+  "data": {
+    "total": -1,
+    "rows": [[&lt;timestamp&gt;, &lt;interval&gt;, &lt;last_close&gt;, &lt;open&gt;, &lt;high&gt;, &lt;low&gt;, &lt;close&gt;, &lt;volume&gt;, &lt;turnover&gt;], [...]]
+  }
+}
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Possible Values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>String</td>
+<td>Yes</td>
+<td>symbol name</td>
+<td>BTCUSD,ETHUSD,uBTCUSD,cETHUSD,XRPUSD...</td>
+</tr>
+<tr>
+<td>resolution</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>kline interval</td>
+<td>described as below</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>Integer</td>
+<td>No</td>
+<td>limit of result</td>
+<td>described as below</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>Value of <code>resolution</code>s</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Resolution</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>60</td>
+<td>MINUTE_1</td>
+</tr>
+<tr>
+<td>300</td>
+<td>MINUTE_5</td>
+</tr>
+<tr>
+<td>900</td>
+<td>MINUTE_15</td>
+</tr>
+<tr>
+<td>1800</td>
+<td>MINUTE_30</td>
+</tr>
+<tr>
+<td>3600</td>
+<td>HOUR_1</td>
+</tr>
+<tr>
+<td>14400</td>
+<td>HOUR_4</td>
+</tr>
+<tr>
+<td>86400</td>
+<td>DAY_1</td>
+</tr>
+<tr>
+<td>604800</td>
+<td>WEEK_1</td>
+</tr>
+<tr>
+<td>2592000</td>
+<td>MONTH_1</td>
+</tr>
+<tr>
+<td>7776000</td>
+<td>SEASON_1</td>
+</tr>
+<tr>
+<td>31104000</td>
+<td>YEAR_1</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>Value of <code>limit</code>s</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Limit</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>5</td>
+<td>limit 5</td>
+</tr>
+<tr>
+<td>10</td>
+<td>limit 10</td>
+</tr>
+<tr>
+<td>50</td>
+<td>limit 50</td>
+</tr>
+<tr>
+<td>100</td>
+<td>limit 100</td>
+</tr>
+<tr>
+<td>500</td>
+<td>limit 500</td>
+</tr>
+<tr>
+<td>1000</td>
+<td>limit 1000</td>
+</tr>
+</tbody></table>
+
+<p><strong>NOTE</strong> for backward compatibility reason, phemex also provides kline query with from/to, however, this interface is <strong>NOT</strong> recommended.</p>
+
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /exchange/public/md/kline?symbol=&lt;symbol&gt;&amp;to=&lt;to&gt;&amp;from=&lt;from&gt;&amp;resolution=&lt;resolution&gt;
+
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Possible Values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>String</td>
+<td>Yes</td>
+<td>symbol name</td>
+<td>BTCUSD,ETHUSD,uBTCUSD,cETHUSD,XRPUSD...</td>
+</tr>
+<tr>
+<td>from</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>start time in seconds</td>
+<td>value aligned in resolution boundary</td>
+</tr>
+<tr>
+<td>to</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>end time in seconds</td>
+<td>value aligned in resolution boundary; Number of k-lines return between [<code>from</code>, <code>to</code>) should be less than 1000</td>
+</tr>
+<tr>
+<td>resolution</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>kline interval</td>
+<td>the same as described above</td>
+</tr>
+</tbody></table>
+<h3 id='query-recent-trades'>Query Recent Trades</h3>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /md/trade?symbol=&lt;symbol&gt;
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Possible values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>String</td>
+<td>Contract symbol name</td>
+<td><a href="#trading-symbols">Trading Symbols</a></td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "error": null,
+  "id": 0,
+  "result": {
+    "type": "snapshot",
+    "sequence": &lt;sequence&gt;,
+    "symbol": "&lt;symbol&gt;",
+    "trades": [
+      [
+        &lt;timestamp&gt;,
+        "&lt;side&gt;",
+        &lt;priceEp&gt;,
+        &lt;size&gt;
+      ],
+      .
+      .
+      .
+    ]
+  }
+}
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Possible values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>timestamp</td>
+<td>Integer</td>
+<td>Timestamp in nanoseconds</td>
+<td></td>
+</tr>
+<tr>
+<td>side</td>
+<td>String</td>
+<td>Trade side string</td>
+<td>Buy, Sell</td>
+</tr>
+<tr>
+<td>priceEp</td>
+<td>Integer</td>
+<td>Scaled trade price</td>
+<td></td>
+</tr>
+<tr>
+<td>size</td>
+<td>Integer</td>
+<td>Scaled trade size</td>
+<td></td>
+</tr>
+<tr>
+<td>sequence</td>
+<td>Integer</td>
+<td>Current message sequence</td>
+<td></td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>String</td>
+<td>Contract symbol name</td>
+<td><a href="#trading-symbols">Trading Symbols</a></td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Message sample</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /md/trade?symbol=BTCUSD
+
+{
+  "error": null,
+  "id": 0,
+  "result": {
+    "sequence": 15934323,
+    "symbol": "BTCUSD",
+    "trades": [
+      [
+        1579164056368538508,
+        "Sell",
+        86960000,
+        121
+      ],
+      [
+        1579164055036820552,
+        "Sell",
+        86960000,
+        58
+      ]
+    ],
+    "type": "snapshot"
+  }
+}
+</code></pre></div><h3 id='query-24-hours-ticker'>Query 24 Hours Ticker</h3>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET v1/md/ticker/24hr?symbol=&lt;symbol&gt;
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Possible values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>String</td>
+<td>Contract symbol name</td>
+<td><a href="#trading-symbols">Trading Symbols</a></td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "error": null,
+  "id": 0,
+  "result": {
+      "askEp": &lt;best ask priceEp&gt;,
+      "bidEp": &lt;best bid priceEp&gt;,
+      "fundingRateEr": &lt;funding rateEr&gt;,
+      "highEp": &lt;high priceEp&gt;,
+      "indexEp": &lt;index priceEp&gt;,
+      "lastEp": &lt;last priceEp&gt;,
+      "lowEp": &lt;low priceEp&gt;,
+      "markEp": &lt;mark priceEp&gt;,
+      "openEp": &lt;open priceEp&gt;,
+      "openInterest": &lt;open interest&gt;,
+      "predFundingRateEr": &lt;predicated funding rateEr&gt;,
+      "symbol": &lt;symbol&gt;,
+      "timestamp": &lt;timestamp&gt;,
+      "turnoverEv": &lt;turnoverEv&gt;,
+      "volume": &lt;volume&gt;
+  }
+}
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Possible values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>open priceEp</td>
+<td>Integer</td>
+<td>The scaled open price in last 24 hours</td>
+<td></td>
+</tr>
+<tr>
+<td>high priceEp</td>
+<td>Integer</td>
+<td>The scaled highest price in last 24 hours</td>
+<td></td>
+</tr>
+<tr>
+<td>low priceEp</td>
+<td>Integer</td>
+<td>The scaled lowest price in last 24 hours</td>
+<td></td>
+</tr>
+<tr>
+<td>close priceEp</td>
+<td>Integer</td>
+<td>The scaled close price in last 24 hours</td>
+<td></td>
+</tr>
+<tr>
+<td>index priceEp</td>
+<td>Integer</td>
+<td>Scaled index price</td>
+<td></td>
+</tr>
+<tr>
+<td>mark priceEp</td>
+<td>Integer</td>
+<td>Scaled mark price</td>
+<td></td>
+</tr>
+<tr>
+<td>open interest</td>
+<td>Integer</td>
+<td>current open interest</td>
+<td></td>
+</tr>
+<tr>
+<td>funding rateEr</td>
+<td>Integer</td>
+<td>Scaled funding rate</td>
+<td></td>
+</tr>
+<tr>
+<td>predicated funding rateEr</td>
+<td>Integer</td>
+<td>Scaled predicated funding rate</td>
+<td></td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>Integer</td>
+<td>Timestamp in nanoseconds</td>
+<td></td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>String</td>
+<td>Contract symbol name</td>
+<td><a href="#trading-symbols">Trading Symbols</a></td>
+</tr>
+<tr>
+<td>turnoverEv</td>
+<td>Integer</td>
+<td>The scaled turnover value in last 24 hours</td>
+<td></td>
+</tr>
+<tr>
+<td>volume</td>
+<td>Integer</td>
+<td>Symbol trade volume in last 24 hours</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Request sample
+<code>
+GET v1/md/ticker/24hr?symbol=BTCUSD
+</code></p>
+
+<p>Response sample</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"close"</span><span class="p">:</span><span class="w"> </span><span class="mi">87425000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fundingRate"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"high"</span><span class="p">:</span><span class="w"> </span><span class="mi">92080000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"indexPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">87450676</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"low"</span><span class="p">:</span><span class="w"> </span><span class="mi">87130000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"markPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">87453092</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"open"</span><span class="p">:</span><span class="w"> </span><span class="mi">90710000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"openInterest"</span><span class="p">:</span><span class="w"> </span><span class="mi">7821141</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"predFundingRate"</span><span class="p">:</span><span class="w"> </span><span class="mi">7609</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSD"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1583646442444219017</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"turnover"</span><span class="p">:</span><span class="w"> </span><span class="mi">1399362834123</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="mi">125287131</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='query-history-trades-by-symbol'>Query History Trades By symbol</h3>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /exchange/public/nomics/trades?market=&lt;symbol&gt;&amp;since=&lt;since&gt;
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Possible values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>market</td>
+<td>String</td>
+<td>the market of symbol</td>
+<td><a href="#trading-symbols">Trading Symbols</a></td>
+</tr>
+<tr>
+<td>since</td>
+<td>String</td>
+<td>Last id of response field, 0-0-0 is from the very initial trade</td>
+<td>default 0-0-0</td>
+</tr>
+<tr>
+<td>start</td>
+<td>Integer</td>
+<td>Epoch time in milli-seconds of range start</td>
+<td></td>
+</tr>
+<tr>
+<td>end</td>
+<td>Integer</td>
+<td>Epoch time in milli-seconds of range end</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "code": 0,
+  "data": [
+    {
+      "id": "&lt;id&gt;",
+      "amount_quote": "&lt;amount&gt;",
+      "price": "&lt;price&gt;",
+      "side": "&lt;side&gt;",
+      "timestamp": "&lt;timestamp&gt;",
+      "type": "&lt;type&gt;"
+    }
+  ],
+  "msg": "&lt;msg&gt;"
+}
+</code></pre></div>
+<ul>
+<li>Query History trades by symbol</li>
+<li><p>RateLimit of this api is 5 per second</p></li>
+<li><p>Response sample</p></li>
+</ul>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1183-3-2"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-11-24T08:32:17.046Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7211.00000000"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"amount_quote"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sell"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"limit"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1184-2-1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-11-24T08:32:17.047Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7211.00000000"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"amount_quote"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"limit"</span><span class="w">
+  </span><span class="p">}]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div><h2 id='websocket-api'>Websocket API</h2><h3 id='heartbeat'>Heartbeat</h3>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"server.ping"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pong"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li>Each client is required to actively send heartbeat (ping) message to Phemex data gateway (&#39;DataGW&#39; in short) with interval less than 30 seconds, otherwise DataGW will drop the connection. If a client sends a ping message, DataGW will reply with a pong message.</li>
+<li>Clients can use WS built-in ping message or the application level ping message to DataGW as heartbeat. The heartbeat interval is recommended to be set as <em>5 seconds</em>, and actively reconnect to DataGW if don&#39;t receive messages in <em>3 heartbeat intervals</em>.</li>
+</ul>
+<h3 id='user-authentication'>User Authentication</h3>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "method": "user.auth",
+  "params": [
+    "API",
+    "&lt;token&gt;",
+    "&lt;signature&gt;",
+    &lt;expiry&gt;
+  ],
+  "id": 0
+}
+</code></pre></div>
+<blockquote>
+<p>Request sample</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user.auth"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"API"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"806066b0-f02b-4d3e-b444-76ec718e1023"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"8c939f7a6e6716ab7c4240384e07c81840dacd371cdcf5051bb6b7084897470e"</span><span class="p">,</span><span class="w">
+    </span><span class="mi">1570091232</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div>
+<blockquote>
+<p>Response sample</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>Public channels like trade/orderbook/kline are published publicly without user authentication.
+While for private channels like account/position/order data, the client should send user.auth message to Data Gateway to authenticate the session.</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Possible values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>Token type</td>
+<td>API</td>
+</tr>
+<tr>
+<td>token</td>
+<td>String</td>
+<td>API Key</td>
+<td></td>
+</tr>
+<tr>
+<td>signature</td>
+<td>String</td>
+<td>Signature generated by a funtion as HMacSha256(API Key + expiry) with <strong><em>API Secret</em></strong></td>
+<td></td>
+</tr>
+<tr>
+<td>expiry</td>
+<td>Integer</td>
+<td>A future time after which request will be rejected, in epoch <strong><em>second</em></strong>. Maximum expiry is request time plus 2 minutes</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id='subscribe-orderbook'>Subscribe OrderBook</h3>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "id": &lt;id&gt;,
+  "method": "orderbook.subscribe",
+  "params": [
+    "&lt;symbol&gt;"
+  ]
+}
+</code></pre></div>
+<p>On each successful subscription, DataGW will immediately send the current Order Book snapshot to client and all later order book updates will be published. </p>
+
+<blockquote>
+<p>Request sample：</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orderbook.subscribe"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"sBTCUSDT"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Response sample：</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='orderbook-message'>OrderBook Message</h3>
+<blockquote>
+<p>Message format：</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "book": {
+    "asks": [
+      [
+        &lt;priceEp&gt;,
+        &lt;qty&gt;
+      ],
+      .
+      .
+      .
+    ],
+    "bids": [
+      [
+        &lt;priceEp&gt;,
+        &lt;qty&gt;
+      ],
+      .
+      .
+      .
+    ]
+  },
+  "depth": &lt;depth&gt;,
+  "sequence": &lt;sequence&gt;,
+  "timestamp": &lt;timestamp&gt;,
+  "symbol": "&lt;symbol&gt;",
+
+</code></pre></div>
+<p>DataGW publishes order book message with types: incremental, snapshot. Incremental messages are published with 20ms interval. And snapshot messages are published with 60-second interval for client self-verification.</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Possible values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>side</td>
+<td>String</td>
+<td>Price level side</td>
+<td>bid, ask</td>
+</tr>
+<tr>
+<td>priceEp</td>
+<td>Integer</td>
+<td>Scaled price</td>
+<td></td>
+</tr>
+<tr>
+<td>qty</td>
+<td>Integer</td>
+<td>Price level size. Non-zero qty indicates price level insertion or updation, and qty 0 indicates price level deletion.</td>
+<td></td>
+</tr>
+<tr>
+<td>sequence</td>
+<td>Integer</td>
+<td>Latest message sequence</td>
+<td></td>
+</tr>
+<tr>
+<td>depth</td>
+<td>Integer</td>
+<td>Market depth</td>
+<td>30</td>
+</tr>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>Message type</td>
+<td>snapshot, incremental</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Message sample: snapshot</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"book"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"asks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">[</span><span class="w">
+        </span><span class="mi">86765000</span><span class="p">,</span><span class="w">
+        </span><span class="mi">19609</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="p">[</span><span class="w">
+        </span><span class="mi">86770000</span><span class="p">,</span><span class="w">
+        </span><span class="mi">7402</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"bids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">[</span><span class="w">
+        </span><span class="mi">86760000</span><span class="p">,</span><span class="w">
+        </span><span class="mi">18995</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="p">[</span><span class="w">
+        </span><span class="mi">86755000</span><span class="p">,</span><span class="w">
+        </span><span class="mi">6451</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"depth"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="mi">1191904</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSD"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"snapshot"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Message sample: incremental update</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"book"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"asks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">[</span><span class="w">
+        </span><span class="mi">86775000</span><span class="p">,</span><span class="w">
+        </span><span class="mi">4621</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"bids"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"depth"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="mi">1191905</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSD"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"incremental"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='unsubscribe-orderbook'>Unsubscribe OrderBook</h3>
+<blockquote>
+<p>Request sample</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orderbook.unsubscribe"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Response sample</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>It unsubscribes all orderbook related subscriptions.</p>
+<h3 id='subscribe-trade'>Subscribe Trade</h3>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "id": &lt;id&gt;,
+  "method": "trade.subscribe",
+  "params": [
+    "&lt;symbol&gt;"
+  ]
+}
+</code></pre></div>
+<p>On each successful subscription, DataGW will send the 200 history trades immediately for the subscribed symbol and all the later trades will be published.</p>
+
+<blockquote>
+<p>Request sample</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"trade.subscribe"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"BTCUSD"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Response sample</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='trade-message'>Trade Message</h3>
+<blockquote>
+<p>Message format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "trades": [
+    [
+      &lt;timestamp&gt;,
+      "&lt;side&gt;",
+      &lt;priceEp&gt;,
+      &lt;qty&gt;
+    ],
+    .
+    .
+    .
+  ],
+  "sequence": &lt;sequence&gt;,
+  "symbol": "&lt;symbol&gt;",
+  "type": "&lt;type&gt;"
+}
+</code></pre></div>
+<p>DataGW publishes trade message with types: incremental, snapshot. Incremental messages are published with 20ms interval. And snapshot messages are published on connection initial setup for client recovery.</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Possible values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>timestamp</td>
+<td>Integer</td>
+<td>Timestamp in nanoseconds for each trade</td>
+<td></td>
+</tr>
+<tr>
+<td>side</td>
+<td>String</td>
+<td>Execution taker side</td>
+<td>bid, ask</td>
+</tr>
+<tr>
+<td>priceEp</td>
+<td>Integer</td>
+<td>Scaled execution price</td>
+<td></td>
+</tr>
+<tr>
+<td>qty</td>
+<td>Integer</td>
+<td>Execution size</td>
+<td></td>
+</tr>
+<tr>
+<td>sequence</td>
+<td>Integer</td>
+<td>Latest message sequence</td>
+<td></td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>String</td>
+<td>Contract symbol name</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>Message type</td>
+<td>snapshot, incremental</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Message sample: snapshot</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="mi">1167852</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSD"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"trades"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">[</span><span class="w">
+      </span><span class="mi">1573716998128563500</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Buy"</span><span class="p">,</span><span class="w">
+      </span><span class="mi">86735000</span><span class="p">,</span><span class="w">
+      </span><span class="mi">56</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="p">[</span><span class="w">
+      </span><span class="mi">1573716995033683000</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Buy"</span><span class="p">,</span><span class="w">
+      </span><span class="mi">86735000</span><span class="p">,</span><span class="w">
+      </span><span class="mi">52</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="p">[</span><span class="w">
+      </span><span class="mi">1573716991485286000</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Buy"</span><span class="p">,</span><span class="w">
+      </span><span class="mi">86735000</span><span class="p">,</span><span class="w">
+      </span><span class="mi">51</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="p">[</span><span class="w">
+      </span><span class="mi">1573716988636291300</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Buy"</span><span class="p">,</span><span class="w">
+      </span><span class="mi">86735000</span><span class="p">,</span><span class="w">
+      </span><span class="mi">12</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"snapshot"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Message sample: snapshot</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="mi">1188273</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSD"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"trades"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">[</span><span class="w">
+      </span><span class="mi">1573717116484024300</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Buy"</span><span class="p">,</span><span class="w">
+      </span><span class="mi">86730000</span><span class="p">,</span><span class="w">
+      </span><span class="mi">21</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"incremental"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='unsubscribe-trade'>Unsubscribe Trade</h3>
+<blockquote>
+<p>Request format: unsubscribe all trade subsciptions</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "id": &lt;id&gt;,
+  "method": "trade.unsubscribe",
+  "params": [
+  ]
+}
+</code></pre></div>
+<blockquote>
+<p>Request format: unsubscribe all trade subsciptions for a symbol</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "id": &lt;id&gt;,
+  "method": "trade.unsubscribe",
+  "params": [
+    "&lt;symbol&gt;"
+  ]
+}
+</code></pre></div>
+<p>It unsubscribes all trade subscriptions or for a single symbol.</p>
+
+<blockquote>
+<p>Response sample</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='subscribe-kline'>Subscribe Kline</h3>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "id": &lt;id&gt;,
+  "method": "kline.subscribe",
+  "params": [
+    "&lt;symbol&gt;",
+    "&lt;interval&gt;"
+  ]
+}
+</code></pre></div>
+<p>On each successful subscription, DataGW will send the 1000 history klines immediately for the subscribed symbol and all the later kline update will be published in real-time.</p>
+
+<blockquote>
+<p>Request sample: subscribe 1-day kline</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kline.subscribe"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"BTCUSD"</span><span class="p">,</span><span class="w">
+    </span><span class="mi">86400</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Response sample: subscribe 1-day kline</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='kline-message'>Kline Message</h3>
+<blockquote>
+<p>Message format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "kline": [
+    [
+      &lt;timestamp&gt;,
+      "&lt;interval&gt;",
+      &lt;lastCloseEp&gt;,
+      &lt;openEp&gt;,
+      &lt;highEp&gt;,
+      &lt;lowEp&gt;,
+      &lt;closeEp&gt;,
+      &lt;volume&gt;,
+      &lt;turnoverEv&gt;,
+    ],
+    .
+    .
+    .
+  ],
+  "sequence": &lt;sequence&gt;,
+  "symbol": "&lt;symbol&gt;",
+  "type": "&lt;type&gt;"
+}
+</code></pre></div>
+<blockquote>
+<p>Message sample: snapshot</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"kline"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">[</span><span class="w">
+      </span><span class="mi">1590019200</span><span class="p">,</span><span class="w">
+      </span><span class="mi">86400</span><span class="p">,</span><span class="w">
+      </span><span class="mi">95165000</span><span class="p">,</span><span class="w">
+      </span><span class="mi">95160000</span><span class="p">,</span><span class="w">
+      </span><span class="mi">95160000</span><span class="p">,</span><span class="w">
+      </span><span class="mi">95160000</span><span class="p">,</span><span class="w">
+      </span><span class="mi">95160000</span><span class="p">,</span><span class="w">
+      </span><span class="mi">164</span><span class="p">,</span><span class="w">
+      </span><span class="mi">1723413</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="p">[</span><span class="w">
+      </span><span class="mi">1589932800</span><span class="p">,</span><span class="w">
+      </span><span class="mi">86400</span><span class="p">,</span><span class="w">
+      </span><span class="mi">97840000</span><span class="p">,</span><span class="w">
+      </span><span class="mi">97840000</span><span class="p">,</span><span class="w">
+      </span><span class="mi">98480000</span><span class="p">,</span><span class="w">
+      </span><span class="mi">92990000</span><span class="p">,</span><span class="w">
+      </span><span class="mi">95165000</span><span class="p">,</span><span class="w">
+      </span><span class="mi">246294692</span><span class="p">,</span><span class="w">
+      </span><span class="mi">2562249857942</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="p">[</span><span class="w">
+      </span><span class="mi">1589846400</span><span class="p">,</span><span class="w">
+      </span><span class="mi">86400</span><span class="p">,</span><span class="w">
+      </span><span class="mi">97335000</span><span class="p">,</span><span class="w">
+      </span><span class="mi">97335000</span><span class="p">,</span><span class="w">
+      </span><span class="mi">99090000</span><span class="p">,</span><span class="w">
+      </span><span class="mi">94490000</span><span class="p">,</span><span class="w">
+      </span><span class="mi">97840000</span><span class="p">,</span><span class="w">
+      </span><span class="mi">212484260</span><span class="p">,</span><span class="w">
+      </span><span class="mi">2194232158593</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="mi">1118993873</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSD"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"snapshot"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Message sample: snapshot</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"kline"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">[</span><span class="w">
+      </span><span class="mi">1590019200</span><span class="p">,</span><span class="w">
+      </span><span class="mi">86400</span><span class="p">,</span><span class="w">
+      </span><span class="mi">95165000</span><span class="p">,</span><span class="w">
+      </span><span class="mi">95160000</span><span class="p">,</span><span class="w">
+      </span><span class="mi">95750000</span><span class="p">,</span><span class="w">
+      </span><span class="mi">92585000</span><span class="p">,</span><span class="w">
+      </span><span class="mi">93655000</span><span class="p">,</span><span class="w">
+      </span><span class="mi">84414679</span><span class="p">,</span><span class="w">
+      </span><span class="mi">892414738605</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="mi">1122006398</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSD"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"incremental"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>DataGW publishes kline message with types: incremental, snapshot. Incremental messages are published with 20ms interval. And snapshot messages are published on connection initial setup for client recovery.</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Possible values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>timestamp</td>
+<td>Integer</td>
+<td>Timestamp in nanoseconds for each trade</td>
+<td></td>
+</tr>
+<tr>
+<td>interval</td>
+<td>Integer</td>
+<td>Kline interval type</td>
+<td>60, 300, 900, 1800, 3600, 14400, 86400, 604800, 2592000, 7776000, 31104000</td>
+</tr>
+<tr>
+<td>lastCloseEp</td>
+<td>Integer</td>
+<td>Scaled last close price</td>
+<td></td>
+</tr>
+<tr>
+<td>openEp</td>
+<td>Integer</td>
+<td>Scaled open price</td>
+<td></td>
+</tr>
+<tr>
+<td>highEp</td>
+<td>Integer</td>
+<td>Scaled high price</td>
+<td></td>
+</tr>
+<tr>
+<td>lowEp</td>
+<td>Integer</td>
+<td>Scaled low price</td>
+<td></td>
+</tr>
+<tr>
+<td>closeEp</td>
+<td>Integer</td>
+<td>Scaled close price</td>
+<td></td>
+</tr>
+<tr>
+<td>volume</td>
+<td>Integer</td>
+<td>Trade voulme during the current kline interval</td>
+<td></td>
+</tr>
+<tr>
+<td>turnoverEv</td>
+<td>Integer</td>
+<td>Scaled turnover value</td>
+<td></td>
+</tr>
+<tr>
+<td>sequence</td>
+<td>Integer</td>
+<td>Latest message sequence</td>
+<td></td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>String</td>
+<td>Contract symbol name</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>Message type</td>
+<td>snapshot, incremental</td>
+</tr>
+</tbody></table>
+<h3 id='unsubscribe-kline'>Unsubscribe Kline</h3>
+<blockquote>
+<p>Request format: unsubscribe all kline subscriptions</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "id": &lt;id&gt;,
+  "method": "kline.unsubscribe",
+  "params": []
+}
+</code></pre></div>
+<blockquote>
+<p>Request format: unsubscribe all kline subscriptions of a symbol</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "id": &lt;id&gt;,
+  "method": "kline.unsubscribe",
+  "params": [
+    "&lt;symbol&gt;"
+  ]
+}
+</code></pre></div>
+<p>It unsubscribes all kline subscriptions or for a single symbol.</p>
+<h3 id='subscribe-account-order-position-aop'>Subscribe Account-Order-Position (AOP)</h3>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "id": &lt;id&gt;,
+  "method": "aop.subscribe",
+  "params": []
+}
+</code></pre></div>
+<p>AOP subscription requires the session been authorized successfully. DataGW extracts the user information from the given token and sends AOP messages back to client accordingly. 0 or more latest account snapshot messages will be sent to client immediately on subscription, and incremental messages will be sent for later updates. Each account snapshot contains a trading account information, holding positions, and open / max 100 closed / max 100 filled order event message history.</p>
+<h3 id='account-order-position-aop-message'>Account-Order-Position (AOP) Message</h3>
+<blockquote>
+<p>Message format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "accounts": [
+    {
+      "accountID": 604630001,
+      "currency": "BTC",
+      .
+      .
+      .
+    }
+  ],
+  "orders": [
+    {
+      "accountID": 604630001,
+      .
+      .
+      .
+    }
+  ],
+  "positions": [
+    {
+      "accountID": 604630001,
+      .
+      .
+      .
+    }
+  ],
+  "sequence":1,
+  "timestamp":&lt;timestamp&gt;,
+  "type":"&lt;type&gt;"
+}
+
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Possible values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>timestamp</td>
+<td>Integer</td>
+<td>Transaction timestamp in nanoseconds</td>
+<td></td>
+</tr>
+<tr>
+<td>sequence</td>
+<td>Integer</td>
+<td>Latest message sequence</td>
+<td></td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>String</td>
+<td>Contract symbol name</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>Message type</td>
+<td>snapshot, incremental</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Message sample: snapshot</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"accounts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"accountBalanceEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000024</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"accountID"</span><span class="p">:</span><span class="w"> </span><span class="mi">675340001</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"bonusBalanceEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"totalUsedBalanceEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">1222</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"userID"</span><span class="p">:</span><span class="w"> </span><span class="mi">67534</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"orders"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"accountID"</span><span class="p">:</span><span class="w"> </span><span class="mi">675340001</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"actionBy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ByUser"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"actionTimeNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">1573711481897337000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"addedSeq"</span><span class="p">:</span><span class="w"> </span><span class="mi">1110523</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"bonusChangedAmountEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"clOrdID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uuid-1573711480091"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"closedPnlEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"closedSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cumQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cumValueEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">23018</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curAccBalanceEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000005</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curAssignedPosBalanceEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curBonusBalanceEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curLeverageEr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curPosSide"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Buy"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curPosSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curPosTerm"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curPosValueEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">23018</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curRiskLimitEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000000000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cxlRejReason"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"displayQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execFeeEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">-5</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"92301512-7a79-5138-b582-ac185223727d"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execPriceEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">86885000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execSeq"</span><span class="p">:</span><span class="w"> </span><span class="mi">1131034</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MakerFill"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execValueEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">23018</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"feeRateEr"</span><span class="p">:</span><span class="w"> </span><span class="mi">-25000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"lastLiquidityInd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AddedLiquidity"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"leavesQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"leavesValueEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"No error"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"ordStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Filled"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"ordType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Limit"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e9a45803-0af8-41b7-9c63-9b7c417715d9"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"orderQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"pegOffsetValueEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"priceEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">86885000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"relatedPosTerm"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"relatedReqNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Buy"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"stopLossEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"stopPxEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSD"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"takeProfitEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"timeInForce"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GoodTillCancel"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"tradeType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Trade"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"transactTimeNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">1573712555309040400</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"userID"</span><span class="p">:</span><span class="w"> </span><span class="mi">67534</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"accountID"</span><span class="p">:</span><span class="w"> </span><span class="mi">675340001</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"actionBy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ByUser"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"actionTimeNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">1573711490507067000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"addedSeq"</span><span class="p">:</span><span class="w"> </span><span class="mi">1110980</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"bonusChangedAmountEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"clOrdID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uuid-1573711488668"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"closedPnlEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"closedSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cumQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cumValueEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">34530</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curAccBalanceEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000013</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curAssignedPosBalanceEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curBonusBalanceEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curLeverageEr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curPosSide"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Buy"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curPosSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curPosTerm"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curPosValueEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">57548</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curRiskLimitEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000000000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cxlRejReason"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"displayQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execFeeEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">-8</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"80899855-5b95-55aa-b84e-8d1052f19886"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execPriceEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">86880000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execSeq"</span><span class="p">:</span><span class="w"> </span><span class="mi">1131408</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MakerFill"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execValueEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">34530</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"feeRateEr"</span><span class="p">:</span><span class="w"> </span><span class="mi">-25000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"lastLiquidityInd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AddedLiquidity"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"leavesQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"leavesValueEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"No error"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"ordStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Filled"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"ordType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Limit"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7e03cd6b-e45e-48d9-8937-8c6628e7a79d"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"orderQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"pegOffsetValueEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"priceEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">86880000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"relatedPosTerm"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"relatedReqNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Buy"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"stopLossEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"stopPxEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSD"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"takeProfitEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"timeInForce"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GoodTillCancel"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"tradeType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Trade"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"transactTimeNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">1573712559100655600</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"userID"</span><span class="p">:</span><span class="w"> </span><span class="mi">67534</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"accountID"</span><span class="p">:</span><span class="w"> </span><span class="mi">675340001</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"actionBy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ByUser"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"actionTimeNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">1573711499282604000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"addedSeq"</span><span class="p">:</span><span class="w"> </span><span class="mi">1111025</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"bonusChangedAmountEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"clOrdID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uuid-1573711497265"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"closedPnlEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"closedSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cumQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cumValueEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">46048</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curAccBalanceEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000024</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curAssignedPosBalanceEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curBonusBalanceEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curLeverageEr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curPosSide"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Buy"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curPosSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curPosTerm"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curPosValueEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">103596</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curRiskLimitEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000000000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cxlRejReason"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"displayQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execFeeEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">-11</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0be06645-90b8-5abe-8eb0-dca8e852f82f"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execPriceEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">86865000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execSeq"</span><span class="p">:</span><span class="w"> </span><span class="mi">1132422</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MakerFill"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execValueEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">46048</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"feeRateEr"</span><span class="p">:</span><span class="w"> </span><span class="mi">-25000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"lastLiquidityInd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AddedLiquidity"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"leavesQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"leavesValueEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"No error"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"ordStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Filled"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"ordType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Limit"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"66753807-9204-443d-acf9-946d15d5bedb"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"orderQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"pegOffsetValueEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"priceEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">86865000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"relatedPosTerm"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"relatedReqNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Buy"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"stopLossEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"stopPxEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSD"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"takeProfitEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"timeInForce"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GoodTillCancel"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"tradeType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Trade"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"transactTimeNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">1573712618104628700</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"userID"</span><span class="p">:</span><span class="w"> </span><span class="mi">67534</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"positions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"accountID"</span><span class="p">:</span><span class="w"> </span><span class="mi">675340001</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"assignedPosBalanceEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"avgEntryPriceEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">86875941</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"bankruptCommEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">75022</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"bankruptPriceEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">90000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"buyLeavesQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"buyLeavesValueEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"buyValueToCostEr"</span><span class="p">:</span><span class="w"> </span><span class="mi">1150750</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"createdAtNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"crossSharedBalanceEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">99998802</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cumClosedPnlEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cumFundingFeeEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cumTransactFeeEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">-24</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"dataVer"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"deleveragePercentileEr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"displayLeverageEr"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"estimatedOrdLossEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execSeq"</span><span class="p">:</span><span class="w"> </span><span class="mi">1132422</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"freeCostEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"freeQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">-9</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"initMarginReqEr"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"lastFundingTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1573703858883133200</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"lastTermEndTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"leverageEr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"liquidationPriceEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">90000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"maintMarginReqEr"</span><span class="p">:</span><span class="w"> </span><span class="mi">500000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"makerFeeRateEr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"markPriceEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">86786292</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"orderCostEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"posCostEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">1115</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"positionMarginEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">99925002</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"positionStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Normal"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"riskLimitEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000000000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"sellLeavesQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"sellLeavesValueEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"sellValueToCostEr"</span><span class="p">:</span><span class="w"> </span><span class="mi">1149250</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Buy"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSD"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"takerFeeRateEr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"term"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"transactTimeNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">1573712618104628700</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"unrealisedPnlEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">-107</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"updatedAtNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"usedBalanceEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">1222</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"userID"</span><span class="p">:</span><span class="w"> </span><span class="mi">67534</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"valueEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">103596</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="mi">1310812</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1573716998131004000</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"snapshot"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Message sample: incremental</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"accounts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"accountBalanceEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">99999989</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"accountID"</span><span class="p">:</span><span class="w"> </span><span class="mi">675340001</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"bonusBalanceEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"totalUsedBalanceEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">1803</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"userID"</span><span class="p">:</span><span class="w"> </span><span class="mi">67534</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"orders"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"accountID"</span><span class="p">:</span><span class="w"> </span><span class="mi">675340001</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"actionBy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ByUser"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"actionTimeNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">1573717286765750000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"addedSeq"</span><span class="p">:</span><span class="w"> </span><span class="mi">1192303</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"bonusChangedAmountEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"clOrdID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uuid-1573717284329"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"closedPnlEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"closedSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cumQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cumValueEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curAccBalanceEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000024</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curAssignedPosBalanceEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curBonusBalanceEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curLeverageEr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curPosSide"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Buy"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curPosSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curPosTerm"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curPosValueEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">103596</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curRiskLimitEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000000000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cxlRejReason"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"displayQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execFeeEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00000000-0000-0000-0000-000000000000"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execPriceEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execSeq"</span><span class="p">:</span><span class="w"> </span><span class="mi">1192303</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execValueEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"feeRateEr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"leavesQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"leavesValueEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">46098</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"No error"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"ordStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"ordType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Limit"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e329ae87-ce80-439d-b0cf-ad65272ed44c"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"orderQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"pegOffsetValueEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"priceEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">86770000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"relatedPosTerm"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"relatedReqNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Buy"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"stopLossEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"stopPxEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSD"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"takeProfitEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"timeInForce"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GoodTillCancel"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"transactTimeNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">1573717286765896400</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"userID"</span><span class="p">:</span><span class="w"> </span><span class="mi">67534</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"accountID"</span><span class="p">:</span><span class="w"> </span><span class="mi">675340001</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"actionBy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ByUser"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"actionTimeNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">1573717286765750000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"addedSeq"</span><span class="p">:</span><span class="w"> </span><span class="mi">1192303</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"bonusChangedAmountEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"clOrdID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uuid-1573717284329"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"closedPnlEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"closedSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cumQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cumValueEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">46098</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curAccBalanceEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">99999989</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curAssignedPosBalanceEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curBonusBalanceEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curLeverageEr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curPosSide"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Buy"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curPosSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curPosTerm"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curPosValueEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">149694</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curRiskLimitEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000000000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cxlRejReason"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"displayQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execFeeEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">35</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8d1848a2-5faf-52dd-be71-9fecbc8926be"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execPriceEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">86770000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execSeq"</span><span class="p">:</span><span class="w"> </span><span class="mi">1192303</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TakerFill"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execValueEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">46098</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"feeRateEr"</span><span class="p">:</span><span class="w"> </span><span class="mi">75000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"lastLiquidityInd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RemovedLiquidity"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"leavesQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"leavesValueEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"No error"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"ordStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Filled"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"ordType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Limit"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e329ae87-ce80-439d-b0cf-ad65272ed44c"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"orderQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"pegOffsetValueEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"priceEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">86770000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"relatedPosTerm"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"relatedReqNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Buy"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"stopLossEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"stopPxEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSD"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"takeProfitEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"timeInForce"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GoodTillCancel"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"tradeType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Trade"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"transactTimeNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">1573717286765896400</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"userID"</span><span class="p">:</span><span class="w"> </span><span class="mi">67534</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"positions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"accountID"</span><span class="p">:</span><span class="w"> </span><span class="mi">675340001</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"assignedPosBalanceEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"avgEntryPriceEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">86843828</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"bankruptCommEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">75056</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"bankruptPriceEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">130000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"buyLeavesQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"buyLeavesValueEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"buyValueToCostEr"</span><span class="p">:</span><span class="w"> </span><span class="mi">1150750</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"createdAtNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"crossSharedBalanceEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">99998186</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cumClosedPnlEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cumFundingFeeEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cumTransactFeeEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"dataVer"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"deleveragePercentileEr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"displayLeverageEr"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"estimatedOrdLossEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execSeq"</span><span class="p">:</span><span class="w"> </span><span class="mi">1192303</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"freeCostEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"freeQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">-13</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"initMarginReqEr"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"lastFundingTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1573703858883133200</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"lastTermEndTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"leverageEr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"liquidationPriceEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">130000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"maintMarginReqEr"</span><span class="p">:</span><span class="w"> </span><span class="mi">500000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"makerFeeRateEr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"markPriceEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">86732335</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"orderCostEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"posCostEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">1611</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"positionMarginEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">99924933</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"positionStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Normal"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"riskLimitEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000000000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"sellLeavesQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"sellLeavesValueEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"sellValueToCostEr"</span><span class="p">:</span><span class="w"> </span><span class="mi">1149250</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Buy"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSD"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"takerFeeRateEr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"term"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"transactTimeNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">1573717286765896400</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"unrealisedPnlEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">-192</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"updatedAtNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"usedBalanceEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">1803</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"userID"</span><span class="p">:</span><span class="w"> </span><span class="mi">67534</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"valueEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">149694</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="mi">1315725</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1573717286767188200</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"incremental"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='unsubscribe-account-order-position-aop'>Unsubscribe Account-Order-Position (AOP)</h3>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "id": &lt;id&gt;,
+  "method": "aop.unsubscribe",
+  "params": []
+}
+</code></pre></div>
+<p>It unsubscribes all account-order-positions.</p>
+<h3 id='subscribe-24-hours-ticker'>Subscribe 24 Hours Ticker</h3>
+<blockquote>
+<p>Reuqest sample</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"market24h.subscribe"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='24-hours-ticker-message'>24-Hours Ticker Message</h3>
+<blockquote>
+<p>Message format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "market24h": {
+    "open": &lt;open priceEp&gt;,
+    "high": &lt;high priceEp&gt;,
+    "low": &lt;low priceEp&gt;,
+    "close": &lt;close priceEp&gt;,
+    "indexPrice": &lt;index priceEp&gt;,
+    "markPrice": &lt;mark priceEp&gt;,
+    "openInterest": &lt;open interest&gt;,
+    "fundingRate": &lt;funding rateEr&gt;,
+    "predFundingRate": &lt;predicated funding rateEr&gt;,
+    "symbol": "&lt;symbol&gt;",
+    "turnover": &lt;turnoverEv&gt;,
+    "volume": &lt;volume&gt;
+  },
+  "timestamp": &lt;timestamp&gt;
+}
+</code></pre></div>
+<blockquote>
+<p>Message sample</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"market24h"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"close"</span><span class="p">:</span><span class="w"> </span><span class="mi">87425000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fundingRate"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"high"</span><span class="p">:</span><span class="w"> </span><span class="mi">92080000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"indexPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">87450676</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"low"</span><span class="p">:</span><span class="w"> </span><span class="mi">87130000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"markPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">87453092</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"open"</span><span class="p">:</span><span class="w"> </span><span class="mi">90710000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"openInterest"</span><span class="p">:</span><span class="w"> </span><span class="mi">7821141</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"predFundingRate"</span><span class="p">:</span><span class="w"> </span><span class="mi">7609</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSD"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1583646442444219017</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"turnover"</span><span class="p">:</span><span class="w"> </span><span class="mi">1399362834123</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="mi">125287131</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1576490244024818000</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>On each successful subscription, DataGW will publish 24-hour ticker metrics for all symbols every 1 second.</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Possible values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>open priceEp</td>
+<td>Integer</td>
+<td>The scaled open price in last 24 hours</td>
+<td></td>
+</tr>
+<tr>
+<td>high priceEp</td>
+<td>Integer</td>
+<td>The scaled highest price in last 24 hours</td>
+<td></td>
+</tr>
+<tr>
+<td>low priceEp</td>
+<td>Integer</td>
+<td>The scaled lowest price in last 24 hours</td>
+<td></td>
+</tr>
+<tr>
+<td>close priceEp</td>
+<td>Integer</td>
+<td>The scaled close price in last 24 hours</td>
+<td></td>
+</tr>
+<tr>
+<td>index priceEp</td>
+<td>Integer</td>
+<td>Scaled index price</td>
+<td></td>
+</tr>
+<tr>
+<td>mark priceEp</td>
+<td>Integer</td>
+<td>Scaled mark price</td>
+<td></td>
+</tr>
+<tr>
+<td>open interest</td>
+<td>Integer</td>
+<td>current open interest</td>
+<td></td>
+</tr>
+<tr>
+<td>funding rateEr</td>
+<td>Integer</td>
+<td>Scaled funding rate</td>
+<td></td>
+</tr>
+<tr>
+<td>predicated funding rateEr</td>
+<td>Integer</td>
+<td>Scaled predicated funding rate</td>
+<td></td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>Integer</td>
+<td>Timestamp in nanoseconds</td>
+<td></td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>String</td>
+<td>Contract symbol name</td>
+<td><a href="#trading-symbols">Trading Symbols</a></td>
+</tr>
+<tr>
+<td>turnoverEv</td>
+<td>Integer</td>
+<td>The scaled turnover value in last 24 hours</td>
+<td></td>
+</tr>
+<tr>
+<td>volume</td>
+<td>Integer</td>
+<td>Symbol trade volume in last 24 hours</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id='subscribe-price-tick'>Subscribe Price Tick</h3>
+<blockquote>
+<p>Request sample: subscribe a single symbol. </p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tick.subscribe"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">".BTC"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1580631267153</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li>Every trading symbol has a suite of other symbols, each symbol follows same patterns,
+i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</code>,
+ <code>mark</code> symbol follows a pattern <code>.M&lt;BASECURRENCY&gt;</code>,
+ predicated funding rate&#39;s symbol follows a pattern <code>.&lt;BASECURRENCY&gt;FR</code>,
+ while funding rate symbol follows a pattern <code>.&lt;BASECURRENCY&gt;FR8H</code></li>
+<li>Price is retrieved by subscribing symbol tick.</li>
+<li>all available symbols (pfr=predicated funding rate)</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>symbol</th>
+<th>index symbol</th>
+<th>mark symbol</th>
+<th>pfr symbol</th>
+<th>funding rate symbol</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>BTCUSD</td>
+<td>.BTC</td>
+<td>.MBTC</td>
+<td>.BTCFR</td>
+<td>.BTCFR8H</td>
+</tr>
+<tr>
+<td>cETHUSD</td>
+<td>.cETH</td>
+<td>.McETH</td>
+<td>.cETHFR</td>
+<td>.cETHFR8H</td>
+</tr>
+<tr>
+<td>ETHUSD</td>
+<td>.ETH</td>
+<td>.METH</td>
+<td>.ETHFR</td>
+<td>.ETHFR8H</td>
+</tr>
+<tr>
+<td>XRPUSD</td>
+<td>.XRP</td>
+<td>.MXRP</td>
+<td>.XRPFR</td>
+<td>.XRPFR8H</td>
+</tr>
+<tr>
+<td>LINKUSD</td>
+<td>.LINK</td>
+<td>.MLINK</td>
+<td>.LINKFR</td>
+<td>.LINKFR8H</td>
+</tr>
+<tr>
+<td>XTZUSD</td>
+<td>.XTZ</td>
+<td>.MXTZ</td>
+<td>.XTZFR</td>
+<td>.XTZFR8H</td>
+</tr>
+<tr>
+<td>LTCUSD</td>
+<td>.LTC</td>
+<td>.MLTC</td>
+<td>.LTCFR</td>
+<td>.LTCFR8H</td>
+</tr>
+<tr>
+<td>ADAUSD</td>
+<td>.ADA</td>
+<td>.MADA</td>
+<td>.ADAFR</td>
+<td>.ADAFR8H</td>
+</tr>
+<tr>
+<td>BCHUSD</td>
+<td>.BCH</td>
+<td>.MBCH</td>
+<td>.BCHFR</td>
+<td>.BCHFR8H</td>
+</tr>
+<tr>
+<td>COMPUSD</td>
+<td>.COMP</td>
+<td>.MCOMP</td>
+<td>.COMPFR</td>
+<td>.COMPFR8H</td>
+</tr>
+<tr>
+<td>YFIUSD</td>
+<td>.YFI</td>
+<td>.MYFI</td>
+<td>.YFIFR</td>
+<td>.YFIFR8H</td>
+</tr>
+<tr>
+<td>ALGOUSD</td>
+<td>.ALGO</td>
+<td>.MALGO</td>
+<td>.ALGOFR</td>
+<td>.ALGOFR8H</td>
+</tr>
+<tr>
+<td>TRXUSD</td>
+<td>.TRX</td>
+<td>.MTRX</td>
+<td>.TRXFR</td>
+<td>.TRXFR8H</td>
+</tr>
+<tr>
+<td>EOSUSD</td>
+<td>.EOS</td>
+<td>.MEOS</td>
+<td>.EOSFR</td>
+<td>.EOSFR8H</td>
+</tr>
+<tr>
+<td>ONTUSD</td>
+<td>.ONT</td>
+<td>.MONT</td>
+<td>.ONTFR</td>
+<td>.ONTFR8H</td>
+</tr>
+<tr>
+<td>NEOUSD</td>
+<td>.NEO</td>
+<td>.MNEO</td>
+<td>.NEOFR</td>
+<td>.NEOFR8H</td>
+</tr>
+<tr>
+<td>DOTUSD</td>
+<td>.DOT</td>
+<td>.MDOT</td>
+<td>.DOTFR</td>
+<td>.DOTFR8H</td>
+</tr>
+<tr>
+<td>UNIUSD</td>
+<td>.UNI</td>
+<td>.MUNI</td>
+<td>.UNIFR</td>
+<td>.UNIFR8H</td>
+</tr>
+<tr>
+<td>AAVEUSD</td>
+<td>.AAVE</td>
+<td>.MAAVE</td>
+<td>.AAVEFR</td>
+<td>.AAVEFR8H</td>
+</tr>
+<tr>
+<td>DOGEUSD</td>
+<td>.DOGE</td>
+<td>.MDOGE</td>
+<td>.DOGEFR</td>
+<td>.DOGEFR8H</td>
+</tr>
+<tr>
+<td>BATUSD</td>
+<td>.BAT</td>
+<td>.MBAT</td>
+<td>.BATFR</td>
+<td>.BATFR8H</td>
+</tr>
+<tr>
+<td>CHZUSD</td>
+<td>.CHZ</td>
+<td>.MCHZ</td>
+<td>.CHZFR</td>
+<td>.CHZFR8H</td>
+</tr>
+<tr>
+<td>MANAUSD</td>
+<td>.MANA</td>
+<td>.MMANA</td>
+<td>.MANAFR</td>
+<td>.MANAFR8H</td>
+</tr>
+<tr>
+<td>ENJUSD</td>
+<td>.ENJ</td>
+<td>.MENJ</td>
+<td>.ENJFR</td>
+<td>.ENJFR8H</td>
+</tr>
+<tr>
+<td>SUSHIUSD</td>
+<td>.SUSHI</td>
+<td>.MSUSHI</td>
+<td>.SUSHIFR</td>
+<td>.SUSHIFR8H</td>
+</tr>
+<tr>
+<td>SNXUSD</td>
+<td>.SNX</td>
+<td>.MSNX</td>
+<td>.SNXFR</td>
+<td>.SNXFR8H</td>
+</tr>
+<tr>
+<td>GRTUSD</td>
+<td>.GRT</td>
+<td>.MGRT</td>
+<td>.GRTFR</td>
+<td>.GRTFR8H</td>
+</tr>
+<tr>
+<td>MKRUSD</td>
+<td>.MKR</td>
+<td>.MMKR</td>
+<td>.MKRFR</td>
+<td>.MKRFR8H</td>
+</tr>
+<tr>
+<td>ZECUSD</td>
+<td>.ZEC</td>
+<td>.MZEC</td>
+<td>.ZECFR</td>
+<td>.ZECFR8H</td>
+</tr>
+<tr>
+<td>FILUSD</td>
+<td>.FIL</td>
+<td>.MFIL</td>
+<td>.FILFR</td>
+<td>.FILFR8H</td>
+</tr>
+<tr>
+<td>KSMUSD</td>
+<td>.KSM</td>
+<td>.MKSM</td>
+<td>.KSMFR</td>
+<td>.KSMFR8H</td>
+</tr>
+<tr>
+<td>XMRUSD</td>
+<td>.XMR</td>
+<td>.MXMR</td>
+<td>.XMRFR</td>
+<td>.XMRFR8H</td>
+</tr>
+<tr>
+<td>QTUMUSD</td>
+<td>.QTUM</td>
+<td>.MQTUM</td>
+<td>.QTUMFR</td>
+<td>.QTUMFR8H</td>
+</tr>
+<tr>
+<td>XLMUSD</td>
+<td>.XLM</td>
+<td>.MXLM</td>
+<td>.XLMFR</td>
+<td>.XLMFR8H</td>
+</tr>
+<tr>
+<td>ATOMUSD</td>
+<td>.ATOM</td>
+<td>.MATOM</td>
+<td>.ATOMFR</td>
+<td>.ATOMFR8H</td>
+</tr>
+<tr>
+<td>SOLUSD</td>
+<td>.SOL</td>
+<td>.MSOL</td>
+<td>.SOLFR</td>
+<td>.SOLFR8H</td>
+</tr>
+<tr>
+<td>uBTCUSD</td>
+<td>.uBTC</td>
+<td>.MuBTC</td>
+<td>.uBTCFR</td>
+<td>.uBTCFR8H</td>
+</tr>
+<tr>
+<td>ZILUSD</td>
+<td>.ZIL</td>
+<td>.MZIL</td>
+<td>.ZILFR</td>
+<td>.ZILFR8H</td>
+</tr>
+<tr>
+<td>GMTUSD</td>
+<td>.GMT</td>
+<td>.MGMT</td>
+<td>.GMTFR</td>
+<td>.GMTFR8H</td>
+</tr>
+<tr>
+<td>BNBUSD</td>
+<td>.BNB</td>
+<td>.MBNB</td>
+<td>.BNBFR</td>
+<td>.BNBFR8H</td>
+</tr>
+<tr>
+<td>AVAXUSD</td>
+<td>.AVAX</td>
+<td>.MAVAX</td>
+<td>.AVAXFR</td>
+<td>.AVAXFR8H</td>
+</tr>
+<tr>
+<td>u100VETUSD</td>
+<td>.u100VET</td>
+<td>.Mu100VET</td>
+<td>.u100VETFR</td>
+<td>.u100VETFR8H</td>
+</tr>
+<tr>
+<td>WAVESUSD</td>
+<td>.WAVES</td>
+<td>.MWAVES</td>
+<td>.WAVESFR</td>
+<td>.WAVESFR8H</td>
+</tr>
+<tr>
+<td>u100000SHIBUSD</td>
+<td>.u100000SHIB</td>
+<td>.Mu100000SHIB</td>
+<td>.u100000SHIBFR</td>
+<td>.u100000SHIBFR8H</td>
+</tr>
+<tr>
+<td>u100IOSTUSD</td>
+<td>.u100IOST</td>
+<td>.Mu100IOST</td>
+<td>.u100IOSTFR</td>
+<td>.u100IOSTFR8H</td>
+</tr>
+<tr>
+<td>ETCUSD</td>
+<td>.ETC</td>
+<td>.METC</td>
+<td>.ETCFR</td>
+<td>.ETCFR8H</td>
+</tr>
+<tr>
+<td>SANDUSD</td>
+<td>.SAND</td>
+<td>.MSAND</td>
+<td>.SANDFR</td>
+<td>.SANDFR8H</td>
+</tr>
+<tr>
+<td>APEUSD</td>
+<td>.APE</td>
+<td>.MAPE</td>
+<td>.APEFR</td>
+<td>.APEFR8H</td>
+</tr>
+<tr>
+<td>MATICUSD</td>
+<td>.MATIC</td>
+<td>.MMATIC</td>
+<td>.MATICFR</td>
+<td>.MATICFR8H</td>
+</tr>
+<tr>
+<td>GALAUSD</td>
+<td>.GALA</td>
+<td>.MGALA</td>
+<td>.GALAFR</td>
+<td>.GALAFR8H</td>
+</tr>
+<tr>
+<td>AXSUSD</td>
+<td>.AXS</td>
+<td>.MAXS</td>
+<td>.AXSFR</td>
+<td>.AXSFR8H</td>
+</tr>
+<tr>
+<td>NEARUSD</td>
+<td>.NEAR</td>
+<td>.MNEAR</td>
+<td>.NEARFR</td>
+<td>.NEARFR8H</td>
+</tr>
+<tr>
+<td>u100JASMYUSD</td>
+<td>.u100JASMY</td>
+<td>.Mu100JASMY</td>
+<td>.u100JASMYFR</td>
+<td>.u100JASMYFR8H</td>
+</tr>
+<tr>
+<td>LRCUSD</td>
+<td>.LRC</td>
+<td>.MLRC</td>
+<td>.LRCFR</td>
+<td>.LRCFR8H</td>
+</tr>
+<tr>
+<td>THETAUSD</td>
+<td>.THETA</td>
+<td>.MTHETA</td>
+<td>.THETAFR</td>
+<td>.THETAFR8H</td>
+</tr>
+<tr>
+<td>FTMUSD</td>
+<td>.FTM</td>
+<td>.MFTM</td>
+<td>.FTMFR</td>
+<td>.FTMFR8H</td>
+</tr>
+<tr>
+<td>SRMUSD</td>
+<td>.SRM</td>
+<td>.MSRM</td>
+<td>.SRMFR</td>
+<td>.SRMFR8H</td>
+</tr>
+<tr>
+<td>u100SLPUSD</td>
+<td>.u100SLP</td>
+<td>.Mu100SLP</td>
+<td>.u100SLPFR</td>
+<td>.u100SLPFR8H</td>
+</tr>
+<tr>
+<td>DYDXUSD</td>
+<td>.DYDX</td>
+<td>.MDYDX</td>
+<td>.DYDXFR</td>
+<td>.DYDXFR8H</td>
+</tr>
+<tr>
+<td>CRVUSD</td>
+<td>.CRV</td>
+<td>.MCRV</td>
+<td>.CRVFR</td>
+<td>.CRVFR8H</td>
+</tr>
+<tr>
+<td>DASHUSD</td>
+<td>.DASH</td>
+<td>.MDASH</td>
+<td>.DASHFR</td>
+<td>.DASHFR8H</td>
+</tr>
+<tr>
+<td>ICPUSD</td>
+<td>.ICP</td>
+<td>.MICP</td>
+<td>.ICPFR</td>
+<td>.ICPFR8H</td>
+</tr>
+<tr>
+<td>KLAYUSD</td>
+<td>.KLAY</td>
+<td>.MKLAY</td>
+<td>.KLAYFR</td>
+<td>.KLAYFR8H</td>
+</tr>
+<tr>
+<td>ONEUSD</td>
+<td>.ONE</td>
+<td>.MONE</td>
+<td>.ONEFR</td>
+<td>.ONEFR8H</td>
+</tr>
+<tr>
+<td>ALICEUSD</td>
+<td>.ALICE</td>
+<td>.MALICE</td>
+<td>.ALICEFR</td>
+<td>.ALICEFR8H</td>
+</tr>
+<tr>
+<td>u100PEOPLEUSD</td>
+<td>.u100PEOPLE</td>
+<td>.Mu100PEOPLE</td>
+<td>.u100PEOPLEFR</td>
+<td>.u100PEOPLEFR8H</td>
+</tr>
+<tr>
+<td>SKLUSD</td>
+<td>.SKL</td>
+<td>.MSKL</td>
+<td>.SKLFR</td>
+<td>.SKLFR8H</td>
+</tr>
+<tr>
+<td>IMXUSD</td>
+<td>.IMX</td>
+<td>.MIMX</td>
+<td>.IMXFR</td>
+<td>.IMXFR8H</td>
+</tr>
+<tr>
+<td>KNCUSD</td>
+<td>.KNC</td>
+<td>.MKNC</td>
+<td>.KNCFR</td>
+<td>.KNCFR8H</td>
+</tr>
+<tr>
+<td>u1000000NFTUSD</td>
+<td>.u1000000NFT</td>
+<td>.Mu1000000NFT</td>
+<td>.u1000000NFTFR</td>
+<td>.u1000000NFTFR8H</td>
+</tr>
+<tr>
+<td>RUNEUSD</td>
+<td>.RUNE</td>
+<td>.MRUNE</td>
+<td>.RUNEFR</td>
+<td>.RUNEFR8H</td>
+</tr>
+<tr>
+<td>ASTRUSD</td>
+<td>.ASTR</td>
+<td>.MASTR</td>
+<td>.ASTRFR</td>
+<td>.ASTRFR8H</td>
+</tr>
+<tr>
+<td>EGLDUSD</td>
+<td>.EGLD</td>
+<td>.MEGLD</td>
+<td>.EGLDFR</td>
+<td>.EGLDFR8H</td>
+</tr>
+<tr>
+<td>GLMRUSD</td>
+<td>.GLMR</td>
+<td>.MGLMR</td>
+<td>.GLMRFR</td>
+<td>.GLMRFR8H</td>
+</tr>
+<tr>
+<td>FTTUSD</td>
+<td>.FTT</td>
+<td>.MFTT</td>
+<td>.FTTFR</td>
+<td>.FTTFR8H</td>
+</tr>
+<tr>
+<td>OMGUSD</td>
+<td>.OMG</td>
+<td>.MOMG</td>
+<td>.OMGFR</td>
+<td>.OMGFR8H</td>
+</tr>
+<tr>
+<td>DAOUSD</td>
+<td>.DAO</td>
+<td>.MDAO</td>
+<td>.DAOFR</td>
+<td>.DAOFR8H</td>
+</tr>
+<tr>
+<td>GALUSD</td>
+<td>.GAL</td>
+<td>.MGAL</td>
+<td>.GALFR</td>
+<td>.GALFR8H</td>
+</tr>
+<tr>
+<td>CELOUSD</td>
+<td>.CELO</td>
+<td>.MCELO</td>
+<td>.CELOFR</td>
+<td>.CELOFR8H</td>
+</tr>
+<tr>
+<td>KAVAUSD</td>
+<td>.KAVA</td>
+<td>.MKAVA</td>
+<td>.KAVAFR</td>
+<td>.KAVAFR8H</td>
+</tr>
+<tr>
+<td>FLOWUSD</td>
+<td>.FLOW</td>
+<td>.MFLOW</td>
+<td>.FLOWFR</td>
+<td>.FLOWFR8H</td>
+</tr>
+<tr>
+<td>OGNUSD</td>
+<td>.OGN</td>
+<td>.MOGN</td>
+<td>.OGNFR</td>
+<td>.OGNFR8H</td>
+</tr>
+<tr>
+<td>u1000HOTUSD</td>
+<td>.u1000HOT</td>
+<td>.Mu1000HOT</td>
+<td>.u1000HOTFR</td>
+<td>.u1000HOTFR8H</td>
+</tr>
+<tr>
+<td>1INCHUSD</td>
+<td>.1INCH</td>
+<td>.M1INCH</td>
+<td>.1INCHFR</td>
+<td>.1INCHFR8H</td>
+</tr>
+<tr>
+<td>BALUSD</td>
+<td>.BAL</td>
+<td>.MBAL</td>
+<td>.BALFR</td>
+<td>.BALFR8H</td>
+</tr>
+<tr>
+<td>MINAUSD</td>
+<td>.MINA</td>
+<td>.MMINA</td>
+<td>.MINAFR</td>
+<td>.MINAFR8H</td>
+</tr>
+<tr>
+<td>BNXUSD</td>
+<td>.BNX</td>
+<td>.MBNX</td>
+<td>.BNXFR</td>
+<td>.BNXFR8H</td>
+</tr>
+<tr>
+<td>SXPUSD</td>
+<td>.SXP</td>
+<td>.MSXP</td>
+<td>.SXPFR</td>
+<td>.SXPFR8H</td>
+</tr>
+<tr>
+<td>BAKEUSD</td>
+<td>.BAKE</td>
+<td>.MBAKE</td>
+<td>.BAKEFR</td>
+<td>.BAKEFR8H</td>
+</tr>
+<tr>
+<td>CHRUSD</td>
+<td>.CHR</td>
+<td>.MCHR</td>
+<td>.CHRFR</td>
+<td>.CHRFR8H</td>
+</tr>
+<tr>
+<td>COTIUSD</td>
+<td>.COTI</td>
+<td>.MCOTI</td>
+<td>.COTIFR</td>
+<td>.COTIFR8H</td>
+</tr>
+<tr>
+<td>ZRXUSD</td>
+<td>.ZRX</td>
+<td>.MZRX</td>
+<td>.ZRXFR</td>
+<td>.ZRXFR8H</td>
+</tr>
+<tr>
+<td>WOOUSD</td>
+<td>.WOO</td>
+<td>.MWOO</td>
+<td>.WOOFR</td>
+<td>.WOOFR8H</td>
+</tr>
+<tr>
+<td>DODOUSD</td>
+<td>.DODO</td>
+<td>.MDODO</td>
+<td>.DODOFR</td>
+<td>.DODOFR8H</td>
+</tr>
+<tr>
+<td>C98USD</td>
+<td>.C98</td>
+<td>.MC98</td>
+<td>.C98FR</td>
+<td>.C98FR8H</td>
+</tr>
+<tr>
+<td>ENSUSD</td>
+<td>.ENS</td>
+<td>.MENS</td>
+<td>.ENSFR</td>
+<td>.ENSFR8H</td>
+</tr>
+<tr>
+<td>RENUSD</td>
+<td>.REN</td>
+<td>.MREN</td>
+<td>.RENFR</td>
+<td>.RENFR8H</td>
+</tr>
+<tr>
+<td>MASKUSD</td>
+<td>.MASK</td>
+<td>.MMASK</td>
+<td>.MASKFR</td>
+<td>.MASKFR8H</td>
+</tr>
+<tr>
+<td>ARUSD</td>
+<td>.AR</td>
+<td>.MAR</td>
+<td>.ARFR</td>
+<td>.ARFR8H</td>
+</tr>
+<tr>
+<td>BITUSD</td>
+<td>.BIT</td>
+<td>.MBIT</td>
+<td>.BITFR</td>
+<td>.BITFR8H</td>
+</tr>
+<tr>
+<td>u100ANKRUSD</td>
+<td>.u100ANKR</td>
+<td>.Mu100ANKR</td>
+<td>.u100ANKRFR</td>
+<td>.u100ANKRFR8H</td>
+</tr>
+<tr>
+<td>u100ARPAUSD</td>
+<td>.u100ARPA</td>
+<td>.Mu100ARPA</td>
+<td>.u100ARPAFR</td>
+<td>.u100ARPAFR8H</td>
+</tr>
+<tr>
+<td>u100CELRUSD</td>
+<td>.u100CELR</td>
+<td>.Mu100CELR</td>
+<td>.u100CELRFR</td>
+<td>.u100CELRFR8H</td>
+</tr>
+<tr>
+<td>u1000RSRUSD</td>
+<td>.u1000RSR</td>
+<td>.Mu1000RSR</td>
+<td>.u1000RSRFR</td>
+<td>.u1000RSRFR8H</td>
+</tr>
+<tr>
+<td>u1000REEFUSD</td>
+<td>.u1000REEF</td>
+<td>.Mu1000REEF</td>
+<td>.u1000REEFFR</td>
+<td>.u1000REEFFR8H</td>
+</tr>
+<tr>
+<td>u100RVNUSD</td>
+<td>.u100RVN</td>
+<td>.Mu100RVN</td>
+<td>.u100RVNFR</td>
+<td>.u100RVNFR8H</td>
+</tr>
+<tr>
+<td>u1000DENTUSD</td>
+<td>.u1000DENT</td>
+<td>.Mu1000DENT</td>
+<td>.u1000DENTFR</td>
+<td>.u1000DENTFR8H</td>
+</tr>
+<tr>
+<td>MOVRUSD</td>
+<td>.MOVR</td>
+<td>.MMOVR</td>
+<td>.MOVRFR</td>
+<td>.MOVRFR8H</td>
+</tr>
+<tr>
+<td>OCEANUSD</td>
+<td>.OCEAN</td>
+<td>.MOCEAN</td>
+<td>.OCEANFR</td>
+<td>.OCEANFR8H</td>
+</tr>
+<tr>
+<td>RAYUSD</td>
+<td>.RAY</td>
+<td>.MRAY</td>
+<td>.RAYFR</td>
+<td>.RAYFR8H</td>
+</tr>
+<tr>
+<td>AUDIOUSD</td>
+<td>.AUDIO</td>
+<td>.MAUDIO</td>
+<td>.AUDIOFR</td>
+<td>.AUDIOFR8H</td>
+</tr>
+<tr>
+<td>CVXUSD</td>
+<td>.CVX</td>
+<td>.MCVX</td>
+<td>.CVXFR</td>
+<td>.CVXFR8H</td>
+</tr>
+<tr>
+<td>ZENUSD</td>
+<td>.ZEN</td>
+<td>.MZEN</td>
+<td>.ZENFR</td>
+<td>.ZENFR8H</td>
+</tr>
+<tr>
+<td>MTLUSD</td>
+<td>.MTL</td>
+<td>.MMTL</td>
+<td>.MTLFR</td>
+<td>.MTLFR8H</td>
+</tr>
+<tr>
+<td>LPTUSD</td>
+<td>.LPT</td>
+<td>.MLPT</td>
+<td>.LPTFR</td>
+<td>.LPTFR8H</td>
+</tr>
+<tr>
+<td>u100IOTXUSD</td>
+<td>.u100IOTX</td>
+<td>.Mu100IOTX</td>
+<td>.u100IOTXFR</td>
+<td>.u100IOTXFR8H</td>
+</tr>
+<tr>
+<td>STORJUSD</td>
+<td>.STORJ</td>
+<td>.MSTORJ</td>
+<td>.STORJFR</td>
+<td>.STORJFR8H</td>
+</tr>
+<tr>
+<td>CVCUSD</td>
+<td>.CVC</td>
+<td>.MCVC</td>
+<td>.CVCFR</td>
+<td>.CVCFR8H</td>
+</tr>
+<tr>
+<td>INJUSD</td>
+<td>.INJ</td>
+<td>.MINJ</td>
+<td>.INJFR</td>
+<td>.INJFR8H</td>
+</tr>
+<tr>
+<td>u100LINAUSD</td>
+<td>.u100LINA</td>
+<td>.Mu100LINA</td>
+<td>.u100LINAFR</td>
+<td>.u100LINAFR8H</td>
+</tr>
+<tr>
+<td>TOMOUSD</td>
+<td>.TOMO</td>
+<td>.MTOMO</td>
+<td>.TOMOFR</td>
+<td>.TOMOFR8H</td>
+</tr>
+<tr>
+<td>u100XEMUSD</td>
+<td>.u100XEM</td>
+<td>.Mu100XEM</td>
+<td>.u100XEMFR</td>
+<td>.u100XEMFR8H</td>
+</tr>
+<tr>
+<td>AGLDUSD</td>
+<td>.AGLD</td>
+<td>.MAGLD</td>
+<td>.AGLDFR</td>
+<td>.AGLDFR8H</td>
+</tr>
+<tr>
+<td>ILVUSD</td>
+<td>.ILV</td>
+<td>.MILV</td>
+<td>.ILVFR</td>
+<td>.ILVFR8H</td>
+</tr>
+<tr>
+<td>YGGUSD</td>
+<td>.YGG</td>
+<td>.MYGG</td>
+<td>.YGGFR</td>
+<td>.YGGFR8H</td>
+</tr>
+<tr>
+<td>SFPUSD</td>
+<td>.SFP</td>
+<td>.MSFP</td>
+<td>.SFPFR</td>
+<td>.SFPFR8H</td>
+</tr>
+<tr>
+<td>GTCUSD</td>
+<td>.GTC</td>
+<td>.MGTC</td>
+<td>.GTCFR</td>
+<td>.GTCFR8H</td>
+</tr>
+<tr>
+<td>LITUSD</td>
+<td>.LIT</td>
+<td>.MLIT</td>
+<td>.LITFR</td>
+<td>.LITFR8H</td>
+</tr>
+<tr>
+<td>CTKUSD</td>
+<td>.CTK</td>
+<td>.MCTK</td>
+<td>.CTKFR</td>
+<td>.CTKFR8H</td>
+</tr>
+<tr>
+<td>API3USD</td>
+<td>.API3</td>
+<td>.MAPI3</td>
+<td>.API3FR</td>
+<td>.API3FR8H</td>
+</tr>
+<tr>
+<td>u100ACHUSD</td>
+<td>.u100ACH</td>
+<td>.Mu100ACH</td>
+<td>.u100ACHFR</td>
+<td>.u100ACHFR8H</td>
+</tr>
+<tr>
+<td>OPUSD</td>
+<td>.OP</td>
+<td>.MOP</td>
+<td>.OPFR</td>
+<td>.OPFR8H</td>
+</tr>
+<tr>
+<td>u100ROSEUSD</td>
+<td>.u100ROSE</td>
+<td>.Mu100ROSE</td>
+<td>.u100ROSEFR</td>
+<td>.u100ROSEFR8H</td>
+</tr>
+<tr>
+<td>u1000LEVERUSD</td>
+<td>.u1000LEVER</td>
+<td>.Mu1000LEVER</td>
+<td>.u1000LEVERFR</td>
+<td>.u1000LEVERFR8H</td>
+</tr>
+<tr>
+<td>LDOUSD</td>
+<td>.LDO</td>
+<td>.MLDO</td>
+<td>.LDOFR</td>
+<td>.LDOFR8H</td>
+</tr>
+<tr>
+<td>FLMUSD</td>
+<td>.FLM</td>
+<td>.MFLM</td>
+<td>.FLMFR</td>
+<td>.FLMFR8H</td>
+</tr>
+<tr>
+<td>YFIIUSD</td>
+<td>.YFII</td>
+<td>.MYFII</td>
+<td>.YFIIFR</td>
+<td>.YFIIFR8H</td>
+</tr>
+<tr>
+<td>HNTUSD</td>
+<td>.HNT</td>
+<td>.MHNT</td>
+<td>.HNTFR</td>
+<td>.HNTFR8H</td>
+</tr>
+<tr>
+<td>ALPHAUSD</td>
+<td>.ALPHA</td>
+<td>.MALPHA</td>
+<td>.ALPHAFR</td>
+<td>.ALPHAFR8H</td>
+</tr>
+<tr>
+<td>u1000SPELLUSD</td>
+<td>.u1000SPELL</td>
+<td>.Mu1000SPELL</td>
+<td>.u1000SPELLFR</td>
+<td>.u1000SPELLFR8H</td>
+</tr>
+<tr>
+<td>STGUSD</td>
+<td>.STG</td>
+<td>.MSTG</td>
+<td>.STGFR</td>
+<td>.STGFR8H</td>
+</tr>
+<tr>
+<td>FOOTBALLUSD</td>
+<td>.FOOTBALL</td>
+<td>.MFOOTBALL</td>
+<td>.FOOTBALLFR</td>
+<td>.FOOTBALLFR8H</td>
+</tr>
+<tr>
+<td>u1000LUNCUSD</td>
+<td>.u1000LUNC</td>
+<td>.Mu1000LUNC</td>
+<td>.u1000LUNCFR</td>
+<td>.u1000LUNCFR8H</td>
+</tr>
+<tr>
+<td>PROSUSD</td>
+<td>.PROS</td>
+<td>.MPROS</td>
+<td>.PROSFR</td>
+<td>.PROSFR8H</td>
+</tr>
+<tr>
+<td>u100SWEATUSD</td>
+<td>.u100SWEAT</td>
+<td>.Mu100SWEAT</td>
+<td>.u100SWEATFR</td>
+<td>.u100SWEATFR8H</td>
+</tr>
+<tr>
+<td>FLUXUSD</td>
+<td>.FLUX</td>
+<td>.MFLUX</td>
+<td>.FLUXFR</td>
+<td>.FLUXFR8H</td>
+</tr>
+<tr>
+<td>u100TRYBUSD</td>
+<td>.u100TRYB</td>
+<td>.Mu100TRYB</td>
+<td>.u100TRYBFR</td>
+<td>.u100TRYBFR8H</td>
+</tr>
+<tr>
+<td>PAXGUSD</td>
+<td>.PAXG</td>
+<td>.MPAXG</td>
+<td>.PAXGFR</td>
+<td>.PAXGFR8H</td>
+</tr>
+<tr>
+<td>LUNA2USD</td>
+<td>.LUNA2</td>
+<td>.MLUNA2</td>
+<td>.LUNA2FR</td>
+<td>.LUNA2FR8H</td>
+</tr>
+<tr>
+<td>QNTUSD</td>
+<td>.QNT</td>
+<td>.MQNT</td>
+<td>.QNTFR</td>
+<td>.QNTFR8H</td>
+</tr>
+<tr>
+<td>APTUSD</td>
+<td>.APT</td>
+<td>.MAPT</td>
+<td>.APTFR</td>
+<td>.APTFR8H</td>
+</tr>
+<tr>
+<td>GMXUSD</td>
+<td>.GMX</td>
+<td>.MGMX</td>
+<td>.GMXFR</td>
+<td>.GMXFR8H</td>
+</tr>
+</tbody></table>
+<h3 id='tick-message'>Tick Message</h3>
+<p>A price tick event message.</p>
+
+<blockquote>
+<p>Message format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "tick": {
+    "last": &lt;priceEp&gt;,
+    "scale": &lt;scale&gt;,
+    "symbol": &lt;symbol&gt;
+    "timestamp": &lt;timestamp_in_nano&gt;
+  }
+}
+</code></pre></div>
+<blockquote>
+<p>Message sample</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"tick"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"last"</span><span class="p">:</span><span class="w"> </span><span class="mi">93385362</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">".BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1580635719408000000</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Possible values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>priceEp</td>
+<td>Integer</td>
+<td>The scaled open price in last 24 hours</td>
+<td></td>
+</tr>
+<tr>
+<td>scale</td>
+<td>Integer</td>
+<td>The price scale factor, e.g. 4 denotes price scaled with factor 1e4.</td>
+<td>4,6,8</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>String</td>
+<td>Symbol</td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id='spot'>Spot</h1><h2 id='rest-api'>REST API</h2><h2 id='websocket-api'>Websocket API</h2><h1 id='transfer'>Transfer</h1>
       </div>
       <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="json">json</a>
+          </div>
       </div>
     </div>
   </body>
