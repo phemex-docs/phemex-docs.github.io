@@ -910,6 +910,43 @@
           </li>
           <li>
             <a href="#transfer-rest-api" class="toc-h1 toc-link" data-title="Transfer REST API">Transfer REST API</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#transfer-between-spot-and-futures" class="toc-h2 toc-link" data-title="Transfer Between Spot and Futures">Transfer Between Spot and Futures</a>
+                  </li>
+                  <li>
+                    <a href="#query-transfer-history" class="toc-h2 toc-link" data-title="Query Transfer History">Query Transfer History</a>
+                  </li>
+                  <li>
+                    <a href="#spot-sub-to-main-transfer-for-sub-account-only" class="toc-h2 toc-link" data-title="Spot Sub To Main Transfer (for sub-account only)">Spot Sub To Main Transfer (for sub-account only)</a>
+                  </li>
+                  <li>
+                    <a href="#query-spot-sub-to-main-transfer" class="toc-h2 toc-link" data-title="Query Spot Sub To Main Transfer">Query Spot Sub To Main Transfer</a>
+                  </li>
+                  <li>
+                    <a href="#futures-sub-to-main-transfer-for-sub-account-only" class="toc-h2 toc-link" data-title="Futures Sub To Main Transfer (for sub-account only)">Futures Sub To Main Transfer (for sub-account only)</a>
+                  </li>
+                  <li>
+                    <a href="#query-futures-sub-to-main-transfer" class="toc-h2 toc-link" data-title="Query Futures Sub To Main Transfer">Query Futures Sub To Main Transfer</a>
+                  </li>
+                  <li>
+                    <a href="#universal-transfer-main-account-only-transfer-between-sub-to-main-main-to-sub-or-sub-to-sub" class="toc-h2 toc-link" data-title="Universal Transfer (Main account only) - Transfer between sub to main, main to sub or sub to sub">Universal Transfer (Main account only) - Transfer between sub to main, main to sub or sub to sub</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#convert-rest-api" class="toc-h1 toc-link" data-title="Convert REST API">Convert REST API</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#rfq-quote" class="toc-h2 toc-link" data-title="RFQ Quote">RFQ Quote</a>
+                  </li>
+                  <li>
+                    <a href="#convert" class="toc-h2 toc-link" data-title="Convert">Convert</a>
+                  </li>
+                  <li>
+                    <a href="#query-convert-history" class="toc-h2 toc-link" data-title="Query Convert History">Query Convert History</a>
+                  </li>
+              </ul>
           </li>
       </ul>
     </div>
@@ -5615,7 +5652,624 @@ While for private channels like account/position/order data, the client should s
 <td>165397230166</td>
 </tr>
 </tbody></table>
-<h1 id='transfer-rest-api'>Transfer REST API</h1>
+<h1 id='transfer-rest-api'>Transfer REST API</h1><h2 id='transfer-between-spot-and-futures'>Transfer Between Spot and Futures</h2>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>POST /assets/transfer
+</code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"amountEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"moveOp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Response format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"amountEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"linkKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"userId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Possible Values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>amountEv</td>
+<td>Long</td>
+<td>True</td>
+<td>amountEv to transfer</td>
+<td>100000 ...</td>
+</tr>
+<tr>
+<td>moveOp</td>
+<td>Integer</td>
+<td>True</td>
+<td>direction</td>
+<td>1 - futures to spot, 2 - spot to futures</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td>True</td>
+<td>currency to transfer</td>
+<td>BTC, ETH, USD ...</td>
+</tr>
+</tbody></table>
+<h2 id='query-transfer-history'>Query Transfer History</h2>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /assets/transfer?currency=&lt;currency&gt;
+</code></pre></div>
+<blockquote>
+<p>Response format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"amountEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"bizType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"createTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"linkKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"userId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Possible Values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td>True</td>
+<td>the currency to query</td>
+<td>BTC,ETH ...</td>
+</tr>
+<tr>
+<td>start</td>
+<td>Long</td>
+<td>False</td>
+<td>start time in millisecond</td>
+<td>default 2 days ago from the end</td>
+</tr>
+<tr>
+<td>end</td>
+<td>Long</td>
+<td>False</td>
+<td>end time in millisecond</td>
+<td>default now</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>Integer</td>
+<td>False</td>
+<td>page start from 0</td>
+<td>start from 0, default 0</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>Integer</td>
+<td>False</td>
+<td>page size</td>
+<td>default 20, max 200</td>
+</tr>
+</tbody></table>
+<h2 id='spot-sub-to-main-transfer-for-sub-account-only'>Spot Sub To Main Transfer (for sub-account only)</h2>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>POST /assets/spots/sub-accounts/transfer
+</code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"amountEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"requestKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Response format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"amountEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"fromUserId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"requestKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"toUserId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Possible Values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>amountEv</td>
+<td>Long</td>
+<td>True</td>
+<td>amountEv to transfer</td>
+<td>100000 ...</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td>True</td>
+<td>currency to transfer</td>
+<td>BTC, ETH, USD ...</td>
+</tr>
+<tr>
+<td>requestKey</td>
+<td>String</td>
+<td>False</td>
+<td>unique request key</td>
+<td>Unique request Key, system will generate if its empty</td>
+</tr>
+</tbody></table>
+<h2 id='query-spot-sub-to-main-transfer'>Query Spot Sub To Main Transfer</h2>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /assets/spots/sub-accounts/transfer?currency=&lt;currency&gt;
+</code></pre></div>
+<blockquote>
+<p>Response format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"amountEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"createAt"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fromUserId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"requestKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"toUserId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Possible Values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td>True</td>
+<td>the currency to query</td>
+<td>BTC,ETH ...</td>
+</tr>
+<tr>
+<td>start</td>
+<td>Long</td>
+<td>False</td>
+<td>start time in millisecond</td>
+<td>default 2 days ago from the end</td>
+</tr>
+<tr>
+<td>end</td>
+<td>Long</td>
+<td>False</td>
+<td>end time in millisecond</td>
+<td>default now</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>Integer</td>
+<td>False</td>
+<td>page start from 0</td>
+<td>start from 0, default 0</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>Integer</td>
+<td>False</td>
+<td>page size</td>
+<td>default 20, max 200</td>
+</tr>
+</tbody></table>
+<h2 id='futures-sub-to-main-transfer-for-sub-account-only'>Futures Sub To Main Transfer (for sub-account only)</h2>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>POST /assets/futures/sub-accounts/transfer
+</code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"amountEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"requestKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Response format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"amountEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"bizCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"fromUserId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"requestKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"toUserId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Possible Values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>amountEv</td>
+<td>Long</td>
+<td>True</td>
+<td>amountEv to transfer</td>
+<td>100000 ...</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td>True</td>
+<td>currency to transfer</td>
+<td>BTC, ETH, USD ...</td>
+</tr>
+<tr>
+<td>requestKey</td>
+<td>String</td>
+<td>False</td>
+<td>unique request key</td>
+<td>Unique request Key, system will generate if its empty</td>
+</tr>
+</tbody></table>
+<h2 id='query-futures-sub-to-main-transfer'>Query Futures Sub To Main Transfer</h2>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /assets/futures/sub-accounts/transfer?currency=&lt;currency&gt;
+</code></pre></div>
+<blockquote>
+<p>Response format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"fromUserId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"toUserId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"amountEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"bizCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"requestKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"createAt"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Possible Values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td>True</td>
+<td>the currency to query</td>
+<td>BTC,ETH ...</td>
+</tr>
+<tr>
+<td>start</td>
+<td>Long</td>
+<td>False</td>
+<td>start time in millisecond</td>
+<td>default 2 days ago from the end</td>
+</tr>
+<tr>
+<td>end</td>
+<td>Long</td>
+<td>False</td>
+<td>end time in millisecond</td>
+<td>default now</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>Integer</td>
+<td>False</td>
+<td>page start from 0</td>
+<td>start from 0, default 0</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>Integer</td>
+<td>False</td>
+<td>page size</td>
+<td>default 20, max 200</td>
+</tr>
+</tbody></table>
+<h2 id='universal-transfer-main-account-only-transfer-between-sub-to-main-main-to-sub-or-sub-to-sub'>Universal Transfer (Main account only) - Transfer between sub to main, main to sub or sub to sub</h2>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>POST /assets/universal-transfer
+</code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"amountEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"bizType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"fromUserId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"toUserId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Response format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "requestKey"
+}
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Possible Values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>fromUserId</td>
+<td>Long</td>
+<td>True</td>
+<td>from user id</td>
+<td>Will set as main account if not given or 0</td>
+</tr>
+<tr>
+<td>toUserId</td>
+<td>Long</td>
+<td>True</td>
+<td>to user id</td>
+<td>Will set as main account if not given or 0</td>
+</tr>
+<tr>
+<td>amountEv</td>
+<td>Long</td>
+<td>True</td>
+<td>amountEv to transfer</td>
+<td>100000 ...</td>
+</tr>
+<tr>
+<td>bizType</td>
+<td>String</td>
+<td>True</td>
+<td>transfer for which biz type</td>
+<td>SPOT, PERPETUAL</td>
+</tr>
+<tr>
+<td>requestKey</td>
+<td>String</td>
+<td>False</td>
+<td>unique request key</td>
+<td>Unique request Key, system will generate if its empty</td>
+</tr>
+</tbody></table>
+<h1 id='convert-rest-api'>Convert REST API</h1><h2 id='rfq-quote'>RFQ Quote</h2>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /assets/quote
+</code></pre></div>
+<blockquote>
+<p>Response format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"quoteArgs"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"expireAt"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"origin"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"proceeds"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"quoteAt"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"requestAt"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"ttlMs"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Possible Values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>fromCurrency</td>
+<td>String</td>
+<td>True</td>
+<td>from currency</td>
+<td>BTC,USD ...</td>
+</tr>
+<tr>
+<td>toCurrency</td>
+<td>String</td>
+<td>True</td>
+<td>to currency</td>
+<td>BTC,USD ...</td>
+</tr>
+<tr>
+<td>fromAmountEv</td>
+<td>Long</td>
+<td>True</td>
+<td>amountEv to transfer</td>
+<td>100000 ...</td>
+</tr>
+</tbody></table>
+<h2 id='convert'>Convert</h2>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>POST /assets/convert
+</code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"fromAmountEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"fromCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"toCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Response format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"fromAmountEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"fromCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"linkKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"moveOp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"toAmountEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"toCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Possible Values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>toCurrency</td>
+<td>String</td>
+<td>True</td>
+<td>to currency</td>
+<td>BTC,USD ...</td>
+</tr>
+<tr>
+<td>fromCurrency</td>
+<td>String</td>
+<td>True</td>
+<td>from currency</td>
+<td>BTC,USD ...</td>
+</tr>
+<tr>
+<td>fromAmountEv</td>
+<td>Long</td>
+<td>False</td>
+<td>amountEv to convert</td>
+<td>100000 ...</td>
+</tr>
+<tr>
+<td>code</td>
+<td>String</td>
+<td>True</td>
+<td>encrypted convert args</td>
+<td>xxxxxxxx ...</td>
+</tr>
+</tbody></table>
+<h2 id='query-convert-history'>Query Convert History</h2>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /assets/convert
+</code></pre></div>
+<blockquote>
+<p>Response format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>[
+  {
+    "conversionRate": 0,
+    "createTime": 0,
+    "errorCode": 0,
+    "fromAmountEv": 0,
+    "fromCurrency": "string",
+    "linkKey": "string",
+    "status": 0,
+    "toAmountEv": 0,
+    "toCurrency": "string"
+  }
+]
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Possible Values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>fromCurrency</td>
+<td>String</td>
+<td>False</td>
+<td>from currency</td>
+<td>BTC,USD ...</td>
+</tr>
+<tr>
+<td>toCurrency</td>
+<td>String</td>
+<td>False</td>
+<td>to currency</td>
+<td>BTC,USD ...</td>
+</tr>
+<tr>
+<td>startTime</td>
+<td>Long</td>
+<td>False</td>
+<td>start time in millisecond</td>
+<td>default 2 days ago from the end time</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>Long</td>
+<td>False</td>
+<td>end time in millisecond</td>
+<td>default now</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>Integer</td>
+<td>False</td>
+<td>page start from 0</td>
+<td>start from 0, default 0</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>Integer</td>
+<td>False</td>
+<td>page size</td>
+<td>default 20, max 200</td>
+</tr>
+</tbody></table>
+
       </div>
       <div class="dark-box">
       </div>
