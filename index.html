@@ -2638,7 +2638,7 @@ Because the number of interfaces in Other group may grow over time, the list bel
 </tbody></table>
 <h2 id='query-recent-trades'>Query Recent Trades</h2>
 <blockquote>
-<p>Request</p>
+<p>Request format</p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>GET /md/trade?symbol=&lt;symbol&gt;
 </code></pre></div>
@@ -2679,6 +2679,35 @@ Because the number of interfaces in Other group may grow over time, the list bel
       .
       .
     ]
+  }
+}
+</code></pre></div>
+<blockquote>
+<p>Message sample</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /md/trade?symbol=BTCUSD
+
+{
+  "error": null,
+  "id": 0,
+  "result": {
+    "sequence": 15934323,
+    "symbol": "BTCUSD",
+    "trades": [
+      [
+        1579164056368538508,
+        "Sell",
+        86960000,
+        121
+      ],
+      [
+        1579164055036820552,
+        "Sell",
+        86960000,
+        58
+      ]
+    ],
+    "type": "snapshot"
   }
 }
 </code></pre></div>
@@ -2727,38 +2756,9 @@ Because the number of interfaces in Other group may grow over time, the list bel
 <td></td>
 </tr>
 </tbody></table>
-
+<h2 id='query-24-hours-ticker'>Query 24 Hours Ticker</h2>
 <blockquote>
-<p>Message sample</p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>GET /md/trade?symbol=BTCUSD
-
-{
-  "error": null,
-  "id": 0,
-  "result": {
-    "sequence": 15934323,
-    "symbol": "BTCUSD",
-    "trades": [
-      [
-        1579164056368538508,
-        "Sell",
-        86960000,
-        121
-      ],
-      [
-        1579164055036820552,
-        "Sell",
-        86960000,
-        58
-      ]
-    ],
-    "type": "snapshot"
-  }
-}
-</code></pre></div><h2 id='query-24-hours-ticker'>Query 24 Hours Ticker</h2>
-<blockquote>
-<p>Request</p>
+<p>Request format</p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>GET v1/md/ticker/24hr?symbol=&lt;symbol&gt;
 </code></pre></div>
@@ -2779,7 +2779,7 @@ Because the number of interfaces in Other group may grow over time, the list bel
 </tbody></table>
 
 <blockquote>
-<p>Response:</p>
+<p>Response format</p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>{
   "error": null,
@@ -2803,6 +2803,34 @@ Because the number of interfaces in Other group may grow over time, the list bel
   }
 }
 </code></pre></div>
+<blockquote>
+<p>Request sample</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET v1/md/ticker/24hr?symbol=BTCUSD
+</code></pre></div>
+<blockquote>
+<p>Response sample</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"close"</span><span class="p">:</span><span class="w"> </span><span class="mi">87425000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fundingRate"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"high"</span><span class="p">:</span><span class="w"> </span><span class="mi">92080000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"indexPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">87450676</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"low"</span><span class="p">:</span><span class="w"> </span><span class="mi">87130000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"markPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">87453092</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"open"</span><span class="p">:</span><span class="w"> </span><span class="mi">90710000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"openInterest"</span><span class="p">:</span><span class="w"> </span><span class="mi">7821141</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"predFundingRate"</span><span class="p">:</span><span class="w"> </span><span class="mi">7609</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSD"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1583646442444219017</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"turnover"</span><span class="p">:</span><span class="w"> </span><span class="mi">1399362834123</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="mi">125287131</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -2890,35 +2918,7 @@ Because the number of interfaces in Other group may grow over time, the list bel
 <td></td>
 </tr>
 </tbody></table>
-
-<blockquote>
-<p>Request sample
-<code>
-GET v1/md/ticker/24hr?symbol=BTCUSD
-</code></p>
-
-<p>Response sample</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"close"</span><span class="p">:</span><span class="w"> </span><span class="mi">87425000</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"fundingRate"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"high"</span><span class="p">:</span><span class="w"> </span><span class="mi">92080000</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"indexPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">87450676</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"low"</span><span class="p">:</span><span class="w"> </span><span class="mi">87130000</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"markPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">87453092</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"open"</span><span class="p">:</span><span class="w"> </span><span class="mi">90710000</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"openInterest"</span><span class="p">:</span><span class="w"> </span><span class="mi">7821141</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"predFundingRate"</span><span class="p">:</span><span class="w"> </span><span class="mi">7609</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSD"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1583646442444219017</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"turnover"</span><span class="p">:</span><span class="w"> </span><span class="mi">1399362834123</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="mi">125287131</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div><h2 id='query-history-trades-by-symbol'>Query History Trades By symbol</h2>
+<h2 id='query-history-trades-by-symbol'>Query History Trades By symbol</h2>
 <blockquote>
 <p>Response</p>
 </blockquote>
@@ -2978,9 +2978,12 @@ GET v1/md/ticker/24hr?symbol=BTCUSD
 </code></pre></div>
 <ul>
 <li>Query History trades by symbol</li>
-<li><p>RateLimit of this api is 5 per second</p></li>
-<li><p>Response sample</p></li>
+<li>RateLimit of this api is 5 per second</li>
 </ul>
+
+<blockquote>
+<p>Response sample</p>
+</blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
@@ -3093,8 +3096,6 @@ While for private channels like account/position/order data, the client should s
 </tr>
 </tbody></table>
 <h2 id='subscribe-orderbook'>Subscribe OrderBook</h2>
-<p>Subscribe orderbook update messages with <strong>depth = 30 and interval = 20ms</strong>.</p>
-
 <blockquote>
 <p>Request format</p>
 </blockquote>
@@ -3106,6 +3107,8 @@ While for private channels like account/position/order data, the client should s
   ]
 }
 </code></pre></div>
+<p>Subscribe orderbook update messages with <strong>depth = 30 and interval = 20ms</strong>.</p>
+
 <p>On each successful subscription, DataGW will immediately send the current Order Book (with default depth=30) snapshot to client and all later order book updates will be published. </p>
 
 <blockquote>
@@ -3119,8 +3122,6 @@ While for private channels like account/position/order data, the client should s
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h2 id='subscribe-full-orderbook'>Subscribe Full OrderBook</h2>
-<p>Subscribe orderbook update messages with <strong>full depth and interval = 100ms</strong>.</p>
-
 <blockquote>
 <p>Request format</p>
 </blockquote>
@@ -3133,6 +3134,8 @@ While for private channels like account/position/order data, the client should s
   ]
 }
 </code></pre></div>
+<p>Subscribe orderbook update messages with <strong>full depth and interval = 100ms</strong>.</p>
+
 <p>On each successful subscription, DataGW will immediately send the current full Order Book snapshot to client and all later order book updates will be published. </p>
 
 <blockquote>
@@ -4356,8 +4359,6 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
 <li>all available symbols in <a href="#query-product-information">products</a></li>
 </ul>
 <h2 id='tick-message'>Tick Message</h2>
-<p>A price tick event message.</p>
-
 <blockquote>
 <p>Message format</p>
 </blockquote>
@@ -4527,8 +4528,6 @@ While for private channels like account/position/order data, the client should s
 </tr>
 </tbody></table>
 <h2 id='subscribe-orderbook-2'>Subscribe OrderBook</h2>
-<p>Subscribe orderbook update messages with <strong>depth = 30 and interval = 20ms</strong>.</p>
-
 <blockquote>
 <p>Request format</p>
 </blockquote>
@@ -4540,6 +4539,8 @@ While for private channels like account/position/order data, the client should s
   ]
 }
 </code></pre></div>
+<p>Subscribe orderbook update messages with <strong>depth = 30 and interval = 20ms</strong>.</p>
+
 <p>On each successful subscription, DataGW will immediately send the current Order Book (with default depth=30) snapshot to client and all later order book updates will be published. </p>
 
 <blockquote>
@@ -4553,8 +4554,6 @@ While for private channels like account/position/order data, the client should s
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h2 id='subscribe-full-orderbook-2'>Subscribe Full OrderBook</h2>
-<p>Subscribe orderbook update messages with <strong>full depth and interval = 100ms</strong>.</p>
-
 <blockquote>
 <p>Request format</p>
 </blockquote>
@@ -4567,6 +4566,8 @@ While for private channels like account/position/order data, the client should s
   ]
 }
 </code></pre></div>
+<p>Subscribe orderbook update messages with <strong>full depth and interval = 100ms</strong>.</p>
+
 <p>On each successful subscription, DataGW will immediately send the current full Order Book snapshot to client and all later order book updates will be published. </p>
 
 <blockquote>
@@ -5134,8 +5135,6 @@ While for private channels like account/position/order data, the client should s
 </code></pre></div>
 <p>It unsubscribes all kline subscriptions or for a single symbol.</p>
 <h2 id='subscribe-wallet-order'>Subscribe Wallet-Order</h2>
-<p>WO subscription requires the session been authorized successfully. DataGW extracts the user information from the given token and sends WO messages back to client accordingly. 0 or more latest WO snapshot messages will be sent to client immediately on subscription, and incremental messages will be sent for later updates. Each account snapshot contains a users&#39; wallets and open / max 100 closed / max 100 filled order event message history.</p>
-
 <blockquote>
 <p>Request</p>
 </blockquote>
@@ -5144,7 +5143,9 @@ While for private channels like account/position/order data, the client should s
   </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wo.subscribe"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h2 id='wallet-order-message'>Wallet-Order Message</h2>
+</span></code></pre></div>
+<p>WO subscription requires the session been authorized successfully. DataGW extracts the user information from the given token and sends WO messages back to client accordingly. 0 or more latest WO snapshot messages will be sent to client immediately on subscription, and incremental messages will be sent for later updates. Each account snapshot contains a users&#39; wallets and open / max 100 closed / max 100 filled order event message history.</p>
+<h2 id='wallet-order-message'>Wallet-Order Message</h2>
 <blockquote>
 <p>Message format</p>
 </blockquote>
@@ -5509,8 +5510,6 @@ While for private channels like account/position/order data, the client should s
 </tr>
 </tbody></table>
 <h2 id='subscribe-investment-account'>Subscribe Investment Account</h2>
-<p>On subscription to investment account then you will get your investment information of each currency type.</p>
-
 <blockquote>
 <p>Request sample</p>
 </blockquote>
@@ -5519,7 +5518,9 @@ While for private channels like account/position/order data, the client should s
   </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wm.subscribe"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h2 id='investment-account-message'>Investment Account Message</h2>
+</span></code></pre></div>
+<p>On subscription to investment account then you will get your investment information of each currency type.</p>
+<h2 id='investment-account-message'>Investment Account Message</h2>
 <blockquote>
 <p>Message format</p>
 </blockquote>
