@@ -49,7 +49,7 @@ GET /public/products
 
 > Request format
 
-```
+```javascript
 {
   "method": "user.auth",
   "params": [
@@ -104,7 +104,7 @@ While for private channels like account/position/order data, the client should s
 
 > Request format
 
-```
+```javascript
 {
   "id": <id>,
   "method": "orderbook.subscribe",
@@ -134,7 +134,7 @@ On each successful subscription, DataGW will immediately send the current Order 
 
 > Request format
 
-```
+```javascript
 {
   "id": <id>,
   "method": "orderbook.subscribe",
@@ -166,7 +166,7 @@ On each successful subscription, DataGW will immediately send the current full O
 
 > Message format：
  
-```
+```javascript
 {
   "book": {
     "asks": [
@@ -296,7 +296,7 @@ It unsubscribes all orderbook related subscriptions.
 
 > Request format
 
-```
+```javascript
 {
   "id": <id>,
   "method": "trade.subscribe",
@@ -324,7 +324,7 @@ On each successful subscription, DataGW will send the 200 history trades immedia
 
 > Message format
 
-```
+```javascript
 {
   "trades": [
     [
@@ -415,7 +415,7 @@ DataGW publishes trade message with types: incremental, snapshot. Incremental me
 
 > Request format: unsubscribe all trade subsciptions
 
-```
+```javascript
 {
   "id": <id>,
   "method": "trade.unsubscribe",
@@ -426,7 +426,7 @@ DataGW publishes trade message with types: incremental, snapshot. Incremental me
 
 > Request format: unsubscribe all trade subsciptions for a symbol
 
-```
+```javascript
 {
   "id": <id>,
   "method": "trade.unsubscribe",
@@ -442,7 +442,7 @@ It unsubscribes all trade subscriptions or for a single symbol.
 
 > Request format
 
-```
+```javascript
 {
   "id": <id>,
   "method": "kline.subscribe",
@@ -472,7 +472,7 @@ On each successful subscription, DataGW will send the 1000 history klines immedi
 
 > Message format
 
-```
+```javascript
 {
   "kline": [
     [
@@ -585,7 +585,7 @@ DataGW publishes kline message with types: incremental, snapshot. Incremental me
 
 > Request format: unsubscribe all kline subscriptions
 
-```
+```javascript
 {
   "id": <id>,
   "method": "kline.unsubscribe",
@@ -595,7 +595,7 @@ DataGW publishes kline message with types: incremental, snapshot. Incremental me
 
 > Request format: unsubscribe all kline subscriptions of a symbol
 
-```
+```javascript
 {
   "id": <id>,
   "method": "kline.unsubscribe",
@@ -625,7 +625,7 @@ WO subscription requires the session been authorized successfully. DataGW extrac
 
 > Message format
 
-```
+```javascript
 {
   "wallets": [{"userID":60463,...}, ...],
   "orders": [{"userID":60463, ...}],
@@ -868,7 +868,7 @@ WO subscription requires the session been authorized successfully. DataGW extrac
 
 > Message format
 
-```
+```javascript
 {
   "spot_market24h": {
     "openEp": <open priceEp>,
@@ -938,7 +938,7 @@ On subscription to investment account then you will get your investment informat
 
 > Message format
 
-```
+```javascript
 {
   "investments":[
     {

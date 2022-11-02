@@ -21,16 +21,19 @@ Welcome to the [Phemex](https://phemex.com) API documentation. We offer REST and
 * HTTP `5XX` return codes are used for Phemex internal errors. Note: This doesn't means the operation failed, the execution status is **UNKNOWN** and could be Succeed.
 
 ### REST Response format
-   * All restful API except ***starting*** with `/md` shares same response format.
 
-```
+> Response general format
+
+```javascript
 {
   "code": <code>,
   "msg": <msg>,
   "data": <data>
 }
-
 ```
+
+* All restful API except ***starting*** with `/md` shares same response format.
+
 | Field | Description | 
 |-------|------|
 | code | 0 means `success`, non-zero means `error`|

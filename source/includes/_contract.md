@@ -198,7 +198,7 @@ GET /md/orderbook?symbol=<symbol>
 
 > Response format
 
-```
+```javascript
 {
   "error": null,
   "id": 0,
@@ -296,7 +296,7 @@ GET /exchange/public/md/v2/kline?symbol=<symbol>&resolution=<resolution>&limit=<
 
 > Response format
 
-```
+```javascript
 {
   "code": 0,
   "msg": "OK",
@@ -375,7 +375,7 @@ GET /md/trade?symbol=<symbol>
 
 > Response format
 
-```
+```javascript
 {
   "error": null,
   "id": 0,
@@ -398,11 +398,15 @@ GET /md/trade?symbol=<symbol>
 }
 ```
 
-> Message sample
+> Request sample
 
 ```
 GET /md/trade?symbol=BTCUSD
+```
 
+> Response sample
+
+```json
 {
   "error": null,
   "id": 0,
@@ -451,7 +455,7 @@ GET v1/md/ticker/24hr?symbol=<symbol>
 
 > Response format
 
-```
+```javascript
 {
   "error": null,
   "id": 0,
@@ -538,7 +542,7 @@ GET /exchange/public/nomics/trades?market=<symbol>&since=<since>
 
 > Response format
 
-```
+```javascript
 {
   "code": 0,
   "data": [
@@ -617,7 +621,7 @@ GET /exchange/public/nomics/trades?market=<symbol>&since=<since>
 
 > Request format
 
-```
+```javascript
 {
   "method": "user.auth",
   "params": [
@@ -660,7 +664,7 @@ While for private channels like account/position/order data, the client should s
 
 > Request format
 
-```
+```javascript
 {
   "id": <id>,
   "method": "orderbook.subscribe",
@@ -690,7 +694,7 @@ On each successful subscription, DataGW will immediately send the current Order 
 
 > Request format
 
-```
+```javascript
 {
   "id": <id>,
   "method": "orderbook.subscribe",
@@ -722,7 +726,7 @@ On each successful subscription, DataGW will immediately send the current full O
 
 > Message format：
  
-```
+```javascript
 {
   "book": {
     "asks": [
@@ -834,7 +838,7 @@ It unsubscribes all orderbook related subscriptions.
 
 > Request format
 
-```
+```javascript
 {
   "id": <id>,
   "method": "trade.subscribe",
@@ -862,7 +866,7 @@ On each successful subscription, DataGW will send the 200 history trades immedia
 
 > Message format
 
-```
+```javascript
 {
   "trades": [
     [
@@ -953,7 +957,7 @@ DataGW publishes trade message with types: incremental, snapshot. Incremental me
 
 > Request format: unsubscribe all trade subsciptions
 
-```
+```javascript
 {
   "id": <id>,
   "method": "trade.unsubscribe",
@@ -964,7 +968,7 @@ DataGW publishes trade message with types: incremental, snapshot. Incremental me
 
 > Request format: unsubscribe all trade subsciptions for a symbol
 
-```
+```javascript
 {
   "id": <id>,
   "method": "trade.unsubscribe",
@@ -980,7 +984,7 @@ It unsubscribes all trade subscriptions or for a single symbol.
 
 > Request format
 
-```
+```javascript
 {
   "id": <id>,
   "method": "kline.subscribe",
@@ -1010,7 +1014,7 @@ On each successful subscription, DataGW will send the 1000 history klines immedi
 
 > Message format
 
-```
+```javascript
 {
   "kline": [
     [
@@ -1124,7 +1128,7 @@ DataGW publishes kline message with types: incremental, snapshot. Incremental me
 
 > Request format: unsubscribe all kline subscriptions
 
-```
+```javascript
 {
   "id": <id>,
   "method": "kline.unsubscribe",
@@ -1134,7 +1138,7 @@ DataGW publishes kline message with types: incremental, snapshot. Incremental me
 
 > Request format: unsubscribe all kline subscriptions of a symbol
 
-```
+```javascript
 {
   "id": <id>,
   "method": "kline.unsubscribe",
@@ -1151,7 +1155,7 @@ It unsubscribes all kline subscriptions or for a single symbol.
 
 > Request format
 
-```
+```javascript
 {
   "id": <id>,
   "method": "aop.subscribe",
@@ -1165,7 +1169,7 @@ AOP subscription requires the session been authorized successfully. DataGW extra
 
 > Message format
 
-```
+```javascript
 {
   "accounts": [
     {
@@ -1634,7 +1638,7 @@ AOP subscription requires the session been authorized successfully. DataGW extra
 
 > Request format
 
-```
+```javascript
 {
   "id": <id>,
   "method": "aop.unsubscribe",
@@ -1659,7 +1663,7 @@ It unsubscribes all account-order-positions.
 
 > Message format
 
-```
+```javascript
 {
   "market24h": {
     "open": <open priceEp>,
@@ -1746,7 +1750,7 @@ i.e. `index` symbol follows a pattern `.<BASECURRENCY>`,
 
 > Message format
 
-```
+```javascript
 {
   "tick": {
     "last": <priceEp>,
