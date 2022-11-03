@@ -981,16 +981,19 @@
 <li>HTTP <code>5XX</code> return codes are used for Phemex internal errors. Note: This doesn&#39;t means the operation failed, the execution status is <strong>UNKNOWN</strong> and could be Succeed.</li>
 </ul>
 <h3 id='rest-response-format'>REST Response format</h3>
-<ul>
-<li>All restful API except <strong><em>starting</em></strong> with <code>/md</code> shares same response format.</li>
-</ul>
+<blockquote>
+<p>Response general format</p>
+</blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>{
   "code": &lt;code&gt;,
   "msg": &lt;msg&gt;,
   "data": &lt;data&gt;
 }
-
 </code></pre></div>
+<ul>
+<li>All restful API except <strong><em>starting</em></strong> with <code>/md</code> shares same response format.</li>
+</ul>
+
 <table><thead>
 <tr>
 <th>Field</th>
