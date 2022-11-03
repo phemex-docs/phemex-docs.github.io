@@ -984,11 +984,11 @@
 <blockquote>
 <p>Response general format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "code": &lt;code&gt;,
-  "msg": &lt;msg&gt;,
-  "data": &lt;data&gt;
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">code</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">msg</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">msg</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">data</span><span class="o">&gt;</span>
+<span class="p">}</span>
 </code></pre></div>
 <ul>
 <li>All restful API except <strong><em>starting</em></strong> with <code>/md</code> shares same response format.</li>
@@ -2370,38 +2370,38 @@ Because the number of interfaces in Other group may grow over time, the list bel
 <blockquote>
 <p>Response format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "error": null,
-  "id": 0,
-  "result": {
-    "book": {
-      "asks": [
-        [
-          &lt;priceEp&gt;,
-          &lt;size&gt;
-        ],
-        .
-        .
-        .
-      ],
-      "bids": [
-        [
-          &lt;priceEp&gt;,
-          &lt;size&gt;
-        ],
-        .
-        .
-        .
-      ],
-    ]
-    },
-    "depth": 30,
-    "sequence": &lt;sequence&gt;,
-    "timestamp": &lt;timestamp&gt;,
-    "symbol": "&lt;symbol&gt;",
-    "type": "snapshot"
-  }
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">result</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">book</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="dl">"</span><span class="s2">asks</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">[</span>
+          <span class="o">&lt;</span><span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
+          <span class="o">&lt;</span><span class="nx">size</span><span class="o">&gt;</span>
+        <span class="p">],</span>
+        <span class="p">.</span>
+        <span class="p">.</span>
+        <span class="p">.</span>
+      <span class="p">],</span>
+      <span class="dl">"</span><span class="s2">bids</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">[</span>
+          <span class="o">&lt;</span><span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
+          <span class="o">&lt;</span><span class="nx">size</span><span class="o">&gt;</span>
+        <span class="p">],</span>
+        <span class="p">.</span>
+        <span class="p">.</span>
+        <span class="p">.</span>
+      <span class="p">],</span>
+    <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="dl">"</span><span class="s2">depth</span><span class="dl">"</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">sequence</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">sequence</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">timestamp</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">timestamp</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">symbol</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;symbol&gt;</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">snapshot</span><span class="dl">"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 <table><thead>
 <tr>
@@ -2494,14 +2494,14 @@ Because the number of interfaces in Other group may grow over time, the list bel
 <blockquote>
 <p>Response format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "code": 0,
-  "msg": "OK",
-  "data": {
-    "total": -1,
-    "rows": [[&lt;timestamp&gt;, &lt;interval&gt;, &lt;last_close&gt;, &lt;open&gt;, &lt;high&gt;, &lt;low&gt;, &lt;close&gt;, &lt;volume&gt;, &lt;turnover&gt;], [...]]
-  }
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">code</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">msg</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">OK</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">total</span><span class="dl">"</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">rows</span><span class="dl">"</span><span class="p">:</span> <span class="p">[[</span><span class="o">&lt;</span><span class="nx">timestamp</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="nx">interval</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="nx">last_close</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="nx">open</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="nx">high</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="nx">low</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="nx">close</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="nx">volume</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="nx">turnover</span><span class="o">&gt;</span><span class="p">],</span> <span class="p">[...]]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 <ul>
 <li>Please be noted that kline interfaces have <a href="#rate-limits">rate limits</a> rule,  please check the Other group under <a href="#api-groups">api groups</a></li>
@@ -2702,56 +2702,59 @@ Because the number of interfaces in Other group may grow over time, the list bel
 <blockquote>
 <p>Response format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "error": null,
-  "id": 0,
-  "result": {
-    "type": "snapshot",
-    "sequence": &lt;sequence&gt;,
-    "symbol": "&lt;symbol&gt;",
-    "trades": [
-      [
-        &lt;timestamp&gt;,
-        "&lt;side&gt;",
-        &lt;priceEp&gt;,
-        &lt;size&gt;
-      ],
-      .
-      .
-      .
-    ]
-  }
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">result</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">snapshot</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">sequence</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">sequence</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">symbol</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;symbol&gt;</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">trades</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">[</span>
+        <span class="o">&lt;</span><span class="nx">timestamp</span><span class="o">&gt;</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">&lt;side&gt;</span><span class="dl">"</span><span class="p">,</span>
+        <span class="o">&lt;</span><span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
+        <span class="o">&lt;</span><span class="nx">size</span><span class="o">&gt;</span>
+      <span class="p">],</span>
+      <span class="p">.</span>
+      <span class="p">.</span>
+      <span class="p">.</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 <blockquote>
-<p>Message sample</p>
+<p>Request sample</p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>GET /md/trade?symbol=BTCUSD
-
-{
-  "error": null,
-  "id": 0,
-  "result": {
-    "sequence": 15934323,
-    "symbol": "BTCUSD",
-    "trades": [
-      [
-        1579164056368538508,
-        "Sell",
-        86960000,
-        121
-      ],
-      [
-        1579164055036820552,
-        "Sell",
-        86960000,
-        58
-      ]
-    ],
-    "type": "snapshot"
-  }
-}
 </code></pre></div>
+<blockquote>
+<p>Response sample</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="mi">15934323</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSD"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trades"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">[</span><span class="w">
+        </span><span class="mi">1579164056368538508</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Sell"</span><span class="p">,</span><span class="w">
+        </span><span class="mi">86960000</span><span class="p">,</span><span class="w">
+        </span><span class="mi">121</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="p">[</span><span class="w">
+        </span><span class="mi">1579164055036820552</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Sell"</span><span class="p">,</span><span class="w">
+        </span><span class="mi">86960000</span><span class="p">,</span><span class="w">
+        </span><span class="mi">58</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"snapshot"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -2822,27 +2825,27 @@ Because the number of interfaces in Other group may grow over time, the list bel
 <blockquote>
 <p>Response format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "error": null,
-  "id": 0,
-  "result": {
-      "askEp": &lt;best ask priceEp&gt;,
-      "bidEp": &lt;best bid priceEp&gt;,
-      "fundingRateEr": &lt;funding rateEr&gt;,
-      "highEp": &lt;high priceEp&gt;,
-      "indexEp": &lt;index priceEp&gt;,
-      "lastEp": &lt;last priceEp&gt;,
-      "lowEp": &lt;low priceEp&gt;,
-      "markEp": &lt;mark priceEp&gt;,
-      "openEp": &lt;open priceEp&gt;,
-      "openInterest": &lt;open interest&gt;,
-      "predFundingRateEr": &lt;predicated funding rateEr&gt;,
-      "symbol": &lt;symbol&gt;,
-      "timestamp": &lt;timestamp&gt;,
-      "turnoverEv": &lt;turnoverEv&gt;,
-      "volume": &lt;volume&gt;
-  }
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">result</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="dl">"</span><span class="s2">askEp</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">best</span> <span class="nx">ask</span> <span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">bidEp</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">best</span> <span class="nx">bid</span> <span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">fundingRateEr</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">funding</span> <span class="nx">rateEr</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">highEp</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">high</span> <span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">indexEp</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">index</span> <span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">lastEp</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">last</span> <span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">lowEp</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">low</span> <span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">markEp</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">mark</span> <span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">openEp</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">open</span> <span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">openInterest</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">open</span> <span class="nx">interest</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">predFundingRateEr</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">predicated</span> <span class="nx">funding</span> <span class="nx">rateEr</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">symbol</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">symbol</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">timestamp</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">timestamp</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">turnoverEv</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">turnoverEv</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">volume</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">volume</span><span class="o">&gt;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 <blockquote>
 <p>Request sample</p>
@@ -3002,20 +3005,20 @@ Because the number of interfaces in Other group may grow over time, the list bel
 <blockquote>
 <p>Response format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "code": 0,
-  "data": [
-    {
-      "id": "&lt;id&gt;",
-      "amount_quote": "&lt;amount&gt;",
-      "price": "&lt;price&gt;",
-      "side": "&lt;side&gt;",
-      "timestamp": "&lt;timestamp&gt;",
-      "type": "&lt;type&gt;"
-    }
-  ],
-  "msg": "&lt;msg&gt;"
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">code</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;id&gt;</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">amount_quote</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;amount&gt;</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">price</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;price&gt;</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">side</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;side&gt;</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">timestamp</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;timestamp&gt;</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;type&gt;</span><span class="dl">"</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="dl">"</span><span class="s2">msg</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;msg&gt;</span><span class="dl">"</span>
+<span class="p">}</span>
 </code></pre></div>
 <ul>
 <li>Query History trades by symbol</li>
@@ -3074,16 +3077,16 @@ Because the number of interfaces in Other group may grow over time, the list bel
 <blockquote>
 <p>Request format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "method": "user.auth",
-  "params": [
-    "API",
-    "&lt;token&gt;",
-    "&lt;signature&gt;",
-    &lt;expiry&gt;
-  ],
-  "id": 0
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">user.auth</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">params</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="dl">"</span><span class="s2">API</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">&lt;token&gt;</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">&lt;signature&gt;</span><span class="dl">"</span><span class="p">,</span>
+    <span class="o">&lt;</span><span class="nx">expiry</span><span class="o">&gt;</span>
+  <span class="p">],</span>
+  <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
 </code></pre></div>
 <blockquote>
 <p>Request sample</p>
@@ -3140,13 +3143,13 @@ While for private channels like account/position/order data, the client should s
 <blockquote>
 <p>Request format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "id": &lt;id&gt;,
-  "method": "orderbook.subscribe",
-  "params": [
-    "&lt;symbol&gt;"
-  ]
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">id</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">orderbook.subscribe</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">params</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="dl">"</span><span class="s2">&lt;symbol&gt;</span><span class="dl">"</span>
+  <span class="p">]</span>
+<span class="p">}</span>
 </code></pre></div>
 <p>Subscribe orderbook update messages with <strong>depth = 30 and interval = 20ms</strong>.</p>
 
@@ -3166,14 +3169,14 @@ While for private channels like account/position/order data, the client should s
 <blockquote>
 <p>Request format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "id": &lt;id&gt;,
-  "method": "orderbook.subscribe",
-  "params": [
-    "&lt;symbol&gt;",
-    true
-  ]
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">id</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">orderbook.subscribe</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">params</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="dl">"</span><span class="s2">&lt;symbol&gt;</span><span class="dl">"</span><span class="p">,</span>
+    <span class="kc">true</span>
+  <span class="p">]</span>
+<span class="p">}</span>
 </code></pre></div>
 <p>Subscribe orderbook update messages with <strong>full depth and interval = 100ms</strong>.</p>
 
@@ -3194,31 +3197,31 @@ While for private channels like account/position/order data, the client should s
 <blockquote>
 <p>Message format：</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "book": {
-    "asks": [
-      [
-        &lt;priceEp&gt;,
-        &lt;qty&gt;
-      ],
-      .
-      .
-      .
-    ],
-    "bids": [
-      [
-        &lt;priceEp&gt;,
-        &lt;qty&gt;
-      ],
-      .
-      .
-      .
-    ]
-  },
-  "depth": &lt;depth&gt;,
-  "sequence": &lt;sequence&gt;,
-  "timestamp": &lt;timestamp&gt;,
-  "symbol": "&lt;symbol&gt;",
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">book</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">asks</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">[</span>
+        <span class="o">&lt;</span><span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
+        <span class="o">&lt;</span><span class="nx">qty</span><span class="o">&gt;</span>
+      <span class="p">],</span>
+      <span class="p">.</span>
+      <span class="p">.</span>
+      <span class="p">.</span>
+    <span class="p">],</span>
+    <span class="dl">"</span><span class="s2">bids</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">[</span>
+        <span class="o">&lt;</span><span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
+        <span class="o">&lt;</span><span class="nx">qty</span><span class="o">&gt;</span>
+      <span class="p">],</span>
+      <span class="p">.</span>
+      <span class="p">.</span>
+      <span class="p">.</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">depth</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">depth</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">sequence</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">sequence</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">timestamp</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">timestamp</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">symbol</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;symbol&gt;</span><span class="dl">"</span><span class="p">,</span>
 
 </code></pre></div>
 <p>DataGW publishes order book message with types: incremental, snapshot. Snapshot messages are published with 60-second interval for client self-verification.</p>
@@ -3334,13 +3337,13 @@ While for private channels like account/position/order data, the client should s
 <blockquote>
 <p>Request format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "id": &lt;id&gt;,
-  "method": "trade.subscribe",
-  "params": [
-    "&lt;symbol&gt;"
-  ]
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">id</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">trade.subscribe</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">params</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="dl">"</span><span class="s2">&lt;symbol&gt;</span><span class="dl">"</span>
+  <span class="p">]</span>
+<span class="p">}</span>
 </code></pre></div>
 <p>On each successful subscription, DataGW will send the 200 history trades immediately for the subscribed symbol and all the later trades will be published.</p>
 
@@ -3358,22 +3361,22 @@ While for private channels like account/position/order data, the client should s
 <blockquote>
 <p>Message format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "trades": [
-    [
-      &lt;timestamp&gt;,
-      "&lt;side&gt;",
-      &lt;priceEp&gt;,
-      &lt;qty&gt;
-    ],
-    .
-    .
-    .
-  ],
-  "sequence": &lt;sequence&gt;,
-  "symbol": "&lt;symbol&gt;",
-  "type": "&lt;type&gt;"
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">trades</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">[</span>
+      <span class="o">&lt;</span><span class="nx">timestamp</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">&lt;side&gt;</span><span class="dl">"</span><span class="p">,</span>
+      <span class="o">&lt;</span><span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="o">&lt;</span><span class="nx">qty</span><span class="o">&gt;</span>
+    <span class="p">],</span>
+    <span class="p">.</span>
+    <span class="p">.</span>
+    <span class="p">.</span>
+  <span class="p">],</span>
+  <span class="dl">"</span><span class="s2">sequence</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">sequence</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">symbol</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;symbol&gt;</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;type&gt;</span><span class="dl">"</span>
+<span class="p">}</span>
 </code></pre></div>
 <p>DataGW publishes trade message with types: incremental, snapshot. Incremental messages are published with 20ms interval. And snapshot messages are published on connection initial setup for client recovery.</p>
 
@@ -3484,37 +3487,37 @@ While for private channels like account/position/order data, the client should s
 <blockquote>
 <p>Request format: unsubscribe all trade subsciptions</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "id": &lt;id&gt;,
-  "method": "trade.unsubscribe",
-  "params": [
-  ]
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">id</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">trade.unsubscribe</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">params</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+  <span class="p">]</span>
+<span class="p">}</span>
 </code></pre></div>
 <blockquote>
 <p>Request format: unsubscribe all trade subsciptions for a symbol</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "id": &lt;id&gt;,
-  "method": "trade.unsubscribe",
-  "params": [
-    "&lt;symbol&gt;"
-  ]
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">id</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">trade.unsubscribe</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">params</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="dl">"</span><span class="s2">&lt;symbol&gt;</span><span class="dl">"</span>
+  <span class="p">]</span>
+<span class="p">}</span>
 </code></pre></div>
 <p>It unsubscribes all trade subscriptions or for a single symbol.</p>
 <h2 id='subscribe-kline'>Subscribe Kline</h2>
 <blockquote>
 <p>Request format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "id": &lt;id&gt;,
-  "method": "kline.subscribe",
-  "params": [
-    "&lt;symbol&gt;",
-    "&lt;interval&gt;"
-  ]
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">id</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">kline.subscribe</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">params</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="dl">"</span><span class="s2">&lt;symbol&gt;</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">&lt;interval&gt;</span><span class="dl">"</span>
+  <span class="p">]</span>
+<span class="p">}</span>
 </code></pre></div>
 <p>On each successful subscription, DataGW will send the 1000 history klines immediately for the subscribed symbol and all the later kline update will be published in real-time.</p>
 
@@ -3533,27 +3536,27 @@ While for private channels like account/position/order data, the client should s
 <blockquote>
 <p>Message format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "kline": [
-    [
-      &lt;timestamp&gt;,
-      "&lt;interval&gt;",
-      &lt;lastCloseEp&gt;,
-      &lt;openEp&gt;,
-      &lt;highEp&gt;,
-      &lt;lowEp&gt;,
-      &lt;closeEp&gt;,
-      &lt;volume&gt;,
-      &lt;turnoverEv&gt;,
-    ],
-    .
-    .
-    .
-  ],
-  "sequence": &lt;sequence&gt;,
-  "symbol": "&lt;symbol&gt;",
-  "type": "&lt;type&gt;"
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">kline</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">[</span>
+      <span class="o">&lt;</span><span class="nx">timestamp</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">&lt;interval&gt;</span><span class="dl">"</span><span class="p">,</span>
+      <span class="o">&lt;</span><span class="nx">lastCloseEp</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="o">&lt;</span><span class="nx">openEp</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="o">&lt;</span><span class="nx">highEp</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="o">&lt;</span><span class="nx">lowEp</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="o">&lt;</span><span class="nx">closeEp</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="o">&lt;</span><span class="nx">volume</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="o">&lt;</span><span class="nx">turnoverEv</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="p">.</span>
+    <span class="p">.</span>
+    <span class="p">.</span>
+  <span class="p">],</span>
+  <span class="dl">"</span><span class="s2">sequence</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">sequence</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">symbol</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;symbol&gt;</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;type&gt;</span><span class="dl">"</span>
+<span class="p">}</span>
 </code></pre></div>
 <blockquote>
 <p>Message sample: snapshot</p>
@@ -3708,69 +3711,69 @@ While for private channels like account/position/order data, the client should s
 <blockquote>
 <p>Request format: unsubscribe all kline subscriptions</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "id": &lt;id&gt;,
-  "method": "kline.unsubscribe",
-  "params": []
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">id</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">kline.unsubscribe</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">params</span><span class="dl">"</span><span class="p">:</span> <span class="p">[]</span>
+<span class="p">}</span>
 </code></pre></div>
 <blockquote>
 <p>Request format: unsubscribe all kline subscriptions of a symbol</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "id": &lt;id&gt;,
-  "method": "kline.unsubscribe",
-  "params": [
-    "&lt;symbol&gt;"
-  ]
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">id</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">kline.unsubscribe</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">params</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="dl">"</span><span class="s2">&lt;symbol&gt;</span><span class="dl">"</span>
+  <span class="p">]</span>
+<span class="p">}</span>
 </code></pre></div>
 <p>It unsubscribes all kline subscriptions or for a single symbol.</p>
 <h2 id='subscribe-account-order-position-aop'>Subscribe Account-Order-Position (AOP)</h2>
 <blockquote>
 <p>Request format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "id": &lt;id&gt;,
-  "method": "aop.subscribe",
-  "params": []
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">id</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">aop.subscribe</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">params</span><span class="dl">"</span><span class="p">:</span> <span class="p">[]</span>
+<span class="p">}</span>
 </code></pre></div>
 <p>AOP subscription requires the session been authorized successfully. DataGW extracts the user information from the given token and sends AOP messages back to client accordingly. 0 or more latest account snapshot messages will be sent to client immediately on subscription, and incremental messages will be sent for later updates. Each account snapshot contains a trading account information, holding positions, and open / max 100 closed / max 100 filled order event message history.</p>
 <h2 id='account-order-position-aop-message'>Account-Order-Position (AOP) Message</h2>
 <blockquote>
 <p>Message format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "accounts": [
-    {
-      "accountID": 604630001,
-      "currency": "BTC",
-      .
-      .
-      .
-    }
-  ],
-  "orders": [
-    {
-      "accountID": 604630001,
-      .
-      .
-      .
-    }
-  ],
-  "positions": [
-    {
-      "accountID": 604630001,
-      .
-      .
-      .
-    }
-  ],
-  "sequence":1,
-  "timestamp":&lt;timestamp&gt;,
-  "type":"&lt;type&gt;"
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">accounts</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="dl">"</span><span class="s2">accountID</span><span class="dl">"</span><span class="p">:</span> <span class="mi">604630001</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">currency</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">BTC</span><span class="dl">"</span><span class="p">,</span>
+      <span class="p">.</span>
+      <span class="p">.</span>
+      <span class="p">.</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="dl">"</span><span class="s2">orders</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="dl">"</span><span class="s2">accountID</span><span class="dl">"</span><span class="p">:</span> <span class="mi">604630001</span><span class="p">,</span>
+      <span class="p">.</span>
+      <span class="p">.</span>
+      <span class="p">.</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="dl">"</span><span class="s2">positions</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="dl">"</span><span class="s2">accountID</span><span class="dl">"</span><span class="p">:</span> <span class="mi">604630001</span><span class="p">,</span>
+      <span class="p">.</span>
+      <span class="p">.</span>
+      <span class="p">.</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="dl">"</span><span class="s2">sequence</span><span class="dl">"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">timestamp</span><span class="dl">"</span><span class="p">:</span><span class="o">&lt;</span><span class="nx">timestamp</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">type</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">&lt;type&gt;</span><span class="dl">"</span>
+<span class="p">}</span>
 
 </code></pre></div>
 <table><thead>
@@ -4229,11 +4232,11 @@ While for private channels like account/position/order data, the client should s
 <blockquote>
 <p>Request format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "id": &lt;id&gt;,
-  "method": "aop.unsubscribe",
-  "params": []
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">id</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">aop.unsubscribe</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">params</span><span class="dl">"</span><span class="p">:</span> <span class="p">[]</span>
+<span class="p">}</span>
 </code></pre></div>
 <p>It unsubscribes all account-order-positions.</p>
 <h2 id='subscribe-24-hours-ticker'>Subscribe 24 Hours Ticker</h2>
@@ -4249,23 +4252,23 @@ While for private channels like account/position/order data, the client should s
 <blockquote>
 <p>Message format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "market24h": {
-    "open": &lt;open priceEp&gt;,
-    "high": &lt;high priceEp&gt;,
-    "low": &lt;low priceEp&gt;,
-    "close": &lt;close priceEp&gt;,
-    "indexPrice": &lt;index priceEp&gt;,
-    "markPrice": &lt;mark priceEp&gt;,
-    "openInterest": &lt;open interest&gt;,
-    "fundingRate": &lt;funding rateEr&gt;,
-    "predFundingRate": &lt;predicated funding rateEr&gt;,
-    "symbol": "&lt;symbol&gt;",
-    "turnover": &lt;turnoverEv&gt;,
-    "volume": &lt;volume&gt;
-  },
-  "timestamp": &lt;timestamp&gt;
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">market24h</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">open</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">open</span> <span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">high</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">high</span> <span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">low</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">low</span> <span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">close</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">close</span> <span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">indexPrice</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">index</span> <span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">markPrice</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">mark</span> <span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">openInterest</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">open</span> <span class="nx">interest</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">fundingRate</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">funding</span> <span class="nx">rateEr</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">predFundingRate</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">predicated</span> <span class="nx">funding</span> <span class="nx">rateEr</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">symbol</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;symbol&gt;</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">turnover</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">turnoverEv</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">volume</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">volume</span><span class="o">&gt;</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">timestamp</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">timestamp</span><span class="o">&gt;</span>
+<span class="p">}</span>
 </code></pre></div>
 <blockquote>
 <p>Message sample</p>
@@ -4403,14 +4406,14 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
 <blockquote>
 <p>Message format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "tick": {
-    "last": &lt;priceEp&gt;,
-    "scale": &lt;scale&gt;,
-    "symbol": &lt;symbol&gt;
-    "timestamp": &lt;timestamp_in_nano&gt;
-  }
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">tick</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">last</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">scale</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">scale</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">symbol</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">symbol</span><span class="o">&gt;</span>
+    <span class="dl">"</span><span class="s2">timestamp</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">timestamp_in_nano</span><span class="o">&gt;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 <blockquote>
 <p>Message sample</p>
@@ -4495,16 +4498,16 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
 <blockquote>
 <p>Request format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "method": "user.auth",
-  "params": [
-    "API",
-    "&lt;token&gt;",
-    "&lt;signature&gt;",
-    &lt;expiry&gt;
-  ],
-  "id": 0
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">user.auth</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">params</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="dl">"</span><span class="s2">API</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">&lt;token&gt;</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">&lt;signature&gt;</span><span class="dl">"</span><span class="p">,</span>
+    <span class="o">&lt;</span><span class="nx">expiry</span><span class="o">&gt;</span>
+  <span class="p">],</span>
+  <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
 </code></pre></div>
 <blockquote>
 <p>Request sample</p>
@@ -4572,13 +4575,13 @@ While for private channels like account/position/order data, the client should s
 <blockquote>
 <p>Request format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "id": &lt;id&gt;,
-  "method": "orderbook.subscribe",
-  "params": [
-    "&lt;symbol&gt;"
-  ]
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">id</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">orderbook.subscribe</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">params</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="dl">"</span><span class="s2">&lt;symbol&gt;</span><span class="dl">"</span>
+  <span class="p">]</span>
+<span class="p">}</span>
 </code></pre></div>
 <p>Subscribe orderbook update messages with <strong>depth = 30 and interval = 20ms</strong>.</p>
 
@@ -4598,14 +4601,14 @@ While for private channels like account/position/order data, the client should s
 <blockquote>
 <p>Request format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "id": &lt;id&gt;,
-  "method": "orderbook.subscribe",
-  "params": [
-    "&lt;symbol&gt;",
-    true
-  ]
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">id</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">orderbook.subscribe</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">params</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="dl">"</span><span class="s2">&lt;symbol&gt;</span><span class="dl">"</span><span class="p">,</span>
+    <span class="kc">true</span>
+  <span class="p">]</span>
+<span class="p">}</span>
 </code></pre></div>
 <p>Subscribe orderbook update messages with <strong>full depth and interval = 100ms</strong>.</p>
 
@@ -4626,31 +4629,31 @@ While for private channels like account/position/order data, the client should s
 <blockquote>
 <p>Message format：</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "book": {
-    "asks": [
-      [
-        &lt;priceEp&gt;,
-        &lt;qty&gt;
-      ],
-      .
-      .
-      .
-    ],
-    "bids": [
-      [
-        &lt;priceEp&gt;,
-        &lt;qty&gt;
-      ],
-      .
-      .
-      .
-    ]
-  },
-  "depth": &lt;depth&gt;,
-  "sequence": &lt;sequence&gt;,
-  "timestamp": &lt;timestamp&gt;,
-  "symbol": "&lt;symbol&gt;",
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">book</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">asks</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">[</span>
+        <span class="o">&lt;</span><span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
+        <span class="o">&lt;</span><span class="nx">qty</span><span class="o">&gt;</span>
+      <span class="p">],</span>
+      <span class="p">.</span>
+      <span class="p">.</span>
+      <span class="p">.</span>
+    <span class="p">],</span>
+    <span class="dl">"</span><span class="s2">bids</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">[</span>
+        <span class="o">&lt;</span><span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
+        <span class="o">&lt;</span><span class="nx">qty</span><span class="o">&gt;</span>
+      <span class="p">],</span>
+      <span class="p">.</span>
+      <span class="p">.</span>
+      <span class="p">.</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">depth</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">depth</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">sequence</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">sequence</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">timestamp</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">timestamp</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">symbol</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;symbol&gt;</span><span class="dl">"</span><span class="p">,</span>
 
 </code></pre></div>
 <p>DataGW publishes order book message with types: incremental, snapshot. Snapshot messages are published with 60-second interval for client self-verification.</p>
@@ -4783,13 +4786,13 @@ While for private channels like account/position/order data, the client should s
 <blockquote>
 <p>Request format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "id": &lt;id&gt;,
-  "method": "trade.subscribe",
-  "params": [
-    "&lt;symbol&gt;"
-  ]
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">id</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">trade.subscribe</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">params</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="dl">"</span><span class="s2">&lt;symbol&gt;</span><span class="dl">"</span>
+  <span class="p">]</span>
+<span class="p">}</span>
 </code></pre></div>
 <p>On each successful subscription, DataGW will send the 200 history trades immediately for the subscribed symbol and all the later trades will be published.</p>
 
@@ -4807,22 +4810,22 @@ While for private channels like account/position/order data, the client should s
 <blockquote>
 <p>Message format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "trades": [
-    [
-      &lt;timestamp&gt;,
-      "&lt;side&gt;",
-      &lt;priceEp&gt;,
-      &lt;qty&gt;
-    ],
-    .
-    .
-    .
-  ],
-  "sequence": &lt;sequence&gt;,
-  "symbol": "&lt;symbol&gt;",
-  "type": "&lt;type&gt;"
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">trades</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">[</span>
+      <span class="o">&lt;</span><span class="nx">timestamp</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">&lt;side&gt;</span><span class="dl">"</span><span class="p">,</span>
+      <span class="o">&lt;</span><span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="o">&lt;</span><span class="nx">qty</span><span class="o">&gt;</span>
+    <span class="p">],</span>
+    <span class="p">.</span>
+    <span class="p">.</span>
+    <span class="p">.</span>
+  <span class="p">],</span>
+  <span class="dl">"</span><span class="s2">sequence</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">sequence</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">symbol</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;symbol&gt;</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;type&gt;</span><span class="dl">"</span>
+<span class="p">}</span>
 </code></pre></div>
 <p>DataGW publishes trade message with types: incremental, snapshot. Incremental messages are published with 20ms interval. And snapshot messages are published on connection initial setup for client recovery.</p>
 
@@ -4933,37 +4936,37 @@ While for private channels like account/position/order data, the client should s
 <blockquote>
 <p>Request format: unsubscribe all trade subsciptions</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "id": &lt;id&gt;,
-  "method": "trade.unsubscribe",
-  "params": [
-  ]
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">id</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">trade.unsubscribe</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">params</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+  <span class="p">]</span>
+<span class="p">}</span>
 </code></pre></div>
 <blockquote>
 <p>Request format: unsubscribe all trade subsciptions for a symbol</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "id": &lt;id&gt;,
-  "method": "trade.unsubscribe",
-  "params": [
-    "&lt;symbol&gt;"
-  ]
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">id</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">trade.unsubscribe</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">params</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="dl">"</span><span class="s2">&lt;symbol&gt;</span><span class="dl">"</span>
+  <span class="p">]</span>
+<span class="p">}</span>
 </code></pre></div>
 <p>It unsubscribes all trade subscriptions or for a single symbol.</p>
 <h2 id='subscribe-kline-2'>Subscribe Kline</h2>
 <blockquote>
 <p>Request format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "id": &lt;id&gt;,
-  "method": "kline.subscribe",
-  "params": [
-    "&lt;symbol&gt;",
-    "&lt;interval&gt;"
-  ]
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">id</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">kline.subscribe</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">params</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="dl">"</span><span class="s2">&lt;symbol&gt;</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">&lt;interval&gt;</span><span class="dl">"</span>
+  <span class="p">]</span>
+<span class="p">}</span>
 </code></pre></div>
 <p>On each successful subscription, DataGW will send the 1000 history klines immediately for the subscribed symbol and all the later kline update will be published in real-time.</p>
 
@@ -4982,27 +4985,27 @@ While for private channels like account/position/order data, the client should s
 <blockquote>
 <p>Message format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "kline": [
-    [
-      &lt;timestamp&gt;,
-      "&lt;interval&gt;",
-      &lt;lastCloseEp&gt;,
-      &lt;openEp&gt;,
-      &lt;highEp&gt;,
-      &lt;lowEp&gt;,
-      &lt;closeEp&gt;,
-      &lt;volumeEv&gt;,
-      &lt;turnoverEv&gt;,
-    ],
-    .
-    .
-    .
-  ],
-  "sequence": &lt;sequence&gt;,
-  "symbol": "&lt;symbol&gt;",
-  "type": "&lt;type&gt;"
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">kline</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">[</span>
+      <span class="o">&lt;</span><span class="nx">timestamp</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">&lt;interval&gt;</span><span class="dl">"</span><span class="p">,</span>
+      <span class="o">&lt;</span><span class="nx">lastCloseEp</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="o">&lt;</span><span class="nx">openEp</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="o">&lt;</span><span class="nx">highEp</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="o">&lt;</span><span class="nx">lowEp</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="o">&lt;</span><span class="nx">closeEp</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="o">&lt;</span><span class="nx">volumeEv</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="o">&lt;</span><span class="nx">turnoverEv</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="p">.</span>
+    <span class="p">.</span>
+    <span class="p">.</span>
+  <span class="p">],</span>
+  <span class="dl">"</span><span class="s2">sequence</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">sequence</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">symbol</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;symbol&gt;</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;type&gt;</span><span class="dl">"</span>
+<span class="p">}</span>
 </code></pre></div>
 <blockquote>
 <p>Message sample: snapshot</p>
@@ -5157,22 +5160,22 @@ While for private channels like account/position/order data, the client should s
 <blockquote>
 <p>Request format: unsubscribe all kline subscriptions</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "id": &lt;id&gt;,
-  "method": "kline.unsubscribe",
-  "params": []
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">id</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">kline.unsubscribe</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">params</span><span class="dl">"</span><span class="p">:</span> <span class="p">[]</span>
+<span class="p">}</span>
 </code></pre></div>
 <blockquote>
 <p>Request format: unsubscribe all kline subscriptions of a symbol</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "id": &lt;id&gt;,
-  "method": "kline.unsubscribe",
-  "params": [
-    "&lt;symbol&gt;"
-  ]
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">id</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">kline.unsubscribe</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">params</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="dl">"</span><span class="s2">&lt;symbol&gt;</span><span class="dl">"</span>
+  <span class="p">]</span>
+<span class="p">}</span>
 </code></pre></div>
 <p>It unsubscribes all kline subscriptions or for a single symbol.</p>
 <h2 id='subscribe-wallet-order'>Subscribe Wallet-Order</h2>
@@ -5190,13 +5193,13 @@ While for private channels like account/position/order data, the client should s
 <blockquote>
 <p>Message format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "wallets": [{"userID":60463,...}, ...],
-  "orders": [{"userID":60463, ...}],
-  "sequence": &lt;sequence&gt;,
-  "timestamp": &lt;timestamp&gt;,
-  "type": "&lt;type&gt;"
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">wallets</span><span class="dl">"</span><span class="p">:</span> <span class="p">[{</span><span class="dl">"</span><span class="s2">userID</span><span class="dl">"</span><span class="p">:</span><span class="mi">60463</span><span class="p">,...},</span> <span class="p">...],</span>
+  <span class="dl">"</span><span class="s2">orders</span><span class="dl">"</span><span class="p">:</span> <span class="p">[{</span><span class="dl">"</span><span class="s2">userID</span><span class="dl">"</span><span class="p">:</span><span class="mi">60463</span><span class="p">,</span> <span class="p">...}],</span>
+  <span class="dl">"</span><span class="s2">sequence</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">sequence</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">timestamp</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">timestamp</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;type&gt;</span><span class="dl">"</span>
+<span class="p">}</span>
 </code></pre></div>
 <table><thead>
 <tr>
@@ -5445,20 +5448,20 @@ While for private channels like account/position/order data, the client should s
 <blockquote>
 <p>Message format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "spot_market24h": {
-    "openEp": &lt;open priceEp&gt;,
-    "highEp": &lt;high priceEp&gt;,
-    "lowEp": &lt;low priceEp&gt;,
-    "lastEp": &lt;last priceEp&gt;,
-    "bidEp": &lt;bid priceEp&gt;,
-    "askEp": &lt;ask priceEp&gt;,
-    "symbol": "&lt;symbol&gt;",
-    "turnoverEv": &lt;turnoverEv&gt;,
-    "volumeEv": &lt;volumeEv&gt;
-  },
-  "timestamp": &lt;timestamp&gt;
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">spot_market24h</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">openEp</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">open</span> <span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">highEp</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">high</span> <span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">lowEp</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">low</span> <span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">lastEp</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">last</span> <span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">bidEp</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">bid</span> <span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">askEp</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">ask</span> <span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">symbol</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;symbol&gt;</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">turnoverEv</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">turnoverEv</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">volumeEv</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">volumeEv</span><span class="o">&gt;</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">timestamp</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">timestamp</span><span class="o">&gt;</span>
+<span class="p">}</span>
 </code></pre></div>
 <blockquote>
 <p>Message sample</p>
@@ -5565,18 +5568,18 @@ While for private channels like account/position/order data, the client should s
 <blockquote>
 <p>Message format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "investments":[
-    {
-      "currency": &lt;currency&gt;,
-      "balanceEv": &lt;balanceEv&gt;,
-      "userId": &lt;userId&gt;,
-      "demandPendingInterestBalanceEv": &lt;demandPendingInterestBalanceEv&gt;,
-      "demandInterestedBalanceEv": &lt;demandInterestedBalanceEv&gt;,
-      "timedDepositBalanceEv": &lt;timedDepositBalanceEv&gt;,
-      "currentTimeMillis": &lt;currentTimeMillis&gt;
-  ]
-}
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">investments</span><span class="dl">"</span><span class="p">:[</span>
+    <span class="p">{</span>
+      <span class="dl">"</span><span class="s2">currency</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">currency</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">balanceEv</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">balanceEv</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">userId</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">userId</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">demandPendingInterestBalanceEv</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">demandPendingInterestBalanceEv</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">demandInterestedBalanceEv</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">demandInterestedBalanceEv</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">timedDepositBalanceEv</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">timedDepositBalanceEv</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">currentTimeMillis</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">currentTimeMillis</span><span class="o">&gt;</span>
+  <span class="p">]</span>
+<span class="p">}</span>
 </code></pre></div>
 <blockquote>
 <p>Message sample</p>
@@ -6206,20 +6209,20 @@ While for private channels like account/position/order data, the client should s
 <blockquote>
 <p>Response format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>[
-  {
-    "conversionRate": 0,
-    "createTime": 0,
-    "errorCode": 0,
-    "fromAmountEv": 0,
-    "fromCurrency": "string",
-    "linkKey": "string",
-    "status": 0,
-    "toAmountEv": 0,
-    "toCurrency": "string"
-  }
-]
-</code></pre></div>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"conversionRate"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"createTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fromAmountEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fromCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"linkKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"toAmountEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"toCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
 <table><thead>
 <tr>
 <th>Field</th>
