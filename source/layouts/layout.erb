@@ -65,6 +65,12 @@ under the License.
       a.logo-link{
         line-height: 50px;
       }
+      div.logo-subtitle {
+        color: #fff;
+        text-align: center;
+        margin-bottom: 0;
+        padding-bottom: 0px;
+      }
       img.logo {
         padding: 24px 24px 8px;
         width: 181px;
@@ -221,6 +227,7 @@ under the License.
         <a href="<%= current_page.data.logo.link %>" class="logo-link" target="<%= current_page.data.logo.target %>">
           <%= image_tag "logo.svg", class: 'logo' %>
         </a>
+        <div class="logo-subtitle"><%= current_page.data.logo.subtitle %></div>
       <% else %>
         <%= image_tag "logo.svg", class: 'logo' %>
       <% end %>

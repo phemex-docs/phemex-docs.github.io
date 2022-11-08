@@ -1,6 +1,6 @@
 # Transfer REST API
 
-## Transfer Between Spot and Futures 
+## Transfer between spot and futures
 
 > Request format
 
@@ -35,7 +35,7 @@ POST /assets/transfer
 | moveOp   | Integer | True      | direction             | 1 - futures to spot, 2 - spot to futures   |
 | currency | String  | True      | currency to transfer  | BTC, ETH, USD ...                          |
 
-## Query Transfer History
+## Query transfer history
 
 > Request format
 
@@ -68,7 +68,7 @@ GET /assets/transfer?currency=<currency>
 | offset   | Integer | False    | page start from 0         | start from 0, default 0         |
 | limit    | Integer | False    | page size                 | default 20, max 200             |
 
-## Spot Sub To Main Transfer (for sub-account only)
+## Spot sub to main transfer (for sub-account only)
 
 > Request format
 
@@ -102,7 +102,7 @@ POST /assets/spots/sub-accounts/transfer
 | currency   | String  | True     | currency to transfer | BTC, ETH, USD ...                                     |
 | requestKey | String  | False    | unique request key   | Unique request Key, system will generate if its empty |
 
-## Query Spot Sub To Main Transfer
+## Query spot sub to main transfer
 
 > Request format
 
@@ -136,7 +136,7 @@ GET /assets/spots/sub-accounts/transfer?currency=<currency>
 | limit    | Integer | False    | page size                 | default 20, max 200             |
 
 
-## Futures Sub To Main Transfer (for sub-account only)
+## Futures sub to main transfer (for sub-account only)
 
 > Request format
 
@@ -171,7 +171,7 @@ POST /assets/futures/sub-accounts/transfer
 | currency   | String  | True     | currency to transfer | BTC, ETH, USD ...                                     |
 | requestKey | String  | False    | unique request key   | Unique request Key, system will generate if its empty |
 
-## Query Futures Sub To Main Transfer
+## Query futures sub to main transfer
 
 > Request format
 
@@ -203,7 +203,7 @@ GET /assets/futures/sub-accounts/transfer?currency=<currency>
 | offset   | Integer | False    | page start from 0         | start from 0, default 0         |
 | limit    | Integer | False    | page size                 | default 20, max 200             |
 
-## Universal Transfer (Main account only) - Transfer between sub to main, main to sub or sub to sub
+## Universal transfer (main account only) - transfer between sub to main, main to sub or sub to sub
 
 > Request format
 
@@ -239,7 +239,7 @@ POST /assets/universal-transfer
 
 # Convert REST API
 
-## RFQ Quote
+## RFQ quote
 
 > Request format
 
@@ -309,7 +309,7 @@ POST /assets/convert
 | fromAmountEv | Long   | False    | amountEv to convert    | 100000 ...      |
 | code         | String | True     | encrypted convert args | xxxxxxxx ...    |
 
-## Query Convert History 
+## Query convert history
 
 > Request format
 

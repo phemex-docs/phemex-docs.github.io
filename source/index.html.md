@@ -10,6 +10,7 @@ includes:
 logo:
   link: https://phemex.com
   target: _self
+  subtitle: API Reference
 
 search: true
 
