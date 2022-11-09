@@ -236,6 +236,12 @@
       a.logo-link{
         line-height: 50px;
       }
+      div.logo-subtitle {
+        color: #fff;
+        text-align: center;
+        margin-bottom: 0;
+        padding-bottom: 0px;
+      }
       img.logo {
         padding: 24px 24px 8px;
         width: 181px;
@@ -655,6 +661,7 @@
         <a href="https://phemex.com" class="logo-link" target="_self">
           <img src="images/logo-e10cba0f.svg" class="logo" alt="" />
         </a>
+        <div class="logo-subtitle">API Reference</div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
@@ -684,7 +691,7 @@
                             <a href="#ip-rate-limits" class="toc-h3 toc-link" data-title="IP rate limits">IP rate limits</a>
                           </li>
                           <li>
-                            <a href="#rest-api-rate-limit-rules" class="toc-h3 toc-link" data-title="REST aPI rate limit rules">REST aPI rate limit rules</a>
+                            <a href="#rest-api-rate-limit-rules" class="toc-h3 toc-link" data-title="REST API rate limit rules">REST API rate limit rules</a>
                           </li>
                           <li>
                             <a href="#api-groups" class="toc-h3 toc-link" data-title="API groups">API groups</a>
@@ -1071,7 +1078,7 @@
 <h3 id='ip-rate-limits'>IP rate limits</h3>
 <p>Currently Phemex restrict every IP 5,000 request in 5 minutes window.
    If exceeded this IP capacity, the user would be blocked in the following 5 minutes.</p>
-<h3 id='rest-api-rate-limit-rules'>REST aPI rate limit rules</h3>
+<h3 id='rest-api-rate-limit-rules'>REST API rate limit rules</h3>
 <ul>
 <li><a href="https://phemex.com/user-guides/order-spamming-limitations">Order spamming limitations</a></li>
 <li>All Phemex APIs are divided into 3 groups, <code>contract</code>, <code>spotOrder</code> and <code>others</code>.</li>
@@ -1128,7 +1135,7 @@ Below headers are returned with API response. Postfix <code>-&lt;groupName&gt;</
 <h3 id='api-groups'>API groups</h3>
 <ul>
 <li>Contract group
-Contract group is for contract trading, it contains following api.</li>
+Contract group is for contract trading, it contains following API.</li>
 </ul>
 
 <table><thead>
@@ -1197,7 +1204,7 @@ Contract group is for contract trading, it contains following api.</li>
 
 <ul>
 <li>SpotOrder group
-SpotOrder group is for spot trading, which contains following api.</li>
+SpotOrder group is for spot trading, which contains following API.</li>
 </ul>
 
 <table><thead>
@@ -3714,7 +3721,7 @@ GET /exchange/order?symbol=&lt;symbol&gt;&amp;clOrdID=&lt;clOrdID1,clOrdID2&gt;
 <span class="p">}</span>
 </code></pre></div>
 <aside class="notice">
-Please be noted that kline interfaces have <a href="#rate-limits">rate limits</a> rule,  please check the <i>Other</i> group under <a href="#api-groups">api groups</a>
+Please be noted that kline interfaces have <a href="#rate-limits">rate limits</a> rule,  please check the <i>Other</i> group under <a href="#api-groups">API groups</a>
 </aside>
 
 <table><thead>
@@ -4232,7 +4239,7 @@ Please be noted that kline interfaces have <a href="#rate-limits">rate limits</a
 </code></pre></div>
 <ul>
 <li>Query History trades by symbol</li>
-<li>RateLimit of this api is 5 per second</li>
+<li>RateLimit of this API is 5 per second</li>
 </ul>
 
 <blockquote>
