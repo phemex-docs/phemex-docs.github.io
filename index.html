@@ -688,10 +688,10 @@
                     <a href="#rate-limits" class="toc-h2 toc-link" data-title="Rate limits">Rate limits</a>
                       <ul class="toc-list-h3">
                           <li>
-                            <a href="#ip-rate-limits" class="toc-h3 toc-link" data-title="IP rate limits">IP rate limits</a>
+                            <a href="#ip-ratelimits" class="toc-h3 toc-link" data-title="IP ratelimits">IP ratelimits</a>
                           </li>
                           <li>
-                            <a href="#rest-api-rate-limit-rules" class="toc-h3 toc-link" data-title="REST API rate limit rules">REST API rate limit rules</a>
+                            <a href="#rest-api-ratelimit-rules" class="toc-h3 toc-link" data-title="REST API ratelimit rules">REST API ratelimit rules</a>
                           </li>
                           <li>
                             <a href="#api-groups" class="toc-h3 toc-link" data-title="API groups">API groups</a>
@@ -1032,7 +1032,7 @@
 <ul>
 <li>HTTP <code>401</code> return code is used when unauthenticated</li>
 <li>HTTP <code>403</code> return code is used when lack of priviledge.</li>
-<li>HTTP <code>429</code> return code is used when breaking a request rate limit.</li>
+<li>HTTP <code>429</code> return code is used when breaking a request ratelimit.</li>
 <li>HTTP <code>5XX</code> return codes are used for Phemex internal errors. Note: This doesn&#39;t means the operation failed, the execution status is <strong>UNKNOWN</strong> and could be Succeed.</li>
 </ul>
 <h3 id='rest-response-format'>REST response format</h3>
@@ -1075,10 +1075,10 @@
 <li>IP has request capacity in 5 minutes window.</li>
 <li>Ratelimit of API is <strong>independant</strong> of that in WEB/APP, so if one get ratelimited in API, one can place/cancel orders via WEB or APP.</li>
 </ul>
-<h3 id='ip-rate-limits'>IP rate limits</h3>
+<h3 id='ip-ratelimits'>IP ratelimits</h3>
 <p>Currently Phemex restrict every IP 5,000 request in 5 minutes window.
    If exceeded this IP capacity, the user would be blocked in the following 5 minutes.</p>
-<h3 id='rest-api-rate-limit-rules'>REST API rate limit rules</h3>
+<h3 id='rest-api-ratelimit-rules'>REST API ratelimit rules</h3>
 <ul>
 <li><a href="https://phemex.com/user-guides/order-spamming-limitations">Order spamming limitations</a></li>
 <li>All Phemex APIs are divided into 3 groups, <code>contract</code>, <code>spotOrder</code> and <code>others</code>.</li>
@@ -3721,7 +3721,7 @@ GET /exchange/order?symbol=&lt;symbol&gt;&amp;clOrdID=&lt;clOrdID1,clOrdID2&gt;
 <span class="p">}</span>
 </code></pre></div>
 <aside class="notice">
-Please be noted that kline interfaces have <a href="#rate-limits">rate limits</a> rule,  please check the <i>Other</i> group under <a href="#api-groups">API groups</a>
+Please be noted that kline interfaces have <a href="#rate-limits">ratelimits</a> rule,  please check the <i>Other</i> group under <a href="#api-groups">API groups</a>
 </aside>
 
 <table><thead>
