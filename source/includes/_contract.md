@@ -55,6 +55,7 @@
 ## Price/Ratio/Value scales
 
 Fields with post-fix "Ep", "Er" or "Ev" have been scaled based on symbol setting.
+
 * Fields with post-fix "Ep" are scaled prices, `priceScale` in [products](#query-product-information)
 * Fields with post-fix "Er" are scaled ratios, `ratioScale` in [products](#query-product-information)
 * Fields with post-fix "Ev" are scaled values, `valueScale` of `settleCurrency` in [products](#query-product-information)
@@ -195,6 +196,34 @@ PUT /orders/create?clOrdID=<clOrdID>&symbol=<symbol>&reduceOnly=<reduceOnly>&clo
 | tpTrigger | Enum | - | Trigger source, by mark-price or last-price | ByMarkPrice, ByLastPrice |
 | pegOffsetValueEp | Integer | - | Trailing offset from current price. Negative value when position is long, positive when position is short | |
 | pegPriceType | Enum | - | Trailing order price type |TrailingStopPeg, TrailingTakeProfitPeg |
+
+## Place order (HTTP POST)
+
+> Request example
+
+```
+POST /orders
+```
+
+```json
+{
+  "actionBy": "FromOrderPlacement",
+  "symbol": "BTCUSD",
+  "clOrdID": "uuid-1573058952273",
+  "side": "Sell",
+  "priceEp": 93185000,
+  "orderQty": 7,
+  "ordType": "Limit",
+  "reduceOnly": false,
+  "triggerType": "UNSPECIFIED",
+  "pegPriceType": "UNSPECIFIED",
+  "timeInForce": "GoodTillCancel",
+  "takeProfitEp": 0,
+  "stopLossEp": 0,
+  "pegOffsetValueEp": 0,
+  "pegPriceType": "UNSPECIFIED"
+}
+```
 
 ## More order type examples
 
@@ -339,34 +368,6 @@ PUT /orders/create?clOrdID=<clOrdID>&symbol=<symbol>&reduceOnly=<reduceOnly>&clo
 | triggerType | String  | The trigger price type | ByMarkPrice, ByLastPrice |
 | stopPxEp    | Integer | The order trigger price. It should be less than last-price if hold long position and vice versa. | |
 | pegOffsetValueEp     | Integer | The offset price. It means to set offset price by an offset from the optimal price, and the sign is opposite to position side. e.g. Long Position => negative sign. Short Position => positive sign; | |
-
-## Place order (HTTP POST)
-
-> Request example
-
-```
-POST /orders
-```
-
-```json
-{
-  "actionBy": "FromOrderPlacement",
-  "symbol": "BTCUSD",
-  "clOrdID": "uuid-1573058952273",
-  "side": "Sell",
-  "priceEp": 93185000,
-  "orderQty": 7,
-  "ordType": "Limit",
-  "reduceOnly": false,
-  "triggerType": "UNSPECIFIED",
-  "pegPriceType": "UNSPECIFIED",
-  "timeInForce": "GoodTillCancel",
-  "takeProfitEp": 0,
-  "stopLossEp": 0,
-  "pegOffsetValueEp": 0,
-  "pegPriceType": "UNSPECIFIED"
-}
-```
 
 ## Amend order by order ID
 
@@ -1123,6 +1124,62 @@ GET /md/orderbook?symbol=BTCUSD
 }
 ```
 
+## Query full order book
+
+> Request format
+
+```
+GET /md/fullbook?symbol=<symbol>
+```
+
+> Request sample
+
+```
+GET /md/fullbook?symbol=BTCUSD
+```
+
+> Response sample
+
+```json
+{
+  "error": null,
+  "id": 0,
+  "result": {
+    "book": {
+      "asks": [
+        [
+          87705000,
+          1000000
+        ],
+        [
+          87710000,
+          200000
+        ]
+      ],
+      "bids": [
+        [
+          87700000,
+          2000000
+        ],
+        [
+          87695000,
+          200000
+        ]
+      ]
+    },
+    "depth": 0,
+    "sequence": 455476965,
+    "timestamp": 1583555482434235628,
+    "symbol": "BTCUSD",
+    "type": "snapshot"
+  }
+}
+```
+
+<aside class="notice">
+The depth value is 0 in full book response.
+</aside>
+
 ## Query kline
 
 > Request format
@@ -1146,7 +1203,7 @@ GET /exchange/public/md/v2/kline?symbol=<symbol>&resolution=<resolution>&limit=<
 ```
 
 <aside class="notice">
-Please be noted that kline interfaces have <a href="#rate-limits">ratelimits</a> rule,  please check the <i>Other</i> group under <a href="#api-groups">API groups</a>
+The API has <a href="#rate-limits">ratelimits</a> rule, and please check the <i>Other</i> group under <a href="#api-groups">API groups</a>
 </aside>
 
 | Field      | Type    | Required | Description     | Possible Values                         |

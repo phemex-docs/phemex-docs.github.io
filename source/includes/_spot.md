@@ -18,6 +18,820 @@ GET /public/products
 * Spot symbols are defined in `.products[]` with **type=Spot**.
 * Spot currencies are defined in `.currencies[]`.
 
+## Price/Ratio/Value scales
+
+Fields with post-fix "Ep", "Er" or "Ev" have been scaled based on symbol setting.
+
+* Fields with post-fix "Ep" are scaled prices, `priceScale` in [products](#query-product-information-2)
+* Fields with post-fix "Er" are scaled ratios, `ratioScale` in [products](#query-product-information-2)
+* Fields with post-fix "Ev" are scaled values, `valueScale` of corresponding `Currency` in [products](#query-product-information-2)
+
+## Common order fields
+
+* Order type
+
+| Order type | Description |
+|-----------|-------------|
+| Limit | -- |
+| Market | -- |
+| Stop | -- |
+| StopLimit | -- |
+| MarketIfTouched | -- |
+| LimitIfTouched | -- |
+| MarketAsLimit | -- |
+| StopAsLimit | -- |
+| MarketIfTouchedAsLimit | -- |
+
+* Order status
+
+| Order status | Description | 
+|------------|-------------|
+| Untriggered | Conditional order waiting to be triggered |
+| Triggered | Conditional order being triggered|
+| Rejected | Order rejected |
+| New | Order placed in cross engine |
+| PartiallyFilled | Order partially filled |
+| Filled | Order fully filled |
+| Canceled | Order canceled |
+
+* TimeInForce
+
+| TimeInForce | Description |
+|------------|-------------|
+| GoodTillCancel | -- |
+| PostOnly | -- |
+| ImmediateOrCancel | -- |
+| FillOrKill | -- |
+
+* Trigger source
+
+| Trigger | Description |
+|------------|-------------|
+| ByLastPrice | Trigger by last price |
+
+## Place order (HTTP PUT, *prefered*)
+
+> Request format
+
+```
+PUT /spot/orders/create?symbol=<symbol>&trigger=<trigger>&clOrdID=<clOrdID>&priceEp=<priceEp>&baseQtyEv=<baseQtyEv>&quoteQtyEv=<quoteQtyEv>&stopPxEp=<stopPxEp>&text=<text>&side=<side>&qtyType=<qtyType>&ordType=<ordType>&timeInForce=<timeInForce>&execInst=<execInst>
+```
+
+> Response format
+
+```json
+{
+  "code": 0,
+  "msg": "",
+  "data": {
+    "orderID": "d1d09454-cabc-4a23-89a7-59d43363f16d",
+    "clOrdID": "309bcd5c-9f6e-4a68-b775-4494542eb5cb",
+    "priceEp": 0,
+    "action": "New",
+    "trigger": "UNSPECIFIED",
+    "pegPriceType": "UNSPECIFIED",
+    "stopDirection": "UNSPECIFIED",
+    "bizError": 0,
+    "symbol": "sBTCUSDT",
+    "side": "Buy",
+    "baseQtyEv": 0,
+    "ordType": "Limit",
+    "timeInForce": "GoodTillCancel",
+    "ordStatus": "Created",
+    "cumFeeEv": 0,
+    "cumBaseQtyEv": 0,
+    "cumQuoteQtyEv": 0,
+    "leavesBaseQtyEv": 0,
+    "leavesQuoteQtyEv": 0,
+    "avgPriceEp": 0,
+    "cumBaseAmountEv": 0,
+    "cumQuoteAmountEv": 0,
+    "quoteQtyEv": 0,
+    "qtyType": "ByBase",
+    "stopPxEp": 0,
+    "pegOffsetValueEp": 0
+  }
+}
+```
+
+| Field       | Type   | Required | Description               | Possible values |
+|----------   |--------|----------|---------------------------|-----------------|
+| symbol      | String | Yes      |                           |                 |
+| side        | Enum   | Yes      |                           |  Sell, Buy     | 
+| qtyType     | Enum   | Yes      | Set order quantity by base or quote currency | ByBase, ByQuote|
+| quoteQtyEv  | Integer| --       | Required if qtyType = ByQuote|  |
+| baseQtyEv   | Integer| --       |                           | Required if qtyType = ByBase   |
+| priceEp     | Integer|          |                           | Scaled price            |
+| stopPxEp    | Integer| --       | used in conditionalorder  |   |
+| trigger     | Enum   | --       | Required in conditional order | ByLastPrice |
+| timeInForce | Enum   | No       | Default GoodTillCancel    | GoodTillCancel, PostOnly,ImmediateOrCancel,FillOrKill |
+| ordType     | Enum   | No       | Default to Limit          | Market, Limit, Stop, StopLimit, MarketIfTouched, LimitIfTouched|
+
+## Place order (HTTP POST)
+
+> Request format
+
+```
+POST /spot/orders
+```
+
+```json
+{
+  "symbol": "sBTCUSDT",
+  "clOrdID": "",
+  "side": "Buy/Sell",
+  "qtyType": "ByBase/ByQuote",
+  "quoteQtyEv": 0,
+  "baseQtyEv": 0,
+  "priceEp": 0,
+  "stopPxEp": 0,
+  "trigger": "UNSPECIFIED",
+  "ordType": "Limit",
+  "timeInForce": "GoodTillCancel"
+}
+```
+
+## Amend order
+
+> Request format
+
+```
+PUT /spot/orders?symbol=<symbol>&orderID=<orderID>&origClOrdID=<origClOrdID>&clOrdID=<clOrdID>&priceEp=<priceEp>&baseQtyEV=<baseQtyEV>&quoteQtyEv=<quoteQtyEv>&stopPxEp=<stopPxEp> 
+```
+
+## Cancel order
+
+> Request format
+
+```
+DELETE /spot/orders?symbol=<symbol>&orderID=<orderID>
+DELETE /spot/orders?symbol=<symbol>&clOrdID=<clOrdID>
+```
+
+## Cancel all order by symbol
+
+> Request format
+
+```
+DELETE /spot/orders/all?symbol=<symbol>&untriggered=<untriggered>
+```
+
+| Field | Type | Required | Description |
+|---------|--------|-------|-------------|
+| symbol  | Enum   | Yes   | The symbol to cancel |
+| untriggered | Boolean | No | set false to cancel non-conditiaonal order, true to conditional order |
+
+## Query open order by order ID or client order ID
+
+> Request format
+
+```
+GET /spot/orders/active?symbol=<symbol>&orderID=<orderID>
+GET /spot/orders/active?symbol=<symbol>&clOrDID=<clOrdID>
+```
+
+## Query all open orders by symbol
+
+> Request format
+
+```
+GET /spot/orders?symbol=<symbol>
+```
+
+## Query wallets
+
+Query spot wallet by currency.
+
+> Request format
+
+```
+GET /spot/wallets?currency=<currency>
+```
+
+> Response format
+
+```json
+{
+  "code": 0,
+  "msg": "",
+  "data": [
+    {
+      "currency": "BTC",
+      "balanceEv": 0,
+      "lockedTradingBalanceEv": 0,
+      "lockedWithdrawEv": 0,
+      "lastUpdateTimeNs": 0
+    }
+  ]
+}
+```
+
+## Query orders by order ID or client order ID
+
+> Request format
+
+```
+GET /api-data/spots/orders/by-order-id?symbol=<symbol>&oderId=<orderID>&clOrdID=<clOrdID>
+```
+
+| Field    | Type   | Required | Description           | Possible Values                                                                                                                           |
+|----------|--------|----------|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| symbol   | String | True     | the trade symbol to query | sBTCUSDT ...                                                                                                                              |
+| orderID  | String | False    | Order id              | Either orderID or clOrdID is required. |
+| clOrdID  | String | False    | Client order id       | Refer to orderID                                                                                                                          |
+
+> Response format
+
+```json
+[
+  {
+    "avgPriceEp": 0,
+    "avgTransactPriceEp": 0,
+    "baseQtyEv": "string",
+    "createTimeNs": 0,
+    "cumBaseValueEv": 0,
+    "cumFeeEv": 0,
+    "cumQuoteValueEv": 0,
+    "execStatus": "string",
+    "feeCurrency": "string",
+    "leavesBaseQtyEv": 0,
+    "leavesQuoteQtyEv": 0,
+    "ordStatus": "string",
+    "ordType": "string",
+    "orderID": "string",
+    "priceEp": 0,
+    "qtyType": "string",
+    "quoteQtyEv": 0,
+    "side": "string",
+    "stopDirection": "string",
+    "stopPxEp": 0,
+    "symbol": "string",
+    "timeInForce": "string"
+  }
+]
+```
+
+## Query order history
+
+> Request format
+
+```
+GET /api-data/spots/orders?symbol=<symbol>
+```
+
+> Response format
+
+```json
+[
+  {
+    "avgPriceEp": 0,
+    "avgTransactPriceEp": 0,
+    "baseQtyEv": "string",
+    "createTimeNs": 0,
+    "cumBaseValueEv": 0,
+    "cumFeeEv": 0,
+    "cumQuoteValueEv": 0,
+    "execStatus": "string",
+    "feeCurrency": "string",
+    "leavesBaseQtyEv": 0,
+    "leavesQuoteQtyEv": 0,
+    "ordStatus": "string",
+    "ordType": "string",
+    "orderID": "string",
+    "priceEp": 0,
+    "qtyType": "string",
+    "quoteQtyEv": 0,
+    "side": "string",
+    "stopDirection": "string",
+    "stopPxEp": 0,
+    "symbol": "string",
+    "timeInForce": "string"
+  }
+]
+```
+
+| Field     | Type    | Required | Description               | Possible Values                 |
+|-----------|---------|----------|---------------------------|---------------------------------|
+| symbol    | String  | True     | The trade symbol to query     | sBTCUSDT ...                    |
+| start     | Integer | False    | Start time in millisecond | Default to 2 days before the end time |
+| end       | Integer | False    | End time in millisecond   | Default to now                     |
+| offset    | Integer | False    | Page start from 0         | Start from 0, default 0         |
+| limit     | Integer | False    | Page size                 | Default to 20, max 200             |
+
+## Query trade history
+
+> Request format
+
+```
+GET /api-data/spots/trades?symbol=<symbol>
+```
+
+> Response format
+
+```json
+[
+  {
+    "action": "string",
+    "baseCurrency": "string",
+    "baseQtyEv": 0,
+    "clOrdID": "string",
+    "execBaseQtyEv": 0,
+    "execFeeEv": 0,
+    "execId": "string",
+    "execInst": "string",
+    "execPriceEp": 0,
+    "execQuoteQtyEv": 0,
+    "execStatus": "string",
+    "feeCurrency": "string",
+    "feeRateEr": 0,
+    "leavesBaseQtyEv": 0,
+    "leavesQuoteQtyEv": 0,
+    "ordStatus": "string",
+    "ordType": "string",
+    "orderID": "string",
+    "priceEP": 0,
+    "qtyType": "string",
+    "quoteCurrency": "string",
+    "quoteQtyEv": 0,
+    "side": "string",
+    "stopDirection": "string",
+    "stopPxEp": 0,
+    "symbol": "string",
+    "timeInForce": "string",
+    "tradeType": "string",
+    "transactTimeNs": 0
+  }
+]
+```
+
+| Field     | Type    | Required | Description               | Possible Values                 |
+|-----------|---------|----------|---------------------------|---------------------------------|
+| symbol    | String  | True     | The currency to query     | sBTCUSDT ...                    |
+| start     | Integer | False    | Start time in millisecond | Default to 2 days before the end time |
+| end       | Integer | False    | End time in millisecond   | Default to now                  |
+| offset    | Integer | False    | Page start from 0         | Start from 0, default 0         |
+| limit     | Integer | False    | Page size                 | Default 20, max 200             |
+
+## Query PnL
+
+> Request format
+
+```
+GET /api-data/spots/pnls
+```
+
+> Response format
+
+```json
+[
+  {
+    "collectTime": 0,
+    "cumPnlEv": 0,
+    "dailyPnlEv": 0,
+    "userId": 0
+  }
+]
+```
+
+| Field    | Type   | Required | Description           | Possible Values                                                                                                                           |
+|----------|--------|----------|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| start     | Integer | False    | Start time in millisecond | Default to 2 days before the end time |
+| end       | Integer | False    | End time in millisecond   | Default to now                     |
+
+## Query chain information
+
+> Request format
+
+```
+GET /exchange/public/cfg/chain-settings?currency=<currency>
+```
+## Query deposit address by currency
+
+> Request format
+
+```
+GET /exchange/wallets/v2/depositAddress?currency=<currency>&chainName=<chainName>
+```
+
+> Response format
+
+```json
+{
+  "address": "1Cdxxxxxxxxxxxxxx",
+  "tag": null
+}
+```
+
+* `chainName` shall be queried from [chain information](#query-chain-information).
+
+| Field    | Type   | Required  | Description| Possible Values |
+|----------|--------|-----------|------------|-----------------|
+| currency | String | True      | the currency to query | BTC,ETH, USDT ... |
+| chainName| String | True      | the chain for this currency | BTC, ETH, EOS |
+
+## Query recent deposit history
+
+> Request format
+
+```
+GET /exchange/wallets/depositList?currency=<currency>&offset=<offset>&limit=<limit>
+```
+
+> Response format
+
+```json
+{
+  "address": "1xxxxxxxxxxxxxxxxxx",
+  "amountEv": 1000000,
+  "confirmations": 1,
+  "createdAt": 1574685871000,
+  "currency": "BTC",
+  "currencyCode": 1,
+  "status": "Success",
+  "txHash": "9e84xxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "type": "Deposit"
+}
+```
+
+<aside class="notice">
+Response data is limited to 3 months.
+</aside>
+
+| Field    | Type   | Required  | Description| Possible Values |
+|----------|--------|-----------|------------|-----------------|
+| currency | String | True      | the currency to query | BTC,ETH, ... |
+
+## Query recent withdraw history
+
+> Request format
+
+```
+GET /exchange/wallets/withdrawList?currency=<currency>&offset=<offset>&limit=<limit>
+```
+
+> Response format
+
+```json
+{
+  "address": "1Lxxxxxxxxxxx",
+  "amountEv": 200000,
+  "currency": "BTC",
+  "currencyCode": 1,
+  "expiredTime": 0,
+  "feeEv": 50000,
+  "rejectReason": null,
+  "status": "Succeed",
+  "txHash": "44exxxxxxxxxxxxxxxxxxxxxx",
+  "withdrawStatus": ""
+}
+```
+
+<aside class="notice">
+Response data is limited to 3 months.
+</aside>
+
+| Field    | Type   | Required  | Description| Possible Values |
+|----------|--------|-----------|------------|-----------------|
+| currency | String | True      | the currency to query | BTC,ETH, ... |
+
+## Query funds history
+
+> Request format
+
+```
+GET /api-data/spots/funds?currency=<currency>
+```
+
+> Response format
+
+```json
+[
+  {
+    "action": "string",
+    "amountEv": 0,
+    "balanceEv": 0,
+    "bizCode": 0,
+    "createTime": 0,
+    "currency": "string",
+    "execId": "string",
+    "execSeq": 0,
+    "feeEv": 0,
+    "id": 0,
+    "side": "string",
+    "text": "string",
+    "transactTimeNs": 0
+  }
+]
+```
+
+| Field    | Type           | Required | Description               | Possible Values                 |
+|----------|----------------|----------|---------------------------|---------------------------------|
+| currency | String         | True     | the currency to query     | BTC,ETH, USDT ...               |
+| start    | Integer        | False    | start time in millisecond | default 2 days ago from the end |
+| end      | Integer        | False    | end time in millisecond   | default now                     |
+| offset   | Integer        | False    | page start from 0         | start from 0, default 0         |
+| limit    | Integer        | False    | page size                 | default 20, max 200             |
+
+## Query order book
+
+> Request format
+
+```
+GET /md/orderbook?symbol=<symbol>
+```
+
+> Response format
+
+```javascript
+{
+  "error": null,
+  "id": 0,
+  "result": {
+    "book": {
+      "asks": [
+        [
+          <priceEp>,
+          <size>
+        ],
+        ...
+        ...
+        ...
+      ],
+      "bids": [
+        [
+          <priceEp>,
+          <size>
+        ],
+        ...
+        ...
+        ...
+      ],
+    ]
+    },
+    "depth": 30,
+    "sequence": <sequence>,
+    "timestamp": <timestamp>,
+    "symbol": "<symbol>",
+    "type": "snapshot"
+  }
+}
+```
+
+| Field       | Type   | Description                                | Possible values |
+|-------------|--------|--------------------------------------------|--------------|
+| timestamp   | Integer| Timestamp in nanoseconds                   |              |
+| priceEp     | Integer| Scaled book level price                    |              |
+| size        | Integer| Scaled book level size                     |              |
+| sequence    | Integer| current message sequence                   |              |
+| symbol      | String | Spot symbol name                           |              |
+
+> Request sample
+
+```
+GET /md/orderbook?symbol=sBTCUSDT
+```
+
+> Response sample
+
+```json
+{
+  "error": null,
+  "id": 0,
+  "result": {
+    "book": {
+      "asks": [
+        [
+          877050000000,
+          1000000
+        ],
+        [
+          877100000000,
+          200000
+        ]
+      ],
+      "bids": [
+        [
+          877000000000,
+          2000000
+        ],
+        [
+          876950000000,
+          200000
+        ]
+      ]
+    },
+    "depth": 30,
+    "sequence": 455476965,
+    "timestamp": 1583555482434235628,
+    "symbol": "sBTCUSDT",
+    "type": "snapshot"
+  }
+}
+```
+
+## Query full order book
+
+> Request format
+
+```
+GET /md/fullbook?symbol=<symbol>
+```
+
+> Request sample
+
+```
+GET /md/orderbook?symbol=sBTCUSDT
+```
+
+> Response sample
+
+```json
+{
+  "error": null,
+  "id": 0,
+  "result": {
+    "book": {
+      "asks": [
+        [
+          877050000000,
+          1000000
+        ],
+        [
+          877100000000,
+          200000
+        ]
+      ],
+      "bids": [
+        [
+          877000000000,
+          2000000
+        ],
+        [
+          876950000000,
+          200000
+        ]
+      ]
+    },
+    "depth": 0,
+    "sequence": 455476965,
+    "timestamp": 1583555482434235628,
+    "symbol": "sBTCUSDT",
+    "type": "snapshot"
+  }
+}
+```
+
+<aside class="notice">
+The depth value is 0 in full book response.
+</aside>
+
+## Query recent trades
+
+> Request format
+
+```
+GET /md/trade?symbol=<symbol>
+```
+
+> Response format
+
+```javascript
+{
+  "error": null,
+  "id": 0,
+  "result": {
+    "type": "snapshot",
+    "sequence": <sequence>,
+    "symbol": "<symbol>",
+    "trades": [
+      [
+        <timestamp>,
+        "<side>",
+        <priceEp>,
+        <size>
+      ],
+      ...
+      ...
+      ...
+    ]
+  }
+}
+
+```
+
+| Field       | Type   | Description                                | Possible values |
+|-------------|--------|--------------------------------------------|--------------|
+| timestamp   | Integer| Timestamp in nanoseconds                   |              |
+| side        | String | Trade side string                          | Buy, Sell    |
+| priceEp     | Integer| Scaled trade price                         |              |
+| size        | Integer| Scaled trade size                          |              |
+| sequence    | Integer| Current message sequence                   |              |
+| symbol      | String | Spot symbol name                           |              |
+
+> Request sample
+
+```
+GET /md/trade?symbol=sBTCUSDT
+```
+
+> Response sample
+
+```json
+{
+  "error": null,
+  "id": 0,
+  "result": {
+    "sequence": 15934323,
+    "symbol": "sBTCUSDT",
+    "trades": [
+      [
+        1579164056368538508,
+        "Sell",
+        869600000000,
+        1210000
+      ],
+      [
+        1579164055036820552,
+        "Sell",
+        869600000000,
+        580000
+      ]
+    ],
+    "type": "snapshot"
+  }
+}
+
+```
+
+## Query 24 hours ticker
+
+> Request format
+
+```
+GET /md/spot/ticker/24hr?symbol=<symbol>
+```
+
+> Response format
+
+```javascript
+{
+  "error": null,
+  "id": 0,
+  "result": {
+    "openEp": <open priceEp>,
+    "highEp": <high priceEp>,
+    "lowEp": <low priceEp>,
+    "lastEp": <last priceEp>,
+    "bidEp": <bid priceEp>,
+    "askEp": <ask priceEp>,
+    "symbol": "<symbol>",
+    "turnoverEv": <turnoverEv>,
+    "volumeEv": <volumeEv>,
+    "timestamp": <timestamp>
+  }
+}
+```
+
+| Field         | Type   | Description                                | Possible values |
+|---------------|--------|--------------------------------------------|--------------|
+| open priceEp  | Integer| The scaled open price in last 24 hours     |              |
+| high priceEp  | Integer| The scaled highest price in last 24 hours  |              |
+| low priceEp   | Integer| The scaled lowest price in last 24 hours   |              |
+| last priceEp  | Integer| The scaled last price                      |              |
+| bid priceEp   | Integer| Scaled bid price                           |              |
+| ask priceEp   | Integer| Scaled ask price                           |              |
+| timestamp     | Integer| Timestamp in nanoseconds                   |              |
+| symbol        | String | symbol name                                | [Trading symbols](#productinfo) |
+| turnoverEv    | Integer| The scaled turnover value in last 24 hours |              |
+| volumeEv      | Integer| The scaled trade volume in last 24 hours   |              |
+
+> Request sample
+
+```
+GET /md/spot/ticker/24hr?symbol=sBTCUSDT
+```
+
+> Response sample
+
+```json
+{
+  "error": null,
+  "id": 0,
+  "result": {
+    "askEp": 892100000000,
+    "bidEp": 891835000000,
+    "highEp": 898264000000,
+    "lastEp": 892486000000,
+    "lowEp": 870656000000,
+    "openEp": 896261000000,
+    "symbol": "sBTCUSDT",
+    "timestamp": 1590571240030003249,
+    "turnoverEv": 104718804814499,
+    "volumeEv": 11841148100
+  }
+}
+```
+
 # Spot Websocket API
 
 ## Heartbeat
@@ -981,12 +1795,12 @@ On subscription to investment account then you will get your investment informat
 
 | Field       | Type   | Description      | Possible values |
 |-------------|--------|------------------|-----------------|
-| currency    | String |invested currency |      BTC,ETH    |
-| balanceEv   | Long   |invested amount   |        0        |
-| userId      | Long   | your user id     | 1234            |
-| demandPendingInterestBalanceEv | Long   | pending interest for flexible product  | 0 |
-| demandInterestedBalanceEv      | Long   | paid interest for flexible product     | 0 |
-| timedDepositBalanceEv          | Long | amount for fixed product                 | 20000000000 |
-| currentTimeMillis              | Long |   time in milli    | 165397230166 |
+| currency    | String |Invested currency |      BTC,ETH    |
+| balanceEv   | Integer|Invested amount   |        0        |
+| userId      | Integer| User id     |                 |
+| demandPendingInterestBalanceEv | Integer| Pending interest for flexible product  | 0 |
+| demandInterestedBalanceEv      | Integer| Paid interest for flexible product     | 0 |
+| timedDepositBalanceEv          | Integer| Amount for fixed product                 | 20000000000 |
+| currentTimeMillis              | Integer| Time in milliseconds | 165397230166 |
 
 
