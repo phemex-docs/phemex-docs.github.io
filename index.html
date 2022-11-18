@@ -680,6 +680,9 @@
                             <a href="#http-return-codes" class="toc-h3 toc-link" data-title="HTTP return codes">HTTP return codes</a>
                           </li>
                           <li>
+                            <a href="#rest-request-header" class="toc-h3 toc-link" data-title="REST request header">REST request header</a>
+                          </li>
+                          <li>
                             <a href="#rest-response-format" class="toc-h3 toc-link" data-title="REST response format">REST response format</a>
                           </li>
                       </ul>
@@ -1106,6 +1109,15 @@
 <li>HTTP <code>403</code> return code is used when lack of priviledge.</li>
 <li>HTTP <code>429</code> return code is used when breaking a request ratelimit.</li>
 <li>HTTP <code>5XX</code> return codes are used for Phemex internal errors. Note: This doesn&#39;t means the operation failed, the execution status is <strong>UNKNOWN</strong> and could be Succeed.</li>
+</ul>
+<h3 id='rest-request-header'>REST request header</h3>
+<p>Every HTTP Rest Request must have the following Headers:</p>
+
+<ul>
+<li><strong>x-phemex-access-token</strong> : This is <em>API-KEY</em> (id field) from Phemex site.</li>
+<li><strong>x-phemex-request-expiry</strong> : This describes the Unix <em>EPoch SECONDS</em> to expire the request, normally it should be (Now() + 1 minute)</li>
+<li><strong>x-phemex-request-signature</strong> : This is HMAC SHA256 signature of the http request. Secret is <em>API Secret</em>, its formula is : HMacSha256(URL Path + QueryString + Expiry + body)</li>
+<li>(Optional) <strong>x-phemex-request-tracing</strong>: a unique string to trace http-request, less than 40 bytes. This header is a must in resolving latency issues.</li>
 </ul>
 <h3 id='rest-response-format'>REST response format</h3>
 <blockquote>
