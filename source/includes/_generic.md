@@ -20,6 +20,15 @@ Welcome to the [Phemex](https://phemex.com) API documentation. We offer REST and
 * HTTP `429` return code is used when breaking a request ratelimit.
 * HTTP `5XX` return codes are used for Phemex internal errors. Note: This doesn't means the operation failed, the execution status is **UNKNOWN** and could be Succeed.
 
+### REST request header
+
+Every HTTP Rest Request must have the following Headers:
+
+* **x-phemex-access-token** : This is *API-KEY* (id field) from Phemex site.
+* **x-phemex-request-expiry** : This describes the Unix *EPoch SECONDS* to expire the request, normally it should be (Now() + 1 minute)
+* **x-phemex-request-signature** : This is HMAC SHA256 signature of the http request. Secret is *API Secret*, its formula is : HMacSha256(URL Path + QueryString + Expiry + body)
+* (Optional) **x-phemex-request-tracing**: a unique string to trace http-request, less than 40 bytes. This header is a must in resolving latency issues.
+
 ### REST response format
 
 > Response general format
