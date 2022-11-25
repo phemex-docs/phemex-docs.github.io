@@ -31,9 +31,9 @@ POST /assets/transfer
 
 | Field    | Type    | Required  | Description           | Possible Values                            |
 |----------|---------|-----------|-----------------------|--------------------------------------------|
-| amountEv | Long    | True      | amountEv to transfer  | 100000 ...                                 |
-| moveOp   | Integer | True      | direction             | 1 - futures to spot, 2 - spot to futures   |
-| currency | String  | True      | currency to transfer  | BTC, ETH, USD ...                          |
+| amountEv | Long    | True      | AmountEv to transfer  | 100000 ...                                 |
+| moveOp   | Integer | True      | Direction             | 1 - futures to spot, 2 - spot to futures   |
+| currency | String  | True      | Currency to transfer  | BTC, ETH, USD ...                          |
 
 ## Query transfer history
 
@@ -62,11 +62,11 @@ GET /assets/transfer?currency=<currency>
 
 | Field    | Type    | Required | Description               | Possible Values                 |
 |----------|---------|----------|---------------------------|---------------------------------|
-| currency | String  | True     | the currency to query     | BTC,ETH ...                     |
-| start    | Long    | False    | start time in millisecond | default 2 days ago from the end |
-| end      | Long    | False    | end time in millisecond   | default now                     |
-| offset   | Integer | False    | page start from 0         | start from 0, default 0         |
-| limit    | Integer | False    | page size                 | default 20, max 200             |
+| currency | String  | True     | The currency to query     | BTC,ETH ...                     |
+| start    | Long    | False    | Start time in millisecond | Default to 2 days ago from the end |
+| end      | Long    | False    | End time in millisecond   | Default to now                  |
+| offset   | Integer | False    | Page start from 0         | Start from 0, default 0         |
+| limit    | Integer | False    | Page size                 | Default to 20, max 200             |
 
 ## Spot sub to main transfer (for sub-account only)
 
@@ -98,9 +98,9 @@ POST /assets/spots/sub-accounts/transfer
 
 | Field      | Type    | Required | Description          | Possible Values                                       |
 |------------|---------|----------|----------------------|-------------------------------------------------------|
-| amountEv   | Long    | True     | amountEv to transfer | 100000 ...                                            |
-| currency   | String  | True     | currency to transfer | BTC, ETH, USD ...                                     |
-| requestKey | String  | False    | unique request key   | Unique request Key, system will generate if its empty |
+| amountEv   | Long    | True     | AmountEv to transfer | 100000 ...                                            |
+| currency   | String  | True     | Currency to transfer | BTC, ETH, USD ...                                     |
+| requestKey | String  | False    | Unique request key   | Unique request Key, system will generate if its empty |
 
 ## Query spot sub to main transfer
 
@@ -129,11 +129,11 @@ GET /assets/spots/sub-accounts/transfer?currency=<currency>
 
 | Field    | Type    | Required | Description               | Possible Values                 |
 |----------|---------|----------|---------------------------|---------------------------------|
-| currency | String  | True     | the currency to query     | BTC,ETH ...                     |
-| start    | Long    | False    | start time in millisecond | default 2 days ago from the end |
-| end      | Long    | False    | end time in millisecond   | default now                     |
-| offset   | Integer | False    | page start from 0         | start from 0, default 0         |
-| limit    | Integer | False    | page size                 | default 20, max 200             |
+| currency | String  | True     | The currency to query     | BTC,ETH ...                     |
+| start    | Long    | False    | Start time in millisecond | Default to 2 days ago from the end |
+| end      | Long    | False    | End time in millisecond   | Default to now                     |
+| offset   | Integer | False    | Page start from 0         | Start from 0, default 0         |
+| limit    | Integer | False    | Page size                 | Default to 20, max 200             |
 
 
 ## Futures sub to main transfer (for sub-account only)
@@ -167,9 +167,9 @@ POST /assets/futures/sub-accounts/transfer
 
 | Field      | Type    | Required | Description          | Possible Values                                       |
 |------------|---------|----------|----------------------|-------------------------------------------------------|
-| amountEv   | Long    | True     | amountEv to transfer | 100000 ...                                            |
-| currency   | String  | True     | currency to transfer | BTC, ETH, USD ...                                     |
-| requestKey | String  | False    | unique request key   | Unique request Key, system will generate if its empty |
+| amountEv   | Long    | True     | AmountEv to transfer | 100000 ...                                            |
+| currency   | String  | True     | Currency to transfer | BTC, ETH, USD ...                                     |
+| requestKey | String  | False    | Unique request key   | Unique request Key, system will generate if its empty |
 
 ## Query futures sub to main transfer
 
@@ -197,11 +197,11 @@ GET /assets/futures/sub-accounts/transfer?currency=<currency>
 
 | Field    | Type    | Required | Description               | Possible Values                 |
 |----------|---------|----------|---------------------------|---------------------------------|
-| currency | String  | True     | the currency to query     | BTC,ETH ...                     |
-| start    | Long    | False    | start time in millisecond | default 2 days ago from the end |
-| end      | Long    | False    | end time in millisecond   | default now                     |
-| offset   | Integer | False    | page start from 0         | start from 0, default 0         |
-| limit    | Integer | False    | page size                 | default 20, max 200             |
+| currency | String  | True     | The currency to query     | BTC,ETH ...                     |
+| start    | Long    | False    | Start time in millisecond | Default to 2 days ago from the end |
+| end      | Long    | False    | End time in millisecond   | Default to now                     |
+| offset   | Integer | False    | Page start from 0         | Start from 0, default 0         |
+| limit    | Integer | False    | Page size                 | Default to 20, max 200             |
 
 ## Universal transfer (main account only) - transfer between sub to main, main to sub or sub to sub
 
@@ -231,11 +231,12 @@ POST /assets/universal-transfer
 
 | Field       | Type    | Required | Description                 | Possible Values                                       |
 |-------------|---------|----------|-----------------------------|-------------------------------------------------------|
-| fromUserId  | Long    | True     | from user id                | Will set as main account if not given or 0            |
-| toUserId    | Long    | True     | to user id                  | Will set as main account if not given or 0            |
-| amountEv    | Long    | True     | amountEv to transfer        | 100000 ...                                            |
-| bizType     | String  | True     | transfer for which biz type | SPOT, PERPETUAL                                       |
-| requestKey  | String  | False    | unique request key          | Unique request Key, system will generate if its empty |
+| fromUserId  | Long    | True     | From user id                | Will set as main account if not given or 0            |
+| toUserId    | Long    | True     | To user id                  | Will set as main account if not given or 0            |
+| currency    | String  | True     | The currency to query       | BTC,ETH ...                                           |
+| amountEv    | Long    | True     | AmountEv to transfer        | 100000 ...                                            |
+| bizType     | String  | True     | Transfer for which biz type | SPOT, PERPETUAL                                       |
+| requestKey  | String  | False    | Unique request key          | Unique request Key, system will generate if its empty |
 
 # Convert REST API
 
@@ -266,9 +267,9 @@ GET /assets/quote
 
 | Field        | Type   | Required | Description          | Possible Values |
 |--------------|--------|----------|----------------------|-----------------|
-| fromCurrency | String | True     | from currency        | BTC,USD ...     |
-| toCurrency   | String | True     | to currency          | BTC,USD ...     |
-| fromAmountEv | Long   | True     | amountEv to transfer | 100000 ...      |
+| fromCurrency | String | True     | From currency        | BTC,USD ...     |
+| toCurrency   | String | True     | To currency          | BTC,USD ...     |
+| fromAmountEv | Long   | True     | AmountEv to transfer | 100000 ...      |
 
 
 ## Convert
@@ -304,10 +305,10 @@ POST /assets/convert
 
 | Field        | Type   | Required | Description            | Possible Values |
 |--------------|--------|----------|------------------------|-----------------|
-| toCurrency   | String | True     | to currency            | BTC,USD ...     |
-| fromCurrency | String | True     | from currency          | BTC,USD ...     |
-| fromAmountEv | Long   | False    | amountEv to convert    | 100000 ...      |
-| code         | String | True     | encrypted convert args | xxxxxxxx ...    |
+| toCurrency   | String | True     | To currency            | BTC,USD ...     |
+| fromCurrency | String | True     | From currency          | BTC,USD ...     |
+| fromAmountEv | Long   | False    | AmountEv to convert    | 100000 ...      |
+| code         | String | True     | Encrypted convert args | xxxxxxxx ...    |
 
 ## Query convert history
 
@@ -337,10 +338,10 @@ GET /assets/convert
 
 | Field        | Type     | Required | Description               | Possible Values                      |
 |--------------|----------|----------|---------------------------|--------------------------------------|
-| fromCurrency | String   | False    | from currency             | BTC,USD ...                          |
-| toCurrency   | String   | False    | to currency               | BTC,USD ...                          |
-| startTime    | Long     | False    | start time in millisecond | default 2 days ago from the end time |
-| endTime      | Long     | False    | end time in millisecond   | default now                          |
-| offset       | Integer  | False    | page start from 0         | start from 0, default 0              |
-| limit        | Integer  | False    | page size                 | default 20, max 200                  |
+| fromCurrency | String   | False    | From currency             | BTC,USD ...                          |
+| toCurrency   | String   | False    | To currency               | BTC,USD ...                          |
+| startTime    | Long     | False    | Start time in millisecond | Default to 2 days ago from the end time |
+| endTime      | Long     | False    | End time in millisecond   | Default to now                          |
+| offset       | Integer  | False    | Page start from 0         | Start from 0, default 0              |
+| limit        | Integer  | False    | Page size                 | Default to 20, max 200                  |
 
