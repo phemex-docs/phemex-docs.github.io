@@ -2235,6 +2235,14 @@ Because the number of interfaces in Other group may grow over time, the list bel
 </tr>
 </thead><tbody>
 <tr>
+<td>Created</td>
+<td>order acked from order request, a transient state</td>
+</tr>
+<tr>
+<td>Init</td>
+<td>Same as <code>Created</code>, order acked from order request, a transient state</td>
+</tr>
+<tr>
 <td>Untriggered</td>
 <td>Conditional order waiting to be triggered</td>
 </tr>
@@ -2243,12 +2251,16 @@ Because the number of interfaces in Other group may grow over time, the list bel
 <td>Conditional order being triggered</td>
 </tr>
 <tr>
+<td>Deactivated</td>
+<td>untriggered conditonal order being removed</td>
+</tr>
+<tr>
 <td>Rejected</td>
 <td>Order rejected</td>
 </tr>
 <tr>
 <td>New</td>
-<td>Order placed in cross engine</td>
+<td>Order placed into orderbook</td>
 </tr>
 <tr>
 <td>PartiallyFilled</td>
