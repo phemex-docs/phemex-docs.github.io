@@ -89,10 +89,13 @@ GET /public/products
 
 | Order Status | Description |
 |------------|-------------|
+| Created | order acked from order request, a transient state |
+| Init | Same as `Created`, order acked from order request, a transient state |
 | Untriggered | Conditional order waiting to be triggered |
 | Triggered | Conditional order being triggered|
+| Deactivated | untriggered conditonal order being removed |
 | Rejected | Order rejected |
-| New | Order placed in cross engine |
+| New | Order placed into orderbook |
 | PartiallyFilled | Order partially filled |
 | Filled | Order fully filled |
 | Canceled | Order canceled |
