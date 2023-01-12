@@ -2962,7 +2962,8 @@ DELETE /g-orders/cancel?orderID=<orderID>&posSide=<posSide>&symbol=<symbol>
 
 | Field   | Type   | Required | Description                  |
 | ------- | ------ | -------- | ---------------------------- |
-| orderID | String | Yes      | order id, cannot be changed  |
+| orderID | String | No      | order id, cannot be changed, orderID and clOrdID can not be both empty  |
+| clOrdID | String | No      | clOrdID id, cannot be changed  |
 | symbol  | String | Yes      | which symbol to cancel order |
 | posSide | String | Yes      | position direction           |
 
@@ -3015,7 +3016,8 @@ DELETE /g-orders?symbol=<symbol>&orderID=<orderID1>,<orderID2>,<orderID3>&posSid
 
 | Field   | Type   | Required | Description                                          |
 | ------- | ------ | -------- | ---------------------------------------------------- |
-| orderID | String | Yes      | list of order ids to be cancelled, cannot be changed |
+| orderID | String | No      | list of order ids to be cancelled, cannot be changed, orderID and clOrdID can not be both empty|
+| clOrdID | String | No      | list of clOrdIDs to be cancelled, cannot be changed  |
 | symbol  | String | Yes      | which symbol to cancel order                         |
 | posSide | String | Yes      | position direction                                   |
 
