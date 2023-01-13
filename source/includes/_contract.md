@@ -3367,6 +3367,12 @@ GET /exchange/order/v2/orderList?symbol=<symbol>&currency=<currency>&ordStatus=<
 | limit     | Integer | Yes      | limit of resultset, max 200                                         ||
 | withCount | boolean | No       | if true, result info will contains count info.                      | true,false                                                                                                                                                                                                           |
 
+Response
+
+| Field      | Type    | Description            | Possible values                                                    |
+|------------|----|------------------------|--------------------------------------------------------------------|
+| execStatus | Integer | exec status code | Aborted(2), MakerFill(6), TakerFill(7), Expired(8), Canceled(11), CreateRejected(19)|
+
 
 ## Query user order by orderID or Query user order by client order ID
 > Request format
