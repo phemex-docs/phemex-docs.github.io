@@ -6524,8 +6524,14 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
 <tr>
 <td>orderID</td>
 <td>String</td>
-<td>Yes</td>
-<td>order id, cannot be changed</td>
+<td>No</td>
+<td>order id, cannot be changed, orderID and clOrdID can not be both empty</td>
+</tr>
+<tr>
+<td>clOrdID</td>
+<td>String</td>
+<td>No</td>
+<td>clOrdID id, cannot be changed</td>
 </tr>
 <tr>
 <td>symbol</td>
@@ -6594,8 +6600,14 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
 <tr>
 <td>orderID</td>
 <td>String</td>
-<td>Yes</td>
-<td>list of order ids to be cancelled, cannot be changed</td>
+<td>No</td>
+<td>list of order ids to be cancelled, cannot be changed, orderID and clOrdID can not be both empty</td>
+</tr>
+<tr>
+<td>clOrdID</td>
+<td>String</td>
+<td>No</td>
+<td>list of clOrdIDs to be cancelled, cannot be changed</td>
 </tr>
 <tr>
 <td>symbol</td>
@@ -7098,7 +7110,7 @@ to be added
 <td>Integer</td>
 <td>No</td>
 <td>order type code list filter</td>
-<td>Marketranslation missing: en.1,Limitranslation missing: en.2,Stop(3),StopLimitranslation missing: en.4,MarketIfTouched(5),LimitIfTouched(6),ProtectedMarketranslation missing: en.7,MarketAsLimitranslation missing: en.8,StopAsLimitranslation missing: en.9,MarketIfTouchedAsLimitranslation missing: en.10,Bracketranslation missing: en.11,BoTpLimitranslation missing: en.12,BoSlLimitranslation missing: en.13,BoSlMarketranslation missing: en.14</td>
+<td>Marketranslation missing: en.1, Limitranslation missing: en.2, Stop(3), StopLimitranslation missing: en.4, MarketIfTouched(5), LimitIfTouched(6), ProtectedMarketranslation missing: en.7, MarketAsLimitranslation missing: en.8, StopAsLimitranslation missing: en.9, MarketIfTouchedAsLimitranslation missing: en.10, Bracketranslation missing: en.11, BoTpLimitranslation missing: en.12, BoSlLimitranslation missing: en.13, BoSlMarketranslation missing: en.14</td>
 </tr>
 <tr>
 <td>start</td>
