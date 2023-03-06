@@ -3128,6 +3128,131 @@ GET /g-accounts/accountPositions?currency=<currency>&symbol=<symbol>
 | symbol   | String | -        |             |
 | currency | String | Yes      |             |
 
+## Query Account Positions with unrealized PNL
+
+> Request format
+
+```
+GET /g-accounts/positions?currency=<currency>
+```
+
+> Response sample
+
+```json
+{
+  "code": 0,
+  "msg": "",
+  "data": {
+    "account": {
+      "userID": 4200013,
+      "accountId": 42000130003,
+      "currency": "USDT",
+      "accountBalanceRv": "730.97309163",
+      "totalUsedBalanceRv": "1.02037554",
+      "bonusBalanceRv": "0"
+    },
+    "positions": [
+      {
+        "accountID": 42000130003,
+        "symbol": "XEMUSDT",
+        "currency": "USDT",
+        "side": "Buy",
+        "positionStatus": "Normal",
+        "crossMargin": false,
+        "leverageRr": "-10",
+        "initMarginReqRr": "0.1",
+        "maintMarginReqRr": "0.01",
+        "riskLimitRv": "200000",
+        "sizeRq": "186",
+        "valueRv": "9.951",
+        "avgEntryPriceRp": "0.0535",
+        "posCostRv": "1.00047354",
+        "assignedPosBalanceRv": "1.086606978",
+        "bankruptCommRv": "0.00001116",
+        "bankruptPriceRp": "0.0001",
+        "positionMarginRv": "730.97308047",
+        "liquidationPriceRp": "0.0001",
+        "deleveragePercentileRr": "0",
+        "buyValueToCostRr": "0.10114",
+        "sellValueToCostRr": "0.10126",
+        "markPriceRp": "0.053036917",
+        "markValueEv": 0,
+        "unRealisedPosLossEv": 0,
+        "estimatedOrdLossRv": "0",
+        "usedBalanceRv": "1.086606978",
+        "takeProfitEp": 0,
+        "stopLossEp": 0,
+        "cumClosedPnlRv": "0",
+        "cumFundingFeeRv": "0",
+        "cumTransactFeeRv": "0.0059706",
+        "realisedPnlEv": 0,
+        "unRealisedPnlRv": "-0.086133438",
+        "cumRealisedPnlEv": 0,
+        "term": 1,
+        "lastTermEndTimeNs": 0,
+        "lastFundingTimeNs": 0,
+        "curTermRealisedPnlRv": "-0.0059706",
+        "execSeq": 2260172450,
+        "posSide": "Long",
+        "posMode": "Hedged"
+      },
+      {
+        "accountID": 42000130003,
+        "symbol": "XEMUSDT",
+        "currency": "USDT",
+        "side": "None",
+        "positionStatus": "Normal",
+        "crossMargin": false,
+        "leverageRr": "-10",
+        "initMarginReqRr": "0.1",
+        "maintMarginReqRr": "0.01",
+        "riskLimitRv": "200000",
+        "sizeRq": "0",
+        "valueRv": "0",
+        "avgEntryPriceRp": "0",
+        "posCostRv": "0",
+        "assignedPosBalanceRv": "0",
+        "bankruptCommRv": "0",
+        "bankruptPriceRp": "0",
+        "positionMarginRv": "0",
+        "liquidationPriceRp": "0",
+        "deleveragePercentileRr": "0",
+        "buyValueToCostRr": "0.10114",
+        "sellValueToCostRr": "0.10126",
+        "markPriceRp": "0.053036917",
+        "markValueEv": 0,
+        "unRealisedPosLossEv": 0,
+        "estimatedOrdLossRv": "0",
+        "usedBalanceRv": "0",
+        "takeProfitEp": 0,
+        "stopLossEp": 0,
+        "cumClosedPnlRv": "0",
+        "cumFundingFeeRv": "0",
+        "cumTransactFeeRv": "0",
+        "realisedPnlEv": 0,
+        "unRealisedPnlRv": "0",
+        "cumRealisedPnlEv": 0,
+        "term": 1,
+        "lastTermEndTimeNs": 0,
+        "lastFundingTimeNs": 0,
+        "curTermRealisedPnlRv": "0",
+        "execSeq": 0,
+        "posSide": "Short",
+        "posMode": "Hedged"
+      }
+    ]
+  }
+}
+```
+
+| Field    | Type   | Required | Description |
+| -------- | ------ | -------- | ----------- |
+| currency | String | Yes      |             |
+
+
+<b>Note</b> Highly recommend calculating `unRealisedPnlRv` in client side with latest `markPriceRp` to avoid ratelimit
+penalty.
+
 ## Switch Position Mode Synchronously
 
 > Request format
@@ -3368,6 +3493,12 @@ GET /exchange/order/v2/orderList?symbol=<symbol>&currency=<currency>&ordStatus=<
 | offset    | Integer | Yes      | offset to resultset                                                 ||
 | limit     | Integer | Yes      | limit of resultset, max 200                                         ||
 | withCount | boolean | No       | if true, result info will contains count info.                      | true,false                                                                                                                                                                                                           |
+
+Response
+
+| Field      | Type    | Description            | Possible values                                                    |
+|------------|----|------------------------|--------------------------------------------------------------------|
+| execStatus | Integer | exec status code | Aborted(2), MakerFill(6), TakerFill(7), Expired(8), Canceled(11), CreateRejected(19)|
 
 
 ## Query user order by orderID or Query user order by client order ID

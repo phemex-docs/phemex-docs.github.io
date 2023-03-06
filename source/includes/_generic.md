@@ -97,6 +97,20 @@ Every HTTP Rest Request must have the following Headers:
 | /orders/active | GET | 1 | Query open order by orderID  |
 | /accounts/accountPositions | GET | 1 | Query account & position by currency |
 | /accounts/positions | GET | 25 | Query positions with un-realized-pnl |
+| /g-orders | POST | 1 | Place new order |
+| /g-orders/replace | PUT | 1 | Amend order |
+| /g-orders/cancel | DELETE | 1 | Cancel order |
+| /g-orders/all | DELETE | 3 | Cancel All Orders |
+| /g-orders | DELETE | 1 | Bulk Cancel Orders |
+| /g-orders/activeList | GET | 1 | Query open orders by symbol |
+| /g-orders/active | GET | 1 | Query open order by orderID |
+| /g-orders/create | PUT | 1 | Place order |
+| /g-accounts/accountPositions | GET | 1 | Query Account Positions |
+| /g-accounts/positions | GET | 25 | Query Account Positions with unrealized PNL |
+| /g-positions/assign | POST | 1 | Assign Position Balance |
+| /g-positions/leverage | PUT | 1 | Set Leverage |
+| /g-positions/riskLimit | PUT | 1 | Set RiskLimit |
+| /g-positions/switch-pos-mode-sync | PUT | 1 | /g-positions/switch-pos-mode-sync |
 
 * SpotOrder group
   SpotOrder group is for spot trading, which contains following API.
