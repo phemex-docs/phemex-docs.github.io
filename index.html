@@ -921,6 +921,9 @@
                     <a href="#query-account-positions" class="toc-h2 toc-link" data-title="Query Account Positions">Query Account Positions</a>
                   </li>
                   <li>
+                    <a href="#query-account-positions-with-unrealized-pnl" class="toc-h2 toc-link" data-title="Query Account Positions with unrealized PNL">Query Account Positions with unrealized PNL</a>
+                  </li>
+                  <li>
                     <a href="#switch-position-mode-synchronously" class="toc-h2 toc-link" data-title="Switch Position Mode Synchronously">Switch Position Mode Synchronously</a>
                   </li>
                   <li>
@@ -1410,6 +1413,90 @@ Contract group is for contract trading, it contains following API.</li>
 <td>GET</td>
 <td>25</td>
 <td>Query positions with un-realized-pnl</td>
+</tr>
+<tr>
+<td>/g-orders</td>
+<td>POST</td>
+<td>1</td>
+<td>Place new order</td>
+</tr>
+<tr>
+<td>/g-orders/replace</td>
+<td>PUT</td>
+<td>1</td>
+<td>Amend order</td>
+</tr>
+<tr>
+<td>/g-orders/cancel</td>
+<td>DELETE</td>
+<td>1</td>
+<td>Cancel order</td>
+</tr>
+<tr>
+<td>/g-orders/all</td>
+<td>DELETE</td>
+<td>3</td>
+<td>Cancel All Orders</td>
+</tr>
+<tr>
+<td>/g-orders</td>
+<td>DELETE</td>
+<td>1</td>
+<td>Bulk Cancel Orders</td>
+</tr>
+<tr>
+<td>/g-orders/activeList</td>
+<td>GET</td>
+<td>1</td>
+<td>Query open orders by symbol</td>
+</tr>
+<tr>
+<td>/g-orders/active</td>
+<td>GET</td>
+<td>1</td>
+<td>Query open order by orderID</td>
+</tr>
+<tr>
+<td>/g-orders/create</td>
+<td>PUT</td>
+<td>1</td>
+<td>Place order</td>
+</tr>
+<tr>
+<td>/g-accounts/accountPositions</td>
+<td>GET</td>
+<td>1</td>
+<td>Query Account Positions</td>
+</tr>
+<tr>
+<td>/g-accounts/positions</td>
+<td>GET</td>
+<td>25</td>
+<td>Query Account Positions with unrealized PNL</td>
+</tr>
+<tr>
+<td>/g-positions/assign</td>
+<td>POST</td>
+<td>1</td>
+<td>Assign Position Balance</td>
+</tr>
+<tr>
+<td>/g-positions/leverage</td>
+<td>PUT</td>
+<td>1</td>
+<td>Set Leverage</td>
+</tr>
+<tr>
+<td>/g-positions/riskLimit</td>
+<td>PUT</td>
+<td>1</td>
+<td>Set RiskLimit</td>
+</tr>
+<tr>
+<td>/g-positions/switch-pos-mode-sync</td>
+<td>PUT</td>
+<td>1</td>
+<td>/g-positions/switch-pos-mode-sync</td>
 </tr>
 </tbody></table>
 
@@ -6763,6 +6850,138 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
 <td></td>
 </tr>
 </tbody></table>
+<h2 id='query-account-positions-with-unrealized-pnl'>Query Account Positions with unrealized PNL</h2>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /g-accounts/positions?currency=&lt;currency&gt;
+</code></pre></div>
+<blockquote>
+<p>Response sample</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"userID"</span><span class="p">:</span><span class="w"> </span><span class="mi">4200013</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"accountId"</span><span class="p">:</span><span class="w"> </span><span class="mi">42000130003</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"accountBalanceRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"730.97309163"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"totalUsedBalanceRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.02037554"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"bonusBalanceRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"positions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"accountID"</span><span class="p">:</span><span class="w"> </span><span class="mi">42000130003</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XEMUSDT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Buy"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"positionStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Normal"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"crossMargin"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"leverageRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-10"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"initMarginReqRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"maintMarginReqRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.01"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"riskLimitRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"200000"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"sizeRq"</span><span class="p">:</span><span class="w"> </span><span class="s2">"186"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"valueRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9.951"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"avgEntryPriceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0535"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"posCostRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.00047354"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"assignedPosBalanceRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.086606978"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"bankruptCommRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00001116"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"bankruptPriceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0001"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"positionMarginRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"730.97308047"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"liquidationPriceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0001"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"deleveragePercentileRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"buyValueToCostRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.10114"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"sellValueToCostRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.10126"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"markPriceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.053036917"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"markValueEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"unRealisedPosLossEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"estimatedOrdLossRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"usedBalanceRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.086606978"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"takeProfitEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"stopLossEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"cumClosedPnlRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"cumFundingFeeRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"cumTransactFeeRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0059706"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"realisedPnlEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"unRealisedPnlRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.086133438"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"cumRealisedPnlEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"term"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"lastTermEndTimeNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"lastFundingTimeNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"curTermRealisedPnlRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0059706"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"execSeq"</span><span class="p">:</span><span class="w"> </span><span class="mi">2260172450</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"posSide"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Long"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"posMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hedged"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"accountID"</span><span class="p">:</span><span class="w"> </span><span class="mi">42000130003</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XEMUSDT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"positionStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Normal"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"crossMargin"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"leverageRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-10"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"initMarginReqRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"maintMarginReqRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.01"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"riskLimitRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"200000"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"sizeRq"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"valueRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"avgEntryPriceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"posCostRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"assignedPosBalanceRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"bankruptCommRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"bankruptPriceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"positionMarginRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"liquidationPriceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"deleveragePercentileRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"buyValueToCostRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.10114"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"sellValueToCostRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.10126"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"markPriceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.053036917"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"markValueEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"unRealisedPosLossEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"estimatedOrdLossRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"usedBalanceRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"takeProfitEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"stopLossEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"cumClosedPnlRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"cumFundingFeeRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"cumTransactFeeRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"realisedPnlEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"unRealisedPnlRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"cumRealisedPnlEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"term"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"lastTermEndTimeNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"lastFundingTimeNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"curTermRealisedPnlRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"execSeq"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"posSide"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Short"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"posMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hedged"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td>Yes</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<p><b>Note</b> Highly recommend calculating <code>unRealisedPnlRv</code> in client side with latest <code>markPriceRp</code> to avoid ratelimit
+penalty.</p>
 <h2 id='switch-position-mode-synchronously'>Switch Position Mode Synchronously</h2>
 <blockquote>
 <p>Request format</p>
@@ -7146,6 +7365,24 @@ to be added
 <td>No</td>
 <td>if true, result info will contains count info.</td>
 <td>true,false</td>
+</tr>
+</tbody></table>
+
+<p>Response</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Possible values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>execStatus</td>
+<td>Integer</td>
+<td>exec status code</td>
+<td>Aborted(2), MakerFill(6), TakerFill(7), Expired(8), Canceled(11), CreateRejected(19)</td>
 </tr>
 </tbody></table>
 <h2 id='query-user-order-by-orderid-or-query-user-order-by-client-order-id'>Query user order by orderID or Query user order by client order ID</h2>
