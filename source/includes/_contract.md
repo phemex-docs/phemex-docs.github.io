@@ -125,6 +125,47 @@ GET /public/products
 | ByMarkPrice | trigger by mark price|
 | ByLastPrice | trigger by last price |
   
+  
+* Trade Type
+  
+| tradeType | Description |
+|------------|-------------|
+| Trade | -- |
+| Funding | -- |
+| LiqTrade | -- |
+| AdlTrade | -- |
+
+ 
+* Exec Status
+
+| execStatus | Description |
+|------------|-------------|
+| Aborted | -- |
+| MakerFill | -- |
+| TakerFill | -- |
+| Expired | -- |
+| Canceled | -- |
+| CreateRejected | -- |
+
+    
+* Pos Mode (for Hedged Mode only)
+
+| Trigger | Description |
+|------------|-------------|
+| OneWay | can only hold one side position |
+| Hedged | can hold both side position |
+  
+
+* Pos Side (for Hedged Mode only)
+
+| Trigger | Description |
+|------------|-------------|
+| Long | Long position when pos mode is 'Hedged' |
+| Short | Short position when pos mode is 'Hedged' |
+| Merged | Merged position when pos mode is 'OneWay' |
+
+
+
 
 ## More order fields explained
 | Field | Description |
