@@ -942,9 +942,6 @@
                     <a href="#query-closed-orders-by-symbol-2" class="toc-h2 toc-link" data-title="Query closed orders by symbol">Query closed orders by symbol</a>
                   </li>
                   <li>
-                    <a href="#query-user-order-by-orderid-or-query-user-order-by-client-order-id" class="toc-h2 toc-link" data-title="Query user order by orderID or Query user order by client order ID">Query user order by orderID or Query user order by client order ID</a>
-                  </li>
-                  <li>
                     <a href="#query-user-trade-2" class="toc-h2 toc-link" data-title="Query user trade">Query user trade</a>
                   </li>
                   <li>
@@ -2555,6 +2552,114 @@ Because the number of interfaces in Other group may grow over time, the list bel
 <tr>
 <td>ByLastPrice</td>
 <td>trigger by last price</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>Trade Type</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>tradeType</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Trade</td>
+<td>--</td>
+</tr>
+<tr>
+<td>Funding</td>
+<td>--</td>
+</tr>
+<tr>
+<td>LiqTrade</td>
+<td>--</td>
+</tr>
+<tr>
+<td>AdlTrade</td>
+<td>--</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>Exec Status</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>execStatus</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Aborted</td>
+<td>--</td>
+</tr>
+<tr>
+<td>MakerFill</td>
+<td>--</td>
+</tr>
+<tr>
+<td>TakerFill</td>
+<td>--</td>
+</tr>
+<tr>
+<td>Expired</td>
+<td>--</td>
+</tr>
+<tr>
+<td>Canceled</td>
+<td>--</td>
+</tr>
+<tr>
+<td>CreateRejected</td>
+<td>--</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>Pos Mode (for Hedged Mode only)</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Trigger</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>OneWay</td>
+<td>can only hold one side position</td>
+</tr>
+<tr>
+<td>Hedged</td>
+<td>can hold both side position</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>Pos Side (for Hedged Mode only)</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Trigger</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Long</td>
+<td>Long position when pos mode is &#39;Hedged&#39;</td>
+</tr>
+<tr>
+<td>Short</td>
+<td>Short position when pos mode is &#39;Hedged&#39;</td>
+</tr>
+<tr>
+<td>Merged</td>
+<td>Merged position when pos mode is &#39;OneWay&#39;</td>
 </tr>
 </tbody></table>
 <h2 id='more-order-fields-explained'>More order fields explained</h2>
@@ -7168,7 +7273,47 @@ penalty.</p>
 <p>Response sample
   * Full order
 <code>
-to be added
+{
+    &quot;code&quot;: 0,
+    &quot;msg&quot;: &quot;&quot;,
+    &quot;data&quot;: {
+        &quot;rows&quot;: [
+            {
+                &quot;bizError&quot;: 0,
+                &quot;orderID&quot;: &quot;c2621102-1cc0-4686-b520-9879311bcc26&quot;,
+                &quot;clOrdID&quot;: &quot;&quot;,
+                &quot;symbol&quot;: &quot;BTCUSDT&quot;,
+                &quot;side&quot;: &quot;Sell&quot;,
+                &quot;actionTimeNs&quot;: 1678163665765381733,
+                &quot;transactTimeNs&quot;: 1678163665769528669,
+                &quot;orderType&quot;: &quot;Limit&quot;,
+                &quot;priceRp&quot;: &quot;22490.4&quot;,
+                &quot;orderQtyRq&quot;: &quot;0.005&quot;,
+                &quot;displayQtyRq&quot;: &quot;0.005&quot;,
+                &quot;timeInForce&quot;: &quot;GoodTillCancel&quot;,
+                &quot;reduceOnly&quot;: false,
+                &quot;closedPnlRv&quot;: &quot;0&quot;,
+                &quot;closedSizeRq&quot;: &quot;0&quot;,
+                &quot;cumQtyRq&quot;: &quot;0&quot;,
+                &quot;cumValueRv&quot;: &quot;0&quot;,
+                &quot;leavesQtyRq&quot;: &quot;0.005&quot;,
+                &quot;leavesValueRv&quot;: &quot;112.452&quot;,
+                &quot;stopDirection&quot;: &quot;UNSPECIFIED&quot;,
+                &quot;stopPxRp&quot;: &quot;0&quot;,
+                &quot;trigger&quot;: &quot;UNSPECIFIED&quot;,
+                &quot;pegOffsetValueRp&quot;: &quot;0&quot;,
+                &quot;pegOffsetProportionRr&quot;: &quot;0&quot;,
+                &quot;execStatus&quot;: &quot;New&quot;,
+                &quot;pegPriceType&quot;: &quot;UNSPECIFIED&quot;,
+                &quot;ordStatus&quot;: &quot;New&quot;,
+                &quot;execInst&quot;: &quot;CloseOnTrigger&quot;,
+                &quot;takeProfitRp&quot;: &quot;0&quot;,
+                &quot;stopLossRp&quot;: &quot;0&quot;
+            }
+        ],
+        &quot;nextPageArg&quot;: &quot;&quot;
+    }
+}
 </code></p>
 </blockquote>
 
@@ -7204,7 +7349,7 @@ to be added
     </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="nl">"rows"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
             </span><span class="p">{</span><span class="w">
                 </span><span class="nl">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="mi">1666179379726</span><span class="p">,</span><span class="w">
@@ -7227,62 +7372,6 @@ to be added
                 </span><span class="nl">"ordStatus"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"clOrdId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2739dc9"</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2739dc90-41c6-449f-8774-0a62c8d8e320"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"execStatus"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"bizError"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"totalPnlRv"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"avgTransactPriceRp"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"orderDetailsVos"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"tradeType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-                </span><span class="nl">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="mi">1666179345898</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETHUSDT"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"orderQtyRq"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.78"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"priceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1271.9"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"execQtyRq"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.78"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"leavesQtyRq"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"execPriceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1271.9"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"orderValueRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"992.082"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"leavesValueRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"cumValueRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"992.082"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"stopDirection"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"stopPxRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"actionBy"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"execFeeRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0992082"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"ordType"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"ordStatus"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"clOrdId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ae20aef"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ae20aef9-a62e-49d6-947e-39a9b2be39dd"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"execStatus"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"bizError"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"totalPnlRv"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"avgTransactPriceRp"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"orderDetailsVos"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"tradeType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-                </span><span class="nl">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="mi">1666179331578</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETHUSDT"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"orderQtyRq"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.07"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"priceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1271.9"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"execQtyRq"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.07"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"leavesQtyRq"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"execPriceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1271.9"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"orderValueRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"89.033"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"leavesValueRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"cumValueRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"89.033"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"stopDirection"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"stopPxRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"actionBy"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"execFeeRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0089033"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"ordType"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"ordStatus"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"clOrdId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"74a6899"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"74a68994-f63e-4a6d-82b6-6f560f7e22a7"</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"execStatus"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"bizError"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"totalPnlRv"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -7384,13 +7473,43 @@ to be added
 <td>exec status code</td>
 <td>Aborted(2), MakerFill(6), TakerFill(7), Expired(8), Canceled(11), CreateRejected(19)</td>
 </tr>
+<tr>
+<td>tradeType</td>
+<td>Integer</td>
+<td>trade type code</td>
+<td>Trade(1),Funding(4),LiqTrade(6),AdlTrade(7)</td>
+</tr>
+<tr>
+<td>side</td>
+<td>Integer</td>
+<td>side code</td>
+<td>Buy(1),Sell(2)</td>
+</tr>
+<tr>
+<td>orderType</td>
+<td>Integer</td>
+<td>order type code</td>
+<td>Marketranslation missing: en.1,Limitranslation missing: en.2,Stop(3),StopLimitranslation missing: en.4,MarketIfTouched(5),LimitIfTouched(6)</td>
+</tr>
+<tr>
+<td>ordStatus</td>
+<td>Integer</td>
+<td>order status code</td>
+<td>Created(0),Untriggered(1),Deactivated(2),Triggered(3),Rejected(4),New(5),PartiallyFilled(6),Filled(7),Canceled(8)</td>
+</tr>
+<tr>
+<td>actionBy</td>
+<td>Integer</td>
+<td>action by code</td>
+<td>ByUser(1)</td>
+</tr>
+<tr>
+<td>trigger</td>
+<td>Integer</td>
+<td>trigger code</td>
+<td>UNSPECIFIED(0),ByMarkPrice(1),ByLastPrice(3)</td>
+</tr>
 </tbody></table>
-<h2 id='query-user-order-by-orderid-or-query-user-order-by-client-order-id'>Query user order by orderID or Query user order by client order ID</h2>
-<blockquote>
-<p>Request format</p>
-</blockquote>
-
-<p>to be added</p>
 <h2 id='query-user-trade-2'>Query user trade</h2>
 <blockquote>
 <p>Request format</p>
@@ -7422,42 +7541,6 @@ to be added
                 </span><span class="nl">"execFeeRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0012719"</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"ordType"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"execId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8718cae"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"execStatus"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-                </span><span class="nl">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="mi">1666226903754</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETHUSDT"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"tradeType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"execQtyRq"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.77"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"execPriceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1271.9"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"orderQtyRq"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.78"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"priceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1271.9"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"execValueRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"979.363"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"feeRateRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0001"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"execFeeRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0979363"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"ordType"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"execId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c6db276"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"execStatus"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-                </span><span class="nl">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="mi">1666226903754</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETHUSDT"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"tradeType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"execQtyRq"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.78"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"execPriceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1271.9"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"orderQtyRq"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.78"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"priceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1271.9"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"execValueRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"992.082"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"feeRateRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0001"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"execFeeRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0992082"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"ordType"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"execId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"378d083"</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"execStatus"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="p">{</span><span class="w">
@@ -7509,8 +7592,8 @@ to be added
 <td>execType</td>
 <td>Integer</td>
 <td>No</td>
-<td>order status code list filter</td>
-<td>New(5), PartiallyFilled(6), Untriggered(1), Filled(7), Canceled(8)</td>
+<td>trade type code list filter</td>
+<td>Trade(1),Funding(4),LiqTrade(6),AdlTrade(7)</td>
 </tr>
 <tr>
 <td>offset</td>
@@ -7560,6 +7643,62 @@ to be added
 <tr>
 <td>LiqTrade</td>
 <td>Liquidation trades</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>Response</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Possible values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>execStatus</td>
+<td>Integer</td>
+<td>exec status code</td>
+<td>Aborted(2), MakerFill(6), TakerFill(7), Expired(8), Canceled(11), CreateRejected(19)</td>
+</tr>
+<tr>
+<td>tradeType</td>
+<td>Integer</td>
+<td>trade type code</td>
+<td>Trade(1),Funding(4),LiqTrade(6),AdlTrade(7)</td>
+</tr>
+<tr>
+<td>side</td>
+<td>Integer</td>
+<td>side code</td>
+<td>Buy(1),Sell(2)</td>
+</tr>
+<tr>
+<td>orderType</td>
+<td>Integer</td>
+<td>order type code</td>
+<td>Marketranslation missing: en.1,Limitranslation missing: en.2,Stop(3),StopLimitranslation missing: en.4,MarketIfTouched(5),LimitIfTouched(6)</td>
+</tr>
+<tr>
+<td>ordStatus</td>
+<td>Integer</td>
+<td>order status code</td>
+<td>Created(0),Untriggered(1),Deactivated(2),Triggered(3),Rejected(4),New(5),PartiallyFilled(6),Filled(7),Canceled(8)</td>
+</tr>
+<tr>
+<td>actionBy</td>
+<td>Integer</td>
+<td>action by code</td>
+<td>ByUser(1)</td>
+</tr>
+<tr>
+<td>trigger</td>
+<td>Integer</td>
+<td>trigger code</td>
+<td>UNSPECIFIED(0),ByMarkPrice(1),ByLastPrice(3)</td>
 </tr>
 </tbody></table>
 <h2 id='query-order-book-2'>Query Order Book</h2>
