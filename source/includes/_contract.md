@@ -124,6 +124,48 @@ GET /public/products
 |------------|-------------|
 | ByMarkPrice | trigger by mark price|
 | ByLastPrice | trigger by last price |
+  
+  
+* Trade Type
+  
+| tradeType | Description |
+|------------|-------------|
+| Trade | -- |
+| Funding | -- |
+| LiqTrade | -- |
+| AdlTrade | -- |
+
+ 
+* Exec Status
+
+| execStatus | Description |
+|------------|-------------|
+| Aborted | -- |
+| MakerFill | -- |
+| TakerFill | -- |
+| Expired | -- |
+| Canceled | -- |
+| CreateRejected | -- |
+
+    
+* Pos Mode (for Hedged Mode only)
+
+| Trigger | Description |
+|------------|-------------|
+| OneWay | can only hold one side position |
+| Hedged | can hold both side position |
+  
+
+* Pos Side (for Hedged Mode only)
+
+| Trigger | Description |
+|------------|-------------|
+| Long | Long position when pos mode is 'Hedged' |
+| Short | Short position when pos mode is 'Hedged' |
+| Merged | Merged position when pos mode is 'OneWay' |
+
+
+
 
 ## More order fields explained
 | Field | Description |
@@ -3366,7 +3408,47 @@ GET /g-orders/activeList?symbol=<symbol>
 > Response sample
   * Full order
 ```
-to be added
+{
+    "code": 0,
+    "msg": "",
+    "data": {
+        "rows": [
+            {
+                "bizError": 0,
+                "orderID": "c2621102-1cc0-4686-b520-9879311bcc26",
+                "clOrdID": "",
+                "symbol": "BTCUSDT",
+                "side": "Sell",
+                "actionTimeNs": 1678163665765381733,
+                "transactTimeNs": 1678163665769528669,
+                "orderType": "Limit",
+                "priceRp": "22490.4",
+                "orderQtyRq": "0.005",
+                "displayQtyRq": "0.005",
+                "timeInForce": "GoodTillCancel",
+                "reduceOnly": false,
+                "closedPnlRv": "0",
+                "closedSizeRq": "0",
+                "cumQtyRq": "0",
+                "cumValueRv": "0",
+                "leavesQtyRq": "0.005",
+                "leavesValueRv": "112.452",
+                "stopDirection": "UNSPECIFIED",
+                "stopPxRp": "0",
+                "trigger": "UNSPECIFIED",
+                "pegOffsetValueRp": "0",
+                "pegOffsetProportionRr": "0",
+                "execStatus": "New",
+                "pegPriceType": "UNSPECIFIED",
+                "ordStatus": "New",
+                "execInst": "CloseOnTrigger",
+                "takeProfitRp": "0",
+                "stopLossRp": "0"
+            }
+        ],
+        "nextPageArg": ""
+    }
+}
 ```
 
 | Field   | Type   | Description                                | Possible values |
@@ -3391,7 +3473,7 @@ GET /exchange/order/v2/orderList?symbol=<symbol>&currency=<currency>&ordStatus=<
     "code": 0,
     "msg": "OK",
     "data": {
-        "total": 3,
+        "total": 1,
         "rows": [
             {
                 "createdAt": 1666179379726,
@@ -3420,62 +3502,6 @@ GET /exchange/order/v2/orderList?symbol=<symbol>&currency=<currency>&ordStatus=<
                 "avgTransactPriceRp": null,
                 "orderDetailsVos": null,
                 "tradeType": 1
-            },
-            {
-                "createdAt": 1666179345898,
-                "symbol": "ETHUSDT",
-                "orderQtyRq": "0.78",
-                "side": 1,
-                "priceRp": "1271.9",
-                "execQtyRq": "0.78",
-                "leavesQtyRq": "0",
-                "execPriceRp": "1271.9",
-                "orderValueRv": "992.082",
-                "leavesValueRv": "0",
-                "cumValueRv": "992.082",
-                "stopDirection": 0,
-                "stopPxRp": "0",
-                "trigger": 0,
-                "actionBy": 1,
-                "execFeeRv": "0.0992082",
-                "ordType": 2,
-                "ordStatus": 7,
-                "clOrdId": "ae20aef",
-                "orderId": "ae20aef9-a62e-49d6-947e-39a9b2be39dd",
-                "execStatus": 6,
-                "bizError": 0,
-                "totalPnlRv": null,
-                "avgTransactPriceRp": null,
-                "orderDetailsVos": null,
-                "tradeType": 1
-            },
-            {
-                "createdAt": 1666179331578,
-                "symbol": "ETHUSDT",
-                "orderQtyRq": "0.07",
-                "side": 1,
-                "priceRp": "1271.9",
-                "execQtyRq": "0.07",
-                "leavesQtyRq": "0",
-                "execPriceRp": "1271.9",
-                "orderValueRv": "89.033",
-                "leavesValueRv": "0",
-                "cumValueRv": "89.033",
-                "stopDirection": 0,
-                "stopPxRp": "0",
-                "trigger": 0,
-                "actionBy": 1,
-                "execFeeRv": "0.0089033",
-                "ordType": 2,
-                "ordStatus": 7,
-                "clOrdId": "74a6899",
-                "orderId": "74a68994-f63e-4a6d-82b6-6f560f7e22a7",
-                "execStatus": 6,
-                "bizError": 0,
-                "totalPnlRv": null,
-                "avgTransactPriceRp": null,
-                "orderDetailsVos": null,
-                "tradeType": 1
             }
         ]
     }
@@ -3497,14 +3523,15 @@ GET /exchange/order/v2/orderList?symbol=<symbol>&currency=<currency>&ordStatus=<
 Response
 
 | Field      | Type    | Description            | Possible values                                                    |
-|------------|----|------------------------|--------------------------------------------------------------------|
+|------------|---------|------------------------|--------------------------------------------------------------------|
 | execStatus | Integer | exec status code | Aborted(2), MakerFill(6), TakerFill(7), Expired(8), Canceled(11), CreateRejected(19)|
-
-
-## Query user order by orderID or Query user order by client order ID
-> Request format
-
-to be added
+| tradeType | Integer | trade type code | Trade(1),Funding(4),LiqTrade(6),AdlTrade(7) |
+| side | Integer | side code | Buy(1),Sell(2) |
+| orderType | Integer | order type code | Market(1),Limit(2),Stop(3),StopLimit(4),MarketIfTouched(5),LimitIfTouched(6)|
+| ordStatus | Integer | order status code | Created(0),Untriggered(1),Deactivated(2),Triggered(3),Rejected(4),New(5),PartiallyFilled(6),Filled(7),Canceled(8)|
+| actionBy | Integer | action by code | ByUser(1)|
+| trigger | Integer | trigger code | UNSPECIFIED(0),ByMarkPrice(1),ByLastPrice(3)|
+        
 
 
 ## Query user trade
@@ -3548,42 +3575,6 @@ GET /exchange/order/v2/tradingList?symbol=<symbol>&currency=<currency>&execType=
                 "currency": "USDT",
                 "action": 1,
                 "tradeType": 1,
-                "execQtyRq": "0.77",
-                "execPriceRp": "1271.9",
-                "side": 1,
-                "orderQtyRq": "0.78",
-                "priceRp": "1271.9",
-                "execValueRv": "979.363",
-                "feeRateRr": "0.0001",
-                "execFeeRv": "0.0979363",
-                "ordType": 2,
-                "execId": "c6db276",
-                "execStatus": 6
-            },
-            {
-                "createdAt": 1666226903754,
-                "symbol": "ETHUSDT",
-                "currency": "USDT",
-                "action": 1,
-                "tradeType": 1,
-                "execQtyRq": "0.78",
-                "execPriceRp": "1271.9",
-                "side": 1,
-                "orderQtyRq": "0.78",
-                "priceRp": "1271.9",
-                "execValueRv": "992.082",
-                "feeRateRr": "0.0001",
-                "execFeeRv": "0.0992082",
-                "ordType": 2,
-                "execId": "378d083",
-                "execStatus": 6
-            },
-            {
-                "createdAt": 1666226903754,
-                "symbol": "ETHUSDT",
-                "currency": "USDT",
-                "action": 1,
-                "tradeType": 1,
                 "execQtyRq": "0.07",
                 "execPriceRp": "1271.9",
                 "side": 1,
@@ -3605,7 +3596,7 @@ GET /exchange/order/v2/tradingList?symbol=<symbol>&currency=<currency>&execType=
 |-----------|---------|----------|------------------------------------------------|--------------------------------------------------------------------|
 | symbol    | String  | No       | which symbol needs to query                    | [Trading symbols](#symbpricesub)                                   |
 | currency  | String  | Yes      | which currency needs to query                  |                                                                    |
-| execType  | Integer | No       | order status code list filter                  | New(5), PartiallyFilled(6), Untriggered(1), Filled(7), Canceled(8) |
+| execType  | Integer | No       | trade type code list filter                  | Trade(1),Funding(4),LiqTrade(6),AdlTrade(7) |
 | offset    | Integer | Yes      | offset to resultset                            |                                                                    |
 | limit     | Integer | Yes      | limit of resultset, max 200                    |                                                                    |
 | withCount | boolean | No       | if true, result info will contains count info. | true,false                                                         |
@@ -3620,6 +3611,18 @@ GET /exchange/order/v2/tradingList?symbol=<symbol>&currency=<currency>&execType=
 | AdlTrade |  Auto-delevearage trades |
 | LiqTrade | Liquidation trades |
 
+* Response
+
+| Field      | Type    | Description            | Possible values                                                    |
+|------------|---------|------------------------|--------------------------------------------------------------------|
+| execStatus | Integer | exec status code | Aborted(2), MakerFill(6), TakerFill(7), Expired(8), Canceled(11), CreateRejected(19)|
+| tradeType | Integer | trade type code | Trade(1),Funding(4),LiqTrade(6),AdlTrade(7) |
+| side | Integer | side code | Buy(1),Sell(2) |
+| orderType | Integer | order type code | Market(1),Limit(2),Stop(3),StopLimit(4),MarketIfTouched(5),LimitIfTouched(6)|
+| ordStatus | Integer | order status code | Created(0),Untriggered(1),Deactivated(2),Triggered(3),Rejected(4),New(5),PartiallyFilled(6),Filled(7),Canceled(8)|
+| actionBy | Integer | action by code | ByUser(1)|
+| trigger | Integer | trigger code | UNSPECIFIED(0),ByMarkPrice(1),ByLastPrice(3)|
+        
 
 ## Query Order Book
 
