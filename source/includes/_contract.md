@@ -70,6 +70,31 @@ GET /public/products
 
 * Contract symbols are defined in `.products[]` with **type=Perpetual**.
 * Contract risklimit information are defined in `.risklimits[]`.
+* Contract which delisted has status with 'Delisted' .
+
+
+## Query server time
+
+> Request
+
+```
+GET /public/time
+```
+
+* return server time
+
+> Response sample
+
+```json
+{
+    "code": 0,
+    "msg": "",
+    "data": {
+        "serverTime": 1676172826345
+    }
+} 
+```
+
 
 ## Common order fields
 
@@ -426,7 +451,7 @@ PUT
 | Field  | Required | Description |
 |--------|----------|-------------|
 | symbol | Yes  | Order symbol, cannot be changed|
-| orderID| Yes  | Order ID, cannot be changed |
+| orderID| No  | Order ID, cannot be changed |
 | origClOrdID | No | Original clOrderID |
 | clOrdID| No | New clOrdID |
 | price  | No | New order price |
@@ -441,6 +466,7 @@ PUT
 | pegOffsetValueEp | No | New trailing offset |
 | pegPriceType | No | New peg price type |
 
+orderID and origClOrdID can not be both empty
 
 ## Cancel order by order ID or client order ID
 
@@ -2725,6 +2751,22 @@ i.e. `index` symbol follows a pattern `.<BASECURRENCY>`,
 
 # Hedged Contract Rest API
 
+
+## Query product information
+
+> Request
+
+```
+GET /public/products
+```
+
+* You can find products info with hedged mode under node 'perpProductsV2'.
+* Contract risklimit information are defined in `.riskLimitsV2[]`.
+* Contract which delisted has status with 'Delisted' .
+
+
+
+
 ## Place order (HTTP PUT, *prefered*)
 
 > Request format
@@ -2942,7 +2984,7 @@ PUT /g-orders/replace?symbol=<symbol>&orderID=<orderID>&origClOrdID=<origClOrdID
 | Field            | Required | Description                           |
 | ---------------- | -------- | ------------------------------------- |
 | symbol           | Yes      | order symbol, cannot be changed       |
-| orderID          | Yes      | order id, cannot be changed           |
+| orderID          | -        | order id, cannot be changed           |
 | origClOrdID      | -        | original clOrderID, cannot be changed |
 | clOrdID          | -        | new clOrdID                           |
 | priceRp          | -        | new order price, real value           |
@@ -2954,6 +2996,8 @@ PUT /g-orders/replace?symbol=<symbol>&orderID=<orderID>&origClOrdID=<origClOrdID
 | pegPriceType     | Yes      | new peg price type                    |
 | triggerType      | Yes      | new triggerType                       |
 | posSide          | Yes      | posSide to check, can not be changed  |
+
+orderID and origClOrdID can not be both empty
 
 
 ## Cancel Single Order by orderID
