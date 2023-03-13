@@ -18,6 +18,30 @@ GET /public/products
 * Spot symbols are defined in `.products[]` with **type=Spot**.
 * Spot currencies are defined in `.currencies[]`.
 
+
+## Query server time
+
+> Request
+
+```
+GET /public/time
+```
+
+* return server time
+
+> Response sample
+
+```json
+{
+    "code": 0,
+    "msg": "",
+    "data": {
+        "serverTime": 1676172826345
+    }
+} 
+```
+
+
 ## Price/Ratio/Value scales
 
 Fields with post-fix "Ep", "Er" or "Ev" have been scaled based on symbol setting.
