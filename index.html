@@ -761,6 +761,9 @@
                     <a href="#query-product-information" class="toc-h2 toc-link" data-title="Query product information">Query product information</a>
                   </li>
                   <li>
+                    <a href="#query-server-time" class="toc-h2 toc-link" data-title="Query server time">Query server time</a>
+                  </li>
+                  <li>
                     <a href="#common-order-fields" class="toc-h2 toc-link" data-title="Common order fields">Common order fields</a>
                   </li>
                   <li>
@@ -900,6 +903,9 @@
             <a href="#hedged-contract-rest-api" class="toc-h1 toc-link" data-title="Hedged Contract Rest API">Hedged Contract Rest API</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#query-product-information-2" class="toc-h2 toc-link" data-title="Query product information">Query product information</a>
+                  </li>
+                  <li>
                     <a href="#place-order-http-put-prefered-2" class="toc-h2 toc-link" data-title="Place order (HTTP PUT, prefered)">Place order (HTTP PUT, <em>prefered</em>)</a>
                   </li>
                   <li>
@@ -1030,7 +1036,10 @@
                     <a href="#endpoint-security-type-2" class="toc-h2 toc-link" data-title="Endpoint security type">Endpoint security type</a>
                   </li>
                   <li>
-                    <a href="#query-product-information-2" class="toc-h2 toc-link" data-title="Query product information">Query product information</a>
+                    <a href="#query-product-information-3" class="toc-h2 toc-link" data-title="Query product information">Query product information</a>
+                  </li>
+                  <li>
+                    <a href="#query-server-time-2" class="toc-h2 toc-link" data-title="Query server time">Query server time</a>
                   </li>
                   <li>
                     <a href="#price-ratio-value-scales-2" class="toc-h2 toc-link" data-title="Price/Ratio/Value scales">Price/Ratio/Value scales</a>
@@ -2397,8 +2406,29 @@ Because the number of interfaces in Other group may grow over time, the list bel
 <ul>
 <li>Contract symbols are defined in <code>.products[]</code> with <strong>type=Perpetual</strong>.</li>
 <li>Contract risklimit information are defined in <code>.risklimits[]</code>.</li>
+<li>Contract which delisted has status with &#39;Delisted&#39; .</li>
 </ul>
-<h2 id='common-order-fields'>Common order fields</h2>
+<h2 id='query-server-time'>Query server time</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /public/time
+</code></pre></div>
+<ul>
+<li>return server time</li>
+</ul>
+
+<blockquote>
+<p>Response sample</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"serverTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1676172826345</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w"> 
+</span></code></pre></div><h2 id='common-order-fields'>Common order fields</h2>
 <ul>
 <li>Order Type</li>
 </ul>
@@ -3117,7 +3147,7 @@ when price moves in profitable direction to order-side(buy/sell).</li>
 </tr>
 <tr>
 <td>orderID</td>
-<td>Yes</td>
+<td>No</td>
 <td>Order ID, cannot be changed</td>
 </tr>
 <tr>
@@ -3186,6 +3216,8 @@ when price moves in profitable direction to order-side(buy/sell).</li>
 <td>New peg price type</td>
 </tr>
 </tbody></table>
+
+<p>orderID and origClOrdID can not be both empty</p>
 <h2 id='cancel-order-by-order-id-or-client-order-id'>Cancel order by order ID or client order ID</h2>
 <blockquote>
 <p>Request format</p>
@@ -6140,7 +6172,18 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
 <td></td>
 </tr>
 </tbody></table>
-<h1 id='hedged-contract-rest-api'>Hedged Contract Rest API</h1><h2 id='place-order-http-put-prefered-2'>Place order (HTTP PUT, <em>prefered</em>)</h2>
+<h1 id='hedged-contract-rest-api'>Hedged Contract Rest API</h1><h2 id='query-product-information-2'>Query product information</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /public/products
+</code></pre></div>
+<ul>
+<li>You can find products info with hedged mode under node &#39;perpProductsV2&#39;.</li>
+<li>Contract risklimit information are defined in <code>.riskLimitsV2[]</code>.</li>
+<li>Contract which delisted has status with &#39;Delisted&#39; .</li>
+</ul>
+<h2 id='place-order-http-put-prefered-2'>Place order (HTTP PUT, <em>prefered</em>)</h2>
 <blockquote>
 <p>Request format</p>
 </blockquote>
@@ -6603,7 +6646,7 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
 </tr>
 <tr>
 <td>orderID</td>
-<td>Yes</td>
+<td>-</td>
 <td>order id, cannot be changed</td>
 </tr>
 <tr>
@@ -6662,6 +6705,8 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
 <td>posSide to check, can not be changed</td>
 </tr>
 </tbody></table>
+
+<p>orderID and origClOrdID can not be both empty</p>
 <h2 id='cancel-single-order-by-orderid'>Cancel Single Order by orderID</h2>
 <blockquote>
 <p>Request format</p>
@@ -9506,7 +9551,7 @@ while funding rate symbol follows a pattern <code>.&lt;BASECURRENCY&gt;&lt;QUOTE
 <li><code>apiSecret</code> = <code>Base64::urlDecode(API Secret)</code></li>
 <li>The <code>signature</code> is <strong>case sensitive</strong>.</li>
 </ul>
-<h2 id='query-product-information-2'>Query product information</h2>
+<h2 id='query-product-information-3'>Query product information</h2>
 <blockquote>
 <p>Request</p>
 </blockquote>
@@ -9516,7 +9561,27 @@ while funding rate symbol follows a pattern <code>.&lt;BASECURRENCY&gt;&lt;QUOTE
 <li>Spot symbols are defined in <code>.products[]</code> with <strong>type=Spot</strong>.</li>
 <li>Spot currencies are defined in <code>.currencies[]</code>.</li>
 </ul>
-<h2 id='price-ratio-value-scales-2'>Price/Ratio/Value scales</h2>
+<h2 id='query-server-time-2'>Query server time</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /public/time
+</code></pre></div>
+<ul>
+<li>return server time</li>
+</ul>
+
+<blockquote>
+<p>Response sample</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"serverTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1676172826345</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w"> 
+</span></code></pre></div><h2 id='price-ratio-value-scales-2'>Price/Ratio/Value scales</h2>
 <p>Fields with post-fix &quot;Ep&quot;, &quot;Er&quot; or &quot;Ev&quot; have been scaled based on symbol setting.</p>
 
 <ul>
