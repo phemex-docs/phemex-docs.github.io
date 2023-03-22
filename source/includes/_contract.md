@@ -3557,7 +3557,7 @@ GET /exchange/order/v2/orderList?symbol=<symbol>&currency=<currency>&ordStatus=<
 | symbol    | String  | No       | which symbol needs to query                                         | [Trading symbols](#symbpricesub)                                                                                                                                                                                     |
 |currency|String|Yes| which currency needs to query                                       |                                                                                                                                                                                                                   |
 | ordStatus | Integer | No       | order status code list filter                                       | New(5), PartiallyFilled(6), Untriggered(1), Filled(7), Canceled(8)                                                                                                                                                   |
-| ordType   | Integer | No       | order type code list filter                                         | Market(1), Limit(2), Stop(3), StopLimit(4), MarketIfTouched(5), LimitIfTouched(6), ProtectedMarket(7), MarketAsLimit(8), StopAsLimit(9), MarketIfTouchedAsLimit(10), Bracket(11), BoTpLimit(12), BoSlLimit(13), BoSlMarket(14)    |
+| ordType   | Integer | No       | order type code list filter                                         | Market (1), Limit (2), Stop (3), StopLimit (4), MarketIfTouched (5), LimitIfTouched (6), ProtectedMarket (7), MarketAsLimit (8), StopAsLimit (9), MarketIfTouchedAsLimit (10), Bracket (11), BoTpLimit (12), BoSlLimit (13), BoSlMarket (14)    |
 | start     | Integer | Yes      | start time range, Epoch millis，available only from the last 2 month ||
 | end       | Integer | Yes      | end time range, Epoch millis                                        ||
 | offset    | Integer | Yes      | offset to resultset                                                 ||
@@ -3571,7 +3571,7 @@ Response
 | execStatus | Integer | exec status code | Aborted(2), MakerFill(6), TakerFill(7), Expired(8), Canceled(11), CreateRejected(19)|
 | tradeType | Integer | trade type code | Trade(1),Funding(4),LiqTrade(6),AdlTrade(7) |
 | side | Integer | side code | Buy(1),Sell(2) |
-| orderType | Integer | order type code | Market(1),Limit(2),Stop(3),StopLimit(4),MarketIfTouched(5),LimitIfTouched(6)|
+| orderType | Integer | order type code | Market (1),Limit (2),Stop(3),StopLimit (4),MarketIfTouched(5),LimitIfTouched(6)|
 | ordStatus | Integer | order status code | Created(0),Untriggered(1),Deactivated(2),Triggered(3),Rejected(4),New(5),PartiallyFilled(6),Filled(7),Canceled(8)|
 | actionBy | Integer | action by code | ByUser(1)|
 | trigger | Integer | trigger code | UNSPECIFIED(0),ByMarkPrice(1),ByLastPrice(3)|
@@ -3662,7 +3662,7 @@ GET /exchange/order/v2/tradingList?symbol=<symbol>&currency=<currency>&execType=
 | execStatus | Integer | exec status code | Aborted(2), MakerFill(6), TakerFill(7), Expired(8), Canceled(11), CreateRejected(19)|
 | tradeType | Integer | trade type code | Trade(1),Funding(4),LiqTrade(6),AdlTrade(7) |
 | side | Integer | side code | Buy(1),Sell(2) |
-| orderType | Integer | order type code | Market(1),Limit(2),Stop(3),StopLimit(4),MarketIfTouched(5),LimitIfTouched(6)|
+| orderType | Integer | order type code | Market (1),Limit (2),Stop(3),StopLimit (4),MarketIfTouched (5),LimitIfTouched (6)|
 | ordStatus | Integer | order status code | Created(0),Untriggered(1),Deactivated(2),Triggered(3),Rejected(4),New(5),PartiallyFilled(6),Filled(7),Canceled(8)|
 | actionBy | Integer | action by code | ByUser(1)|
 | trigger | Integer | trigger code | UNSPECIFIED(0),ByMarkPrice(1),ByLastPrice(3)|
