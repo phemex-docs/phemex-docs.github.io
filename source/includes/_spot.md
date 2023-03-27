@@ -763,6 +763,54 @@ GET /md/trade?symbol=sBTCUSDT
 
 ```
 
+## Query 24 hours ticker for all symbols
+
+> Request format
+
+```
+GET /md/spot/ticker/24hr/all
+```
+
+> Response format
+
+```json
+{
+  "error": null,
+  "id": 0,
+  "result": [
+    {
+      "openEp": <open priceEp>,
+      "highEp": <high priceEp>,
+      "lowEp": <low priceEp>, 
+      "indexEp": <index priceEp>,
+      "lastEp": <last priceEp>,
+      "bidEp": <bid priceEp>,
+      "askEp": <ask priceEp>,
+      "symbol": "<symbol>",
+      "turnoverEv": <turnoverEv>,
+      "volumeEv": <volumeEv>,
+      "timestamp": <timestamp>
+    }
+  ]
+}
+```
+
+| Field         | Type    | Description                                | Possible Value                  |
+|---------------|---------|--------------------------------------------|---------------------------------|
+| open priceEp  | Integer | The scaled open price in last 24 hours     |                                 |
+| high priceEp  | Integer | The scaled highest price in last 24 hours  |                                 |
+| low priceEp   | Integer | The scaled lowest price in last 24 hours   |                                 |
+| index priceEp | Integer | The scaled index price in last 24 hours    |                                 |
+| last priceEp  | Integer | The scaled last price                      |                                 |
+| bid priceEp   | Integer | Scaled bid price                           |                                 |
+| ask priceEp   | Integer | Scaled ask price                           |                                 |
+| timestamp     | Integer | Timestamp in nanoseconds                   |                                 |
+| symbol        | String  | symbol name                                | [Trading symbols](#productinfo) |
+| turnoverEv    | Integer | The scaled turnover value in last 24 hours |                                 |
+| volumeEv      | Integer | The scaled trade volume in last 24 hours   |                                 |
+
+
+
 ## Query 24 hours ticker
 
 > Request format
