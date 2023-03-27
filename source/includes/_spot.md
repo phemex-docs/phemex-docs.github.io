@@ -787,6 +787,54 @@ GET /md/trade?symbol=sBTCUSDT
 
 ```
 
+## Query 24 hours ticker for all symbols
+
+> Request format
+
+```
+GET /md/spot/ticker/24hr/all
+```
+
+> Response format
+
+```json
+{
+  "error": null,
+  "id": 0,
+  "result": [
+    {
+      "openEp": <open priceEp>,
+      "highEp": <high priceEp>,
+      "lowEp": <low priceEp>, 
+      "indexEp": <index priceEp>,
+      "lastEp": <last priceEp>,
+      "bidEp": <bid priceEp>,
+      "askEp": <ask priceEp>,
+      "symbol": "<symbol>",
+      "turnoverEv": <turnoverEv>,
+      "volumeEv": <volumeEv>,
+      "timestamp": <timestamp>
+    }
+  ]
+}
+```
+
+| Field         | Type    | Description                                | Possible Value                  |
+|---------------|---------|--------------------------------------------|---------------------------------|
+| open priceEp  | Integer | The scaled open price in last 24 hours     |                                 |
+| high priceEp  | Integer | The scaled highest price in last 24 hours  |                                 |
+| low priceEp   | Integer | The scaled lowest price in last 24 hours   |                                 |
+| index priceEp | Integer | The scaled index price in last 24 hours    |                                 |
+| last priceEp  | Integer | The scaled last price                      |                                 |
+| bid priceEp   | Integer | Scaled bid price                           |                                 |
+| ask priceEp   | Integer | Scaled ask price                           |                                 |
+| timestamp     | Integer | Timestamp in nanoseconds                   |                                 |
+| symbol        | String  | symbol name                                | [Trading symbols](#productinfo) |
+| turnoverEv    | Integer | The scaled turnover value in last 24 hours |                                 |
+| volumeEv      | Integer | The scaled trade volume in last 24 hours   |                                 |
+
+
+
 ## Query 24 hours ticker
 
 > Request format
@@ -1828,3 +1876,319 @@ On subscription to investment account then you will get your investment informat
 | currentTimeMillis              | Integer| Time in milliseconds | 165397230166 |
 
 
+# Margin Trading API
+
+## Endpoint security type
+
+* Each API call must be signed and pass to server in HTTP header `x-phemex-request-signature`.
+* Endpoints use `HMAC SHA256` signatures. The `HMAC SHA256 signature` is a keyed `HMAC SHA256` operation. Use your `apiSecret` as the key and the string `URL Path + QueryString + Expiry + body )` as the value for the HMAC operation.
+* `apiSecret` = `Base64::urlDecode(API Secret)`
+* The `signature` is **case sensitive**.
+
+## Query product information
+
+> Request
+
+```
+GET /public/products
+```
+
+* Spot symbols are defined in `.products[]` with **type=Spot**.
+* Spot currencies are defined in `.currencies[]`.
+
+## Price/Ratio/Value scales
+
+Fields with post-fix "Rp", "Rr", "Rq" or "Rv" are real value.
+
+## Common order fields
+
+* Order type
+
+| Order type | Description |
+|-----------|-------------|
+| Limit | -- |
+| Market | -- |
+| Stop | -- |
+| StopLimit | -- |
+| MarketIfTouched | -- |
+| LimitIfTouched | -- |
+| MarketAsLimit | -- |
+| StopAsLimit | -- |
+| MarketIfTouchedAsLimit | -- |
+
+* Order status
+
+| Order status | Description | 
+|------------|-------------|
+| Untriggered | Conditional order waiting to be triggered |
+| Triggered | Conditional order being triggered|
+| Rejected | Order rejected |
+| New | Order placed in cross engine |
+| PartiallyFilled | Order partially filled |
+| Filled | Order fully filled |
+| Canceled | Order canceled |
+
+* TimeInForce
+
+| TimeInForce | Description |
+|------------|-------------|
+| GoodTillCancel | -- |
+| PostOnly | -- |
+| ImmediateOrCancel | -- |
+| FillOrKill | -- |
+
+* Trigger source
+
+| Trigger | Description |
+|------------|-------------|
+| ByLastPrice | Trigger by last price |
+
+## Place order (HTTP PUT, *prefered*)
+
+> Request format
+
+```
+PUT /margin-trade/orders/create?symbol=<symbol>&trigger=<trigger>&clOrdID=<clOrdID>&priceRp=<priceRp>&baseQtyRq=<baseQtyRq>&quoteQtyRq=<quoteQtyRq>&stopPxRp=<stopPxRp>&text=<text>&side=<side>&qtyType=<qtyType>&ordType=<ordType>&timeInForce=<timeInForce>&execInst=<execInst>&autoBorrow=<autoBorrow>&borrowCurrency=<borrowCurrency>&borrowQtyRq=<borrowQtyRq>&autoPayback=<autoPayback>&paybackCurrency=<paybackCurrency>&paybackQtyRq=<paybackQtyRq>
+```
+
+> Response format
+
+```json
+{
+  "code": 0,
+  "msg": "",
+  "data": {
+    "orderID": "d1d09454-cabc-4a23-89a7-59d43363f16d",
+    "clOrdID": "309bcd5c-9f6e-4a68-b775-4494542eb5cb",
+    "priceRp": "0",
+    "action": "New",
+    "trigger": "UNSPECIFIED",
+    "pegPriceType": "UNSPECIFIED",
+    "stopDirection": "UNSPECIFIED",
+    "bizError": 0,
+    "symbol": "sBTCUSDT",
+    "side": "Buy",
+    "baseQtyRq": "0",
+    "ordType": "Limit",
+    "timeInForce": "GoodTillCancel",
+    "ordStatus": "Created",
+    "cumFeeRv": "0",
+    "cumBaseQtyRq": "0",
+    "cumQuoteQtyRq": "0",
+    "leavesBaseQtyRq": "0",
+    "leavesQuoteQtyRq": "0",
+    "avgPriceRp": "0",
+    "cumBaseAmountRv": "0",
+    "cumQuoteAmountRv": "0",
+    "quoteQtyRq": "0",
+    "qtyType": "ByBase",
+    "stopPxRp": "0",
+    "pegOffsetValueRp": "0",
+    "autoBorrow": false,
+    "borrowCurrency": 1,
+    "borrowQtyRq": "0",
+    "autoPayback": false,
+    "paybackCurrency": 1,
+    "paybackPrincipalQtyRq": "0",
+    "paybackInterestQtyRq": "0",
+    "hourlyInterestRateRr": "0",
+    "riskLevelRr": "0",
+    "liqFeeRv": "0",
+    "liqFeeRateRr": "0"
+  }
+}
+```
+
+| Field       | Type   | Required | Description               | Possible values |
+|----------   |--------|----------|---------------------------|-----------------|
+| symbol      | String | Yes      |                           |                 |
+| side        | Enum   | Yes      |                           |  Sell, Buy     | 
+| qtyType     | Enum   | Yes      | Set order quantity by base or quote currency | ByBase, ByQuote|
+| quoteQtyRq  | String| --       | Required if qtyType = ByQuote|  |
+| baseQtyRq   | String| --       |                           | Required if qtyType = ByBase   |
+| priceRp     | String|          |                           | real price            |
+| stopPxRp    | String| --       | used in conditionalorder  |   |
+| trigger     | Enum   | --       | Required in conditional order | ByLastPrice |
+| timeInForce | Enum   | No       | Default GoodTillCancel    | GoodTillCancel, PostOnly,ImmediateOrCancel,FillOrKill |
+| ordType     | Enum   | No       | Default to Limit          | Market, Limit, Stop, StopLimit, MarketIfTouched, LimitIfTouched|
+| autoBorrow  | Boolean | No      |                           | false                |
+| borrowCurrency  | String | No      |                           | BTC,USDT           |
+| borrowQtyRq     | String | No      |                           |                 |
+| autoPayback     | Boolean | No      |                           | false               |
+| paybackCurrency   | String | No      |                           | BTC,USDT           |
+| paybackQtyRq    | String | No      |                           |                 |
+
+
+## Amend order
+
+> Request format
+
+```
+PUT /margin-trade/orders?symbol=<symbol>&orderID=<orderID>&origClOrdID=<origClOrdID>&clOrdID=<clOrdID>&priceRp=<priceRp>&baseQtyRq=<baseQtyRq>&quoteQtyRq=<quoteQtyRq>&stopPxRp=<stopPxRp> 
+```
+
+## Cancel order
+
+> Request format
+
+```
+DELETE /margin-trade/orders?symbol=<symbol>&orderID=<orderID>
+DELETE /margin-trade/orders?symbol=<symbol>&clOrdID=<clOrdID>
+```
+
+## Cancel all order by symbol
+
+> Request format
+
+```
+DELETE /margin-trade/orders/all?symbol=<symbol>&untriggered=<untriggered>
+```
+
+| Field | Type | Required | Description |
+|---------|--------|-------|-------------|
+| symbol  | Enum   | Yes   | The symbol to cancel |
+| untriggered | Boolean | No | set false to cancel non-conditiaonal order, true to conditional order |
+
+## Query open order by order ID or client order ID
+
+> Request format
+
+```
+GET /margin-trade/orders/active?symbol=<symbol>&orderID=<orderID>
+GET /margin-trade/orders/active?symbol=<symbol>&clOrDID=<clOrdID>
+```
+
+## Query all open orders by symbol
+
+> Request format
+
+```
+GET /margin-trade/orders?symbol=<symbol>
+```
+
+## Query wallets
+
+Query spot wallet by currency.
+
+> Request format
+
+```
+GET /margin-trade/wallets?currency=<currency>
+```
+
+> Response format
+
+```json
+{
+  "code": 0,
+  "msg": "",
+  "data": [
+    {
+      "currency": "BTC",
+      "balanceRq": "0",
+      "lockedTradingBalanceRq": "0",
+      "lockedWithdrawRq": "0",
+      "borrowedRq": "0",
+      "cumInterestRq": "0",
+      "lastUpdateTimeNs": 0
+    }
+  ]
+}
+```
+
+
+[Query order book](#query-order-book-3)
+the same as the spot api
+
+[Query full order book](#query-full-order-book-2)
+the same as the spot api
+
+[Query recent trades](#query-recent-trades-2)
+the same as the spot api
+
+[Query 24 hours ticker](#query-24-hours-ticker-2)
+the same as the spot api
+
+# Margin Trading Websocket API
+
+the same as above Spot Websocket API
+
+## Subscribe margin account and order
+
+> Request
+
+```json
+{
+  "id": 0,
+  "method": "mao.subscribe",
+  "params": []
+}
+```
+> Message sample: incremental
+```json
+{
+	"wallets_mao": [{
+		"balanceRv": "6300000054.015",
+		"currency": "BTC",
+		"lastUpdateTimeNs": 1587547210089640382,
+		"lockedTradingBalanceRv": "2",
+		"lockedWithdrawRv": "0",
+		"borrowedRv": "12",
+		"cumInterestRv": "0.5",
+		"hourlyInterestRateRr": "0.0012",
+		"maxAmountToBorrowRv": "100",
+		"userID": 200076
+	}, {
+		"balanceRv": "3518.025",
+		"currency": "USDT",
+		"lastUpdateTimeNs": 1587543489127498121,
+		"lockedTradingBalanceRv": "0",
+		"lockedWithdrawRv": "0",
+		"borrowedRv": "12",
+		"cumInterestRv": "0.5",
+		"hourlyInterestRateRr": "0.0012",
+		"maxAmountToBorrowRv": "100",
+		"userID": 200076
+	}],
+	"orders_mao": {
+		"closed": [],
+		"fills": [],
+		"open": [{
+			"action": "New",
+			"avgPriceRp": "0",
+			"baseCurrency": "BTC",
+			"baseQtyRq": "10000",
+			"bizError": 0,
+			"clOrdID": "0c1099e5-b900-5351-cf60-edb15ea2539c",
+			"createTimeNs": 1587549529513521745,
+			"cumBaseQtyRq": "0",
+			"cumFeeRv": "0",
+			"cumQuoteQtyRq": "0",
+			"curBaseWalletQtyRq": "6300000.0540150",
+			"curQuoteWalletQtyRq": "3518.0250",
+			"cxlRejReason": 0,
+			"feeCurrency": "BTC",
+			"leavesBaseQtyRq": "1",
+			"leavesQuoteQtyRq": "0",
+			"ordStatus": "New",
+			"ordType": "Limit",
+			"orderID": "494a6cbb-32b3-4d6a-b9b7-196ea2506fb5",
+			"pegOffsetValueRv": "0",
+			"priceRp": "6665",
+			"qtyType": "ByBase",
+			"quoteCurrency": "USDT",
+			"quoteQtyRq": "0",
+			"side": "Sell",
+			"stopPxRp": "0",
+			"symbol": "sBTCUSDT",
+			"timeInForce": "GoodTillCancel",
+			"transactTimeNs": 1587549529518394235,
+			"triggerTimeNs": 0,
+			"userID": 200076
+		}]
+	},
+	"sequence": 350,
+	"timestamp": 1587549529519959388,
+	"type": "incremental"
+}
+```
