@@ -1108,6 +1108,9 @@
                     <a href="#query-recent-trades-2" class="toc-h2 toc-link" data-title="Query recent trades">Query recent trades</a>
                   </li>
                   <li>
+                    <a href="#query-24-hours-ticker-for-all-symbols" class="toc-h2 toc-link" data-title="Query 24 hours ticker for all symbols">Query 24 hours ticker for all symbols</a>
+                  </li>
+                  <li>
                     <a href="#query-24-hours-ticker-2" class="toc-h2 toc-link" data-title="Query 24 hours ticker">Query 24 hours ticker</a>
                   </li>
               </ul>
@@ -10699,7 +10702,111 @@ The depth value is 0 in full book response.
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre></div><h2 id='query-24-hours-ticker-2'>Query 24 hours ticker</h2>
+</span></code></pre></div><h2 id='query-24-hours-ticker-for-all-symbols'>Query 24 hours ticker for all symbols</h2>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /md/spot/ticker/24hr/all
+</code></pre></div>
+<blockquote>
+<p>Response format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"openEp"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;open</span><span class="w"> </span><span class="err">priceEp&gt;</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"highEp"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;high</span><span class="w"> </span><span class="err">priceEp&gt;</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"lowEp"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;low</span><span class="w"> </span><span class="err">priceEp&gt;</span><span class="p">,</span><span class="w"> 
+      </span><span class="nl">"indexEp"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;index</span><span class="w"> </span><span class="err">priceEp&gt;</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"lastEp"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;last</span><span class="w"> </span><span class="err">priceEp&gt;</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"bidEp"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;bid</span><span class="w"> </span><span class="err">priceEp&gt;</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"askEp"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;ask</span><span class="w"> </span><span class="err">priceEp&gt;</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;symbol&gt;"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"turnoverEv"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;turnoverEv&gt;</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"volumeEv"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;volumeEv&gt;</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;timestamp&gt;</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Possible Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>open priceEp</td>
+<td>Integer</td>
+<td>The scaled open price in last 24 hours</td>
+<td></td>
+</tr>
+<tr>
+<td>high priceEp</td>
+<td>Integer</td>
+<td>The scaled highest price in last 24 hours</td>
+<td></td>
+</tr>
+<tr>
+<td>low priceEp</td>
+<td>Integer</td>
+<td>The scaled lowest price in last 24 hours</td>
+<td></td>
+</tr>
+<tr>
+<td>index priceEp</td>
+<td>Integer</td>
+<td>The scaled index price in last 24 hours</td>
+<td></td>
+</tr>
+<tr>
+<td>last priceEp</td>
+<td>Integer</td>
+<td>The scaled last price</td>
+<td></td>
+</tr>
+<tr>
+<td>bid priceEp</td>
+<td>Integer</td>
+<td>Scaled bid price</td>
+<td></td>
+</tr>
+<tr>
+<td>ask priceEp</td>
+<td>Integer</td>
+<td>Scaled ask price</td>
+<td></td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>Integer</td>
+<td>Timestamp in nanoseconds</td>
+<td></td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>String</td>
+<td>symbol name</td>
+<td><a href="#productinfo">Trading symbols</a></td>
+</tr>
+<tr>
+<td>turnoverEv</td>
+<td>Integer</td>
+<td>The scaled turnover value in last 24 hours</td>
+<td></td>
+</tr>
+<tr>
+<td>volumeEv</td>
+<td>Integer</td>
+<td>The scaled trade volume in last 24 hours</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id='query-24-hours-ticker-2'>Query 24 hours ticker</h2>
 <blockquote>
 <p>Request format</p>
 </blockquote>
