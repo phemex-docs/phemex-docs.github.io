@@ -1562,7 +1562,7 @@ GET /exchange/public/nomics/trades?market=<symbol>&since=<since>
 > Request format
 
 ```
-GET /api-data/public/data/funding-rate-history
+GET /api-data/public/data/funding-rate-history?symbol=<symbol>&start=<start>&end=<end>&limit=<limit>
 ```
 
 > Response sample
@@ -1574,15 +1574,15 @@ GET /api-data/public/data/funding-rate-history
   "data": {
     "rows": [
       {
-        "symbol": ".ETHUSDTFR8H",
-        "fundingRate": "0.0001",
-        "fundingTime": 1680768000000,
+        "symbol": ".BTCFR8H",
+        "fundingRate": "0.00007058",
+        "fundingTime": 1680796800000,
         "intervalSeconds": 28800
       },
       {
-        "symbol": ".ETHUSDTFR8H",
-        "fundingRate": "0.0001",
-        "fundingTime": 1680796800000,
+        "symbol": ".BTCFR8H",
+        "fundingRate": "0.00006672",
+        "fundingTime": 1680825600000,
         "intervalSeconds": 28800
       }
     ]
@@ -1592,7 +1592,7 @@ GET /api-data/public/data/funding-rate-history
 
 | Field  | Type    | Required | Description                                       | Possible Values |
 |--------|---------|----------|---------------------------------------------------|-----------------|
-| symbol | String  | True     | funding rate symbol                               | .ETHUSDTFR8H    |
+| symbol | String  | True     | funding rate symbol                               | .BTCFR8H        |
 | start  | Long    | False    | start timestamp in ms of funding time (INCLUSIVE) | 1679852520918   |
 | end    | Long    | False    | end timestamp in ms of funding time (INCLUSIVE)   | 1679852520918   |
 | limit  | Integer | False    | default 100, max 100                              | 100             |
@@ -4162,7 +4162,7 @@ GET /api-data/g-futures/trades?symbol=<symbol>
 > Request format
 
 ```
-GET /api-data/public/data/funding-rate-history
+GET /api-data/public/data/funding-rate-history?symbol=<symbol>&start=<start>&end=<end>&limit=<limit>
 ```
 
 > Response sample
