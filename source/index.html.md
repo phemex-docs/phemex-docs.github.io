@@ -6,6 +6,7 @@ includes:
   - contract
   - spot
   - transfer
+  - withdraw
 
 logo:
   link: https://phemex.com

@@ -13,3 +13,6 @@ en:
 
   # transfer
   transfer: Transfer
+
+  # withdraw
+  withdraw: Withdraw
