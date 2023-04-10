@@ -28,6 +28,7 @@ GET /phemex-deposit/wallets/api/depositAddress?currency=<currency>&chainName=<ch
 | chainName | String | YES      | chain name  | ETH  |
 
 > Response Format
+
 ```json
 {
   "code": 0,
@@ -66,6 +67,7 @@ GET /phemex-deposit/wallets/api/depositHist?currency=<currency>&offset=<offset>&
 | withCount | Boolean | NO       | return total rows or not      | True    |
 
 > Response Format
+
 ```json
 {
     "code": 0,
@@ -120,7 +122,6 @@ GET /phemex-deposit/wallets/api/depositHist?currency=<currency>&offset=<offset>&
 | txHash            | String  |          |                              |                                                   |
 | type              | Enum    | Yes      | Deposit Type                 | Deposit & CompensateDeposit                       |
 | userId            | Long    | Yes      |                              |                                                   |
-
 
 ## Deposit status
 
@@ -348,6 +349,7 @@ POST /phemex-withdraw/wallets/api/cancelWithdraw?id=<id>
 | id        | Long | YES      | withdraw request unique identifier | 10001 |
 
 > Response Format
+
 ```json
 {
     "code": 0,
@@ -372,6 +374,7 @@ GET /phemex-withdraw/wallets/api/asset/info?currency=<currency>&amount=<amount>
 | amount    | String | NO       | withdraw amount with fee | "0.1234" |
 
 > Response format
+
 ```json
 {
   "code": 0,
