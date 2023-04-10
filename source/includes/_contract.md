@@ -445,7 +445,7 @@ POST /orders
 
 ```
 PUT
-/orders/replace?symbol=<symbol>&orderID=<orderID>&origClOrdID=<origClOrdID>&clOrdID=<clOrdID>&price=<price>&priceEp=<priceEp>&orderQty=<orderQty>&stopPx=<stopPx>&stopPxEp=<stopPxEp>&takeProfit=<takeProfit>&takeProfitEp=<takeProfitEp>&stopLoss=<stopLoss>&stopLossEp=<stopLossEp>&pegOffsetValueEp=<pegOffsetValueEp>&pegPriceType=<pegPriceType>
+/orders/replace?symbol=<symbol>&orderID=<orderID>&origClOrdID=<origClOrdID>&price=<price>&priceEp=<priceEp>&orderQty=<orderQty>&stopPx=<stopPx>&stopPxEp=<stopPxEp>&takeProfit=<takeProfit>&takeProfitEp=<takeProfitEp>&stopLoss=<stopLoss>&stopLossEp=<stopLossEp>&pegOffsetValueEp=<pegOffsetValueEp>&pegPriceType=<pegPriceType>
 ```
 
 | Field  | Required | Description |
@@ -453,7 +453,6 @@ PUT
 | symbol | Yes  | Order symbol, cannot be changed|
 | orderID| No  | Order ID, cannot be changed |
 | origClOrdID | No | Original clOrderID |
-| clOrdID| No | New clOrdID |
 | price  | No | New order price |
 | priceEp| No | New order price with scale |
 | orderQty | No | New orderQty |
@@ -1557,6 +1556,50 @@ GET /exchange/public/nomics/trades?market=<symbol>&since=<since>
 
 ```
 
+## Get Funding Rate History
+
+> Request format
+
+```
+GET /api-data/public/data/funding-rate-history?symbol=<symbol>&start=<start>&end=<end>&limit=<limit>
+```
+
+> Response sample
+
+```json
+{
+  "code": 0,
+  "msg": "OK",
+  "data": {
+    "rows": [
+      {
+        "symbol": ".BTCFR8H",
+        "fundingRate": "0.00007058",
+        "fundingTime": 1680796800000,
+        "intervalSeconds": 28800
+      },
+      {
+        "symbol": ".BTCFR8H",
+        "fundingRate": "0.00006672",
+        "fundingTime": 1680825600000,
+        "intervalSeconds": 28800
+      }
+    ]
+  }
+}
+```
+
+| Field  | Type    | Required | Description                                       | Possible Values |
+|--------|---------|----------|---------------------------------------------------|-----------------|
+| symbol | String  | True     | funding rate symbol                               | .BTCFR8H        |
+| start  | Long    | False    | start timestamp in ms of funding time (INCLUSIVE) | 1679852520918   |
+| end    | Long    | False    | end timestamp in ms of funding time (INCLUSIVE)   | 1679852520918   |
+| limit  | Integer | False    | default 100, max 100                              | 100             |
+
+* If `start` and `end` parameters are not specified, the API will return the most recent data within the specified `limit`.
+* If the `start` parameter is provided while `end` is not, the API will return from `start` plus `limit` size of data.
+* If the number of items between `start` and `end` exceeds the specified `limit`, the API will return from `start` plus `limit` size of data.
+* The API returns data in ascending order based on the `fundingTime` attribute.
 
 # Contract Websocket API
 
@@ -2938,7 +2981,7 @@ body:
 > Request format
 
 ```
-PUT /g-orders/replace?symbol=<symbol>&orderID=<orderID>&origClOrdID=<origClOrdID>&clOrdID=<clOrdID>&price=<price>&priceRp=<priceRp>&orderQtyRq=<orderQtyRq>&stopPxRp=<stopPxRp>&takeProfitRp=<takeProfitRp>&stopLossRp=<stopLossRp>&pegOffsetValueRp=<pegOffsetValueRp>&pegPriceType=<pegPriceType>&triggerType=<triggerType>&posSide=<posSide>
+PUT /g-orders/replace?symbol=<symbol>&orderID=<orderID>&origClOrdID=<origClOrdID>&price=<price>&priceRp=<priceRp>&orderQtyRq=<orderQtyRq>&stopPxRp=<stopPxRp>&takeProfitRp=<takeProfitRp>&stopLossRp=<stopLossRp>&pegOffsetValueRp=<pegOffsetValueRp>&pegPriceType=<pegPriceType>&triggerType=<triggerType>&posSide=<posSide>
 ```
 
 > Response sample
@@ -2986,7 +3029,6 @@ PUT /g-orders/replace?symbol=<symbol>&orderID=<orderID>&origClOrdID=<origClOrdID
 | symbol           | Yes      | order symbol, cannot be changed       |
 | orderID          | -        | order id, cannot be changed           |
 | origClOrdID      | -        | original clOrderID, cannot be changed |
-| clOrdID          | -        | new clOrdID                           |
 | priceRp          | -        | new order price, real value           |
 | orderQtyRq       | Yes      | new orderQty, real value              |
 | stopPxRp         | Yes      | new stop price, real value            |
@@ -4113,6 +4155,50 @@ GET /api-data/g-futures/trades?symbol=<symbol>
 | offset   | Integer        | False    | page start from 0         | start from 0, default 0         |
 | limit    | Integer        | False    | page size                 | default 20, max 200             |
 
+## Get Funding Rate History
+
+> Request format
+
+```
+GET /api-data/public/data/funding-rate-history?symbol=<symbol>&start=<start>&end=<end>&limit=<limit>
+```
+
+> Response sample
+
+```json
+{
+  "code": 0,
+  "msg": "OK",
+  "data": {
+    "rows": [
+      {
+        "symbol": ".ETHUSDTFR8H",
+        "fundingRate": "0.0001",
+        "fundingTime": 1680768000000,
+        "intervalSeconds": 28800
+      },
+      {
+        "symbol": ".ETHUSDTFR8H",
+        "fundingRate": "0.0001",
+        "fundingTime": 1680796800000,
+        "intervalSeconds": 28800
+      }
+    ]
+  }
+}
+```
+
+| Field  | Type    | Required | Description                                       | Possible Values |
+|--------|---------|----------|---------------------------------------------------|-----------------|
+| symbol | String  | True     | funding rate symbol                               | .ETHUSDTFR8H    |
+| start  | Long    | False    | start timestamp in ms of funding time (INCLUSIVE) | 1679852520918   |
+| end    | Long    | False    | end timestamp in ms of funding time (INCLUSIVE)   | 1679852520918   |
+| limit  | Integer | False    | default 100, max 100                              | 100             |
+
+* If `start` and `end` parameters are not specified, the API will return the most recent data within the specified `limit`.
+* If the `start` parameter is provided while `end` is not, the API will return from `start` plus `limit` size of data.
+* If the number of items between `start` and `end` exceeds the specified `limit`, the API will return from `start` plus `limit` size of data.
+* The API returns data in ascending order based on the `fundingTime` attribute.
 
 # Hedged Contract Websocket API
 * Each client is required to actively send heartbeat (ping) message to Phemex data gateway ('DataGW' in short) with interval less than 30 seconds, otherwise DataGW will drop the connection. If a client sends a ping message, DataGW will reply with a pong message.
