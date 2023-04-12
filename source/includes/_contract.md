@@ -452,8 +452,7 @@ PUT
 |--------|----------|-------------|
 | symbol | Yes  | Order symbol, cannot be changed|
 | orderID| No  | Order ID, cannot be changed |
-| origClOrdID | No | Original clOrderID |
-| clOrdID| No | New clOrdID |
+| clOrdID| No | clOrdID, cannot be changed |
 | price  | No | New order price |
 | priceEp| No | New order price with scale |
 | orderQty | No | New orderQty |
@@ -3029,8 +3028,7 @@ PUT /g-orders/replace?symbol=<symbol>&orderID=<orderID>&origClOrdID=<origClOrdID
 | ---------------- | -------- | ------------------------------------- |
 | symbol           | Yes      | order symbol, cannot be changed       |
 | orderID          | -        | order id, cannot be changed           |
-| origClOrdID      | -        | original clOrderID, cannot be changed |
-| clOrdID          | -        | new clOrdID                           |
+| clOrdID          | -        | clOrdID, cannot be changed            |
 | priceRp          | -        | new order price, real value           |
 | orderQtyRq       | Yes      | new orderQty, real value              |
 | stopPxRp         | Yes      | new stop price, real value            |
