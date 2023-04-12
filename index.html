@@ -835,6 +835,9 @@
                   <li>
                     <a href="#query-history-trades-by-symbol" class="toc-h2 toc-link" data-title="Query history trades by symbol">Query history trades by symbol</a>
                   </li>
+                  <li>
+                    <a href="#get-funding-rate-history" class="toc-h2 toc-link" data-title="Get Funding Rate History">Get Funding Rate History</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -970,6 +973,9 @@
                   </li>
                   <li>
                     <a href="#query-trades-history" class="toc-h2 toc-link" data-title="Query Trades History">Query Trades History</a>
+                  </li>
+                  <li>
+                    <a href="#get-funding-rate-history-2" class="toc-h2 toc-link" data-title="Get Funding Rate History">Get Funding Rate History</a>
                   </li>
               </ul>
           </li>
@@ -4809,7 +4815,82 @@ The API has <a href="#rate-limits">ratelimits</a> rule, and please check the <i>
   </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre></div><h1 id='contract-websocket-api'>Contract Websocket API</h1><h2 id='heartbeat'>Heartbeat</h2>
+</span></code></pre></div><h2 id='get-funding-rate-history'>Get Funding Rate History</h2>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /api-data/public/data/funding-rate-history?symbol=&lt;symbol&gt;&amp;start=&lt;start&gt;&amp;end=&lt;end&gt;&amp;limit=&lt;limit&gt;
+</code></pre></div>
+<blockquote>
+<p>Response sample</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"rows"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">".BTCFR8H"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fundingRate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00007058"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fundingTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1680796800000</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"intervalSeconds"</span><span class="p">:</span><span class="w"> </span><span class="mi">28800</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">".BTCFR8H"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fundingRate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00006672"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fundingTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1680825600000</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"intervalSeconds"</span><span class="p">:</span><span class="w"> </span><span class="mi">28800</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Possible Values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>String</td>
+<td>True</td>
+<td>funding rate symbol</td>
+<td>.BTCFR8H</td>
+</tr>
+<tr>
+<td>start</td>
+<td>Long</td>
+<td>False</td>
+<td>start timestamp in ms of funding time (INCLUSIVE)</td>
+<td>1679852520918</td>
+</tr>
+<tr>
+<td>end</td>
+<td>Long</td>
+<td>False</td>
+<td>end timestamp in ms of funding time (INCLUSIVE)</td>
+<td>1679852520918</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>Integer</td>
+<td>False</td>
+<td>default 100, max 100</td>
+<td>100</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>If <code>start</code> and <code>end</code> parameters are not specified, the API will return the most recent data within the specified <code>limit</code>.</li>
+<li>If the <code>start</code> parameter is provided while <code>end</code> is not, the API will return from <code>start</code> plus <code>limit</code> size of data.</li>
+<li>If the number of items between <code>start</code> and <code>end</code> exceeds the specified <code>limit</code>, the API will return from <code>start</code> plus <code>limit</code> size of data.</li>
+<li>The API returns data in ascending order based on the <code>fundingTime</code> attribute.</li>
+</ul>
+<h1 id='contract-websocket-api'>Contract Websocket API</h1><h2 id='heartbeat'>Heartbeat</h2>
 <blockquote>
 <p>Request</p>
 </blockquote>
@@ -8520,6 +8601,81 @@ penalty.</p>
 <td>default 20, max 200</td>
 </tr>
 </tbody></table>
+<h2 id='get-funding-rate-history-2'>Get Funding Rate History</h2>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /api-data/public/data/funding-rate-history?symbol=&lt;symbol&gt;&amp;start=&lt;start&gt;&amp;end=&lt;end&gt;&amp;limit=&lt;limit&gt;
+</code></pre></div>
+<blockquote>
+<p>Response sample</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"rows"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">".ETHUSDTFR8H"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fundingRate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0001"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fundingTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1680768000000</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"intervalSeconds"</span><span class="p">:</span><span class="w"> </span><span class="mi">28800</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">".ETHUSDTFR8H"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fundingRate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0001"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fundingTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1680796800000</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"intervalSeconds"</span><span class="p">:</span><span class="w"> </span><span class="mi">28800</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Possible Values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>String</td>
+<td>True</td>
+<td>funding rate symbol</td>
+<td>.ETHUSDTFR8H</td>
+</tr>
+<tr>
+<td>start</td>
+<td>Long</td>
+<td>False</td>
+<td>start timestamp in ms of funding time (INCLUSIVE)</td>
+<td>1679852520918</td>
+</tr>
+<tr>
+<td>end</td>
+<td>Long</td>
+<td>False</td>
+<td>end timestamp in ms of funding time (INCLUSIVE)</td>
+<td>1679852520918</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>Integer</td>
+<td>False</td>
+<td>default 100, max 100</td>
+<td>100</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>If <code>start</code> and <code>end</code> parameters are not specified, the API will return the most recent data within the specified <code>limit</code>.</li>
+<li>If the <code>start</code> parameter is provided while <code>end</code> is not, the API will return from <code>start</code> plus <code>limit</code> size of data.</li>
+<li>If the number of items between <code>start</code> and <code>end</code> exceeds the specified <code>limit</code>, the API will return from <code>start</code> plus <code>limit</code> size of data.</li>
+<li>The API returns data in ascending order based on the <code>fundingTime</code> attribute.</li>
+</ul>
 <h1 id='hedged-contract-websocket-api'>Hedged Contract Websocket API</h1>
 <ul>
 <li>Each client is required to actively send heartbeat (ping) message to Phemex data gateway (&#39;DataGW&#39; in short) with interval less than 30 seconds, otherwise DataGW will drop the connection. If a client sends a ping message, DataGW will reply with a pong message.</li>
