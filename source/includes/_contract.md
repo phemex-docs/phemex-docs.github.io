@@ -3020,7 +3020,7 @@ PUT /g-orders/replace?symbol=<symbol>&orderID=<orderID>&origClOrdID=<origClOrdID
     "trigger": "ByMarkPrice",
     "takeProfitRp":"1271.9",
     "stopLossRp":"1271.9"
-  },
+  }, 
   "msg": "string"
 }
 ```
