@@ -187,7 +187,7 @@ PUT /spot/orders?symbol=<symbol>&orderID=<orderID>&clOrdID=<clOrdID>&priceEp=<pr
 | ---------------- | -------- | ------------------------------------- |
 | symbol           | Yes      | order symbol, cannot be changed       |
 | orderID          | -        | order id, cannot be changed           |
-| origClOrdID      | -        | origClOrdID, cannot be changed        |
+| clOrdID          | -        | clOrdID, cannot be changed            |
 | priceRp          | -        | new order price, scaled price         |
 | baseQtyEV        | -        | new orderQty, scaled base quantity    |
 | quoteQtyEv       | -        | new orderQty, scaled quote quantity   |
