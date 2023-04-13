@@ -452,7 +452,7 @@ PUT
 |--------|----------|-------------|
 | symbol | Yes  | Order symbol, cannot be changed|
 | orderID| No  | Order ID, cannot be changed |
-| clOrdID| No | clOrdID, cannot be changed |
+| origClOrdID  | No | origClOrdID, cannot be changed |
 | price  | No | New order price |
 | priceEp| No | New order price with scale |
 | orderQty | No | New orderQty |
@@ -464,7 +464,6 @@ PUT
 | stopLossEp | No | New stop loss price with scale |
 | pegOffsetValueEp | No | New trailing offset |
 | pegPriceType | No | New peg price type |
-
 orderID and origClOrdID can not be both empty
 
 ## Cancel order by order ID or client order ID
