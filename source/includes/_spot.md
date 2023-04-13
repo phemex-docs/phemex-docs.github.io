@@ -180,7 +180,7 @@ POST /spot/orders
 > Request format
 
 ```
-PUT /spot/orders?symbol=<symbol>&orderID=<orderID>&origClOrdID=<origClOrdID>&priceEp=<priceEp>&baseQtyEV=<baseQtyEV>&quoteQtyEv=<quoteQtyEv>&stopPxEp=<stopPxEp> 
+PUT /spot/orders?symbol=<symbol>&orderID=<orderID>&clOrdID=<clOrdID>&priceEp=<priceEp>&baseQtyEV=<baseQtyEV>&quoteQtyEv=<quoteQtyEv>&stopPxEp=<stopPxEp> 
 ```
 
 | Field            | Required | Description                           |
