@@ -445,15 +445,14 @@ POST /orders
 
 ```
 PUT
-/orders/replace?symbol=<symbol>&orderID=<orderID>&origClOrdID=<origClOrdID>&clOrdID=<clOrdID>&price=<price>&priceEp=<priceEp>&orderQty=<orderQty>&stopPx=<stopPx>&stopPxEp=<stopPxEp>&takeProfit=<takeProfit>&takeProfitEp=<takeProfitEp>&stopLoss=<stopLoss>&stopLossEp=<stopLossEp>&pegOffsetValueEp=<pegOffsetValueEp>&pegPriceType=<pegPriceType>
+/orders/replace?symbol=<symbol>&orderID=<orderID>&origClOrdID=<origClOrdID>&price=<price>&priceEp=<priceEp>&orderQty=<orderQty>&stopPx=<stopPx>&stopPxEp=<stopPxEp>&takeProfit=<takeProfit>&takeProfitEp=<takeProfitEp>&stopLoss=<stopLoss>&stopLossEp=<stopLossEp>&pegOffsetValueEp=<pegOffsetValueEp>&pegPriceType=<pegPriceType>
 ```
 
 | Field  | Required | Description |
 |--------|----------|-------------|
 | symbol | Yes  | Order symbol, cannot be changed|
 | orderID| No  | Order ID, cannot be changed |
-| origClOrdID | No | Original clOrderID |
-| clOrdID| No | New clOrdID |
+| origClOrdID  | No | origClOrdID, cannot be changed |
 | price  | No | New order price |
 | priceEp| No | New order price with scale |
 | orderQty | No | New orderQty |
@@ -465,7 +464,6 @@ PUT
 | stopLossEp | No | New stop loss price with scale |
 | pegOffsetValueEp | No | New trailing offset |
 | pegPriceType | No | New peg price type |
-
 orderID and origClOrdID can not be both empty
 
 ## Cancel order by order ID or client order ID
@@ -3029,8 +3027,7 @@ PUT /g-orders/replace?symbol=<symbol>&orderID=<orderID>&origClOrdID=<origClOrdID
 | ---------------- | -------- | ------------------------------------- |
 | symbol           | Yes      | order symbol, cannot be changed       |
 | orderID          | -        | order id, cannot be changed           |
-| origClOrdID      | -        | original clOrderID, cannot be changed |
-| clOrdID          | -        | new clOrdID                           |
+| origClOrdID      | -        | origClOrdID , cannot be changed       |
 | priceRp          | -        | new order price, real value           |
 | orderQtyRq       | Yes      | new orderQty, real value              |
 | stopPxRp         | Yes      | new stop price, real value            |
