@@ -183,9 +183,6 @@ POST /spot/orders
 PUT /spot/orders?symbol=<symbol>&orderID=<orderID>&origClOrdID=<origClOrdID>&priceEp=<priceEp>&baseQtyEV=<baseQtyEV>&quoteQtyEv=<quoteQtyEv>&stopPxEp=<stopPxEp> 
 ```
 | Field | Type | Required | Description |
-|---------|--------|-------|-------------|
-| symbol  | Enum   | Yes   | The symbol to cancel |
-| untriggered | Boolean | No | set false to cancel non-conditiaonal order, true to conditional order |
 | symbol           | Yes      | order symbol, cannot be changed       |
 | orderID          | -        | order id, cannot be changed           |
 | origClOrdID      | -        | origClOrdID , cannot be changed       |
