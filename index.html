@@ -833,6 +833,9 @@
                     <a href="#query-24-hours-ticker" class="toc-h2 toc-link" data-title="Query 24 hours ticker">Query 24 hours ticker</a>
                   </li>
                   <li>
+                    <a href="#query-24-hours-ticker-for-all-symbols" class="toc-h2 toc-link" data-title="Query 24 hours ticker for all symbols">Query 24 hours ticker for all symbols</a>
+                  </li>
+                  <li>
                     <a href="#query-history-trades-by-symbol" class="toc-h2 toc-link" data-title="Query history trades by symbol">Query history trades by symbol</a>
                   </li>
                   <li>
@@ -964,6 +967,9 @@
                   </li>
                   <li>
                     <a href="#query-24-ticker" class="toc-h2 toc-link" data-title="Query 24 ticker">Query 24 ticker</a>
+                  </li>
+                  <li>
+                    <a href="#query-24-ticker-for-all-symbols" class="toc-h2 toc-link" data-title="Query 24 ticker for all symbols">Query 24 ticker for all symbols</a>
                   </li>
                   <li>
                     <a href="#query-orders-history" class="toc-h2 toc-link" data-title="Query Orders History">Query Orders History</a>
@@ -1114,7 +1120,7 @@
                     <a href="#query-recent-trades-2" class="toc-h2 toc-link" data-title="Query recent trades">Query recent trades</a>
                   </li>
                   <li>
-                    <a href="#query-24-hours-ticker-for-all-symbols" class="toc-h2 toc-link" data-title="Query 24 hours ticker for all symbols">Query 24 hours ticker for all symbols</a>
+                    <a href="#query-24-hours-ticker-for-all-symbols-2" class="toc-h2 toc-link" data-title="Query 24 hours ticker for all symbols">Query 24 hours ticker for all symbols</a>
                   </li>
                   <li>
                     <a href="#query-24-hours-ticker-2" class="toc-h2 toc-link" data-title="Query 24 hours ticker">Query 24 hours ticker</a>
@@ -4569,8 +4575,10 @@ The API has <a href="#rate-limits">ratelimits</a> rule, and please check the <i>
 <blockquote>
 <p>Request format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>GET v1/md/ticker/24hr?symbol=&lt;symbol&gt;
+<div class="highlight"><pre class="highlight plaintext"><code>GET /md/v1/ticker/24hr?symbol=&lt;symbol&gt;
 </code></pre></div>
+<p>the old url , v1/md/ticker/24hr?symbol=<symbol> , will be removed later, which have the same response format as above url.</p>
+
 <table><thead>
 <tr>
 <th>Field</th>
@@ -4615,7 +4623,7 @@ The API has <a href="#rate-limits">ratelimits</a> rule, and please check the <i>
 <blockquote>
 <p>Request sample</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>GET v1/md/ticker/24hr?symbol=BTCUSD
+<div class="highlight"><pre class="highlight plaintext"><code>GET /md/v1/ticker/24hr?symbol=BTCUSD
 </code></pre></div>
 <blockquote>
 <p>Response sample</p>
@@ -4727,7 +4735,10 @@ The API has <a href="#rate-limits">ratelimits</a> rule, and please check the <i>
 <td></td>
 </tr>
 </tbody></table>
-<h2 id='query-history-trades-by-symbol'>Query history trades by symbol</h2>
+<h2 id='query-24-hours-ticker-for-all-symbols'>Query 24 hours ticker for all symbols</h2>
+<p>you can use path below to get data for all symbols, which has reponse data with array list</p>
+<div class="highlight"><pre class="highlight plaintext"><code>  GET /md/v1/ticker/24hr/all
+</code></pre></div><h2 id='query-history-trades-by-symbol'>Query history trades by symbol</h2>
 <blockquote>
 <p>Request format</p>
 </blockquote>
@@ -8295,7 +8306,7 @@ penalty.</p>
 </tbody></table>
 
 <ul>
-<li>Sample：</li>
+<li>Sample:</li>
 </ul>
 <div class="highlight"><pre class="highlight plaintext"><code>  GET /md/v2/trade?symbol=BTCUSDT
 
@@ -8326,8 +8337,13 @@ penalty.</p>
     }
   }
 </code></pre></div><h2 id='query-24-ticker'>Query 24 ticker</h2>
+<p>there are two differnent response format for 24 ticker</p>
+
 <blockquote>
-<p>Request format
+<p>Request format 1 (v2 will be removed later, v3 is recommended)
+<code>
+  GET /md/v2/ticker/24hr?symbol=&lt;symbol&gt;
+</code>
 <code>
   GET /md/v2/ticker/24hr?symbol=&lt;symbol&gt;
 </code></p>
@@ -8338,19 +8354,19 @@ penalty.</p>
     </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"closeRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20731"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"closeRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1903.16"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"fundingRateRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0001"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"highRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20818.8"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"indexPriceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20737.09857143"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"lowRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20425.2"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"markPriceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20737.788944"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"openInterestRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"openRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20709"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"highRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1932.31"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"indexPriceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1903.62867093"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"lowRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1854.52"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"markPriceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1903.16"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"openInterestRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6880.97"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"openRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1891.97"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"predFundingRateRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0001"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1667222412794076700</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"turnoverRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"139029311.7517"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"volumeRq"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6747.727"</span><span class="w">
+        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETHUSDT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1681349614932856300</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"turnoverRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"127962734.6031"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"volumeRq"</span><span class="p">:</span><span class="w"> </span><span class="s2">"67460.4"</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
@@ -8372,6 +8388,43 @@ penalty.</p>
 </tr>
 </tbody></table>
 <div class="highlight"><pre class="highlight plaintext"><code>  GET /md/v2/ticker/24hr?symbol=BTCUSDT
+</code></pre></div>
+<blockquote>
+<p>Request format 2 (recommended)
+<code>
+  GET /md/v3/ticker/24hr?symbol=&lt;symbol&gt;
+</code></p>
+
+<p>Response sample</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"askRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1906.03"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"bidRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1906"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fundingRateRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0001"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"highRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1932.31"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"indexRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1906.275"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"lastRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1905.63"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"lowRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1854.52"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"markRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1905.733555189"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"openInterestRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7115"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"openRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1885.18"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"predFundingRateRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0001"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETHUSDT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1681350167054888200</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"turnoverRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"128200614.5585"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"volumeRq"</span><span class="p">:</span><span class="w"> </span><span class="s2">"67580.6"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre class="highlight plaintext"><code>  GET /md/v3/ticker/24hr?symbol=BTCUSDT
+</code></pre></div><h2 id='query-24-ticker-for-all-symbols'>Query 24 ticker for all symbols</h2>
+<p>also there are two differnent response format for 24 ticker with all ticker</p>
+
+<p>you can use path below (v3 is recommended) to get data with array list</p>
+<div class="highlight"><pre class="highlight plaintext"><code>  GET /md/v2/ticker/24hr/all
+</code></pre></div><div class="highlight"><pre class="highlight plaintext"><code>  GET /md/v3/ticker/24hr/all  
 </code></pre></div><h2 id='query-orders-history'>Query Orders History</h2>
 <blockquote>
 <p>Request format</p>
@@ -10896,7 +10949,7 @@ The depth value is 0 in full book response.
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre></div><h2 id='query-24-hours-ticker-for-all-symbols'>Query 24 hours ticker for all symbols</h2>
+</span></code></pre></div><h2 id='query-24-hours-ticker-for-all-symbols-2'>Query 24 hours ticker for all symbols</h2>
 <blockquote>
 <p>Request format</p>
 </blockquote>
