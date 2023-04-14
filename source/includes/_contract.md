@@ -1414,8 +1414,11 @@ GET /md/trade?symbol=BTCUSD
 > Request format
 
 ```
-GET v1/md/ticker/24hr?symbol=<symbol>
+GET /md/v1/ticker/24hr?symbol=<symbol>
 ```
+
+the old url , v1/md/ticker/24hr?symbol=<symbol> , will be removed later, which have the same response format as above url.
+
 
 | Field       | Type   | Description                                | Possible values |
 |-------------|--------|--------------------------------------------|--------------|
@@ -1450,7 +1453,7 @@ GET v1/md/ticker/24hr?symbol=<symbol>
 > Request sample
 
 ```
-GET v1/md/ticker/24hr?symbol=BTCUSD
+GET /md/v1/ticker/24hr?symbol=BTCUSD
 ```
 
 > Response sample
@@ -1492,6 +1495,17 @@ GET v1/md/ticker/24hr?symbol=BTCUSD
 | symbol        | String | Contract symbol name                       |              |
 | turnoverEv    | Integer| The scaled turnover value in last 24 hours |              |
 | volume        | Integer| Symbol trade volume in last 24 hours       |              |
+
+
+## Query 24 hours ticker for all symbols
+
+you can use path below to get data for all symbols, which has reponse data with array list
+
+```
+  GET /md/v1/ticker/24hr/all
+```
+
+
 
 ## Query history trades by symbol
 
@@ -3943,7 +3957,7 @@ GET /exchange/public/md/v2/kline/list?symbol=<symbol>&to=<to>&from=<from>&resolu
 | sequence   | Integer |current message sequence||
 | symbol     | String  |Contract symbol name| [Trading symbols](#symbpricesub)  |
 
-- Sample：
+- Sample:
 
 ```
   GET /md/v2/trade?symbol=BTCUSDT
@@ -3978,7 +3992,12 @@ GET /exchange/public/md/v2/kline/list?symbol=<symbol>&to=<to>&from=<from>&resolu
 
 ## Query 24 ticker
 
-> Request format
+there are two differnent response format for 24 ticker
+
+> Request format 1 (v2 will be removed later, v3 is recommended)
+```
+  GET /md/v2/ticker/24hr?symbol=<symbol>
+```
 ```
   GET /md/v2/ticker/24hr?symbol=<symbol>
 ```
@@ -3990,19 +4009,19 @@ GET /exchange/public/md/v2/kline/list?symbol=<symbol>&to=<to>&from=<from>&resolu
     "error": null,
     "id": 0,
     "result": {
-        "closeRp": "20731",
+        "closeRp": "1903.16",
         "fundingRateRr": "0.0001",
-        "highRp": "20818.8",
-        "indexPriceRp": "20737.09857143",
-        "lowRp": "20425.2",
-        "markPriceRp": "20737.788944",
-        "openInterestRv": "0",
-        "openRp": "20709",
+        "highRp": "1932.31",
+        "indexPriceRp": "1903.62867093",
+        "lowRp": "1854.52",
+        "markPriceRp": "1903.16",
+        "openInterestRv": "6880.97",
+        "openRp": "1891.97",
         "predFundingRateRr": "0.0001",
-        "symbol": "BTCUSDT",
-        "timestamp": 1667222412794076700,
-        "turnoverRv": "139029311.7517",
-        "volumeRq": "6747.727"
+        "symbol": "ETHUSDT",
+        "timestamp": 1681349614932856300,
+        "turnoverRv": "127962734.6031",
+        "volumeRq": "67460.4"
     }
 }
 ```
@@ -4014,6 +4033,56 @@ GET /exchange/public/md/v2/kline/list?symbol=<symbol>&to=<to>&from=<from>&resolu
 ```
   GET /md/v2/ticker/24hr?symbol=BTCUSDT
 ```
+
+> Request format 2 (recommended)
+```
+  GET /md/v3/ticker/24hr?symbol=<symbol>
+```
+
+> Response sample
+
+```json
+{
+    "error": null,
+    "id": 0,
+    "result": {
+        "askRp": "1906.03",
+        "bidRp": "1906",
+        "fundingRateRr": "0.0001",
+        "highRp": "1932.31",
+        "indexRp": "1906.275",
+        "lastRp": "1905.63",
+        "lowRp": "1854.52",
+        "markRp": "1905.733555189",
+        "openInterestRv": "7115",
+        "openRp": "1885.18",
+        "predFundingRateRr": "0.0001",
+        "symbol": "ETHUSDT",
+        "timestamp": 1681350167054888200,
+        "turnoverRv": "128200614.5585",
+        "volumeRq": "67580.6"
+    }
+}
+```
+
+```
+  GET /md/v3/ticker/24hr?symbol=BTCUSDT
+```
+
+## Query 24 ticker for all symbols
+
+also there are two differnent response format for 24 ticker with all ticker
+
+you can use path below (v3 is recommended) to get data with array list
+
+```
+  GET /md/v2/ticker/24hr/all
+```
+
+```
+  GET /md/v3/ticker/24hr/all  
+```
+
 
 ## Query Orders History
 
