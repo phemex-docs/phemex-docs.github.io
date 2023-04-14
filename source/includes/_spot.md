@@ -191,6 +191,8 @@ PUT /spot/orders?symbol=<symbol>&orderID=<orderID>&origClOrdID=<origClOrdID>&pri
 | orderQtyRq  |      | Yes      | new orderQty, real value              |
 | stopPxRp    |      | Yes      | new stop price, real value            |
 
+orderID and origClOrdID can't both be empty
+
 ## Cancel order
 
 > Request format
