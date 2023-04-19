@@ -180,8 +180,18 @@ POST /spot/orders
 > Request format
 
 ```
-PUT /spot/orders?symbol=<symbol>&orderID=<orderID>&origClOrdID=<origClOrdID>&clOrdID=<clOrdID>&priceEp=<priceEp>&baseQtyEV=<baseQtyEV>&quoteQtyEv=<quoteQtyEv>&stopPxEp=<stopPxEp> 
+PUT /spot/orders?symbol=<symbol>&orderID=<orderID>&origClOrdID=<origClOrdID>&priceEp=<priceEp>&baseQtyEV=<baseQtyEV>&quoteQtyEv=<quoteQtyEv>&stopPxEp=<stopPxEp> 
 ```
+| Field       | Type | Required | Description                           |
+|-------------|------|----------|---------------------------------------|
+| symbol      |      | Yes      | order symbol, cannot be changed       |
+| orderID     |      | -        | order id, cannot be changed           |
+| origClOrdID |      | -        | origClOrdID , cannot be changed       |
+| priceRp     |      | -        | new order price, real value           |
+| orderQtyRq  |      | Yes      | new orderQty, real value              |
+| stopPxRp    |      | Yes      | new stop price, real value            |
+
+orderID and origClOrdID can't both be empty
 
 ## Cancel order
 
