@@ -102,7 +102,7 @@ POST /assets/spots/sub-accounts/transfer
 | currency   | String  | True     | Currency to transfer | BTC, ETH, USD ...                                     |
 | requestKey | String  | False    | Unique request key   | Unique request Key, system will generate if its empty |
 
-## Query spot sub to main transfer
+## Query transfer history of spot accounts between main and sub
 
 > Request format
 
@@ -126,15 +126,22 @@ GET /assets/spots/sub-accounts/transfer?currency=<currency>
   }
 ]
 ```
+* Request parameters
 
-| Field    | Type    | Required | Description               | Possible Values                 |
-|----------|---------|----------|---------------------------|---------------------------------|
-| currency | String  | True     | The currency to query     | BTC,ETH ...                     |
+| Field    | Type    | Required | Description               | Possible Values                    |
+|----------|---------|----------|---------------------------|------------------------------------|
+| currency | String  | True     | The currency to query     | BTC,ETH ...                        |
 | start    | Long    | False    | Start time in millisecond | Default to 2 days ago from the end |
 | end      | Long    | False    | End time in millisecond   | Default to now                     |
-| offset   | Integer | False    | Page start from 0         | Start from 0, default 0         |
+| offset   | Integer | False    | Page start from 0         | Start from 0, default 0            |
 | limit    | Integer | False    | Page size                 | Default to 20, max 200             |
 
+
+* Response Fields 
+
+| Field   | Type    | Description                                          |   
+|---------|---------|------------------------------------------------------|
+| status  | Integer | PENDING(0), DONE(10), FAILED(11)                     |
 
 ## Futures sub to main transfer (for sub-account only)
 
@@ -171,7 +178,7 @@ POST /assets/futures/sub-accounts/transfer
 | currency   | String  | True     | Currency to transfer | BTC, ETH, USD ...                                     |
 | requestKey | String  | False    | Unique request key   | Unique request Key, system will generate if its empty |
 
-## Query futures sub to main transfer
+## Query transfer history of contract accounts between main and sub
 
 > Request format
 
@@ -194,14 +201,22 @@ GET /assets/futures/sub-accounts/transfer?currency=<currency>
   }
 ]
 ```
+* Request parameters
 
-| Field    | Type    | Required | Description               | Possible Values                 |
-|----------|---------|----------|---------------------------|---------------------------------|
-| currency | String  | True     | The currency to query     | BTC,ETH ...                     |
+| Field    | Type    | Required | Description               | Possible Values                    |
+|----------|---------|----------|---------------------------|------------------------------------|
+| currency | String  | True     | The currency to query     | BTC,ETH ...                        |
 | start    | Long    | False    | Start time in millisecond | Default to 2 days ago from the end |
 | end      | Long    | False    | End time in millisecond   | Default to now                     |
-| offset   | Integer | False    | Page start from 0         | Start from 0, default 0         |
+| offset   | Integer | False    | Page start from 0         | Start from 0, default 0            |
 | limit    | Integer | False    | Page size                 | Default to 20, max 200             |
+
+* Response Fields 
+
+| Field   | Type    | Description                                          |   
+|---------|---------|------------------------------------------------------|
+| bizCode | Integer | PARENT_TO_SUB_TRANSFER(3), SUB_TO_PARENT_TRANSFER(4) |
+
 
 ## Universal transfer (main account only) - transfer between sub to main, main to sub or sub to sub
 
