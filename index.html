@@ -3184,7 +3184,7 @@ when price moves in profitable direction to order-side(buy/sell).</li>
 <p>Request format</p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>PUT
-/orders/replace?symbol=&lt;symbol&gt;&amp;orderID=&lt;orderID&gt;&amp;origClOrdID=&lt;origClOrdID&gt;&amp;clOrdID=&lt;clOrdID&gt;&amp;price=&lt;price&gt;&amp;priceEp=&lt;priceEp&gt;&amp;orderQty=&lt;orderQty&gt;&amp;stopPx=&lt;stopPx&gt;&amp;stopPxEp=&lt;stopPxEp&gt;&amp;takeProfit=&lt;takeProfit&gt;&amp;takeProfitEp=&lt;takeProfitEp&gt;&amp;stopLoss=&lt;stopLoss&gt;&amp;stopLossEp=&lt;stopLossEp&gt;&amp;pegOffsetValueEp=&lt;pegOffsetValueEp&gt;&amp;pegPriceType=&lt;pegPriceType&gt;
+/orders/replace?symbol=&lt;symbol&gt;&amp;orderID=&lt;orderID&gt;&amp;origClOrdID=&lt;origClOrdID&gt;&amp;price=&lt;price&gt;&amp;priceEp=&lt;priceEp&gt;&amp;orderQty=&lt;orderQty&gt;&amp;stopPx=&lt;stopPx&gt;&amp;stopPxEp=&lt;stopPxEp&gt;&amp;takeProfit=&lt;takeProfit&gt;&amp;takeProfitEp=&lt;takeProfitEp&gt;&amp;stopLoss=&lt;stopLoss&gt;&amp;stopLossEp=&lt;stopLossEp&gt;&amp;pegOffsetValueEp=&lt;pegOffsetValueEp&gt;&amp;pegPriceType=&lt;pegPriceType&gt;
 </code></pre></div>
 <table><thead>
 <tr>
@@ -3207,11 +3207,6 @@ when price moves in profitable direction to order-side(buy/sell).</li>
 <td>origClOrdID</td>
 <td>No</td>
 <td>Original clOrderID</td>
-</tr>
-<tr>
-<td>clOrdID</td>
-<td>No</td>
-<td>New clOrdID</td>
 </tr>
 <tr>
 <td>price</td>
@@ -6724,7 +6719,7 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
 <blockquote>
 <p>Request format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>PUT /g-orders/replace?symbol=&lt;symbol&gt;&amp;orderID=&lt;orderID&gt;&amp;origClOrdID=&lt;origClOrdID&gt;&amp;clOrdID=&lt;clOrdID&gt;&amp;price=&lt;price&gt;&amp;priceRp=&lt;priceRp&gt;&amp;orderQtyRq=&lt;orderQtyRq&gt;&amp;stopPxRp=&lt;stopPxRp&gt;&amp;takeProfitRp=&lt;takeProfitRp&gt;&amp;stopLossRp=&lt;stopLossRp&gt;&amp;pegOffsetValueRp=&lt;pegOffsetValueRp&gt;&amp;pegPriceType=&lt;pegPriceType&gt;&amp;triggerType=&lt;triggerType&gt;&amp;posSide=&lt;posSide&gt;
+<div class="highlight"><pre class="highlight plaintext"><code>PUT /g-orders/replace?symbol=&lt;symbol&gt;&amp;orderID=&lt;orderID&gt;&amp;origClOrdID=&lt;origClOrdID&gt;&amp;price=&lt;price&gt;&amp;priceRp=&lt;priceRp&gt;&amp;orderQtyRq=&lt;orderQtyRq&gt;&amp;stopPxRp=&lt;stopPxRp&gt;&amp;takeProfitRp=&lt;takeProfitRp&gt;&amp;stopLossRp=&lt;stopLossRp&gt;&amp;pegOffsetValueRp=&lt;pegOffsetValueRp&gt;&amp;pegPriceType=&lt;pegPriceType&gt;&amp;triggerType=&lt;triggerType&gt;&amp;posSide=&lt;posSide&gt;
 </code></pre></div>
 <blockquote>
 <p>Response sample</p>
@@ -6786,11 +6781,6 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
 <td>origClOrdID</td>
 <td>-</td>
 <td>original clOrderID, cannot be changed</td>
-</tr>
-<tr>
-<td>clOrdID</td>
-<td>-</td>
-<td>new clOrdID</td>
 </tr>
 <tr>
 <td>priceRp</td>
@@ -10115,8 +10105,56 @@ while funding rate symbol follows a pattern <code>.&lt;BASECURRENCY&gt;&lt;QUOTE
 <blockquote>
 <p>Request format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>PUT /spot/orders?symbol=&lt;symbol&gt;&amp;orderID=&lt;orderID&gt;&amp;origClOrdID=&lt;origClOrdID&gt;&amp;clOrdID=&lt;clOrdID&gt;&amp;priceEp=&lt;priceEp&gt;&amp;baseQtyEV=&lt;baseQtyEV&gt;&amp;quoteQtyEv=&lt;quoteQtyEv&gt;&amp;stopPxEp=&lt;stopPxEp&gt; 
-</code></pre></div><h2 id='cancel-order'>Cancel order</h2>
+<div class="highlight"><pre class="highlight plaintext"><code>PUT /spot/orders?symbol=&lt;symbol&gt;&amp;orderID=&lt;orderID&gt;&amp;origClOrdID=&lt;origClOrdID&gt;&amp;priceEp=&lt;priceEp&gt;&amp;baseQtyEV=&lt;baseQtyEV&gt;&amp;quoteQtyEv=&lt;quoteQtyEv&gt;&amp;stopPxEp=&lt;stopPxEp&gt; 
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td></td>
+<td>Yes</td>
+<td>order symbol, cannot be changed</td>
+</tr>
+<tr>
+<td>orderID</td>
+<td></td>
+<td>-</td>
+<td>order id, cannot be changed</td>
+</tr>
+<tr>
+<td>origClOrdID</td>
+<td></td>
+<td>-</td>
+<td>origClOrdID , cannot be changed</td>
+</tr>
+<tr>
+<td>priceRp</td>
+<td></td>
+<td>-</td>
+<td>new order price, real value</td>
+</tr>
+<tr>
+<td>orderQtyRq</td>
+<td></td>
+<td>Yes</td>
+<td>new orderQty, real value</td>
+</tr>
+<tr>
+<td>stopPxRp</td>
+<td></td>
+<td>Yes</td>
+<td>new stop price, real value</td>
+</tr>
+</tbody></table>
+
+<p>orderID and origClOrdID can&#39;t both be empty</p>
+<h2 id='cancel-order'>Cancel order</h2>
 <blockquote>
 <p>Request format</p>
 </blockquote>
