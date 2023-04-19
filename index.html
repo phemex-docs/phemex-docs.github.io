@@ -1202,13 +1202,13 @@
                     <a href="#spot-sub-to-main-transfer-for-sub-account-only" class="toc-h2 toc-link" data-title="Spot sub to main transfer (for sub-account only)">Spot sub to main transfer (for sub-account only)</a>
                   </li>
                   <li>
-                    <a href="#query-spot-sub-to-main-transfer" class="toc-h2 toc-link" data-title="Query spot sub to main transfer">Query spot sub to main transfer</a>
+                    <a href="#query-transfer-history-of-spot-accounts-between-main-and-sub" class="toc-h2 toc-link" data-title="Query transfer history of spot accounts between main and sub">Query transfer history of spot accounts between main and sub</a>
                   </li>
                   <li>
                     <a href="#futures-sub-to-main-transfer-for-sub-account-only" class="toc-h2 toc-link" data-title="Futures sub to main transfer (for sub-account only)">Futures sub to main transfer (for sub-account only)</a>
                   </li>
                   <li>
-                    <a href="#query-futures-sub-to-main-transfer" class="toc-h2 toc-link" data-title="Query futures sub to main transfer">Query futures sub to main transfer</a>
+                    <a href="#query-transfer-history-of-contract-accounts-between-main-and-sub" class="toc-h2 toc-link" data-title="Query transfer history of contract accounts between main and sub">Query transfer history of contract accounts between main and sub</a>
                   </li>
                   <li>
                     <a href="#universal-transfer-main-account-only-transfer-between-sub-to-main-main-to-sub-or-sub-to-sub" class="toc-h2 toc-link" data-title="Universal transfer (main account only) - transfer between sub to main, main to sub or sub to sub">Universal transfer (main account only) - transfer between sub to main, main to sub or sub to sub</a>
@@ -12596,7 +12596,7 @@ While for private channels like account/position/order data, the client should s
 <td>Unique request Key, system will generate if its empty</td>
 </tr>
 </tbody></table>
-<h2 id='query-spot-sub-to-main-transfer'>Query spot sub to main transfer</h2>
+<h2 id='query-transfer-history-of-spot-accounts-between-main-and-sub'>Query transfer history of spot accounts between main and sub</h2>
 <blockquote>
 <p>Request format</p>
 </blockquote>
@@ -12618,6 +12618,10 @@ While for private channels like account/position/order data, the client should s
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
+<ul>
+<li>Request parameters</li>
+</ul>
+
 <table><thead>
 <tr>
 <th>Field</th>
@@ -12661,6 +12665,24 @@ While for private channels like account/position/order data, the client should s
 <td>False</td>
 <td>Page size</td>
 <td>Default to 20, max 200</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>Response Fields </li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status</td>
+<td>Integer</td>
+<td>PENDING(0), DONE(10), FAILED(11)</td>
 </tr>
 </tbody></table>
 <h2 id='futures-sub-to-main-transfer-for-sub-account-only'>Futures sub to main transfer (for sub-account only)</h2>
@@ -12717,7 +12739,7 @@ While for private channels like account/position/order data, the client should s
 <td>Unique request Key, system will generate if its empty</td>
 </tr>
 </tbody></table>
-<h2 id='query-futures-sub-to-main-transfer'>Query futures sub to main transfer</h2>
+<h2 id='query-transfer-history-of-contract-accounts-between-main-and-sub'>Query transfer history of contract accounts between main and sub</h2>
 <blockquote>
 <p>Request format</p>
 </blockquote>
@@ -12738,6 +12760,10 @@ While for private channels like account/position/order data, the client should s
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
+<ul>
+<li>Request parameters</li>
+</ul>
+
 <table><thead>
 <tr>
 <th>Field</th>
@@ -12781,6 +12807,24 @@ While for private channels like account/position/order data, the client should s
 <td>False</td>
 <td>Page size</td>
 <td>Default to 20, max 200</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>Response Fields </li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>bizCode</td>
+<td>Integer</td>
+<td>PARENT_TO_SUB_TRANSFER(3), SUB_TO_PARENT_TRANSFER(4)</td>
 </tr>
 </tbody></table>
 <h2 id='universal-transfer-main-account-only-transfer-between-sub-to-main-main-to-sub-or-sub-to-sub'>Universal transfer (main account only) - transfer between sub to main, main to sub or sub to sub</h2>
