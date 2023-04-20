@@ -3236,7 +3236,6 @@ GET /g-accounts/accountPositions?currency=<currency>&symbol=<symbol>
         "bankruptCommRv": "1271.9",
         "bankruptPriceRp": "1271.9",
         "buyValueToCostRr": "0.1",
-        "crossMargin": true,
         "cumClosedPnlRv": "1271.9",
         "cumFundingFeeRv": "1271.9",
         "cumTransactFeeRv": "1271.9",
@@ -3275,11 +3274,18 @@ GET /g-accounts/accountPositions?currency=<currency>&symbol=<symbol>
   "msg": "string"
 }
 ```
+* Request parameters
 
 | Field    | Type   | Required | Description |
 | -------- | ------ | -------- | ----------- |
 | symbol   | String | -        |             |
 | currency | String | Yes      |             |
+
+* Response Fields 
+
+| Field      | Type   | Description                                                 |
+|------------|--------|-------------------------------------------------------------|
+| leverageRr | Int    | when negative, cross margin; when positive, isolated margin |
 
 ## Query Account Positions with unrealized PNL
 
@@ -3311,7 +3317,6 @@ GET /g-accounts/positions?currency=<currency>
         "currency": "USDT",
         "side": "Buy",
         "positionStatus": "Normal",
-        "crossMargin": false,
         "leverageRr": "-10",
         "initMarginReqRr": "0.1",
         "maintMarginReqRr": "0.01",
@@ -3397,11 +3402,17 @@ GET /g-accounts/positions?currency=<currency>
   }
 }
 ```
+* Request parameters
 
 | Field    | Type   | Required | Description |
 | -------- | ------ | -------- | ----------- |
 | currency | String | Yes      |             |
 
+* Response Fields 
+
+| Field      | Type   | Description                                                 |
+|------------|--------|-------------------------------------------------------------|
+| leverageRr | Int    | when negative, cross margin; when positive, isolated margin |
 
 <b>Note</b> Highly recommend calculating `unRealisedPnlRv` in client side with latest `markPriceRp` to avoid ratelimit
 penalty.
@@ -4235,7 +4246,7 @@ GET /api-data/g-futures/trades?symbol=<symbol>
 | offset   | Integer        | False    | page start from 0         | start from 0, default 0         |
 | limit    | Integer        | False    | page size                 | default 20, max 200             |
 
-## Get Funding Rate History
+## Query Funding Rate History
 
 > Request format
 
