@@ -2028,14 +2028,6 @@ PUT /margin-trade/orders/create?symbol=<symbol>&trigger=<trigger>&clOrdID=<clOrd
 | paybackQtyRq    | String | No      |                           |                 |
 
 
-## Amend order
-
-> Request format
-
-```
-PUT /margin-trade/orders?symbol=<symbol>&orderID=<orderID>&origClOrdID=<origClOrdID>&clOrdID=<clOrdID>&priceRp=<priceRp>&baseQtyRq=<baseQtyRq>&quoteQtyRq=<quoteQtyRq>&stopPxRp=<stopPxRp> 
-```
-
 ## Cancel order
 
 > Request format
