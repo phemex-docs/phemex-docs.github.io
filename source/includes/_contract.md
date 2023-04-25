@@ -4246,7 +4246,7 @@ GET /api-data/g-futures/trades?symbol=<symbol>
 | offset   | Integer        | False    | page start from 0         | start from 0, default 0         |
 | limit    | Integer        | False    | page size                 | default 20, max 200             |
 
-## Query Funding Rate History
+## Get Funding Rate History
 
 > Request format
 
