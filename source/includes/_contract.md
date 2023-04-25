@@ -1570,7 +1570,7 @@ GET /exchange/public/nomics/trades?market=<symbol>&since=<since>
 
 ```
 
-## Get Funding Rate History
+## Query funding rate history
 
 > Request format
 
@@ -1614,6 +1614,38 @@ GET /api-data/public/data/funding-rate-history?symbol=<symbol>&start=<start>&end
 * If the `start` parameter is provided while `end` is not, the API will return from `start` plus `limit` size of data.
 * If the number of items between `start` and `end` exceeds the specified `limit`, the API will return from `start` plus `limit` size of data.
 * The API returns data in ascending order based on the `fundingTime` attribute.
+
+## Query funding fee history
+
+> Request format
+
+```
+GET /api-data/futures/funding-fees?symbol=<symbol>
+```
+
+* Request parameters
+
+| Parameter | Type    | Required | Description                   | Case                |
+|-----------|---------|----------|-------------------------------|---------------------|
+| symbol    | String  | True     | the currency to query         | uBTCUSDT...         |
+| offset    | Integer | False    | page starts from 0            | default 0           |
+| limit     | Integer | False    | page size                     | default 20, max 200 |
+
+> Response sample
+[
+  {
+    "createTime": 0,
+    "currency": "string",
+    "execFeeEv": 0,
+    "execPriceEp": 0,
+    "execQty": 0,
+    "execValueEv": 0,
+    "feeRateEr": 0,
+    "fundingRateEr": 0,
+    "side": "string",
+    "symbol": "string"
+  }
+]
 
 # Contract Websocket API
 
@@ -3707,7 +3739,7 @@ GET /exchange/order/v2/tradingList?symbol=<symbol>&currency=<currency>&execType=
 |-----------|---------|----------|------------------------------------------------|--------------------------------------------------------------------|
 | symbol    | String  | No       | which symbol needs to query                    | [Trading symbols](#symbpricesub)                                   |
 | currency  | String  | Yes      | which currency needs to query                  |                                                                    |
-| execType  | Integer | No       | trade type code list filter                  | Trade(1),Funding(4),LiqTrade(6),AdlTrade(7) |
+| execType  | Integer | No       | trade type code list filter                    | Trade(1),LiqTrade(6),AdlTrade(7)                                   |
 | offset    | Integer | Yes      | offset to resultset                            |                                                                    |
 | limit     | Integer | Yes      | limit of resultset, max 200                    |                                                                    |
 | withCount | boolean | No       | if true, result info will contains count info. | true,false                                                         |
@@ -3727,7 +3759,7 @@ GET /exchange/order/v2/tradingList?symbol=<symbol>&currency=<currency>&execType=
 | Field      | Type    | Description            | Possible values                                                    |
 |------------|---------|------------------------|--------------------------------------------------------------------|
 | execStatus | Integer | exec status code | Aborted(2), MakerFill(6), TakerFill(7), Expired(8), Canceled(11), CreateRejected(19)|
-| tradeType | Integer | trade type code | Trade(1),Funding(4),LiqTrade(6),AdlTrade(7) |
+| tradeType | Integer | trade type code | Trade(1),LiqTrade(6),AdlTrade(7) |
 | side | Integer | side code | Buy(1),Sell(2) |
 | orderType | Integer | order type code | Market (1),Limit (2),Stop(3),StopLimit (4),MarketIfTouched (5),LimitIfTouched (6)|
 | ordStatus | Integer | order status code | Created(0),Untriggered(1),Deactivated(2),Triggered(3),Rejected(4),New(5),PartiallyFilled(6),Filled(7),Canceled(8)|
@@ -4235,7 +4267,7 @@ GET /api-data/g-futures/trades?symbol=<symbol>
 | offset   | Integer        | False    | page start from 0         | start from 0, default 0         |
 | limit    | Integer        | False    | page size                 | default 20, max 200             |
 
-## Get Funding Rate History
+## Query funding rate history
 
 > Request format
 
@@ -4279,6 +4311,38 @@ GET /api-data/public/data/funding-rate-history?symbol=<symbol>&start=<start>&end
 * If the `start` parameter is provided while `end` is not, the API will return from `start` plus `limit` size of data.
 * If the number of items between `start` and `end` exceeds the specified `limit`, the API will return from `start` plus `limit` size of data.
 * The API returns data in ascending order based on the `fundingTime` attribute.
+
+## Query funding fee history
+
+> Request format
+
+```
+GET /api-data/g-futures/funding-fees?symbol=<symbol>
+```
+
+* Request parameters
+
+| Parameter | Type    | Required | Description                   | Case                |
+|-----------|---------|----------|-------------------------------|---------------------|
+| symbol    | String  | True     | the currency to query         | BTCUSDT...          |
+| offset    | Integer | False    | page starts from 0            | default 0           |
+| limit     | Integer | False    | page size                     | default 20, max 200 |
+
+> Response sample
+[
+  {
+    "symbol": "ETHUSDT",
+    "currency": "USDT",
+    "execQtyRq": "0.16",
+    "side": "Buy",
+    "execPriceRp": "1322.84500459",
+    "execValueRv": "211.65520073",
+    "fundingRateRr": "0.0001",
+    "feeRateRr": "0.0001",
+    "execFeeRv": "0.02116552",
+    "createTime": 1671004800021
+  }
+]
 
 # Hedged Contract Websocket API
 * Each client is required to actively send heartbeat (ping) message to Phemex data gateway ('DataGW' in short) with interval less than 30 seconds, otherwise DataGW will drop the connection. If a client sends a ping message, DataGW will reply with a pong message.
