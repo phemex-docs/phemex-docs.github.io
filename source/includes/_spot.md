@@ -2067,6 +2067,315 @@ GET /margin-trade/orders/active?symbol=<symbol>&clOrDID=<clOrdID>
 GET /margin-trade/orders?symbol=<symbol>
 ```
 
+## Query margin orders details
+
+> Request format
+
+```
+GET /margin/orders?symbol=<symbol>&ordStatus=<ordStatus>&ordType=<ordType>&start=<start>&end=<end>&pageNum=<pageNum>&pageSize=<pageSize>
+```
+
+* Request parameters
+
+| Parameter | Type    | Required | Description                  | Case     |
+|-----------|---------|----------|------------------------------|----------|
+| symbol    | String  | NO       | spot symbol                  | sBTCUSDT |
+| ordStatus | String  | NO       |                              | Filled   |
+| ordType   | String  | NO       |                              | Market   |
+| start     | Long    | NO       | start order index, default 0 |          |
+| end       | Long    | NO       | end order index, default 0   |          |
+| pageNum   | Long    | NO       | page number, default 0       |          |
+| pageSize  | Integer | NO       | pageable size, default 20    |          |
+
+
+> Response Format
+
+```json
+{
+  "code": 0,
+  "msg": "OK",
+  "data": {
+    "total": 1,
+    "rows": [
+      {
+        "orderId": "f6256e4f-0f0f-40bd-b26e-2c3e5afd02f5",
+        "clOrdId": "2337fc19-7db0-f0c7-6ff9-404234a78c3c",
+        "stopPxRp": "0",
+        "avgPriceRp": "24747.95059307",
+        "qtyType": "ByBase",
+        "leavesBaseQtyRq": "0",
+        "leavesQuoteQtyRq": "0",
+        "baseQtyRq": "0.349332",
+        "feeCurrency": "USDT",
+        "stopDirection": "UNSPECIFIED",
+        "symbol": "sBTCUSDT",
+        "side": "Sell",
+        "quoteQtyRq": "0",
+        "priceRp": "22211.84",
+        "ordType": "Market",
+        "timeInForce": "ImmediateOrCancel",
+        "ordStatus": "Filled",
+        "execStatus": "TakerFill",
+        "createTimeNs": 1676893028372924849,
+        "cumFeeRv": "8.64525109",
+        "cumBaseValueRv": "0.349332",
+        "cumQuoteValueRv": "8645.25107658",
+        "detailVos": null
+      }
+    ]
+  }
+}
+```
+
+## Query margin order trades details
+
+> Request format
+
+```
+GET /margin/orders/trades?symbol=<symbol>&execType=<execType>&start=<start>&end=<end>&pageNum=<pageNum>&pageSize=<pageSize>
+```
+
+* Request parameters
+
+| Parameter | Type    | Required | Description                  | Case     |
+|-----------|---------|----------|------------------------------|----------|
+| symbol    | String  | NO       | spot symbol                  | sBTCUSDT |
+| execType  | String  | NO       |                              | Trade    |
+| start     | Long    | NO       | start order index, default 0 |          |
+| end       | Long    | NO       | end order index, default 0   |          |
+| pageNum   | Long    | NO       | page number, default 0       |          |
+| pageSize  | Integer | NO       | pageable size, default 20    |          |
+
+
+> Response format
+
+```json
+{
+    "code": 0,
+    "msg": "OK",
+    "data": {
+        "total": 1,
+        "rows": [
+            {
+                "transactTimeNs": 1675181154118252379,
+                "execType": "Amend",
+                "qtyType": "ByQuote",
+                "clOrdId": "6bbbf1d2-42a1-70ef-e272-168b524353b4",
+                "orderId": "c111c403-ace7-43ec-a7a6-6c6ef012fdfe",
+                "symbol": "sBTCUSDT",
+                "side": "Buy",
+                "priceRp": "25437.04",
+                "baseQtyRq": "0",
+                "quoteQtyRq": "2443.28",
+                "action": "New",
+                "execStatus": "TakerFill",
+                "ordStatus": "PartiallyFilled",
+                "ordType": "Market",
+                "execInst": "None",
+                "timeInForce": "ImmediateOrCancel",
+                "stopDirection": "UNSPECIFIED",
+                "stopPxRp": "0",
+                "execId": "e7717c8a-5fd2-5360-a7e3-de5c29f24639",
+                "execPriceRp": "23124.59",
+                "execBaseQtyRq": "0.01126",
+                "execQuoteQtyRq": "260.3828834",
+                "leavesBaseQtyRq": "0",
+                "leavesQuoteQtyRq": "2182.8971166",
+                "execFeeRv": "0.00001126",
+                "feeRateRr": "0.001",
+                "baseCurrency": "BTC",
+                "quoteCurrency": "USDT",
+                "feeCurrency": "BTC"
+            }
+        ]
+    }
+}
+```
+
+## Query margin borrow interest history
+
+> Request format
+
+```
+GET /margin/borrow/interests?currency=<currencyList>&start=<start>&end=<end>&pageNum=<pageNum>&pageSize=<pageSize>
+```
+
+* Request parameters
+
+| Parameter | Type    | Required | Description    | Case      |
+|-----------|---------|----------|----------------|-----------|
+| currency  | List    | NO       | currency list  | USDT,BTC  |
+| start     | Long    | NO       | default 0      |           |
+| end       | Long    | NO       | default 0      |           |
+| pageNum   | Long    | NO       | default 0      |           |
+| pageSize  | Integer | NO       | default 20     |           |
+
+
+> Response format
+
+```json
+{
+    "code": 0,
+    "msg": "OK",
+    "data": {
+        "total": 1,
+        "rows": [
+            {
+                "borrowCurrency": "USDT",
+                "interestCalcTime": 1678975566487,
+                "interestCurrency": "USDT",
+                "hourlyInterestRv": "0.00013254",
+                "hourlyRateRr": "0.00000551",
+                "annualRateRr": "0.0482676"
+            }
+        ]
+    }
+}
+```
+
+## Query margin borrow history records
+
+> Request format
+
+```
+GET /margin/borrow?currency=<currency>&start=<start>&end=<end>&pageNum=<pageNum>&pageSize=<pageSize>
+```
+
+* Request parameters
+
+| Parameter | Type    | Required | Description | Case |
+|-----------|---------|----------|-------------|------|
+| Currency  | String  | NO       |             | USDT |
+| start     | Long    | NO       | default 0   |      |
+| end       | Long    | NO       | default 0   |      |
+| pageNum   | Long    | NO       | default 0   |      |
+| pageSize  | Integer | NO       | default 20  |      |
+
+
+> Response format
+
+```json
+{
+  "code": 0,
+  "msg": "OK",
+  "data": {
+    "total": 1,
+    "rows": [
+      {
+        "currency": "USDT",
+        "borrowTime": 1677211672675,
+        "amountRv": "94.05",
+        "type": 1,
+        "status": "Success"
+      }
+    ]
+  }
+}
+```
+
+## Query margin payback history
+
+> Request format
+
+```
+GET /margin/payback?currency=<currency>&start=<start>&end=<end>&pageNum=<pageNum>&pageSize=<pageSize>
+```
+
+* Request parameters
+
+| Parameter | Type    | Required | Description | Case |
+|-----------|---------|----------|-------------|------|
+| currency  | String  | NO       |             | USDT |
+| start     | Long    | NO       | default 0   |      |
+| end       | Long    | NO       | default 0   |      |
+| pageNum   | Long    | NO       | default 0   |      |
+| pageSize  | Integer | NO       | default 20  |      |
+
+
+> Response format
+
+```json
+{
+    "code": 0,
+    "msg": "OK",
+    "data": {
+        "total": 1,
+        "rows": [
+            {
+                "currency": "USDT",
+                "repayTime": 1678976978535,
+                "principalAmountRv": "24.05469895",
+                "interestAmountRv": "0.019881",
+                "liqFeeRv": "0",
+                "type": 1,
+                "status": "Success"
+            }
+        ]
+    }
+}
+```
+
+## Post margin borrow request
+
+> Request format
+
+```
+POST /margin/borrow?currency=<currency>&amountRv=<amountRv>
+```
+
+* Request parameters
+
+| Parameter | Type   | Required | Description              | Case    |
+|-----------|--------|----------|--------------------------|---------|
+| currency  | String | YES      | borrow currency          | USDT    |
+| amountRv  | String | YES      | borrow amount real value | 1000.12 |
+
+
+> Response format
+
+```json
+{
+  "code": 0,
+  "msg": "OK",
+  "data": {
+    "maxBorrowAmountRq": "80000",
+    "borrowedAmountRq": "40",
+    "currency": "USDT"
+  }
+}
+```
+
+## Post margin payback history
+
+> Request format
+
+```
+POST /margin/payback?currency=<currency>&amountRv=<amountRv>
+```
+
+* Request parameters
+
+
+| Parameter | Type   | Required | Description               | Case    |
+|-----------|--------|----------|---------------------------|---------|
+| currency  | String | YES      | payback currency          | USDT    |
+| amountRv  | String | YES      | payback amount real value | 1000.12 |
+
+> Response format
+
+```json
+{
+  "code": 0,
+  "msg": "OK",
+  "data": {
+    "maxBorrowAmountRq": "80000",
+    "borrowedAmountRq": "40",
+    "currency": "USDT"
+  }
+}
+```
+
+
 ## Query wallets
 
 Query spot wallet by currency.
@@ -2109,6 +2418,7 @@ the same as the spot api
 
 [Query 24 hours ticker](#query-24-hours-ticker-2)
 the same as the spot api
+
 
 # Margin Trading Websocket API
 
@@ -2193,3 +2503,5 @@ the same as above Spot Websocket API
 	"type": "incremental"
 }
 ```
+
+
