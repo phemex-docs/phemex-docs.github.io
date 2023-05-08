@@ -839,7 +839,10 @@
                     <a href="#query-history-trades-by-symbol" class="toc-h2 toc-link" data-title="Query history trades by symbol">Query history trades by symbol</a>
                   </li>
                   <li>
-                    <a href="#get-funding-rate-history" class="toc-h2 toc-link" data-title="Get Funding Rate History">Get Funding Rate History</a>
+                    <a href="#query-funding-rate-history" class="toc-h2 toc-link" data-title="Query funding rate history">Query funding rate history</a>
+                  </li>
+                  <li>
+                    <a href="#query-funding-fee-history" class="toc-h2 toc-link" data-title="Query funding fee history">Query funding fee history</a>
                   </li>
               </ul>
           </li>
@@ -981,7 +984,10 @@
                     <a href="#query-trades-history" class="toc-h2 toc-link" data-title="Query Trades History">Query Trades History</a>
                   </li>
                   <li>
-                    <a href="#get-funding-rate-history-2" class="toc-h2 toc-link" data-title="Get Funding Rate History">Get Funding Rate History</a>
+                    <a href="#query-funding-rate-history-2" class="toc-h2 toc-link" data-title="Query funding rate history">Query funding rate history</a>
+                  </li>
+                  <li>
+                    <a href="#query-funding-fee-history-2" class="toc-h2 toc-link" data-title="Query funding fee history">Query funding fee history</a>
                   </li>
               </ul>
           </li>
@@ -4821,7 +4827,7 @@ The API has <a href="#rate-limits">ratelimits</a> rule, and please check the <i>
   </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre></div><h2 id='get-funding-rate-history'>Get Funding Rate History</h2>
+</span></code></pre></div><h2 id='query-funding-rate-history'>Query funding rate history</h2>
 <blockquote>
 <p>Request format</p>
 </blockquote>
@@ -4896,6 +4902,65 @@ The API has <a href="#rate-limits">ratelimits</a> rule, and please check the <i>
 <li>If the number of items between <code>start</code> and <code>end</code> exceeds the specified <code>limit</code>, the API will return from <code>start</code> plus <code>limit</code> size of data.</li>
 <li>The API returns data in ascending order based on the <code>fundingTime</code> attribute.</li>
 </ul>
+<h2 id='query-funding-fee-history'>Query funding fee history</h2>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /api-data/futures/funding-fees?symbol=&lt;symbol&gt;
+</code></pre></div>
+<ul>
+<li>Request parameters</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Case</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>String</td>
+<td>True</td>
+<td>the currency to query</td>
+<td>uBTCUSDT...</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>Integer</td>
+<td>False</td>
+<td>page starts from 0</td>
+<td>default 0</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>Integer</td>
+<td>False</td>
+<td>page size</td>
+<td>default 20, max 200</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response sample
+[
+  {
+    &quot;createTime&quot;: 0,
+    &quot;currency&quot;: &quot;string&quot;,
+    &quot;execFeeEv&quot;: 0,
+    &quot;execPriceEp&quot;: 0,
+    &quot;execQty&quot;: 0,
+    &quot;execValueEv&quot;: 0,
+    &quot;feeRateEr&quot;: 0,
+    &quot;fundingRateEr&quot;: 0,
+    &quot;side&quot;: &quot;string&quot;,
+    &quot;symbol&quot;: &quot;string&quot;
+  }
+]</p>
+</blockquote>
 <h1 id='contract-websocket-api'>Contract Websocket API</h1><h2 id='heartbeat'>Heartbeat</h2>
 <blockquote>
 <p>Request</p>
@@ -7074,7 +7139,6 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
         </span><span class="nl">"bankruptCommRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1271.9"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"bankruptPriceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1271.9"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"buyValueToCostRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"crossMargin"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="nl">"cumClosedPnlRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1271.9"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"cumFundingFeeRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1271.9"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"cumTransactFeeRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1271.9"</span><span class="p">,</span><span class="w">
@@ -7113,6 +7177,10 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
   </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
+<ul>
+<li>Request parameters</li>
+</ul>
+
 <table><thead>
 <tr>
 <th>Field</th>
@@ -7132,6 +7200,24 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
 <td>String</td>
 <td>Yes</td>
 <td></td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>Response Fields </li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>leverageRr</td>
+<td>Int</td>
+<td>when negative, cross margin; when positive, isolated margin</td>
 </tr>
 </tbody></table>
 <h2 id='query-account-positions-with-unrealized-pnl'>Query Account Positions with unrealized PNL</h2>
@@ -7162,7 +7248,6 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
         </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Buy"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"positionStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Normal"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"crossMargin"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
         </span><span class="nl">"leverageRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-10"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"initMarginReqRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"maintMarginReqRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.01"</span><span class="p">,</span><span class="w">
@@ -7248,6 +7333,10 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
+<ul>
+<li>Request parameters</li>
+</ul>
+
 <table><thead>
 <tr>
 <th>Field</th>
@@ -7261,6 +7350,24 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
 <td>String</td>
 <td>Yes</td>
 <td></td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>Response Fields </li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>leverageRr</td>
+<td>Int</td>
+<td>when negative, cross margin; when positive, isolated margin</td>
 </tr>
 </tbody></table>
 
@@ -7772,7 +7879,7 @@ penalty.</p>
 <td>Integer</td>
 <td>No</td>
 <td>trade type code list filter</td>
-<td>Trade(1),Funding(4),LiqTrade(6),AdlTrade(7)</td>
+<td>Trade(1),LiqTrade(6),AdlTrade(7)</td>
 </tr>
 <tr>
 <td>offset</td>
@@ -7847,7 +7954,7 @@ penalty.</p>
 <td>tradeType</td>
 <td>Integer</td>
 <td>trade type code</td>
-<td>Trade(1),Funding(4),LiqTrade(6),AdlTrade(7)</td>
+<td>Trade(1),LiqTrade(6),AdlTrade(7)</td>
 </tr>
 <tr>
 <td>side</td>
@@ -8655,7 +8762,7 @@ penalty.</p>
 <td>default 20, max 200</td>
 </tr>
 </tbody></table>
-<h2 id='get-funding-rate-history-2'>Get Funding Rate History</h2>
+<h2 id='query-funding-rate-history-2'>Query funding rate history</h2>
 <blockquote>
 <p>Request format</p>
 </blockquote>
@@ -8730,6 +8837,65 @@ penalty.</p>
 <li>If the number of items between <code>start</code> and <code>end</code> exceeds the specified <code>limit</code>, the API will return from <code>start</code> plus <code>limit</code> size of data.</li>
 <li>The API returns data in ascending order based on the <code>fundingTime</code> attribute.</li>
 </ul>
+<h2 id='query-funding-fee-history-2'>Query funding fee history</h2>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /api-data/g-futures/funding-fees?symbol=&lt;symbol&gt;
+</code></pre></div>
+<ul>
+<li>Request parameters</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Case</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>String</td>
+<td>True</td>
+<td>the currency to query</td>
+<td>BTCUSDT...</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>Integer</td>
+<td>False</td>
+<td>page starts from 0</td>
+<td>default 0</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>Integer</td>
+<td>False</td>
+<td>page size</td>
+<td>default 20, max 200</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response sample
+[
+  {
+    &quot;symbol&quot;: &quot;ETHUSDT&quot;,
+    &quot;currency&quot;: &quot;USDT&quot;,
+    &quot;execQtyRq&quot;: &quot;0.16&quot;,
+    &quot;side&quot;: &quot;Buy&quot;,
+    &quot;execPriceRp&quot;: &quot;1322.84500459&quot;,
+    &quot;execValueRv&quot;: &quot;211.65520073&quot;,
+    &quot;fundingRateRr&quot;: &quot;0.0001&quot;,
+    &quot;feeRateRr&quot;: &quot;0.0001&quot;,
+    &quot;execFeeRv&quot;: &quot;0.02116552&quot;,
+    &quot;createTime&quot;: 1671004800021
+  }
+]</p>
+</blockquote>
 <h1 id='hedged-contract-websocket-api'>Hedged Contract Websocket API</h1>
 <ul>
 <li>Each client is required to actively send heartbeat (ping) message to Phemex data gateway (&#39;DataGW&#39; in short) with interval less than 30 seconds, otherwise DataGW will drop the connection. If a client sends a ping message, DataGW will reply with a pong message.</li>
