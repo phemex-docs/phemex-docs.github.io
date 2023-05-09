@@ -558,6 +558,36 @@ GET /api-data/spots/funds?currency=<currency>
 ]
 ```
 
+<aside class="notice">
+Response data is limited to 3 months.
+</aside>
+
+| Field         | Type   | Required | Description                 | Possible Values       |
+|---------------|--------|----------|-----------------------------|-----------------------|
+| quoteCurrency | String | True     | the quote currency to query | USDT,TRY,BRZ,USDC, ...|
+
+## Query fee rate by quote currency
+
+> Request format
+
+```
+GET /api-data/spots/fee-rate?quoteCurrency=<quoteCurrency>
+```
+
+> Response format
+
+```json
+{
+  "symbolFeeRates": [
+    {
+      "takerFeeRateEr": 80000,
+      "makerFeeRateEr": 80000,
+      "symbol": "sETHTRY"
+    }
+  ]
+}
+```
+
 | Field    | Type           | Required | Description               | Possible Values                 |
 |----------|----------------|----------|---------------------------|---------------------------------|
 | currency | String         | True     | the currency to query     | BTC,ETH, USDT ...               |
