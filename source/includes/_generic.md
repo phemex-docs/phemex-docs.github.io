@@ -7,9 +7,9 @@ Welcome to the [Phemex](https://phemex.com) API documentation. We offer REST and
   * High ratelimit endpoint: **https://vapi.phemex.com**
   * TestNet endpoint: **https://testnet-api.phemex.com**
 * WebSocket API base endpoints:
-  * Default endpoint: **wss://phemex.com/ws**
+  * Default endpoint: **wss://api.phemex.com/md**
   * High ratelimit endpoint: **wss://vapi.phemex.com/ws**
-  * TestNet endpoint: **wss://testnet.phemex.com/ws**
+  * TestNet endpoint: **wss://testnet-api.phemex.com/md**
 * Phemex provides HTTP Rest API for client to operate Orders, all endpoints return a JSON object.
 
 ## REST API Standards
