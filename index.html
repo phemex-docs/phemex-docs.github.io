@@ -844,6 +844,12 @@
                   <li>
                     <a href="#query-funding-fee-history" class="toc-h2 toc-link" data-title="Query funding fee history">Query funding fee history</a>
                   </li>
+                  <li>
+                    <a href="#query-contract-fee-rate" class="toc-h2 toc-link" data-title="Query contract fee rate">Query contract fee rate</a>
+                  </li>
+                  <li>
+                    <a href="#query-funds-detail" class="toc-h2 toc-link" data-title="Query Funds Detail">Query Funds Detail</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -1115,6 +1121,9 @@
                   </li>
                   <li>
                     <a href="#query-funds-history" class="toc-h2 toc-link" data-title="Query funds history">Query funds history</a>
+                  </li>
+                  <li>
+                    <a href="#query-fee-rate-by-quote-currency" class="toc-h2 toc-link" data-title="Query fee rate by quote currency">Query fee rate by quote currency</a>
                   </li>
                   <li>
                     <a href="#query-order-book-3" class="toc-h2 toc-link" data-title="Query order book">Query order book</a>
@@ -2813,6 +2822,62 @@ Because the number of interfaces in Other group may grow over time, the list bel
 <tr>
 <td>Merged</td>
 <td>Merged position when pos mode is &#39;OneWay&#39;</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>Funds Biz Type</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Description</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>REALIZED_PNL</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TRANSFER</td>
+<td>2</td>
+</tr>
+<tr>
+<td>COMMISSION</td>
+<td>3</td>
+</tr>
+<tr>
+<td>BONUS</td>
+<td>4</td>
+</tr>
+<tr>
+<td>SUB_TO_PARENT_TRANSFER</td>
+<td>5</td>
+</tr>
+<tr>
+<td>PARENT_TO_SUB_TRANSFER</td>
+<td>6</td>
+</tr>
+<tr>
+<td>COPY_TRADE_TRANSFER</td>
+<td>90</td>
+</tr>
+<tr>
+<td>COPY_TRADE_SETTLEMENT</td>
+<td>91</td>
+</tr>
+<tr>
+<td>COPY_TRADE_REFUNDS</td>
+<td>92</td>
+</tr>
+<tr>
+<td>COPY_TRADE_PROFIT_SHARE</td>
+<td>93</td>
+</tr>
+<tr>
+<td>MARGIN_TRANSFER</td>
+<td>213</td>
 </tr>
 </tbody></table>
 <h2 id='more-order-fields-explained'>More order fields explained</h2>
@@ -5009,23 +5074,145 @@ The API has <a href="#rate-limits">ratelimits</a> rule, and please check the <i>
 </tbody></table>
 
 <blockquote>
-<p>Response sample
-[
-  {
-    &quot;createTime&quot;: 0,
-    &quot;currency&quot;: &quot;string&quot;,
-    &quot;execFeeEv&quot;: 0,
-    &quot;execPriceEp&quot;: 0,
-    &quot;execQty&quot;: 0,
-    &quot;execValueEv&quot;: 0,
-    &quot;feeRateEr&quot;: 0,
-    &quot;fundingRateEr&quot;: 0,
-    &quot;side&quot;: &quot;string&quot;,
-    &quot;symbol&quot;: &quot;string&quot;
-  }
-]</p>
+<p>Response sample</p>
 </blockquote>
-<h1 id='contract-websocket-api'>Contract Websocket API</h1><h2 id='heartbeat'>Heartbeat</h2>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"createTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"execFeeEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"execPriceEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"execQty"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"execValueEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"feeRateEr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fundingRateEr"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div><h2 id='query-contract-fee-rate'>Query contract fee rate</h2>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /api-data/futures/fee-rate?settleCurrency=&lt;settleCurrency&gt;
+</code></pre></div>
+<ul>
+<li>Request parameters</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Case</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>settleCurrency</td>
+<td>String</td>
+<td>True</td>
+<td>the settle currency to query</td>
+<td>USDT,USD,BTC,ETH, ...</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response sample</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"symbolFeeRates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"takerFeeRateEr"</span><span class="p">:</span><span class="w"> </span><span class="mi">55000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"makerFeeRateEr"</span><span class="p">:</span><span class="w"> </span><span class="mi">6000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cETHUSD"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='query-funds-detail'>Query Funds Detail</h2>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /api-data/futures/v2/tradeAccountDetail?currency=&lt;currecny&gt;&amp;type=&lt;type&gt;&amp;limit=&lt;limit&gt;&amp;offset=&lt;offset&gt;&amp;start=&lt;start&gt;&amp;end=&lt;end&gt;&amp;withCount=&lt;withCount&gt;
+</code></pre></div>
+<ul>
+<li>Request parameters</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Case</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td>False</td>
+<td>the currency to query</td>
+<td>USDT,USD,BTC,ETH, ...</td>
+</tr>
+<tr>
+<td>type</td>
+<td>Integer</td>
+<td>False</td>
+<td>Funds Biz Type</td>
+<td>REALIZED_PNL(1),TRANSFER(2), ...</td>
+</tr>
+<tr>
+<td>start</td>
+<td>Integer</td>
+<td>False</td>
+<td>start time range, Epoch millis</td>
+<td>default 0</td>
+</tr>
+<tr>
+<td>end</td>
+<td>Integer</td>
+<td>False</td>
+<td>end time range, Epoch millis</td>
+<td>default 0</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>Integer</td>
+<td>False</td>
+<td>offset to resultset, max 1000</td>
+<td>default 0</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>Integer</td>
+<td>False</td>
+<td>limit of resultset</td>
+<td>default 20</td>
+</tr>
+<tr>
+<td>withCount</td>
+<td>Integer</td>
+<td>False</td>
+<td>result with total count</td>
+<td>default false</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response sample</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"typeDesc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REALIZED_PNL"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"amountRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.01010945"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"balanceRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1464.64081733"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"createTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1682035200000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div><h1 id='contract-websocket-api'>Contract Websocket API</h1><h2 id='heartbeat'>Heartbeat</h2>
 <blockquote>
 <p>Request</p>
 </blockquote>
@@ -8944,23 +9131,23 @@ penalty.</p>
 </tbody></table>
 
 <blockquote>
-<p>Response sample
-[
-  {
-    &quot;symbol&quot;: &quot;ETHUSDT&quot;,
-    &quot;currency&quot;: &quot;USDT&quot;,
-    &quot;execQtyRq&quot;: &quot;0.16&quot;,
-    &quot;side&quot;: &quot;Buy&quot;,
-    &quot;execPriceRp&quot;: &quot;1322.84500459&quot;,
-    &quot;execValueRv&quot;: &quot;211.65520073&quot;,
-    &quot;fundingRateRr&quot;: &quot;0.0001&quot;,
-    &quot;feeRateRr&quot;: &quot;0.0001&quot;,
-    &quot;execFeeRv&quot;: &quot;0.02116552&quot;,
-    &quot;createTime&quot;: 1671004800021
-  }
-]</p>
+<p>Response sample</p>
 </blockquote>
-<h1 id='hedged-contract-websocket-api'>Hedged Contract Websocket API</h1>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETHUSDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"execQtyRq"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.16"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Buy"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"execPriceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1322.84500459"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"execValueRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"211.65520073"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fundingRateRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0001"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"feeRateRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0001"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"execFeeRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.02116552"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"createTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1671004800021</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div><h1 id='hedged-contract-websocket-api'>Hedged Contract Websocket API</h1>
 <ul>
 <li>Each client is required to actively send heartbeat (ping) message to Phemex data gateway (&#39;DataGW&#39; in short) with interval less than 30 seconds, otherwise DataGW will drop the connection. If a client sends a ping message, DataGW will reply with a pong message.</li>
 <li>Clients can use WS built-in ping message or the application level ping message to DataGW as heartbeat. The heartbeat interval is recommended to be set as <em>5 seconds</em>, and actively reconnect to DataGW if don&#39;t receive messages in <em>3 heartbeat intervals</em>.</li>
@@ -10912,6 +11099,46 @@ Response data is limited to 3 months.
     </span><span class="nl">"transactTimeNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<aside class="notice">
+Response data is limited to 3 months.
+</aside>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Possible Values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>quoteCurrency</td>
+<td>String</td>
+<td>True</td>
+<td>the quote currency to query</td>
+<td>USDT,TRY,BRZ,USDC, ...</td>
+</tr>
+</tbody></table>
+<h2 id='query-fee-rate-by-quote-currency'>Query fee rate by quote currency</h2>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /api-data/spots/fee-rate?quoteCurrency=&lt;quoteCurrency&gt;
+</code></pre></div>
+<blockquote>
+<p>Response format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"symbolFeeRates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"takerFeeRateEr"</span><span class="p">:</span><span class="w"> </span><span class="mi">80000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"makerFeeRateEr"</span><span class="p">:</span><span class="w"> </span><span class="mi">80000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sETHTRY"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <table><thead>
 <tr>
