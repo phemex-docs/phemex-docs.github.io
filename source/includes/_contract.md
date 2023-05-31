@@ -188,9 +188,23 @@ GET /public/time
 | Long | Long position when pos mode is 'Hedged' |
 | Short | Short position when pos mode is 'Hedged' |
 | Merged | Merged position when pos mode is 'OneWay' |
+    
 
+* Funds Biz Type
 
-
+| Description             | Code |
+|-------------------------|------|
+| REALIZED_PNL            | 1    |
+| TRANSFER                | 2    |
+| COMMISSION              | 3    |
+| BONUS                   | 4    |
+| SUB_TO_PARENT_TRANSFER  | 5    |
+| PARENT_TO_SUB_TRANSFER  | 6    |
+| COPY_TRADE_TRANSFER     | 90   |
+| COPY_TRADE_SETTLEMENT   | 91   |
+| COPY_TRADE_REFUNDS      | 92   |
+| COPY_TRADE_PROFIT_SHARE | 93   |
+| MARGIN_TRANSFER         | 213  |
 
 ## More order fields explained
 | Field | Description |
@@ -1632,6 +1646,8 @@ GET /api-data/futures/funding-fees?symbol=<symbol>
 | limit     | Integer | False    | page size                     | default 20, max 200 |
 
 > Response sample
+
+```json
 [
   {
     "createTime": 0,
@@ -1646,6 +1662,69 @@ GET /api-data/futures/funding-fees?symbol=<symbol>
     "symbol": "string"
   }
 ]
+```
+
+## Query contract fee rate
+
+> Request format
+
+```
+GET /api-data/futures/fee-rate?settleCurrency=<settleCurrency>
+```
+
+* Request parameters
+
+| Parameter      | Type    | Required | Description                  | Case                  |
+|----------------|---------|----------|------------------------------|-----------------------|
+| settleCurrency | String  | True     | the settle currency to query | USDT,USD,BTC,ETH, ... |
+
+> Response sample
+
+```json
+{
+  "symbolFeeRates": [
+    {
+      "takerFeeRateEr": 55000,
+      "makerFeeRateEr": 6000,
+      "symbol": "cETHUSD"
+    }
+  ]
+}
+```
+
+## Query Funds Detail
+
+> Request format
+
+```
+GET /api-data/futures/v2/tradeAccountDetail?currency=<currecny>&type=<type>&limit=<limit>&offset=<offset>&start=<start>&end=<end>&withCount=<withCount>
+```
+
+* Request parameters
+
+| Parameter | Type    | Required | Description                    | Case                             |
+|-----------|---------|----------|--------------------------------|----------------------------------|
+| currency  | String  | False    | the currency to query          | USDT,USD,BTC,ETH, ...            |
+| type      | Integer | False    | Funds Biz Type                 | REALIZED_PNL(1),TRANSFER(2), ... |
+| start     | Integer | False    | start time range, Epoch millis | default 0                        |
+| end       | Integer | False    | end time range, Epoch millis   | default 0                        |
+| offset    | Integer | False    | offset to resultset, max 1000  | default 0                        |
+| limit     | Integer | False    | limit of resultset             | default 20                       |
+| withCount | Integer | False    | result with total count        | default false                    |
+
+> Response sample
+
+```json
+[
+  {
+    "typeDesc": "REALIZED_PNL",
+    "amountRv": "-0.01010945",
+    "balanceRv": "1464.64081733",
+    "createTime": 1682035200000,
+    "currency": "USDT"
+  }
+]
+```
 
 # Contract Websocket API
 
@@ -4340,6 +4419,8 @@ GET /api-data/g-futures/funding-fees?symbol=<symbol>
 | limit     | Integer | False    | page size                     | default 20, max 200 |
 
 > Response sample
+
+```json
 [
   {
     "symbol": "ETHUSDT",
@@ -4354,6 +4435,7 @@ GET /api-data/g-futures/funding-fees?symbol=<symbol>
     "createTime": 1671004800021
   }
 ]
+```
 
 # Hedged Contract Websocket API
 * Each client is required to actively send heartbeat (ping) message to Phemex data gateway ('DataGW' in short) with interval less than 30 seconds, otherwise DataGW will drop the connection. If a client sends a ping message, DataGW will reply with a pong message.
