@@ -1365,9 +1365,11 @@
 <li>WebSocket API base endpoints:
 
 <ul>
-<li>Default endpoint: <strong>wss://api.phemex.com/md</strong></li>
-<li>High ratelimit endpoint: <strong>wss://vapi.phemex.com/ws</strong></li>
-<li>TestNet endpoint: <strong>wss://testnet-api.phemex.com/md</strong></li>
+<li>Default endpoint: <strong>wss://ws.phemex.com</strong><br>
+Note: URI or querystring not allowed; rate limit 200/m</li>
+<li>TestNet endpoint: <strong>wss://testnet-api.phemex.com/ws</strong><br>
+Note: URI or querystring not allowed; rate limit 500/m</li>
+<li>High ratelimit endpoint: <strong>wss://vapi.phemex.com/ws</strong><br></li>
 </ul></li>
 <li>Phemex provides HTTP Rest API for client to operate Orders, all endpoints return a JSON object.</li>
 </ul>
@@ -3476,7 +3478,7 @@ different arguments.</li>
 <td>symbol</td>
 <td>String</td>
 <td>Yes</td>
-<td>Which Symbol to cancel</td>
+<td>Which symbol to cancel</td>
 <td></td>
 </tr>
 <tr>
@@ -3683,7 +3685,7 @@ penalty.
 <tr>
 <td>symbol</td>
 <td>String</td>
-<td>Which postion needs to change</td>
+<td>Which postion to change</td>
 <td></td>
 </tr>
 <tr>
@@ -3716,7 +3718,7 @@ penalty.
 <tr>
 <td>symbol</td>
 <td>String</td>
-<td>Which postion needs to change</td>
+<td>Which postion to change</td>
 <td></td>
 </tr>
 <tr>
@@ -3749,7 +3751,7 @@ penalty.
 <tr>
 <td>symbol</td>
 <td>String</td>
-<td>Which symbol needs to change</td>
+<td>Which symbol to change</td>
 <td></td>
 </tr>
 <tr>
@@ -3857,7 +3859,7 @@ penalty.
 <tr>
 <td>symbol</td>
 <td>String</td>
-<td>which symbol needs to query</td>
+<td>which symbol to query</td>
 <td></td>
 </tr>
 </tbody></table>
@@ -3951,7 +3953,7 @@ penalty.
 <tr>
 <td>symbol</td>
 <td>String</td>
-<td>which symbol needs to query</td>
+<td>which symbol to query</td>
 <td></td>
 </tr>
 <tr>
@@ -4405,7 +4407,7 @@ The depth value is 0 in full book response.
 <span class="p">}</span>
 </code></pre></div>
 <aside class="notice">
-The API has <a href="#rate-limits">ratelimits</a> rule, and please check the <i>Other</i> group under <a href="#api-groups">API groups</a>
+The API has <a href="#rate-limits">ratelimits</a> rule, and please check the <i>Other</i> group under <a href="#api-groups">API groups</a>. Kline under generation beyond the latest interval is not included in the response.</a>
 </aside>
 
 <table><thead>
@@ -4532,7 +4534,7 @@ The API has <a href="#rate-limits">ratelimits</a> rule, and please check the <i>
 </tr>
 </tbody></table>
 
-<p><strong>NOTE</strong> for backward compatibility reason, phemex also provides kline query with from/to, however, this interface is <strong>NOT</strong> recommended.</p>
+<p><strong>NOTE</strong>: for backward compatibility reason, phemex also provides kline query with from/to, however, this interface is <strong>NOT</strong> recommended.</p>
 
 <blockquote>
 <p>Request format</p>
@@ -5117,6 +5119,8 @@ The API has <a href="#rate-limits">ratelimits</a> rule, and please check the <i>
 <td>USDT,USD,BTC,ETH, ...</td>
 </tr>
 </tbody></table>
+
+<p>Note: *RateEr (ratio scale) in response field are const 8</p>
 
 <blockquote>
 <p>Response sample</p>
@@ -7865,7 +7869,7 @@ penalty.</p>
 <tr>
 <td>symbol</td>
 <td>String</td>
-<td>which symbol needs to query</td>
+<td>which symbol to query</td>
 <td><a href="#symbpricesub">Trading symbols</a></td>
 </tr>
 </tbody></table>
@@ -7933,14 +7937,14 @@ penalty.</p>
 <td>symbol</td>
 <td>String</td>
 <td>No</td>
-<td>which symbol needs to query</td>
+<td>which symbol to query</td>
 <td><a href="#symbpricesub">Trading symbols</a></td>
 </tr>
 <tr>
 <td>currency</td>
 <td>String</td>
 <td>Yes</td>
-<td>which currency needs to query</td>
+<td>which currency to query</td>
 <td></td>
 </tr>
 <tr>
@@ -8115,14 +8119,14 @@ penalty.</p>
 <td>symbol</td>
 <td>String</td>
 <td>No</td>
-<td>which symbol needs to query</td>
+<td>which symbol to query</td>
 <td><a href="#symbpricesub">Trading symbols</a></td>
 </tr>
 <tr>
 <td>currency</td>
 <td>String</td>
 <td>Yes</td>
-<td>which currency needs to query</td>
+<td>which currency to query</td>
 <td></td>
 </tr>
 <tr>
@@ -8378,11 +8382,7 @@ penalty.</p>
   </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div><h2 id='query-kline-2'>Query kline</h2>
-<p>NOTE:</p>
-
-<ol>
-<li>please be noted that kline interfaces have <a href="https://github.com/phemex/phemex-api-docs/blob/master/Generic-API-Info.en.md#rate-limits">rate limits</a> rule,  please check the Other group under <a href="https://github.com/phemex/phemex-api-docs/blob/master/Generic-API-Info.en.md#api-groups">api groups</a></li>
-</ol>
+<p><strong>NOTE</strong>: kline interfaces have <a href="https://github.com/phemex/phemex-api-docs/blob/master/Generic-API-Info.en.md#rate-limits">rate limits</a> rule,  please check the Other group under <a href="https://github.com/phemex/phemex-api-docs/blob/master/Generic-API-Info.en.md#api-groups">api groups</a>. Kline under generation beyond the latest interval is not included in the response.</p>
 
 <blockquote>
 <p>Request format</p>
@@ -8414,7 +8414,7 @@ penalty.</p>
 <td>symbol</td>
 <td>String</td>
 <td>Yes</td>
-<td>which symbol needs to query</td>
+<td>which symbol to query</td>
 <td><a href="#symbpricesub">Trading symbols</a></td>
 </tr>
 <tr>
@@ -8525,7 +8525,7 @@ penalty.</p>
 </tr>
 </tbody></table>
 
-<p><strong>NOTE</strong>, for backward compatibility reason, phemex also provides kline query with from/to, however, this interface is <strong>NOT</strong> recommended.</p>
+<p><strong>NOTE</strong>: for backward compatibility reason, phemex also provides kline query with from/to, however, this interface is <strong>NOT</strong> recommended.</p>
 <div class="highlight"><pre class="highlight plaintext"><code>GET /exchange/public/md/v2/kline/list?symbol=&lt;symbol&gt;&amp;to=&lt;to&gt;&amp;from=&lt;from&gt;&amp;resolution=&lt;resolution&gt;
 </code></pre></div>
 <table><thead>
@@ -8556,7 +8556,7 @@ penalty.</p>
 <td>Integer</td>
 <td>Yes</td>
 <td>end time in seconds</td>
-<td>value aligned in resolution boundary; Number of k-lines return between [<code>from</code>, <code>to</code>) should be less than 1000</td>
+<td>value aligned in resolution boundary; Number of k-lines return between [<code>from</code>, <code>to</code>) should be less than 2000</td>
 </tr>
 <tr>
 <td>resolution</td>
@@ -8742,7 +8742,7 @@ penalty.</p>
 <td>symbol</td>
 <td>String</td>
 <td>Yes</td>
-<td>which symbol needs to query</td>
+<td>which symbol to query</td>
 <td><a href="#symbpricesub">Trading symbols</a></td>
 </tr>
 </tbody></table>
@@ -14953,7 +14953,7 @@ the same as the spot api</p>
 <tr>
 <td>currency</td>
 <td>String</td>
-<td>NO</td>
+<td>YES</td>
 <td>coin name</td>
 <td>ETH</td>
 </tr>
