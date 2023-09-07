@@ -58,7 +58,7 @@ Every HTTP Rest Request must have the following Headers:
 * **wss://ws.phemex.com** 200/5m
 
 ### IP ratelimits
-   Currently Phemex restricts every IP 5,000 REST API requests in 5 minutes window.
+   Currently Phemex restricts every IP 5,000 requests in 5 minutes window.
    If exceeded this IP capacity, the user would be blocked in the following 5 minutes.
 
 ### REST API ratelimit rules
