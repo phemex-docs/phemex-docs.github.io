@@ -552,7 +552,7 @@ DELETE /orders/all?symbol=<symbol>&untriggered=<untriggered>&text=<text>
 
 | Field       | Type   | Required  | Description                    | Possible values         |
 |-------------|--------|-----------|--------------------------------|-------------------------|
-| symbol      | String | Yes       | Which Symbol to cancel         |                         |
+| symbol      | String | Yes       | Which symbol to cancel         |                         |
 | untriggered | Boolean| No        | Default to false, default cancel non-conditional order; if intending to cancel conditional order, set this to true| true,false|
 | text        | Comments| No       | Comments of this operation, limited to 40 characters  |  |
 
@@ -737,7 +737,7 @@ PUT /positions/leverage?symbol=<symbol>&leverage=<leverage>&leverageEr=<leverage
 
 | Field                | Type   | Description                                | Possible values |
 |----------------------|--------|--------------------------------------------|-----------------|
-| symbol               | String | Which postion needs to change              |                 |
+| symbol               | String | Which postion to change              |                 |
 | leverage             | Integer| Unscaled leverage                          |                 |
 | leverageEr           | Integer| Ratio scaled leverage, leverage wins when both leverage and leverageEr provided|  |
 
@@ -751,7 +751,7 @@ PUT /positions/riskLimit?symbol=<symbol>&riskLimit=<riskLimit>&riskLimitEv=<risk
 
 | Field                | Type   | Description                                | Possible values |
 |----------------------|--------|--------------------------------------------|-----------------|
-| symbol               | String | Which postion needs to change              |                 |
+| symbol               | String | Which postion to change              |                 |
 | riskLimit            | Integer| Unscaled value, reference BTC/USD value scale|               |
 | riskLimitEv          | Integer| Value scaled risklimit, riskLimitEv wins when both riskLimit and riskLimitEv provided|  |
 
@@ -765,7 +765,7 @@ POST /positions/assign?symbol=<symbol>&posBalance=<posBalance>&posBalanceEv=<pos
 
 | Field                | Type   | Description                                | Possible values |
 |----------------------|--------|--------------------------------------------|--------------|
-| symbol               | String | Which symbol needs to change              |  |
+| symbol               | String | Which symbol to change              |  |
 | posBalance           | Integer| Unscaled raw value                       |  |
 | posBalanceEv         | Integer| The scaled value for position balance, posBalanceEv wins when both posBalance and posBalanceEv provided|  |
 
@@ -853,7 +853,7 @@ GET /orders/activeList?symbol=<symbol>
 
 | Field                | Type   | Description                                | Possible values |
 |----------------------|--------|--------------------------------------------|--------------|
-| symbol | String | which symbol needs to query |   |
+| symbol | String | which symbol to query |   |
 
 ## Query closed orders by symbol
 
@@ -939,7 +939,7 @@ GET /exchange/order/list?symbol=<symbol>&start=<start>&end=<end>&offset=<offset>
 
 | Field                | Type   | Description                                | Possible values |
 |----------------------|--------|--------------------------------------------|--------------|
-| symbol | String | which symbol needs to query | |
+| symbol | String | which symbol to query | |
 | start  | Integer | start time range, Epoch millis，available only from the last 2 month | |
 | end  | Integer | end time range, Epoch millis | |
 | offset | Integer | offset to resultset | |
@@ -1251,7 +1251,7 @@ GET /md/fullbook?symbol=BTCUSD
         ]
       ]
     },
-    "depth": 0,
+    "depth": 0,kline
     "sequence": 455476965,
     "timestamp": 1583555482434235628,
     "symbol": "BTCUSD",
@@ -1287,7 +1287,7 @@ GET /exchange/public/md/v2/kline?symbol=<symbol>&resolution=<resolution>&limit=<
 ```
 
 <aside class="notice">
-The API has <a href="#rate-limits">ratelimits</a> rule, and please check the <i>Other</i> group under <a href="#api-groups">API groups</a>
+The API has <a href="#rate-limits">ratelimits</a> rule, and please check the <i>Other</i> group under <a href="#api-groups">API groups. Kline under generation beyond the latest interval is not included in the response.</a>
 </aside>
 
 | Field      | Type    | Required | Description     | Possible Values                         |
@@ -1325,7 +1325,7 @@ The API has <a href="#rate-limits">ratelimits</a> rule, and please check the <i>
 | 1000    | limit 1000  |
 
 
-**NOTE** for backward compatibility reason, phemex also provides kline query with from/to, however, this interface is **NOT** recommended.
+**NOTE**: for backward compatibility reason, phemex also provides kline query with from/to, however, this interface is **NOT** recommended.
 
 > Request format
 
@@ -1677,6 +1677,8 @@ GET /api-data/futures/fee-rate?settleCurrency=<settleCurrency>
 | Parameter      | Type    | Required | Description                  | Case                  |
 |----------------|---------|----------|------------------------------|-----------------------|
 | settleCurrency | String  | True     | the settle currency to query | USDT,USD,BTC,ETH, ... |
+
+Note: *RateEr (ratio scale) in response field are const 8
 
 > Response sample
 
@@ -3686,7 +3688,7 @@ GET /g-orders/activeList?symbol=<symbol>
 
 | Field   | Type   | Description                                | Possible values |
 |---------|--------|--------------------------------------------|--------------|
-| symbol  | String | which symbol needs to query | [Trading symbols](#symbpricesub)  |
+| symbol  | String | which symbol to query | [Trading symbols](#symbpricesub)  |
 
 
 ## Query closed orders by symbol
@@ -3743,8 +3745,8 @@ GET /exchange/order/v2/orderList?symbol=<symbol>&currency=<currency>&ordStatus=<
 
 | Field     | Type    | Required | Description                                                         | Possible values                                                                                                                                                                                                      |
 |----|----|----|---------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| symbol    | String  | No       | which symbol needs to query                                         | [Trading symbols](#symbpricesub)                                                                                                                                                                                     |
-|currency|String|Yes| which currency needs to query                                       |                                                                                                                                                                                                                   |
+| symbol    | String  | No       | which symbol to query                                         | [Trading symbols](#symbpricesub)                                                                                                                                                                                     |
+|currency|String|Yes| which currency to query                                       |                                                                                                                                                                                                                   |
 | ordStatus | Integer | No       | order status code list filter                                       | New(5), PartiallyFilled(6), Untriggered(1), Filled(7), Canceled(8)                                                                                                                                                   |
 | ordType   | Integer | No       | order type code list filter                                         | Market (1), Limit (2), Stop (3), StopLimit (4), MarketIfTouched (5), LimitIfTouched (6), ProtectedMarket (7), MarketAsLimit (8), StopAsLimit (9), MarketIfTouchedAsLimit (10), Bracket (11), BoTpLimit (12), BoSlLimit (13), BoSlMarket (14)    |
 | start     | Integer | Yes      | start time range, Epoch millis，available only from the last 2 month ||
@@ -3827,8 +3829,8 @@ GET /exchange/order/v2/tradingList?symbol=<symbol>&currency=<currency>&execType=
 
 | Field     | Type    | Required | Description                                    | Possible values                                                    |
 |-----------|---------|----------|------------------------------------------------|--------------------------------------------------------------------|
-| symbol    | String  | No       | which symbol needs to query                    | [Trading symbols](#symbpricesub)                                   |
-| currency  | String  | Yes      | which currency needs to query                  |                                                                    |
+| symbol    | String  | No       | which symbol to query                    | [Trading symbols](#symbpricesub)                                   |
+| currency  | String  | Yes      | which currency to query                  |                                                                    |
 | execType  | Integer | No       | trade type code list filter                    | Trade(1),LiqTrade(6),AdlTrade(7)                                   |
 | offset    | Integer | Yes      | offset to resultset                            |                                                                    |
 | limit     | Integer | Yes      | limit of resultset, max 200                    |                                                                    |
@@ -3964,9 +3966,7 @@ GET /exchange/order/v2/tradingList?symbol=<symbol>&currency=<currency>&execType=
 
 ## Query kline
 
-NOTE:
-
-1. please be noted that kline interfaces have [rate limits](https://github.com/phemex/phemex-api-docs/blob/master/Generic-API-Info.en.md#rate-limits) rule,  please check the Other group under [api groups](https://github.com/phemex/phemex-api-docs/blob/master/Generic-API-Info.en.md#api-groups)
+**NOTE**: kline interfaces have [rate limits](https://github.com/phemex/phemex-api-docs/blob/master/Generic-API-Info.en.md#rate-limits) rule,  please check the Other group under [api groups](https://github.com/phemex/phemex-api-docs/blob/master/Generic-API-Info.en.md#api-groups). Kline under generation beyond the latest interval is not included in the response.
 
 > Request format
 
@@ -3989,7 +3989,7 @@ NOTE:
 
 | Field      | Type    | Required | Description                 | Possible values                                                                                                                                                       |
 |------------|---------|----------|-----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| symbol     | String  | Yes      | which symbol needs to query | [Trading symbols](#symbpricesub)                                                                                                                                      |
+| symbol     | String  | Yes      | which symbol to query | [Trading symbols](#symbpricesub)                                                                                                                                      |
 | resolution | Integer | Yes      | Kline Interval              | MINUTE_1(60),MINUTE_5(300),MINUTE_15(900),MINUTE_30(1800),HOUR_1(3600),HOUR_4(14400),DAY_1(86400),WEEK_1(604800),MONTH_1(2592000),SEASON_1(7776000),YEAR_1(31104000)  |
 | limit      | Integer | No       | records limit               | 5                                                                                                                                                                     |
 
@@ -4022,7 +4022,7 @@ NOTE:
 | 1000    | limit 1000  |
 
 
-**NOTE**, for backward compatibility reason, phemex also provides kline query with from/to, however, this interface is **NOT** recommended.
+**NOTE**: for backward compatibility reason, phemex also provides kline query with from/to, however, this interface is **NOT** recommended.
 
 ```
 GET /exchange/public/md/v2/kline/list?symbol=<symbol>&to=<to>&from=<from>&resolution=<resolution>
@@ -4033,7 +4033,7 @@ GET /exchange/public/md/v2/kline/list?symbol=<symbol>&to=<to>&from=<from>&resolu
 |-------------|---------|-------------|------------------------|----------------------------------------------------------------------------------------------------------------|
 |symbol       | String  | Yes         | symbol name            | BTCUSD,ETHUSD,uBTCUSD,cETHUSD,XRPUSD...                                                                        | 
 | from        | Integer | Yes         | start time in seconds  | value aligned in resolution boundary                                                                           |
-| to          | Integer | Yes         | end time in seconds    | value aligned in resolution boundary; Number of k-lines return between [`from`, `to`) should be less than 1000 | 
+| to          | Integer | Yes         | end time in seconds    | value aligned in resolution boundary; Number of k-lines return between [`from`, `to`) should be less than 2000 | 
 | resolution  | Integer | Yes         | kline interval         | the same as described above                                                                                    |
 
 ## Query Trade
@@ -4159,7 +4159,7 @@ there are two differnent response format for 24 ticker
 
 |Field|Type|Required|Description| Possible values                   |
 |----|----|----|----|-----------------------------------|
-|symbol|String|Yes|which symbol needs to query| [Trading symbols](#symbpricesub)  |
+|symbol|String|Yes|which symbol to query| [Trading symbols](#symbpricesub)  |
 
 ```
   GET /md/v2/ticker/24hr?symbol=BTCUSDT

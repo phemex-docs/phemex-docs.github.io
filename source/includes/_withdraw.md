@@ -147,7 +147,7 @@ GET /phemex-deposit/wallets/api/chainCfg?currency=<currency>
 
 | Parameter | Type   | Required | Description | Case |
 |-----------|--------|----------|-------------|------|
-| currency  | String | NO       | coin name   | ETH  |
+| currency  | String | YES      | coin name   | ETH  |
 
 > Response Format
 
