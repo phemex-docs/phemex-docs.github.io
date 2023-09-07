@@ -53,7 +53,7 @@ Every HTTP Rest Request must have the following Headers:
 * In order to protect the exchange, Phemex apply `API RateLimit` and `IP Ratelimit` on all requests.
 * Rest API has a request capacity in one minute window on user basis.
 * IP has request capacity in 5 minutes window.
-* Ratelimit of API is **independant** of that in WEB/APP, so if one get ratelimited in API, one can place/cancel orders via WEB or APP.
+* Ratelimit of API is independant of that in WEB/APP, so if one get ratelimited in API, one can place/cancel orders via WEB or APP.
 * all requests to the domain **testnet-api.phemex.com** shared across the rate limit 500/5m in total
 * **wss://ws.phemex.com** 200/5m
 
