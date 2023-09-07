@@ -1362,14 +1362,12 @@
 <li>High ratelimit endpoint: <strong>https://vapi.phemex.com</strong></li>
 <li>TestNet endpoint: <strong>https://testnet-api.phemex.com</strong></li>
 </ul></li>
-<li>WebSocket API base endpoints:
+<li>WebSocket API base endpoints (URI or querystring not allowed):
 
 <ul>
-<li>Default endpoint: <strong>wss://ws.phemex.com</strong><br>
-Note: URI or querystring not allowed; rate limit 200/m</li>
-<li>TestNet endpoint: <strong>wss://testnet-api.phemex.com/ws</strong><br>
-Note: URI or querystring not allowed; rate limit 500/m</li>
-<li>High ratelimit endpoint: <strong>wss://vapi.phemex.com/ws</strong><br></li>
+<li>Default endpoint: <strong>wss://ws.phemex.com</strong></li>
+<li>TestNet endpoint: <strong>wss://testnet-api.phemex.com/ws</strong></li>
+<li>High ratelimit endpoint: <strong>wss://vapi.phemex.com/ws</strong></li>
 </ul></li>
 <li>Phemex provides HTTP Rest API for client to operate Orders, all endpoints return a JSON object.</li>
 </ul>
@@ -1427,10 +1425,12 @@ Note: URI or querystring not allowed; rate limit 500/m</li>
 <li>In order to protect the exchange, Phemex apply <code>API RateLimit</code> and <code>IP Ratelimit</code> on all requests.</li>
 <li>Rest API has a request capacity in one minute window on user basis.</li>
 <li>IP has request capacity in 5 minutes window.</li>
-<li>Ratelimit of API is <strong>independant</strong> of that in WEB/APP, so if one get ratelimited in API, one can place/cancel orders via WEB or APP.</li>
+<li>Ratelimit of API is independant of that in WEB/APP, so if one get ratelimited in API, one can place/cancel orders via WEB or APP.</li>
+<li>all requests to the domain <strong>testnet-api.phemex.com</strong> shared across the rate limit 500/5m in total.</li>
+<li><strong>wss://ws.phemex.com</strong> 200/5m</li>
 </ul>
 <h3 id='ip-ratelimits'>IP ratelimits</h3>
-<p>Currently Phemex restrict every IP 5,000 request in 5 minutes window.
+<p>Currently Phemex restricts every IP 5,000 requests in 5 minutes window.
    If exceeded this IP capacity, the user would be blocked in the following 5 minutes.</p>
 <h3 id='rest-api-ratelimit-rules'>REST API ratelimit rules</h3>
 <ul>
