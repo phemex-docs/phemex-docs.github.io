@@ -6,12 +6,10 @@ Welcome to the [Phemex](https://phemex.com) API documentation. We offer REST and
   * Default endpoint: **https://api.phemex.com**
   * High ratelimit endpoint: **https://vapi.phemex.com**
   * TestNet endpoint: **https://testnet-api.phemex.com**
-* WebSocket API base endpoints:
-  * Default endpoint: **wss://ws.phemex.com**<br>
-    Note: URI or querystring not allowed; rate limit 200/m
-  * TestNet endpoint: **wss://testnet-api.phemex.com/ws**<br>
-    Note: URI or querystring not allowed; rate limit 500/m
-  * High ratelimit endpoint: **wss://vapi.phemex.com/ws**<br>
+* WebSocket API base endpoints (URI or querystring not allowed):
+  * Default endpoint: **wss://ws.phemex.com**
+  * TestNet endpoint: **wss://testnet-api.phemex.com/ws**
+  * High ratelimit endpoint: **wss://vapi.phemex.com/ws**
 * Phemex provides HTTP Rest API for client to operate Orders, all endpoints return a JSON object.
 
 ## REST API Standards
@@ -55,10 +53,12 @@ Every HTTP Rest Request must have the following Headers:
 * In order to protect the exchange, Phemex apply `API RateLimit` and `IP Ratelimit` on all requests.
 * Rest API has a request capacity in one minute window on user basis.
 * IP has request capacity in 5 minutes window.
-* Ratelimit of API is **independant** of that in WEB/APP, so if one get ratelimited in API, one can place/cancel orders via WEB or APP.
+* Ratelimit of API is independant of that in WEB/APP, so if one get ratelimited in API, one can place/cancel orders via WEB or APP.
+* all requests to the domain **testnet-api.phemex.com** shared across the rate limit 500/5m in total.
+* **wss://ws.phemex.com** 200/5m
 
 ### IP ratelimits
-   Currently Phemex restrict every IP 5,000 request in 5 minutes window.
+   Currently Phemex restricts every IP 5,000 requests in 5 minutes window.
    If exceeded this IP capacity, the user would be blocked in the following 5 minutes.
 
 ### REST API ratelimit rules
