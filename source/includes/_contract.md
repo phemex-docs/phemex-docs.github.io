@@ -1251,7 +1251,7 @@ GET /md/fullbook?symbol=BTCUSD
         ]
       ]
     },
-    "depth": 0,kline
+    "depth": 0,
     "sequence": 455476965,
     "timestamp": 1583555482434235628,
     "symbol": "BTCUSD",
