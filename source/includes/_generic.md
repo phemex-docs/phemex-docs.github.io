@@ -7,7 +7,7 @@ Welcome to the [Phemex](https://phemex.com) API documentation. We offer REST and
   * High ratelimit endpoint: **https://vapi.phemex.com**
   * TestNet endpoint: **https://testnet-api.phemex.com**
 * WebSocket API base endpoints:
-  * Default endpoint: **wss://ws.phemex.com**<br>  
+  * Default endpoint: **wss://ws.phemex.com**<br>
     Note: URI or querystring not allowed; rate limit 200/m
   * TestNet endpoint: **wss://testnet-api.phemex.com/ws**<br>
     Note: URI or querystring not allowed; rate limit 500/m
