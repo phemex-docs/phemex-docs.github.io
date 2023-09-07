@@ -8,11 +8,11 @@ Welcome to the [Phemex](https://phemex.com) API documentation. We offer REST and
   * TestNet endpoint: **https://testnet-api.phemex.com**
 * WebSocket API base endpoints:
   * Default endpoint: **wss://ws.phemex.com**<br>
-    Note: URI or querystring not allowed; rate limit 200/5m
+    Note: URI or querystring not allowed; 
   * TestNet endpoint: **wss://testnet-api.phemex.com/ws**<br>
     Note: URI or querystring not allowed; 
   * High rate-limit endpoint: **wss://vapi.phemex.com/ws**<br>
-* Phemex provides HTTPS Rest API for client to operate Orders, all endpoints return a JSON object. **https://testnet-api.phemex.com** and **wss://testnet-api.phemex.com/ws** shared across rate limit 500/5m in total
+* Phemex provides HTTPS Rest API for client to operate Orders, all endpoints return a JSON object. 
 
 ## REST API Standards
 ### HTTP return codes
@@ -56,6 +56,8 @@ Every HTTP Rest Request must have the following Headers:
 * Rest API has a request capacity in one minute window on user basis.
 * IP has request capacity in 5 minutes window.
 * Ratelimit of API is **independant** of that in WEB/APP, so if one get ratelimited in API, one can place/cancel orders via WEB or APP.
+* **https://testnet-api.phemex.com** and **wss://testnet-api.phemex.com/ws** shared across rate limit 500/5m in total
+* **wss://ws.phemex.com** rate limit 200/5m
 
 ### IP ratelimits
    Currently Phemex restricts every IP 5,000 REST API requests in 5 minutes window.
