@@ -1287,7 +1287,7 @@ GET /exchange/public/md/v2/kline?symbol=<symbol>&resolution=<resolution>&limit=<
 ```
 
 <aside class="notice">
-The API has <a href="#rate-limits">ratelimits</a> rule, and please check the <i>Other</i> group under <a href="#api-groups">API groups. Kline under generation beyond the latest interval is not included in the response.</a>
+The API has <a href="#rate-limits">ratelimits</a> rule, and please check the <i>Other</i> group under <a href="#api-groups">API groups</a>. Kline under generation beyond the latest interval is not included in the response.</a>
 </aside>
 
 | Field      | Type    | Required | Description     | Possible Values                         |
