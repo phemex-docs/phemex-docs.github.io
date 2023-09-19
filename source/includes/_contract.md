@@ -4,7 +4,6 @@
 
 * Each API call must be signed and pass to server in HTTP header `x-phemex-request-signature`.
 * Endpoints use `HMAC SHA256` signatures. The `HMAC SHA256 signature` is a keyed `HMAC SHA256` operation. Use your `apiSecret` as the key and the string `URL Path + QueryString + Expiry + body )` as the value for the HMAC operation.
-* `apiSecret` = `Base64::urlDecode(API Secret)`
 * The `signature` is **case sensitive**.
 
 ### Signature example 1: HTTP GET request
@@ -3168,13 +3167,13 @@ PUT /g-orders/replace?symbol=<symbol>&orderID=<orderID>&origClOrdID=<origClOrdID
 | orderID          | -        | order id, cannot be changed           |
 | origClOrdID      | -        | original clOrderID, cannot be changed |
 | priceRp          | -        | new order price, real value           |
-| orderQtyRq       | Yes      | new orderQty, real value              |
-| stopPxRp         | Yes      | new stop price, real value            |
-| takeProfitRp     | Yes      | new stop profit price, real value     |
-| stopLossRp       | Yes      | new stop loss price, real value       |
-| pegOffsetValueRp | Yes      | new trailing offset, real value       |
-| pegPriceType     | Yes      | new peg price type                    |
-| triggerType      | Yes      | new triggerType                       |
+| orderQtyRq       | -        | new orderQty, real value              |
+| stopPxRp         | -        | new stop price, real value            |
+| takeProfitRp     | -        | new stop profit price, real value     |
+| stopLossRp       | -        | new stop loss price, real value       |
+| pegOffsetValueRp | -        | new trailing offset, real value       |
+| pegPriceType     | -        | new peg price type                    |
+| triggerType      | -        | new triggerType                       |
 | posSide          | Yes      | posSide to check, can not be changed  |
 
 orderID and origClOrdID can not be both empty
