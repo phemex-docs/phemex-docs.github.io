@@ -4257,12 +4257,14 @@ GET /api-data/g-futures/orders?symbol=<symbol>
 
 | Field    | Type           | Required | Description               | Possible Values                 |
 |----------|----------------|----------|---------------------------|---------------------------------|
-| symbol   | String         | True     | the currency to query     | BTCUSDT ...                     |
+| symbol   | String         | False    | the symbol to query       | BTCUSDT ...                     |
+| currency | String         | False    | the currency to query     | USDT                            |
+| symbols  | Enum           | False    | the symbols to query      | BTCUSDT,ETHUSDT ...             |
 | start    | Long           | False    | start time in millisecond | default 2 days ago from the end |
 | end      | Long           | False    | end time in millisecond   | default now                     |
 | offset   | Integer        | False    | page start from 0         | start from 0, default 0         |
 | limit    | Integer        | False    | page size                 | default 20, max 200             |
-
+Symbol and currency cannot both be empty. When the symbol parameter is present, prioritize searching by symbol. If only the currency is provided, retrieve all symbols under that currency. When searching for specific symbols under a currency, you can pass the symbols parameter.
 
 ## Query Orders By Ids
 
@@ -4350,11 +4352,14 @@ GET /api-data/g-futures/trades?symbol=<symbol>
 
 | Field    | Type           | Required | Description               | Possible Values                 |
 |----------|----------------|----------|---------------------------|---------------------------------|
-| symbol   | String         | True     | the currency to query     | BTCUSDT ...                     |
+| symbol   | String         | False    | the symbol to query       | BTCUSDT ...                     |
+| currency | String         | False    | the currency to query     | USDT                            |
+| symbols  | Enum           | False    | the symbols to query      | BTCUSDT,ETHUSDT ...             |
 | start    | Long           | False    | start time in millisecond | default 2 days ago from the end |
 | end      | Long           | False    | end time in millisecond   | default now                     |
 | offset   | Integer        | False    | page start from 0         | start from 0, default 0         |
 | limit    | Integer        | False    | page size                 | default 20, max 200             |
+Symbol and currency cannot both be empty. When the symbol parameter is present, prioritize searching by symbol. If only the currency is provided, retrieve all symbols under that currency. When searching for specific symbols under a currency, you can pass the symbols parameter.
 
 ## Query funding rate history
 
