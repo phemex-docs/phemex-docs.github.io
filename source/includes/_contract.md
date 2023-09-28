@@ -4,7 +4,6 @@
 
 * Each API call must be signed and pass to server in HTTP header `x-phemex-request-signature`.
 * Endpoints use `HMAC SHA256` signatures. The `HMAC SHA256 signature` is a keyed `HMAC SHA256` operation. Use your `apiSecret` as the key and the string `URL Path + QueryString + Expiry + body )` as the value for the HMAC operation.
-* `apiSecret` = `Base64::urlDecode(API Secret)`
 * The `signature` is **case sensitive**.
 
 ### Signature example 1: HTTP GET request
