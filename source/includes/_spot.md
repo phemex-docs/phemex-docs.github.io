@@ -234,7 +234,11 @@ GET /spot/orders?symbol=<symbol>
 
 ## Query wallets
 
-Query spot wallet by currency.
+| Parameter | Type   | Required | Description               | Case         |
+|-----------|--------|----------|---------------------------|--------------|
+| currency  | String | No       | the currency to query     | BTC, USDT... |
+
+NOTE: GET /spot/wallets queries the wallets of all currencies
 
 > Request format
 
@@ -539,23 +543,27 @@ GET /api-data/spots/funds?currency=<currency>
 > Response format
 
 ```json
-[
-  {
-    "action": "string",
-    "amountEv": 0,
-    "balanceEv": 0,
-    "bizCode": 0,
-    "createTime": 0,
-    "currency": "string",
-    "execId": "string",
-    "execSeq": 0,
-    "feeEv": 0,
-    "id": 0,
-    "side": "string",
-    "text": "string",
-    "transactTimeNs": 0
+{
+  "code": 0,
+  "msg": "OK",
+  "data": {
+    "rows":[{
+      "id": 0,
+      "currency": "string",
+      "execId": "string",
+      "amountEv": 0,
+      "feeEv": 0,
+      "side": "string",
+      "action": "string",
+      "balanceEv": 0,
+      "bizCode": 0,
+      "execSeq": 0,
+      "transactTimeNs": 0,
+      "text": "string",
+      "createTime": 0,
+    }]
   }
-]
+}
 ```
 
 <aside class="notice">
@@ -564,7 +572,7 @@ Response data is limited to 3 months.
 
 | Field         | Type   | Required | Description                 | Possible Values       |
 |---------------|--------|----------|-----------------------------|-----------------------|
-| quoteCurrency | String | True     | the quote currency to query | USDT,TRY,BRZ,USDC, ...|
+| Currency      | String | True     | the currency to query       | USDT,TRY,BRZ,USDC, ...|
 
 ## Query fee rate by quote currency
 
@@ -2408,7 +2416,14 @@ POST /margin/payback?currency=<currency>&amountRv=<amountRv>
 
 ## Query wallets
 
-Query spot wallet by currency.
+* Request parameters
+
+
+| Parameter | Type   | Required | Description               | Case         |
+|-----------|--------|----------|---------------------------|--------------|
+| currency  | String | No       | the currency to query     | BTC, USDT... |
+
+NOTE: GET /margin-trade/wallets queries the wallets of all currencies
 
 > Request format
 

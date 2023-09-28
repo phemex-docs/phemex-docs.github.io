@@ -3168,13 +3168,13 @@ PUT /g-orders/replace?symbol=<symbol>&orderID=<orderID>&origClOrdID=<origClOrdID
 | orderID          | -        | order id, cannot be changed           |
 | origClOrdID      | -        | original clOrderID, cannot be changed |
 | priceRp          | -        | new order price, real value           |
-| orderQtyRq       | Yes      | new orderQty, real value              |
-| stopPxRp         | Yes      | new stop price, real value            |
-| takeProfitRp     | Yes      | new stop profit price, real value     |
-| stopLossRp       | Yes      | new stop loss price, real value       |
-| pegOffsetValueRp | Yes      | new trailing offset, real value       |
-| pegPriceType     | Yes      | new peg price type                    |
-| triggerType      | Yes      | new triggerType                       |
+| orderQtyRq       | -        | new orderQty, real value              |
+| stopPxRp         | -        | new stop price, real value            |
+| takeProfitRp     | -        | new stop profit price, real value     |
+| stopLossRp       | -        | new stop loss price, real value       |
+| pegOffsetValueRp | -        | new trailing offset, real value       |
+| pegPriceType     | -        | new peg price type                    |
+| triggerType      | -        | new triggerType                       |
 | posSide          | Yes      | posSide to check, can not be changed  |
 
 orderID and origClOrdID can not be both empty
@@ -3771,6 +3771,8 @@ Response
 
 ## Query user trade
 
+NOTE: user trade queries from database and its data is limited for the last 90 days.
+
 > Request format
 
 ```
@@ -3829,8 +3831,8 @@ GET /exchange/order/v2/tradingList?symbol=<symbol>&currency=<currency>&execType=
 
 | Field     | Type    | Required | Description                                    | Possible values                                                    |
 |-----------|---------|----------|------------------------------------------------|--------------------------------------------------------------------|
-| symbol    | String  | No       | which symbol to query                    | [Trading symbols](#symbpricesub)                                   |
-| currency  | String  | Yes      | which currency to query                  |                                                                    |
+| symbol    | String  | No       | which symbol to query                          | [Trading symbols](#symbpricesub)                                   |
+| currency  | String  | Yes      | which currency to query                        | USDT...                                                            |
 | execType  | Integer | No       | trade type code list filter                    | Trade(1),LiqTrade(6),AdlTrade(7)                                   |
 | offset    | Integer | Yes      | offset to resultset                            |                                                                    |
 | limit     | Integer | Yes      | limit of resultset, max 200                    |                                                                    |
@@ -4258,12 +4260,19 @@ GET /api-data/g-futures/orders?symbol=<symbol>
 
 | Field    | Type           | Required | Description               | Possible Values                 |
 |----------|----------------|----------|---------------------------|---------------------------------|
-| symbol   | String         | True     | the currency to query     | BTCUSDT ...                     |
+| symbol   | String         | False    | the symbol to query       | "BTCUSDT" ...                   |
+| symbols  | String         | False    | the symbols to query      | "BTCUSDT, LINKUSDT" ...         |
+| currency | String         | False    | the currency to query     | "USDT" ...                      |
 | start    | Long           | False    | start time in millisecond | default 2 days ago from the end |
 | end      | Long           | False    | end time in millisecond   | default now                     |
 | offset   | Integer        | False    | page start from 0         | start from 0, default 0         |
 | limit    | Integer        | False    | page size                 | default 20, max 200             |
 
+**NOTE**: 1) symbol and currency cannot both be empty. 
+          2) When the symbol parameter is present, searching by symbol is prioritised. 
+          3) If only the currency is provided, it retrieves all symbols under that currency.
+          4) Searching for specific symbols under a currency needs both symbols and currency parameter.
+          
 
 ## Query Orders By Ids
 
@@ -4351,11 +4360,18 @@ GET /api-data/g-futures/trades?symbol=<symbol>
 
 | Field    | Type           | Required | Description               | Possible Values                 |
 |----------|----------------|----------|---------------------------|---------------------------------|
-| symbol   | String         | True     | the currency to query     | BTCUSDT ...                     |
+| symbol   | String         | False    | the symbol to query       | "BTCUSDT" ...                   |
+| symbols  | String         | False    | the symbols to query      | "BTCUSDT, LINKUSDT" ...         |
+| currency | String         | False    | the currency to query     | "USDT" ...                      |
 | start    | Long           | False    | start time in millisecond | default 2 days ago from the end |
 | end      | Long           | False    | end time in millisecond   | default now                     |
 | offset   | Integer        | False    | page start from 0         | start from 0, default 0         |
 | limit    | Integer        | False    | page size                 | default 20, max 200             |
+
+**NOTE**: 1) symbol and currency cannot both be empty. 
+          2) When the symbol parameter is present, searching by symbol is prioritised. 
+          3) If only the currency is provided, it retrieves all symbols under that currency.
+          4) Searching for specific symbols under a currency needs both symbols and currency parameter.
 
 ## Query funding rate history
 
