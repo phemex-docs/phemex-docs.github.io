@@ -1362,7 +1362,7 @@
 <li>High ratelimit endpoint: <strong>https://vapi.phemex.com</strong></li>
 <li>TestNet endpoint: <strong>https://testnet-api.phemex.com</strong></li>
 </ul></li>
-<li>WebSocket API base endpoints (URI or querystring not allowed):
+<li>WebSocket API base endpoints (further URI or querystring not allowed):
 
 <ul>
 <li>Default endpoint: <strong>wss://ws.phemex.com</strong></li>
@@ -2466,7 +2466,6 @@ Because the number of interfaces in Other group may grow over time, the list bel
 <ul>
 <li>Each API call must be signed and pass to server in HTTP header <code>x-phemex-request-signature</code>.</li>
 <li>Endpoints use <code>HMAC SHA256</code> signatures. The <code>HMAC SHA256 signature</code> is a keyed <code>HMAC SHA256</code> operation. Use your <code>apiSecret</code> as the key and the string <code>URL Path + QueryString + Expiry + body )</code> as the value for the HMAC operation.</li>
-<li><code>apiSecret</code> = <code>Base64::urlDecode(API Secret)</code></li>
 <li>The <code>signature</code> is <strong>case sensitive</strong>.</li>
 </ul>
 <h3 id='signature-example-1-http-get-request'>Signature example 1: HTTP GET request</h3>
@@ -7120,37 +7119,37 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
 </tr>
 <tr>
 <td>orderQtyRq</td>
-<td>Yes</td>
+<td>-</td>
 <td>new orderQty, real value</td>
 </tr>
 <tr>
 <td>stopPxRp</td>
-<td>Yes</td>
+<td>-</td>
 <td>new stop price, real value</td>
 </tr>
 <tr>
 <td>takeProfitRp</td>
-<td>Yes</td>
+<td>-</td>
 <td>new stop profit price, real value</td>
 </tr>
 <tr>
 <td>stopLossRp</td>
-<td>Yes</td>
+<td>-</td>
 <td>new stop loss price, real value</td>
 </tr>
 <tr>
 <td>pegOffsetValueRp</td>
-<td>Yes</td>
+<td>-</td>
 <td>new trailing offset, real value</td>
 </tr>
 <tr>
 <td>pegPriceType</td>
-<td>Yes</td>
+<td>-</td>
 <td>new peg price type</td>
 </tr>
 <tr>
 <td>triggerType</td>
-<td>Yes</td>
+<td>-</td>
 <td>new triggerType</td>
 </tr>
 <tr>
@@ -8052,6 +8051,8 @@ penalty.</p>
 </tr>
 </tbody></table>
 <h2 id='query-user-trade-2'>Query user trade</h2>
+<p>NOTE: user trade queries from database and its data is limited for the last 90 days.</p>
+
 <blockquote>
 <p>Request format</p>
 </blockquote>
@@ -8127,7 +8128,7 @@ penalty.</p>
 <td>String</td>
 <td>Yes</td>
 <td>which currency to query</td>
-<td></td>
+<td>USDT...</td>
 </tr>
 <tr>
 <td>execType</td>
@@ -8833,9 +8834,23 @@ penalty.</p>
 <tr>
 <td>symbol</td>
 <td>String</td>
-<td>True</td>
+<td>False</td>
+<td>the symbol to query</td>
+<td>&quot;BTCUSDT&quot; ...</td>
+</tr>
+<tr>
+<td>symbols</td>
+<td>String</td>
+<td>False</td>
+<td>the symbols to query</td>
+<td>&quot;BTCUSDT, LINKUSDT&quot; ...</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td>False</td>
 <td>the currency to query</td>
-<td>BTCUSDT ...</td>
+<td>&quot;USDT&quot; ...</td>
 </tr>
 <tr>
 <td>start</td>
@@ -8866,6 +8881,11 @@ penalty.</p>
 <td>default 20, max 200</td>
 </tr>
 </tbody></table>
+
+<p><strong>NOTE</strong>: 1) symbol and currency cannot both be empty. 
+          2) When the symbol parameter is present, searching by symbol is prioritised. 
+          3) If only the currency is provided, it retrieves all symbols under that currency.
+          4) Searching for specific symbols under a currency needs both symbols and currency parameter.</p>
 <h2 id='query-orders-by-ids'>Query Orders By Ids</h2>
 <blockquote>
 <p>Request format</p>
@@ -8980,9 +9000,23 @@ penalty.</p>
 <tr>
 <td>symbol</td>
 <td>String</td>
-<td>True</td>
+<td>False</td>
+<td>the symbol to query</td>
+<td>&quot;BTCUSDT&quot; ...</td>
+</tr>
+<tr>
+<td>symbols</td>
+<td>String</td>
+<td>False</td>
+<td>the symbols to query</td>
+<td>&quot;BTCUSDT, LINKUSDT&quot; ...</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td>False</td>
 <td>the currency to query</td>
-<td>BTCUSDT ...</td>
+<td>&quot;USDT&quot; ...</td>
 </tr>
 <tr>
 <td>start</td>
@@ -9013,6 +9047,11 @@ penalty.</p>
 <td>default 20, max 200</td>
 </tr>
 </tbody></table>
+
+<p><strong>NOTE</strong>: 1) symbol and currency cannot both be empty. 
+          2) When the symbol parameter is present, searching by symbol is prioritised. 
+          3) If only the currency is provided, it retrieves all symbols under that currency.
+          4) Searching for specific symbols under a currency needs both symbols and currency parameter.</p>
 <h2 id='query-funding-rate-history-2'>Query funding rate history</h2>
 <blockquote>
 <p>Request format</p>
@@ -10229,7 +10268,6 @@ while funding rate symbol follows a pattern <code>.&lt;BASECURRENCY&gt;&lt;QUOTE
 <ul>
 <li>Each API call must be signed and pass to server in HTTP header <code>x-phemex-request-signature</code>.</li>
 <li>Endpoints use <code>HMAC SHA256</code> signatures. The <code>HMAC SHA256 signature</code> is a keyed <code>HMAC SHA256</code> operation. Use your <code>apiSecret</code> as the key and the string <code>URL Path + QueryString + Expiry + body )</code> as the value for the HMAC operation.</li>
-<li><code>apiSecret</code> = <code>Base64::urlDecode(API Secret)</code></li>
 <li>The <code>signature</code> is <strong>case sensitive</strong>.</li>
 </ul>
 <h2 id='query-product-information-3'>Query product information</h2>
@@ -10640,7 +10678,25 @@ GET /spot/orders/active?symbol=&lt;symbol&gt;&amp;clOrDID=&lt;clOrdID&gt;
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>GET /spot/orders?symbol=&lt;symbol&gt;
 </code></pre></div><h2 id='query-wallets'>Query wallets</h2>
-<p>Query spot wallet by currency.</p>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Case</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td>No</td>
+<td>the currency to query</td>
+<td>BTC, USDT...</td>
+</tr>
+</tbody></table>
+
+<p>NOTE: GET /spot/wallets queries the wallets of all currencies</p>
 
 <blockquote>
 <p>Request format</p>
@@ -11082,23 +11138,27 @@ Response data is limited to 3 months.
 <blockquote>
 <p>Response format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"amountEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"balanceEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"bizCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"createTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"execId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"execSeq"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"feeEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"transactTimeNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"rows"</span><span class="p">:[{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"amountEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"feeEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"balanceEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"bizCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execSeq"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"transactTimeNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"createTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
   </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <aside class="notice">
 Response data is limited to 3 months.
@@ -11114,10 +11174,10 @@ Response data is limited to 3 months.
 </tr>
 </thead><tbody>
 <tr>
-<td>quoteCurrency</td>
+<td>Currency</td>
 <td>String</td>
 <td>True</td>
-<td>the quote currency to query</td>
+<td>the currency to query</td>
 <td>USDT,TRY,BRZ,USDC, ...</td>
 </tr>
 </tbody></table>
@@ -13785,7 +13845,29 @@ GET /margin-trade/orders/active?symbol=&lt;symbol&gt;&amp;clOrDID=&lt;clOrdID&gt
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h2 id='query-wallets-2'>Query wallets</h2>
-<p>Query spot wallet by currency.</p>
+<ul>
+<li>Request parameters</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Case</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td>No</td>
+<td>the currency to query</td>
+<td>BTC, USDT...</td>
+</tr>
+</tbody></table>
+
+<p>NOTE: GET /margin-trade/wallets queries the wallets of all currencies</p>
 
 <blockquote>
 <p>Request format</p>
@@ -14591,7 +14673,6 @@ the same as the spot api</p>
 <li>Please raise API Key via web and choose <code>Read &amp; Trade &amp; Withdraw permission</code>, btw IP Address is mandatory.</li>
 <li>Each API call must be signed and pass to server in HTTP header <code>x-phemex-request-signature</code>.</li>
 <li>Endpoints use <code>HMAC SHA256</code> signatures. The <code>HMAC SHA256 signature</code> is a keyed <code>HMAC SHA256</code> operation. Use your <code>apiSecret</code> as the key and the string <code>URL Path + QueryString + Expiry + body )</code> as the value for the HMAC operation.</li>
-<li><code>apiSecret</code> = <code>Base64::urlDecode(API Secret)</code></li>
 <li>The <code>signature</code> is <strong>case-sensitive</strong>.</li>
 </ul>
 <h2 id='price-ratio-value'>Price/Ratio/Value</h2>
