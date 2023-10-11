@@ -2,15 +2,16 @@
 Welcome to the [Phemex](https://phemex.com) API documentation. We offer REST and Websocket APIs to interact with our systems.
 
 ## General API information
-* Rest API base endpoints:
-  * Default endpoint: **https://api.phemex.com**
-  * High ratelimit endpoint: **https://vapi.phemex.com**
-  * TestNet endpoint: **https://testnet-api.phemex.com**
-* WebSocket API base endpoints (further URI or querystring not allowed):
-  * Default endpoint: **wss://ws.phemex.com**
-  * TestNet endpoint: **wss://testnet-api.phemex.com/ws**
-  * High ratelimit endpoint: **wss://vapi.phemex.com/ws**
-* Phemex provides HTTP Rest API for client to operate Orders, all endpoints return a JSON object.
+* vip user endpoints (for whitelisted client IPs only):
+  * Rest API: `https://vapi.phemex.com`
+  * Websocket: `wss://vapi.phemex.com/ws`
+* public user endpoints::
+  * Rest API: `https://api.phemex.com`
+  * Websocket(further URI or querystring not allowed): `wss://ws.phemex.com`
+* testnet user endpoints::
+  * Rest API: `https://testnet-api.phemex.com`
+  * Websocket: `wss://testnet-api.phemex.com/ws`
+* Phemex provides HTTP Rest API for client to operate orders, all endpoints return a JSON object.
 
 ## REST API Standards
 ### HTTP return codes
@@ -54,12 +55,12 @@ Every HTTP Rest Request must have the following Headers:
 * Rest API has a request capacity in one minute window on user basis.
 * IP has request capacity in 5 minutes window.
 * Ratelimit of API is independant of that in WEB/APP, so if one get ratelimited in API, one can place/cancel orders via WEB or APP.
-* all requests to the domain **testnet-api.phemex.com** shared across the rate limit 500/5m in total.
-* **wss://ws.phemex.com** 200/5m
+* all requests to the domain `testnet-api.phemex.com` shared across the rate limit 500/5m in total.
+
 
 ### IP ratelimits
-   Currently Phemex restricts every IP 5,000 requests in 5 minutes window.
-   If exceeded this IP capacity, the user would be blocked in the following 5 minutes.
+* Currently Phemex restricts every IP 5,000 requests in 5 minutes window. If exceeded this IP capacity, the user would be blocked in the following 5 minutes.
+* `wss://ws.phemex.com` 200/5m per IP address, not mandatory to bind IP or get whitelisted.
 
 ### REST API ratelimit rules
 * [Order spamming limitations](https://phemex.com/user-guides/order-spamming-limitations)
@@ -140,13 +141,13 @@ Every HTTP Rest Request must have the following Headers:
 
 ## CCXT integration
 * CCXT is our authorized SDK provider and you may access the Phemex API through CCXT. For more information, please visit: https://ccxt.trade.
-* CCXT GitHub: https://github.com/ccxt/ccxt
+* [CCXT GitHub](https://github.com/ccxt/ccxt)
 
 ## Code samples
-* Java Sample Client: *https://github.com/phemex/java-client*
-* Python Sample Client: *https://github.com/phemex/phemex-python-api*
-* NodeJS Sample Client: *https://github.com/phemex/phemex-node-example*
-* C++ Market Data Sample Client: *https://github.com/phemex/phemex-cpp-api*
+[Java Sample Client](https://github.com/phemex/java-client)
+[Python Sample Client](https://github.com/phemex/phemex-python-api)
+[NodeJS Sample Client](https://github.com/phemex/phemex-node-example)
+[C++ Market Data Sample Client](https://github.com/phemex/phemex-cpp-api)
 
 ## Error codes
 ### CxlRejReason field

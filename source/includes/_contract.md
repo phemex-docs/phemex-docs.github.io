@@ -5221,6 +5221,8 @@ On each successful subscription, DataGW will publish 24-hour ticker metrics for 
 
 
 
+<a id="symbpricesub"></a>
+
 ## Subscribe tick event for symbol price
 
 * Every trading symbol has a suite of other symbols, each symbol follows same patterns,
