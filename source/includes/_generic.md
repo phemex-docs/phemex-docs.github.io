@@ -8,9 +8,6 @@ Welcome to the [Phemex](https://phemex.com) API documentation. We offer REST and
 * public user endpoints:
   * Rest API: `https://api.phemex.com`
   * Websocket(further URI or querystring not allowed): `wss://ws.phemex.com`
-* testnet user endpoints:
-  * Rest API: `https://testnet-api.phemex.com`
-  * Websocket: `wss://testnet-api.phemex.com/ws`
 * Phemex provides HTTP Rest API for client to operate Orders, all endpoints return a JSON object.
 
 ## REST API Standards
