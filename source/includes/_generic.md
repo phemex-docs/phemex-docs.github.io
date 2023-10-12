@@ -3,7 +3,7 @@ Welcome to the [Phemex](https://phemex.com) API documentation. We offer REST and
 
 ## General API information
 * Rest API base endpoints:
-  * Default endpoint: **https://api.phemex.com**
+  * Default endpoint: `https://api.phemex.com`
   * High ratelimit endpoint: **https://vapi.phemex.com**
   * TestNet endpoint: **https://testnet-api.phemex.com**
 * WebSocket API base endpoints (further URI or querystring not allowed):
