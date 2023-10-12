@@ -2,12 +2,12 @@
 Welcome to the [Phemex](https://phemex.com) API documentation. We offer REST and Websocket APIs to interact with our systems.
 
 ## General API information
-* vip user endpoints(for whitelisted client IPs only):
+* vip user endpoints (for whitelisted client IPs only):
   * Rest API: `https://vapi.phemex.com`
   * Websocket: `wss://vapi.phemex.com/ws`
 * public user endpoints:
   * Rest API: `https://api.phemex.com`
-  * Websocket(further URI or querystring not allowed): `wss://ws.phemex.com`
+  * Websocket (further URI or querystring not allowed): `wss://ws.phemex.com`
 * Phemex provides HTTP Rest API for client to operate Orders, all endpoints return a JSON object.
 
 ## REST API Standards
