@@ -7,7 +7,7 @@ Welcome to the [Phemex](https://phemex.com) API documentation. We offer REST and
   * Websocket: `wss://vapi.phemex.com/ws`
 * public user endpoints:
   * Rest API: `https://api.phemex.com`
-  * Websocket(further URI or querystring not allowed): `wss://ws.phemex.com`
+  * Websocket (further URI or querystring not allowed): `wss://ws.phemex.com`
 * testnet user endpoints:
   * Rest API: `https://testnet-api.phemex.com`
   * Websocket: `wss://testnet-api.phemex.com/ws`
