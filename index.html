@@ -1355,21 +1355,25 @@
 <p>Welcome to the <a href="https://phemex.com">Phemex</a> API documentation. We offer REST and Websocket APIs to interact with our systems.</p>
 <h2 id='general-api-information'>General API information</h2>
 <ul>
-<li>Rest API base endpoints:
+<li>vip user endpoints (for whitelisted client IPs only):
 
 <ul>
-<li>Default endpoint: <strong>https://api.phemex.com</strong></li>
-<li>High ratelimit endpoint: <strong>https://vapi.phemex.com</strong></li>
-<li>TestNet endpoint: <strong>https://testnet-api.phemex.com</strong></li>
+<li>Rest API: <code>https://vapi.phemex.com</code></li>
+<li>Websocket: <code>wss://vapi.phemex.com/ws</code></li>
 </ul></li>
-<li>WebSocket API base endpoints (further URI or querystring not allowed):
+<li>public user endpoints:
 
 <ul>
-<li>Default endpoint: <strong>wss://ws.phemex.com</strong></li>
-<li>TestNet endpoint: <strong>wss://testnet-api.phemex.com/ws</strong></li>
-<li>High ratelimit endpoint: <strong>wss://vapi.phemex.com/ws</strong></li>
+<li>Rest API: <code>https://api.phemex.com</code></li>
+<li>Websocket (further URI or querystring not allowed): <code>wss://ws.phemex.com</code></li>
 </ul></li>
-<li>Phemex provides HTTP Rest API for client to operate Orders, all endpoints return a JSON object.</li>
+<li>testnet user endpoints:
+
+<ul>
+<li>Rest API: <code>https://testnet-api.phemex.com</code></li>
+<li>Websocket: <code>wss://testnet-api.phemex.com/ws</code></li>
+</ul></li>
+<li>Phemex provides HTTP Rest API for client to operate orders, all endpoints return a JSON object.</li>
 </ul>
 <h2 id='rest-api-standards'>REST API Standards</h2><h3 id='http-return-codes'>HTTP return codes</h3>
 <ul>
@@ -1426,12 +1430,13 @@
 <li>Rest API has a request capacity in one minute window on user basis.</li>
 <li>IP has request capacity in 5 minutes window.</li>
 <li>Ratelimit of API is independant of that in WEB/APP, so if one get ratelimited in API, one can place/cancel orders via WEB or APP.</li>
-<li>all requests to the domain <strong>testnet-api.phemex.com</strong> shared across the rate limit 500/5m in total.</li>
-<li><strong>wss://ws.phemex.com</strong> 200/5m</li>
+<li>all requests to the domain <code>testnet-api.phemex.com</code> shared across the rate limit 500/5m in total.</li>
 </ul>
 <h3 id='ip-ratelimits'>IP ratelimits</h3>
-<p>Currently Phemex restricts every IP 5,000 requests in 5 minutes window.
-   If exceeded this IP capacity, the user would be blocked in the following 5 minutes.</p>
+<ul>
+<li>Currently Phemex restricts every IP 5,000 requests in 5 minutes window. If exceeded this IP capacity, the user would be blocked in the following 5 minutes.</li>
+<li><code>wss://ws.phemex.com</code> 200/5m per IP address, not mandatory to bind IP or get whitelisted.</li>
+</ul>
 <h3 id='rest-api-ratelimit-rules'>REST API ratelimit rules</h3>
 <ul>
 <li><a href="https://phemex.com/user-guides/order-spamming-limitations">Order spamming limitations</a></li>
@@ -1720,15 +1725,13 @@ Because the number of interfaces in Other group may grow over time, the list bel
 <h2 id='ccxt-integration'>CCXT integration</h2>
 <ul>
 <li>CCXT is our authorized SDK provider and you may access the Phemex API through CCXT. For more information, please visit: https://ccxt.trade.</li>
-<li>CCXT GitHub: https://github.com/ccxt/ccxt</li>
+<li><a href="https://github.com/ccxt/ccxt">CCXT GitHub</a></li>
 </ul>
 <h2 id='code-samples'>Code samples</h2>
-<ul>
-<li>Java Sample Client: <em>https://github.com/phemex/java-client</em></li>
-<li>Python Sample Client: <em>https://github.com/phemex/phemex-python-api</em></li>
-<li>NodeJS Sample Client: <em>https://github.com/phemex/phemex-node-example</em></li>
-<li>C++ Market Data Sample Client: <em>https://github.com/phemex/phemex-cpp-api</em></li>
-</ul>
+<p><a href="https://github.com/phemex/java-client">Java Sample Client</a>
+<a href="https://github.com/phemex/phemex-python-api">Python Sample Client</a>
+<a href="https://github.com/phemex/phemex-node-example">NodeJS Sample Client</a>
+<a href="https://github.com/phemex/phemex-cpp-api">C++ Market Data Sample Client</a></p>
 <h2 id='error-codes'>Error codes</h2><h3 id='cxlrejreason-field'>CxlRejReason field</h3>
 <table><thead>
 <tr>
@@ -10171,6 +10174,8 @@ Response sample
 <td></td>
 </tr>
 </tbody></table>
+
+<p><a id="symbpricesub"></a></p>
 <h2 id='subscribe-tick-event-for-symbol-price'>Subscribe tick event for symbol price</h2>
 <ul>
 <li>Every trading symbol has a suite of other symbols, each symbol follows same patterns,
@@ -12943,7 +12948,6 @@ While for private channels like account/position/order data, the client should s
 <ul>
 <li>Each API call must be signed and pass to server in HTTP header <code>x-phemex-request-signature</code>.</li>
 <li>Endpoints use <code>HMAC SHA256</code> signatures. The <code>HMAC SHA256 signature</code> is a keyed <code>HMAC SHA256</code> operation. Use your <code>apiSecret</code> as the key and the string <code>URL Path + QueryString + Expiry + body )</code> as the value for the HMAC operation.</li>
-<li><code>apiSecret</code> = <code>Base64::urlDecode(API Secret)</code></li>
 <li>The <code>signature</code> is <strong>case sensitive</strong>.</li>
 </ul>
 <h2 id='query-product-information-4'>Query product information</h2>
