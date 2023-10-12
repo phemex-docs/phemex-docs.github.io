@@ -5220,6 +5220,7 @@ On each successful subscription, DataGW will publish 24-hour ticker metrics for 
 | predFundingRateRr | String  | Unscaled predicated funding rate             |                                  |
 
 
+<a id="symbpricesub"></a>
 
 ## Subscribe tick event for symbol price
 
