@@ -3793,7 +3793,7 @@ GET /api-data/g-futures/closedPosition?symbol=<symbol>&currency=<currency>
                 "term": 0,
                 "closedSizeRq": 1,
                 "side": 1,
-                "cumEntryValueRv": `None`, None <!-- No special highlighting for None -->, <span>None</span>,
+                "cumEntryValueRv": `None`, None <!-- No special highlighting for None -->, <span>None</span>, &#8203;None&#8203;, None<!-- -->, \None
                 "closedPnlRv": "-0.2",
                 "exchangeFeeRv": "0.007113",
                 "fundingFeeRv": "0.78",
