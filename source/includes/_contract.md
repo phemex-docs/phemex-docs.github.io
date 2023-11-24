@@ -67,6 +67,7 @@ Fields with post-fix "Ep", "Er" or "Ev" have been scaled based on symbol setting
 GET /public/products
 ```
 
+* USD-M perpetual contracts using USD as margin or COIN-M perpetual contracts using COIN as margin
 * Contract symbols are defined in `.products[]` with **type=Perpetual**.
 * Contract risklimit information are defined in `.risklimits[]`.
 * Contract which delisted has status with 'Delisted' .
@@ -1677,7 +1678,7 @@ GET /api-data/futures/fee-rate?settleCurrency=<settleCurrency>
 |----------------|---------|----------|------------------------------|-----------------------|
 | settleCurrency | String  | True     | the settle currency to query | USDT,USD,BTC,ETH, ... |
 
-Note: *RateEr (ratio scale) in response field are const 8
+**NOTE**: *RateEr (ratio scale) in response field are const 8
 
 > Response sample
 
@@ -2940,6 +2941,7 @@ i.e. `index` symbol follows a pattern `.<BASECURRENCY>`,
 GET /public/products
 ```
 
+* USDT-M perpetual contracts using USDT as margin.
 * You can find products info with hedged mode under node 'perpProductsV2'.
 * Contract risklimit information are defined in `.riskLimitsV2[]`.
 * Contract which delisted has status with 'Delisted' .
@@ -3526,7 +3528,7 @@ GET /g-accounts/positions?currency=<currency>
 |------------|--------|-------------------------------------------------------------|
 | leverageRr | Int    | when negative, cross margin; when positive, isolated margin |
 
-<b>Note</b> Highly recommend calculating `unRealisedPnlRv` in client side with latest `markPriceRp` to avoid ratelimit
+<b>NOTE:</b> Highly recommend calculating `unRealisedPnlRv` in client side with latest `markPriceRp` to avoid ratelimit
 penalty.
 
 ## Switch Position Mode Synchronously
@@ -3756,21 +3758,89 @@ GET /exchange/order/v2/orderList?symbol=<symbol>&currency=<currency>&ordStatus=<
 
 Response
 
-| Field      | Type    | Description            | Possible values                                                    |
-|------------|---------|------------------------|--------------------------------------------------------------------|
-| execStatus | Integer | exec status code | Aborted(2), MakerFill(6), TakerFill(7), Expired(8), Canceled(11), CreateRejected(19)|
-| tradeType | Integer | trade type code | Trade(1),Funding(4),LiqTrade(6),AdlTrade(7) |
-| side | Integer | side code | Buy(1),Sell(2) |
-| orderType | Integer | order type code | Market (1),Limit (2),Stop(3),StopLimit (4),MarketIfTouched(5),LimitIfTouched(6)|
-| ordStatus | Integer | order status code | Created(0),Untriggered(1),Deactivated(2),Triggered(3),Rejected(4),New(5),PartiallyFilled(6),Filled(7),Canceled(8)|
-| actionBy | Integer | action by code | ByUser(1)|
-| trigger | Integer | trigger code | UNSPECIFIED(0),ByMarkPrice(1),ByLastPrice(3)|
+| Field      | Type    | Description          | Possible values                                                                     |
+|------------|---------|----------------------|-------------------------------------------------------------------------------------|
+| execStatus | Integer | exec status code     | Aborted(2), MakerFill(6), TakerFill(7), Expired(8), Canceled(11), CreateRejected(19)|
+| tradeType  | Integer | trade type code      | Trade(1), Funding(4), LiqTrade(6), AdlTrade(7)                                         |
+| side       | Integer | side code            | Buy(1), Sell(2) |
+| orderType  | Integer | order type code      | Market(1), Limit(2), Stop(3), StopLimit(4), MarketIfTouched(5), LimitIfTouched(6)     |
+| ordStatus  | Integer | order status code    | Created(0), Untriggered(1), Deactivated(2), Triggered(3), Rejected(4), New(5), PartiallyFilled(6), Filled(7), Canceled(8)|
+| actionBy   | Integer | action by code       | ByUser(1)                                                                           |
+| action     | Integer | user code            | New(1), Cancel(2), Replace(3), CancelAll(4),  LiqRequest(11), SettleFundingFee(13)  |
+| trigger    | Integer | trigger code         | UNSPECIFIED(0), ByMarkPrice(1), ByLastPrice(3)                                        |
         
 
+## Query closed positions
+
+> Request format
+
+```
+GET /api-data/g-futures/closedPosition?symbol=<symbol>&currency=<currency>
+```
+
+> Response sample
+
+```json
+{
+    "code": 0,
+    "msg": "OK",
+    "data": {
+        "total": 2,
+        "rows": [
+            {
+                "symbol": "ETHUSDT",
+                "currency": "USDT",
+                "term": 0,
+                "closedSizeRq": 1,
+                "side": 1,
+                "cumEntryValueRv":, None,
+                "closedPnlRv": "-0.2",
+                "exchangeFeeRv": "0.007113",
+                "fundingFeeRv": "0.78",
+                "finished": "0",
+                "openedTimeNs": 1694542394835,
+                "updatedTimeNs": 1694542398837,
+                "openPrice": "5.93900000",
+                "closePrice": 2,
+                "roi": "-0.01008799",
+                "leverage": 6
+            },
+            {
+                "symbol": "ETHUSDT",
+                "currency": "USDT",
+                "term": 0,
+                "closedSizeRq": 20,
+                "side": 1,
+                "cumEntryValueRv":, None,
+                "closedPnlRv": "-55",
+                "exchangeFeeRv": "0.7113",
+                "fundingFeeRv": "3.52",
+                "finished": "0",
+                "openedTimeNs": 1693542394835,
+                "updatedTimeNs": 1693542398837,
+                "openPrice": "1998",
+                "closePrice": "1888",
+                "roi": "-0.28799",
+                "leverage": 20
+            }
+        ]
+    }
+}
+```
+
+| Field     | Type    | Required | Description                                    | Possible values                                                    |
+|-----------|---------|----------|------------------------------------------------|--------------------------------------------------------------------|
+| symbol    | String  | No       | which symbol to query                          | [Trading symbols](#symbpricesub)                                   |
+| currency  | String  | No       | which currency to query                        | USDT...                                                            |
+| offset    | Integer | No       | offset to resultset                            |                                                                    |
+| limit     | Integer | No       | limit of resultset, max 200                    |                                                                    |
+| withCount | Boolean | No       | if true, result info will contains count info. | true, false                                                        |
+
+**NOTE**:  
+1\) symbol and currency cannot both be empty.<br> 
+2\) user trade queries from database and its data is limited for the last 90 days.
 
 ## Query user trade
-
-NOTE: user trade queries from database and its data is limited for the last 90 days.
 
 > Request format
 
@@ -3835,17 +3905,20 @@ GET /exchange/order/v2/tradingList?symbol=<symbol>&currency=<currency>&execType=
 | execType  | Integer | No       | trade type code list filter                    | Trade(1),LiqTrade(6),AdlTrade(7)                                   |
 | offset    | Integer | Yes      | offset to resultset                            |                                                                    |
 | limit     | Integer | Yes      | limit of resultset, max 200                    |                                                                    |
-| withCount | boolean | No       | if true, result info will contains count info. | true,false                                                         |
+| withCount | Boolean | No       | if true, result info will contains count info. | true,false                                                         |
 
+**NOTE**:  
+1\) symbol and currency cannot both be empty.<br> 
+2\) user trade queries from database and its data is limited for the last 90 days.
 
 * Possible trade types
 
-|TradeTypes| Description |
-|---------|--------------|
-| Trade | Normal trades |
-| Funding | Funding on positions |
+|TradeTypes| Description              |
+|----------|--------------------------|
+| Trade    | Normal trades            |
+| Funding  | Funding on positions     |
 | AdlTrade |  Auto-delevearage trades |
-| LiqTrade | Liquidation trades |
+| LiqTrade | Liquidation trades       |
 
 * Response
 
@@ -4267,10 +4340,11 @@ GET /api-data/g-futures/orders?symbol=<symbol>
 | offset   | Integer        | False    | page start from 0         | start from 0, default 0         |
 | limit    | Integer        | False    | page size                 | default 20, max 200             |
 
-**NOTE**: 1) symbol and currency cannot both be empty. 
-          2) When the symbol parameter is present, searching by symbol is prioritised. 
-          3) If only the currency is provided, it retrieves all symbols under that currency.
-          4) Searching for specific symbols under a currency needs both symbols and currency parameter.
+**NOTE**:  
+1\) symbol and currency cannot both be empty.<br> 
+2\) When the symbol parameter is present, searching by symbol is prioritised.<br> 
+3\) If only the currency is provided, it retrieves all symbols under that currency.<br>
+4\) Searching for specific symbols under a currency needs both symbols and currency parameter.<br>
           
 
 ## Query Orders By Ids
@@ -4333,26 +4407,27 @@ GET /api-data/g-futures/trades?symbol=<symbol>
 ```json
 [
     {
-        "action": "New",
-        "clOrdID": "",
-        "closedPnlRv": "0",
-        "closedSizeRq": "0",
+        "transactTimeNs": 1669407633926215067,
+        "symbol": "BTCUSDT",
         "currency": "USDT",
-        "execFeeRv": "0.00166",
-        "execID": "5c3d96e1-8874-53b6-b6e5-9dcc4d28b4ab",
-        "execPriceRp": "16600",
+        "action": "New",
+        "posSide": "Short",
+        "side": "Sell",
+        "tradeType": "Trade",
         "execQtyRq": "0.001",
-        "execStatus": "MakerFill",
+        "execPriceRp": "16600",
+        "orderQtyRq": "0.001",
+        "priceRp": "16600",
         "execValueRv": "16.6",
         "feeRateRr": "0.0001",
-        "orderID": "fcdfeafa-ed68-45d4-b2bd-7bc27f2b2b0b",
-        "orderQtyRq": "0.001",
+        "execFeeRv": "0.00166",
+        "closedSizeRq": "0",
+        "closedPnlRv": "0",
         "ordType": "LimitIfTouched",
-        "priceRp": "16600",
-        "side": "Sell",
-        "symbol": "BTCUSDT",
-        "tradeType": "Trade",
-        "transactTimeNs": 1669407633926215067
+        "execID": "5c3d96e1-8874-53b6-b6e5-9dcc4d28b4ab",
+        "orderID": "fcdfeafa-ed68-45d4-b2bd-7bc27f2b2b0b",
+        "clOrdID": "",                                
+        "execStatus": "MakerFill",                                                  
     }
 ]
 ```
@@ -4367,10 +4442,12 @@ GET /api-data/g-futures/trades?symbol=<symbol>
 | offset   | Integer        | False    | page start from 0         | start from 0, default 0         |
 | limit    | Integer        | False    | page size                 | default 20, max 200             |
 
-**NOTE**: 1) symbol and currency cannot both be empty. 
-          2) When the symbol parameter is present, searching by symbol is prioritised. 
-          3) If only the currency is provided, it retrieves all symbols under that currency.
-          4) Searching for specific symbols under a currency needs both symbols and currency parameter.
+**NOTE**:  
+1\) symbol and currency cannot both be empty.<br> 
+2\) When the symbol parameter is present, searching by symbol is prioritised.<br> 
+3\) If only the currency is provided, it retrieves all symbols under that currency.<br>
+4\) Searching for specific symbols under a currency needs both symbols and currency parameter.<br>
+
 
 ## Query funding rate history
 
