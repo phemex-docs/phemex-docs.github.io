@@ -21,11 +21,11 @@ set :images_dir, 'images'
 set :fonts_dir, 'fonts'
 
 # Activate the syntax highlighter
-activate :syntax
-ready do
-  require './lib/monokai_sublime_slate.rb'
-  require './lib/multilang.rb'
-end
+# activate :syntax
+# ready do
+#   require './lib/monokai_sublime_slate.rb'
+#   require './lib/multilang.rb'
+# end
 
 activate :sprockets
 
