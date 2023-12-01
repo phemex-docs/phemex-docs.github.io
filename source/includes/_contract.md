@@ -4536,7 +4536,7 @@ GET /api-data/g-futures/funding-fees?symbol=<symbol>
 
 API Rate Limits
 
-* Each Client has concurrent connection limit to *5* in maximum.
+* Each Client has concurrent connection limit to *20* in maximum.
 * Each connection has subscription limit to *20* in maximum.
 * Each connection has throttle limit to *20* request/s.
 
@@ -5096,10 +5096,304 @@ AOP subscription requires the session been authorized successfully. DataGW extra
 
 ## Account-Order-Position (AOP) Message Sample:
 
-> Response sample
+> Message sample: snapshot
+
 ```json
-{"index_market24h": {"highEp": 10009,"lastEp": 10007,"lowEp": 10004, "openEp": 10004,"symbol": ".USDT"},"timestamp": 1681496204104375396}
-{"accounts_p":[{"accountBalanceRv":"1508.452588802237","accountID":9328670003,"bonusBalanceRv":"0","currency":"USDT","totalUsedBalanceRv":"343.132599666883","userID":932867}],"orders_p":[{"accountID":9328670003,"action":"New","actionBy":"ByUser","actionTimeNs":1666858780876924611,"addedSeq":77751555,"apRp":"0","bonusChangedAmountRv":"0","bpRp":"0","clOrdID":"c0327a7d-9064-62a9-28f6-2db9aaaa04e0","closedPnlRv":"0","closedSize":"0","code":0,"cumFeeRv":"0","cumQty":"0","cumValueRv":"0","curAccBalanceRv":"1508.489893982237","curAssignedPosBalanceRv":"24.62786650928","curBonusBalanceRv":"0","curLeverageRr":"-10","curPosSide":"Buy","curPosSize":"0.043","curPosTerm":1,"curPosValueRv":"894.0689","curRiskLimitRv":"1000000","currency":"USDT","cxlRejReason":0,"displayQty":"0.003","execFeeRv":"0","execID":"00000000-0000-0000-0000-000000000000","execPriceRp":"20723.7","execQty":"0","execSeq":77751555,"execStatus":"New","execValueRv":"0","feeRateRr":"0","leavesQty":"0.003","leavesValueRv":"63.4503","message":"No error","ordStatus":"New","ordType":"Market","orderID":"fa64c6f2-47a4-4929-aab4-b7fa9bbc4323","orderQty":"0.003","pegOffsetValueRp":"0","posSide":"Long","priceRp":"21150.1","relatedPosTerm":1,"relatedReqNum":11,"side":"Buy","slTrigger":"ByMarkPrice","stopLossRp":"0","stopPxRp":"0","symbol":"BTCUSDT","takeProfitRp":"0","timeInForce":"ImmediateOrCancel","tpTrigger":"ByLastPrice","tradeType":"Amend","transactTimeNs":1666858780881545305,"userID":932867},{"accountID":9328670003,"action":"New","actionBy":"ByUser","actionTimeNs":1666858780876924611,"addedSeq":77751555,"apRp":"0","bonusChangedAmountRv":"0","bpRp":"0","clOrdID":"c0327a7d-9064-62a9-28f6-2db9aaaa04e0","closedPnlRv":"0","closedSize":"0","code":0,"cumFeeRv":"0","cumQty":"0.003","cumValueRv":"62.1753","curAccBalanceRv":"1508.452588802237","curAssignedPosBalanceRv":"24.62786650928","curBonusBalanceRv":"0","curLeverageRr":"-10","curPosSide":"Buy","curPosSize":"0.046","curPosTerm":1,"curPosValueRv":"956.2442","curRiskLimitRv":"1000000","currency":"USDT","cxlRejReason":0,"displayQty":"0.003","execFeeRv":"0.03730518","execID":"b6c8d16b-c777-510c-8476-80f399b2d5ad","execPriceRp":"20725.1","execQty":"0.003","execSeq":77751555,"execStatus":"TakerFill","execValueRv":"62.1753","feeRateRr":"0.0006","lastLiquidityInd":"RemovedLiquidity","leavesQty":"0","leavesValueRv":"0","message":"No error","ordStatus":"Filled","ordType":"Market","orderID":"fa64c6f2-47a4-4929-aab4-b7fa9bbc4323","orderQty":"0.003","pegOffsetValueRp":"0","posSide":"Long","priceRp":"21150.1","relatedPosTerm":1,"relatedReqNum":11,"side":"Buy","slTrigger":"ByMarkPrice","stopLossRp":"0","stopPxRp":"0","symbol":"BTCUSDT","takeProfitRp":"0","timeInForce":"ImmediateOrCancel","tpTrigger":"ByLastPrice","tradeType":"Trade","transactTimeNs":1666858780881545305,"userID":932867}],"positions_p":[{"accountID":9328670003,"assignedPosBalanceRv":"30.861734862748","avgEntryPriceRp":"20787.917391304","bankruptCommRv":"0.0000006","bankruptPriceRp":"0.1","buyLeavesQty":"0","buyLeavesValueRv":"0","buyValueToCostRr":"0.10114","createdAtNs":0,"crossSharedBalanceRv":"1165.319989135354","cumClosedPnlRv":"0","cumFundingFeeRv":"0.089061821453","cumTransactFeeRv":"0.57374652","curTermRealisedPnlRv":"-0.662808341453","currency":"USDT","dataVer":11,"deleveragePercentileRr":"0","displayLeverageRr":"0.79941382","estimatedOrdLossRv":"0","execSeq":77751555,"freeCostRv":"0","freeQty":"-0.046","initMarginReqRr":"0.1","lastFundingTime":1666857600000000000,"lastTermEndTime":0,"leverageRr":"-10","liquidationPriceRp":"0.1","maintMarginReqRr":"0.01","makerFeeRateRr":"-1","markPriceRp":"20735.47347096","minPosCostRv":"0","orderCostRv":"0","posCostRv":"30.284669572349","posMode":"Hedged","posSide":"Long","positionMarginRv":"1196.181723398102","positionStatus":"Normal","riskLimitRv":"1000000","sellLeavesQty":"0","sellLeavesValueRv":"0","sellValueToCostRr":"0.10126","side":"Buy","size":"0.046","symbol":"BTCUSDT","takerFeeRateRr":"-1","term":1,"transactTimeNs":1666858780881545305,"unrealisedPnlRv":"-2.41242033584","updatedAtNs":0,"usedBalanceRv":"30.861734862748","userID":932867,"valueRv":"956.2442"},{"accountID":9328670003,"assignedPosBalanceRv":"9.473634984","avgEntryPriceRp":"20786.455555556","bankruptCommRv":"1.153171711445","bankruptPriceRp":"1000000","buyLeavesQty":"0","buyLeavesValueRv":"0","buyValueToCostRr":"0.10114","createdAtNs":0,"crossSharedBalanceRv":"1165.319989135354","cumClosedPnlRv":"0","cumFundingFeeRv":"-0.074563385402","cumTransactFeeRv":"0.44898744","curTermRealisedPnlRv":"-0.374424054598","currency":"USDT","dataVer":10,"deleveragePercentileRr":"0","displayLeverageRr":"0.63759936","estimatedOrdLossRv":"0","execSeq":77731059,"freeCostRv":"0","freeQty":"0.036","initMarginReqRr":"0.1","lastFundingTime":1666857600000000000,"lastTermEndTime":0,"leverageRr":"-10","liquidationPriceRp":"1000000","maintMarginReqRr":"0.01","makerFeeRateRr":"-1","markPriceRp":"20735.47347096","minPosCostRv":"0","orderCostRv":"0","posCostRv":"9.473634984","posMode":"Hedged","posSide":"Short","positionMarginRv":"1173.640452407909","positionStatus":"Normal","riskLimitRv":"1000000","sellLeavesQty":"0","sellLeavesValueRv":"0","sellValueToCostRr":"0.10126","side":"Sell","size":"0.036","symbol":"BTCUSDT","takerFeeRateRr":"-1","term":1,"transactTimeNs":1666858780876924611,"unrealisedPnlRv":"1.83535504544","updatedAtNs":0,"usedBalanceRv":"9.473634984","userID":932867,"valueRv":"748.3124"},{"accountID":9328670003,"assignedPosBalanceRv":"156.56916092763","avgEntryPriceRp":"1563.815","bankruptCommRv":"0.187657798123","bankruptPriceRp":"1042.55","buyLeavesQty":"0","buyLeavesValueRv":"0","buyValueToCostRr":"0.33433334","createdAtNs":0,"crossSharedBalanceRv":"1165.319989135354","cumClosedPnlRv":"-89.82","cumFundingFeeRv":"0.104061681397","cumTransactFeeRv":"0.4835887","curTermRealisedPnlRv":"-0.328183513333","currency":"USDT","dataVer":14,"deleveragePercentileRr":"0","displayLeverageRr":"2.99999994","estimatedOrdLossRv":"0","execSeq":77731060,"freeCostRv":"0","freeQty":"-0.3","initMarginReqRr":"0.33333333","lastFundingTime":1666857600000000000,"lastTermEndTime":1666755074905395643,"leverageRr":"3","liquidationPriceRp":"1058.2","maintMarginReqRr":"0.01","makerFeeRateRr":"-1","markPriceRp":"1558.51230846","minPosCostRv":"0","orderCostRv":"0","posCostRv":"156.56916092763","posMode":"Hedged","posSide":"Long","positionMarginRv":"156.381503129507","positionStatus":"Normal","riskLimitRv":"500000","sellLeavesQty":"0","sellLeavesValueRv":"0","sellValueToCostRr":"0.33473333","side":"Buy","size":"0.3","symbol":"ETHUSDT","takerFeeRateRr":"-1","term":2,"transactTimeNs":1666858780876924611,"unrealisedPnlRv":"-1.590807462","updatedAtNs":0,"usedBalanceRv":"156.56916092763","userID":932867,"valueRv":"469.1445"},{"accountID":9328670003,"assignedPosBalanceRv":"146.228068892505","avgEntryPriceRp":"1455.495","bankruptCommRv":"0.349516231597","bankruptPriceRp":"1941.75","buyLeavesQty":"0","buyLeavesValueRv":"0","buyValueToCostRr":"0.33433334","createdAtNs":0,"crossSharedBalanceRv":"1165.319989135354","cumClosedPnlRv":"0","cumFundingFeeRv":"-0.159460679685","cumTransactFeeRv":"0.2619891","curTermRealisedPnlRv":"-0.102528420315","currency":"USDT","dataVer":14,"deleveragePercentileRr":"0","displayLeverageRr":"2.99323302","estimatedOrdLossRv":"0","execSeq":77731060,"freeCostRv":"0","freeQty":"0.3","initMarginReqRr":"0.33333333","lastFundingTime":1666857600000000000,"lastTermEndTime":0,"leverageRr":"3","liquidationPriceRp":"1927.21","maintMarginReqRr":"0.01","makerFeeRateRr":"-1","markPriceRp":"1558.51230846","minPosCostRv":"0","orderCostRv":"0","posCostRv":"145.898817344505","posMode":"Hedged","posSide":"Short","positionMarginRv":"145.878552660908","positionStatus":"Normal","riskLimitRv":"500000","sellLeavesQty":"0","sellLeavesValueRv":"0","sellValueToCostRr":"0.33473333","side":"Sell","size":"0.3","symbol":"ETHUSDT","takerFeeRateRr":"-1","term":1,"transactTimeNs":1666858780876924611,"unrealisedPnlRv":"-30.905192538","updatedAtNs":0,"usedBalanceRv":"146.228068892505","userID":932867,"valueRv":"436.6485"}],"sequence":68744,"timestamp":1666858780883525030,"type":"incremental","version":0}
+
+{
+  "index_market24h": {
+    "highEp": 10009,
+    "lastEp": 10007,
+    "lowEp": 10004,
+    "openEp": 10004,
+    "symbol": ".USDT"
+  },
+  "timestamp": 1681496204104375396}
+{
+  "accounts_p":[
+    {
+      "accountBalanceRv":"1508.452588802237",
+      "accountID":9328670003,
+      "bonusBalanceRv":"0",
+      "currency":"USDT",
+      "totalUsedBalanceRv":"343.132599666883",
+      "userID":932867
+    }
+  ],
+  "orders_p":[
+    {
+      "accountID":9328670003,
+      "action":"New",
+      "actionBy":"ByUser",
+      "actionTimeNs":1666858780876924611,
+      "addedSeq":77751555,
+      "apRp":"0",
+      "bonusChangedAmountRv":"0",
+      "bpRp":"0",
+      "clOrdID":"c0327a7d-9064-62a9-28f6-2db9aaaa04e0",
+      "closedPnlRv":"0",
+      "closedSize":"0",
+      "code":0,
+      "cumFeeRv":"0",
+      "cumQty":"0",
+      "cumValueRv":"0",
+      "curAccBalanceRv":"1508.489893982237",
+      "curAssignedPosBalanceRv":"24.62786650928",
+      "curBonusBalanceRv":"0",
+      "curLeverageRr":"-10",
+      "curPosSide":"Buy",
+      "curPosSize":"0.043",
+      "curPosTerm":1,
+      "curPosValueRv":"894.0689",
+      "curRiskLimitRv":"1000000",
+      "currency":"USDT",
+      "cxlRejReason":0,
+      "displayQty":"0.003",
+      "execFeeRv":"0",
+      "execID":"00000000-0000-0000-0000-000000000000",
+      "execPriceRp":"20723.7",
+      "execQty":"0",
+      "execSeq":77751555,
+      "execStatus":"New",
+      "execValueRv":"0",
+      "feeRateRr":"0",
+      "leavesQty":"0.003",
+      "leavesValueRv":"63.4503",
+      "message":"No error",
+      "ordStatus":"New",
+      "ordType":"Market",
+      "orderID":"fa64c6f2-47a4-4929-aab4-b7fa9bbc4323",
+      "orderQty":"0.003",
+      "pegOffsetValueRp":"0",
+      "posSide":"Long",
+      "priceRp":"21150.1",
+      "relatedPosTerm":1,
+      "relatedReqNum":11,
+      "side":"Buy",
+      "slTrigger":"ByMarkPrice",
+      "stopLossRp":"0",
+      "stopPxRp":"0",
+      "symbol":"BTCUSDT",
+      "takeProfitRp":"0",
+      "timeInForce":"ImmediateOrCancel",
+      "tpTrigger":"ByLastPrice",
+      "tradeType":"Amend",
+      "transactTimeNs":1666858780881545305,
+      "userID":932867}
+  ],
+  "positions_p": [
+    {
+      "accountID": 9328670003,
+      "assignedPosBalanceRv": "0",
+      "avgEntryPriceRp": "0",
+      "bankruptCommRv": "0",
+      "bankruptPriceRp": "0",
+      "buyLeavesQty": "0",
+      "buyLeavesValueRv": "0",
+      "buyValueToCostRr": "0.10114",
+      "createdAtNs": 0,
+      "crossSharedBalanceRv": "266.079483950342",
+      "cumClosedPnlRv": "-0.8092",
+      "cumFundingFeeRv": "0.013573252307",
+      "cumPtFeeRv": "0",
+      "cumTransactFeeRv": "0.27247008",
+      "curTermRealisedPnlRv": "-0.11368032",
+      "currency": "USDT",
+      "dataVer": 40,
+      "deleveragePercentileRr": "0",
+      "displayLeverageRr": "-10",
+      "estimatedOrdLossRv": "0",
+      "execSeq": 7659244869,
+      "freeCostRv": "0",
+      "freeQty": "0",
+      "initMarginReqRr": "0.1",
+      "lastFundingTime": 1699833600000000000,
+      "lastTermEndTime": 1699545458473086582,
+      "leverageRr": "-10",
+      "liquidationPriceRp": "0",
+      "maintMarginReqRr": "0.005",
+      "makerFeeRateRr": "0.0001",
+      "markPriceRp": "37214.088278684",
+      "minPosCostRv": "0",
+      "orderCostRv": "0",
+      "posCostRv": "0",
+      "posMode": "OneWay",
+      "posSide": "Long",
+      "positionMarginRv": "0",
+      "positionStatus": "Normal",
+      "riskLimitRv": "2000000",
+      "sellLeavesQty": "0",
+      "sellLeavesValueRv": "0",
+      "sellValueToCostRr": "0.10126",
+      "side": "None",
+      "size": "0",
+      "symbol": "BTCUSDT",
+      "takerFeeRateRr": "0.0006",
+      "term": 7,
+      "transactTimeNs": 1699833600004313941,
+      "unrealisedPnlRv": "0",
+      "updatedAtNs": 0,
+      "usedBalanceRv": "0",
+      "userID": 932867,
+      "valueRv": "0"
+    }
+  ],
+  "sequence": 59553602,
+  "timestamp": 1701414172164093977,
+  "type": "snapshot",
+  "version": 0
+}
+
+> Message sample: incremental
+
+```json
+
+{
+  "accounts_p": [
+    {
+      "accountBalanceRv": "512.097102123158",
+      "accountID": 9328670003,
+      "bonusBalanceRv": "197.754035960875",
+      "currency": "USDT",
+      "status": 0,
+      "totalUsedBalanceRv": "0.0074407494",
+      "tradeLevel": 0,
+      "userID": 932867
+    }
+  ],
+  "orders_p": [
+    {
+      "accountID": 9328670003,
+       "action": "New",
+       "actionBy": "ByUser",
+       "actionTimeNs": 1701414861467927198,
+       "addedSeq": 7757755866,
+       "bonusChangedAmountRv": "0",
+       "clOrdID": "3811d9a0-96e4-2150-6f9a-686514cbb266",
+       "cl_req_code": 0,
+       "closedPnlRv": "0",
+       "closedSize": "0",
+       "code": 0,
+       "cumFeeRv": "0",
+       "cumPtFeeRv": "0",
+       "cumQty": "0",
+       "cumValueRv": "0",
+       "curAccBalanceRv": "511.465393303158",
+       "curAssignedPosBalanceRv": "2.04508414",
+       "curBonusBalanceRv": "197.760331550875",
+       "curLeverageRr": "-10",
+       "curPosSide": "Buy",
+       "curPosSize": "0.01",
+       "curPosTerm": 3,
+       "curPosValueRv": "20.341",
+       "curRiskLimitRv": "1000000",
+       "currency": "USDT",
+       "cxlRejReason": 0,
+       "displayQty": "0.01",
+       "execFeeRv": "0",
+       "execID": "00000000-0000-0000-0000-000000000000",
+       "execInst": "CloseOnTrigger",
+       "execPriceRp": "0",
+       "execQty": "0",
+       "execSeq": 7757755866,
+       "execStatus": "New",
+       "execValueRv": "0",
+       "feeRateRr": "0",
+       "leavesQty": "0.01",
+       "leavesValueRv": "15.7389",
+       "message": "No error",
+       "ordStatus": "New",
+       "ordType": "Market",
+       "orderID": "2ce8a2ae-fda4-44d0-af70-bca632fd9869",
+       "orderQty": "0.01",
+       "pegOffsetProportionRr": "0",
+       "pegOffsetValueRp": "0",
+       "posSide": "Merged",
+       "priceRp": "1573.89",
+       "ptFeeRv": "0",
+       "ptPriceRp": "0",
+       "relatedPosTerm": 3,
+       "relatedReqNum": 78,
+       "side": "Sell",
+       "slPxRp": "0",
+       "slTimeInForce": "ImmediateOrCancel",
+       "slTrigger": "ByMarkPrice",
+       "stopLossRp": "0",
+       "stopPxRp": "0",
+       "symbol": "ETHUSDT",
+       "takeProfitRp": "0",
+       "timeInForce": "ImmediateOrCancel",
+       "tpPxRp": "0",
+       "tpTimeInForce": "ImmediateOrCancel",
+       "tpTrigger": "ByLastPrice",
+       "transactTimeNs": 1701414861472716784,
+       "userID": 932867
+    }
+  ],
+  "positions_p": [
+    {
+      "accountID": 9328670003,
+      "assignedPosBalanceRv": "0",
+      "avgEntryPriceRp": "0",
+      "bankruptCommRv": "0",
+      "bankruptPriceRp": "0",
+      "buyLeavesQty": "0",
+      "buyLeavesValueRv": "0",
+      "buyValueToCostRr": "0.10114",
+      "createdAtNs": 0,
+      "crossSharedBalanceRv": "512.089661373758",
+      "cumClosedPnlRv": "1.2114",
+      "cumFundingFeeRv": "0.038701322568",
+      "cumPtFeeRv": "0",
+      "cumTransactFeeRv": "0.0668598",
+      "curTermRealisedPnlRv": "0.613379890738",
+      "currency": "USDT",
+      "dataVer": 78,
+      "deleveragePercentileRr": "0",
+      "displayLeverageRr": "-10",
+      "estimatedOrdLossRv": "0",
+      "execSeq": 7757755866,
+      "freeCostRv": "0",
+      "freeQty": "0",
+      "initMarginReqRr": "0.1",
+      "lastFundingTime": 1701388800000000000,
+      "lastTermEndTime": 1701414861472716784,
+      "leverageRr": "-10",
+      "liquidationPriceRp": "0",
+      "maintMarginReqRr": "0.005",
+      "makerFeeRateRr": "0.0001",
+      "markPriceRp": "2100.851224773",
+      "minPosCostRv": "0",
+      "orderCostRv": "0",
+      "posCostRv": "0",
+      "posMode": "OneWay",
+      "posSide": "Merged",
+      "positionMarginRv": "0",
+      "positionStatus": "Normal",
+      "riskLimitRv": "1000000",
+      "sellLeavesQty": "0",
+      "sellLeavesValueRv": "0",
+      "sellValueToCostRr": "0.10126",
+      "side": "None",
+      "size": "0",
+      "symbol": "ETHUSDT",
+      "takerFeeRateRr": "0.0006",
+      "term": 4,
+      "transactTimeNs": 1701414861472716784,
+      "unrealisedPnlRv": "0",
+      "updatedAtNs": 0,
+      "usedBalanceRv": "0",
+      "userID": 932867,
+      "valueRv": "0"
+    }
+  ],
+  "sequence": 59555555,
+  "timestamp": 1701414861475827540,
+  "type": "incremental",
+  "version": 0
+}
+
+
 
 ```
 
