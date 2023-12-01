@@ -5179,7 +5179,8 @@ AOP subscription requires the session been authorized successfully. DataGW extra
       "tpTrigger":"ByLastPrice",
       "tradeType":"Amend",
       "transactTimeNs":1666858780881545305,
-      "userID":932867}
+      "userID":932867
+    }
   ],
   "positions_p": [
     {
