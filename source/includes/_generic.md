@@ -145,9 +145,9 @@ Every HTTP Rest Request must have the following Headers:
 
 ## Code samples
 [Java Sample Client](https://github.com/phemex/java-client)<br>   
-[Python Sample Client](https://github.com/phemex/phemex-python-api)    
+[Python Sample Client](https://github.com/phemex/phemex-python-api)<br>    
 [NodeJS Sample Client](https://github.com/phemex/phemex-node-example)<br>  
-[C++ Market Data Sample Client](https://github.com/phemex/phemex-cpp-api)    
+[C++ Market Data Sample Client](https://github.com/phemex/phemex-cpp-api)<br>    
 
 ## Error codes
 ### CxlRejReason field
