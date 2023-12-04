@@ -4536,7 +4536,7 @@ GET /api-data/g-futures/funding-fees?symbol=<symbol>
 
 API Rate Limits
 
-* Each Client has concurrent connection limit to *20* in maximum.
+* Each Client has concurrent connection limit to *5* in maximum.
 * Each connection has subscription limit to *20* in maximum.
 * Each connection has throttle limit to *20* request/s.
 
