@@ -144,10 +144,10 @@ Every HTTP Rest Request must have the following Headers:
 * [CCXT GitHub](https://github.com/ccxt/ccxt)
 
 ## Code samples
-[Java Sample Client](https://github.com/phemex/java-client)
-[Python Sample Client](https://github.com/phemex/phemex-python-api)
-[NodeJS Sample Client](https://github.com/phemex/phemex-node-example)
-[C++ Market Data Sample Client](https://github.com/phemex/phemex-cpp-api)
+[Java Sample Client](https://github.com/phemex/java-client)   
+[Python Sample Client](https://github.com/phemex/phemex-python-api)  
+[NodeJS Sample Client](https://github.com/phemex/phemex-node-example)  
+[C++ Market Data Sample Client](https://github.com/phemex/phemex-cpp-api)  
 
 ## Error codes
 ### CxlRejReason field
