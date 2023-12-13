@@ -3008,10 +3008,12 @@ PUT /g-orders/create?clOrdID=<clOrdID>&symbol=<symbol>&reduceOnly=<reduceOnly>&c
 | posSide          | String  | Yes      | Position direction                                           | "Merged" for oneway mode , <br />"Long" / "Short" for hedge mode |
 | text             | String  | -        | Order comments                                               |                                                              |
 | timeInForce      | String  | -        | Time in force. default to GoodTillCancel                     | GoodTillCancel, ImmediateOrCancel, FillOrKill, PostOnly      |
-| stopPxRp         | String  | -        | Trigger price for stop orders                                | "1"                                                          |
-| takeProfitRp     | String  | -        | Real take profit price                                       | "1"                                                          |
-| stopLossRp       | String  | -        | Real stop loss price                                         | "1"                                                          |
-| pegOffsetValueRp | String  | -        | Trailing offset from current price. Negative value when position is long, positive when position is short | "1"                                                          |
+| stopPxRp         | String  | -        | Trigger price of conditional order                           | "1"                                                          |
+| takeProfitRp     | String  | -        | trigger price of take-profit order attached to position opening          | "1"                                                          |
+| tpPxRp           | String  | -        | limit price of take-profit order attached to position opening            | "1"                                                          |
+| stopLossRp       | String  | -        | trigger price of stop-loss order attached to position opening            | "1"                                                          |
+| slPxRp           | String  | -        | limit price of stop-loss order attached to position opening              | "1"                                                          |
+| pegOffsetValueRp | String  | -        | Trailing offset from current price. Negative value when position is long, positive when position is short | "1"                         |
 | pegPriceType     | String  | -        | Trailing order price type                                    | LastPeg, MidPricePeg, MarketPeg, PrimaryPeg, TrailingStopPeg, TrailingTakeProfitPeg |
 | triggerType      | String  | -        | Trigger source                                               | ByMarkPrice, ByIndexPrice, ByLastPrice, ByAskPrice, ByBidPrice, ByMarkPriceLimit, ByLastPriceLimit |
 | tpTrigger        | String  | -        | Trigger source                                               | ByMarkPrice, ByIndexPrice, ByLastPrice, ByAskPrice, ByBidPrice, ByMarkPriceLimit, ByLastPriceLimit |
@@ -3044,7 +3046,7 @@ body:
   "side": "Buy",
   "slTrigger": "ByMarkPrice",
   "stopLossRp": "1271.9",
-  "stopPxRp": "1271.9",
+  "stopPxRp": "1271.9",    
   "symbol": "BTCUSDT",
   "takeProfitRp": "1271.9",
   "text": "string",
@@ -3105,7 +3107,7 @@ body:
 | posSide          | String  | Yes      | Position direction                                           | "Merged" for oneway mode , <br />"Long" / "Short" for hedge mode |
 | text             | String  | -        | Order comments                                               |                                                              |
 | timeInForce      | String  | -        | Time in force. default to GoodTillCancel                     | GoodTillCancel, ImmediateOrCancel, FillOrKill, PostOnly      |
-| stopPxRp         | String  | -        | Trigger price for stop orders                                | "1"                                                          |
+| stopPxRp         | String  | -        | Trigger price of conditional order                          | "1"                                                          |
 | takeProfitRp     | String  | -        | Real take profit price                                       | "1"                                                          |
 | stopLossRp       | String  | -        | Real stop loss price                                         | "1"                                                          |
 | pegOffsetValueRp | String  | -        | Trailing offset from current price. Negative value when position is long, positive when position is short | "1"                                                          |
@@ -3576,9 +3578,9 @@ PUT /g-positions/leverage?leverageRr=<leverage>&longLeverageRr=<longLeverageRr>&
 | Field           | Type   | Required | Description                                                  |
 | --------------- | ------ | -------- | ------------------------------------------------------------ |
 | symbol          | String | Yes      | symbol to set leverage                                       |
-| leverageRr      | String | -        | new leverage value, if leverageRr exists, the position side is merged. <br />either leverageRr or longLeverageRr and shortLeverageRr should exist. |
-| longLeverageRr  | String | -        | new long leverage value, if  longLeverageRr exists, the position side is hedged.<br />either leverageRr or longLeverageRr and shortLeverageRr should exist. |
-| shortLeverageRr | String | -        | new short leverage value, if shortLeverageRr exists, the position side is hedged<br />either leverageRr or longLeverageRr and shortLeverageRr should exist. |
+| leverageRr      | String | -        | new leverage value, if leverageRr exists, the position side is merged. |
+| longLeverageRr  | String | -        | new long leverage value, if  longLeverageRr exists, the position side is hedged. <br />both longLeverageRr and shortLeverageRr should exist. |
+| shortLeverageRr | String | -        | new short leverage value, if shortLeverageRr exists, the position side is hedged. <br />both longLeverageRr and shortLeverageRr should exist. |
 
 ## Set RiskLimit
 
