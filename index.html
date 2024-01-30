@@ -963,6 +963,9 @@
                     <a href="#query-closed-orders-by-symbol-2" class="toc-h2 toc-link" data-title="Query closed orders by symbol">Query closed orders by symbol</a>
                   </li>
                   <li>
+                    <a href="#query-closed-positions" class="toc-h2 toc-link" data-title="Query closed positions">Query closed positions</a>
+                  </li>
+                  <li>
                     <a href="#query-user-trade-2" class="toc-h2 toc-link" data-title="Query user trade">Query user trade</a>
                   </li>
                   <li>
@@ -1038,6 +1041,9 @@
                   </li>
                   <li>
                     <a href="#account-order-position-aop-message-sample" class="toc-h2 toc-link" data-title="Account-Order-Position (AOP) Message Sample:">Account-Order-Position (AOP) Message Sample:</a>
+                  </li>
+                  <li>
+                    <a href="#unsubscribe-account-order-position-aop-2" class="toc-h2 toc-link" data-title="Unsubscribe Account-Order-Position (AOP)">Unsubscribe Account-Order-Position (AOP)</a>
                   </li>
                   <li>
                     <a href="#subscribe-24-hours-ticker-2" class="toc-h2 toc-link" data-title="Subscribe 24 Hours Ticker">Subscribe 24 Hours Ticker</a>
@@ -1557,7 +1563,7 @@ Contract group is for contract trading, it contains following API.</li>
 <td>/accounts/positions</td>
 <td>GET</td>
 <td>25</td>
-<td>Query positions with un-realized-pnl</td>
+<td>Query positions with unrealized PNL</td>
 </tr>
 <tr>
 <td>/g-orders</td>
@@ -1728,10 +1734,10 @@ Because the number of interfaces in Other group may grow over time, the list bel
 <li><a href="https://github.com/ccxt/ccxt">CCXT GitHub</a></li>
 </ul>
 <h2 id='code-samples'>Code samples</h2>
-<p><a href="https://github.com/phemex/java-client">Java Sample Client</a>
-<a href="https://github.com/phemex/phemex-python-api">Python Sample Client</a>
-<a href="https://github.com/phemex/phemex-node-example">NodeJS Sample Client</a>
-<a href="https://github.com/phemex/phemex-cpp-api">C++ Market Data Sample Client</a></p>
+<p><a href="https://github.com/phemex/java-client">Java Sample Client</a><br><br>
+<a href="https://github.com/phemex/phemex-python-api">Python Sample Client</a><br><br>
+<a href="https://github.com/phemex/phemex-node-example">NodeJS Sample Client</a><br><br>
+<a href="https://github.com/phemex/phemex-cpp-api">C++ Market Data Sample Client</a><br>    </p>
 <h2 id='error-codes'>Error codes</h2><h3 id='cxlrejreason-field'>CxlRejReason field</h3>
 <table><thead>
 <tr>
@@ -2540,6 +2546,7 @@ Because the number of interfaces in Other group may grow over time, the list bel
 <div class="highlight"><pre class="highlight plaintext"><code>GET /public/products
 </code></pre></div>
 <ul>
+<li>USD-M perpetual contracts using USD as margin or COIN-M perpetual contracts using COIN as margin</li>
 <li>Contract symbols are defined in <code>.products[]</code> with <strong>type=Perpetual</strong>.</li>
 <li>Contract risklimit information are defined in <code>.risklimits[]</code>.</li>
 <li>Contract which delisted has status with &#39;Delisted&#39; .</li>
@@ -5122,7 +5129,7 @@ The API has <a href="#rate-limits">ratelimits</a> rule, and please check the <i>
 </tr>
 </tbody></table>
 
-<p>Note: *RateEr (ratio scale) in response field are const 8</p>
+<p><strong>NOTE</strong>: *RateEr (ratio scale) in response field are const 8</p>
 
 <blockquote>
 <p>Response sample</p>
@@ -6640,6 +6647,7 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
 <div class="highlight"><pre class="highlight plaintext"><code>GET /public/products
 </code></pre></div>
 <ul>
+<li>USDT-M perpetual contracts using USDT as margin.</li>
 <li>You can find products info with hedged mode under node &#39;perpProductsV2&#39;.</li>
 <li>Contract risklimit information are defined in <code>.riskLimitsV2[]</code>.</li>
 <li>Contract which delisted has status with &#39;Delisted&#39; .</li>
@@ -6777,21 +6785,35 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
 <td>stopPxRp</td>
 <td>String</td>
 <td>-</td>
-<td>Trigger price for stop orders</td>
+<td>Trigger price of conditional order</td>
 <td>&quot;1&quot;</td>
 </tr>
 <tr>
 <td>takeProfitRp</td>
 <td>String</td>
 <td>-</td>
-<td>Real take profit price</td>
+<td>trigger price of take-profit order attached to position opening</td>
+<td>&quot;1&quot;</td>
+</tr>
+<tr>
+<td>tpPxRp</td>
+<td>String</td>
+<td>-</td>
+<td>limit price of take-profit order attached to position opening</td>
 <td>&quot;1&quot;</td>
 </tr>
 <tr>
 <td>stopLossRp</td>
 <td>String</td>
 <td>-</td>
-<td>Real stop loss price</td>
+<td>trigger price of stop-loss order attached to position opening</td>
+<td>&quot;1&quot;</td>
+</tr>
+<tr>
+<td>slPxRp</td>
+<td>String</td>
+<td>-</td>
+<td>limit price of stop-loss order attached to position opening</td>
 <td>&quot;1&quot;</td>
 </tr>
 <tr>
@@ -6858,7 +6880,7 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
   &quot;side&quot;: &quot;Buy&quot;,
   &quot;slTrigger&quot;: &quot;ByMarkPrice&quot;,
   &quot;stopLossRp&quot;: &quot;1271.9&quot;,
-  &quot;stopPxRp&quot;: &quot;1271.9&quot;,
+  &quot;stopPxRp&quot;: &quot;1271.9&quot;,    
   &quot;symbol&quot;: &quot;BTCUSDT&quot;,
   &quot;takeProfitRp&quot;: &quot;1271.9&quot;,
   &quot;text&quot;: &quot;string&quot;,
@@ -6995,7 +7017,7 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
 <td>stopPxRp</td>
 <td>String</td>
 <td>-</td>
-<td>Trigger price for stop orders</td>
+<td>Trigger price of conditional order</td>
 <td>&quot;1&quot;</td>
 </tr>
 <tr>
@@ -7628,7 +7650,7 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
 </tr>
 </tbody></table>
 
-<p><b>Note</b> Highly recommend calculating <code>unRealisedPnlRv</code> in client side with latest <code>markPriceRp</code> to avoid ratelimit
+<p><b>NOTE:</b> Highly recommend calculating <code>unRealisedPnlRv</code> in client side with latest <code>markPriceRp</code> to avoid ratelimit
 penalty.</p>
 <h2 id='switch-position-mode-synchronously'>Switch Position Mode Synchronously</h2>
 <blockquote>
@@ -7702,19 +7724,19 @@ penalty.</p>
 <td>leverageRr</td>
 <td>String</td>
 <td>-</td>
-<td>new leverage value, if leverageRr exists, the position side is merged. <br />either leverageRr or longLeverageRr and shortLeverageRr should exist.</td>
+<td>new leverage value, if leverageRr exists, the position side is merged.</td>
 </tr>
 <tr>
 <td>longLeverageRr</td>
 <td>String</td>
 <td>-</td>
-<td>new long leverage value, if  longLeverageRr exists, the position side is hedged.<br />either leverageRr or longLeverageRr and shortLeverageRr should exist.</td>
+<td>new long leverage value, if  longLeverageRr exists, the position side is hedged. <br />both longLeverageRr and shortLeverageRr should exist.</td>
 </tr>
 <tr>
 <td>shortLeverageRr</td>
 <td>String</td>
 <td>-</td>
-<td>new short leverage value, if shortLeverageRr exists, the position side is hedged<br />either leverageRr or longLeverageRr and shortLeverageRr should exist.</td>
+<td>new short leverage value, if shortLeverageRr exists, the position side is hedged. <br />both longLeverageRr and shortLeverageRr should exist.</td>
 </tr>
 </tbody></table>
 <h2 id='set-risklimit'>Set RiskLimit</h2>
@@ -8020,25 +8042,25 @@ penalty.</p>
 <td>tradeType</td>
 <td>Integer</td>
 <td>trade type code</td>
-<td>Trade(1),Funding(4),LiqTrade(6),AdlTrade(7)</td>
+<td>Trade(1), Funding(4), LiqTrade(6), AdlTrade(7)</td>
 </tr>
 <tr>
 <td>side</td>
 <td>Integer</td>
 <td>side code</td>
-<td>Buy(1),Sell(2)</td>
+<td>Buy(1), Sell(2)</td>
 </tr>
 <tr>
 <td>orderType</td>
 <td>Integer</td>
 <td>order type code</td>
-<td>Market (1),Limit (2),Stop(3),StopLimit (4),MarketIfTouched(5),LimitIfTouched(6)</td>
+<td>Marketranslation missing: en.1, Limitranslation missing: en.2, Stop(3), StopLimitranslation missing: en.4, MarketIfTouched(5), LimitIfTouched(6)</td>
 </tr>
 <tr>
 <td>ordStatus</td>
 <td>Integer</td>
 <td>order status code</td>
-<td>Created(0),Untriggered(1),Deactivated(2),Triggered(3),Rejected(4),New(5),PartiallyFilled(6),Filled(7),Canceled(8)</td>
+<td>Created(0), Untriggered(1), Deactivated(2), Triggered(3), Rejected(4), New(5), PartiallyFilled(6), Filled(7), Canceled(8)</td>
 </tr>
 <tr>
 <td>actionBy</td>
@@ -8047,15 +8069,123 @@ penalty.</p>
 <td>ByUser(1)</td>
 </tr>
 <tr>
+<td>action</td>
+<td>Integer</td>
+<td>user code</td>
+<td>New(1), Cancel(2), Replace(3), CancelAll(4),  LiqRequestranslation missing: en.11, SettleFundingFee(13)</td>
+</tr>
+<tr>
 <td>trigger</td>
 <td>Integer</td>
 <td>trigger code</td>
-<td>UNSPECIFIED(0),ByMarkPrice(1),ByLastPrice(3)</td>
+<td>UNSPECIFIED(0), ByMarkPrice(1), ByLastPrice(3)</td>
 </tr>
 </tbody></table>
-<h2 id='query-user-trade-2'>Query user trade</h2>
-<p>NOTE: user trade queries from database and its data is limited for the last 90 days.</p>
+<h2 id='query-closed-positions'>Query closed positions</h2>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /api-data/g-futures/closedPosition?symbol=&lt;symbol&gt;&amp;currency=&lt;currency&gt;
+</code></pre></div>
+<blockquote>
+<p>Response sample</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"rows"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETHUSDT"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"term"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"closedSizeRq"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"cumEntryValueRv"</span><span class="p">:</span><span class="w"> </span><span class="err">None</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"closedPnlRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.2"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"exchangeFeeRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.007113"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"fundingFeeRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.78"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"finished"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"openedTimeNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">1694542394835</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"updatedTimeNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">1694542398837</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"openPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5.93900000"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"closePrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"roi"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.01008799"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"leverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETHUSDT"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"term"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"closedSizeRq"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"cumEntryValueRv"</span><span class="p">:</span><span class="w"> </span><span class="err">None</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"closedPnlRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-55"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"exchangeFeeRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.7113"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"fundingFeeRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.52"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"finished"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"openedTimeNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">1693542394835</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"updatedTimeNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">1693542398837</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"openPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1998"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"closePrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1888"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"roi"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.28799"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"leverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Possible values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>String</td>
+<td>No</td>
+<td>which symbol to query</td>
+<td><a href="#symbpricesub">Trading symbols</a></td>
+</tr>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td>No</td>
+<td>which currency to query</td>
+<td>USDT...</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>Integer</td>
+<td>No</td>
+<td>offset to resultset</td>
+<td></td>
+</tr>
+<tr>
+<td>limit</td>
+<td>Integer</td>
+<td>No</td>
+<td>limit of resultset, max 200</td>
+<td></td>
+</tr>
+<tr>
+<td>withCount</td>
+<td>Boolean</td>
+<td>No</td>
+<td>if true, result info will contains count info.</td>
+<td>true, false</td>
+</tr>
+</tbody></table>
 
+<p><strong>NOTE</strong>:<br>
+1) symbol and currency cannot both be empty.<br> 
+2) user trade queries from database and its data is limited for the last 90 days.</p>
+<h2 id='query-user-trade-2'>Query user trade</h2>
 <blockquote>
 <p>Request format</p>
 </blockquote>
@@ -8156,12 +8286,16 @@ penalty.</p>
 </tr>
 <tr>
 <td>withCount</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>No</td>
 <td>if true, result info will contains count info.</td>
 <td>true,false</td>
 </tr>
 </tbody></table>
+
+<p><strong>NOTE</strong>:<br>
+1) symbol and currency cannot both be empty.<br> 
+2) user trade queries from database and its data is limited for the last 90 days.</p>
 
 <ul>
 <li>Possible trade types</li>
@@ -8885,10 +9019,11 @@ penalty.</p>
 </tr>
 </tbody></table>
 
-<p><strong>NOTE</strong>: 1) symbol and currency cannot both be empty. 
-          2) When the symbol parameter is present, searching by symbol is prioritised. 
-          3) If only the currency is provided, it retrieves all symbols under that currency.
-          4) Searching for specific symbols under a currency needs both symbols and currency parameter.</p>
+<p><strong>NOTE</strong>:<br>
+1) symbol and currency cannot both be empty.<br> 
+2) When the symbol parameter is present, searching by symbol is prioritised.<br> 
+3) If only the currency is provided, it retrieves all symbols under that currency.<br>
+4) Searching for specific symbols under a currency needs both symbols and currency parameter.<br></p>
 <h2 id='query-orders-by-ids'>Query Orders By Ids</h2>
 <blockquote>
 <p>Request format</p>
@@ -8968,26 +9103,27 @@ penalty.</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"clOrdID"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"closedPnlRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"closedSizeRq"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"transactTimeNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">1669407633926215067</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"execFeeRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00166"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"execID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5c3d96e1-8874-53b6-b6e5-9dcc4d28b4ab"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"execPriceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16600"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"posSide"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Short"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sell"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"tradeType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Trade"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"execQtyRq"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.001"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"execStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MakerFill"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"execPriceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16600"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"orderQtyRq"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.001"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"priceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16600"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"execValueRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16.6"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"feeRateRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0001"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fcdfeafa-ed68-45d4-b2bd-7bc27f2b2b0b"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"orderQtyRq"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.001"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"execFeeRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00166"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"closedSizeRq"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"closedPnlRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"ordType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LimitIfTouched"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"priceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16600"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sell"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"tradeType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Trade"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"transactTimeNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">1669407633926215067</span><span class="w">
+        </span><span class="nl">"execID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5c3d96e1-8874-53b6-b6e5-9dcc4d28b4ab"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fcdfeafa-ed68-45d4-b2bd-7bc27f2b2b0b"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"clOrdID"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">                                
+        </span><span class="nl">"execStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MakerFill"</span><span class="p">,</span><span class="w">                                                  
     </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
@@ -9051,10 +9187,11 @@ penalty.</p>
 </tr>
 </tbody></table>
 
-<p><strong>NOTE</strong>: 1) symbol and currency cannot both be empty. 
-          2) When the symbol parameter is present, searching by symbol is prioritised. 
-          3) If only the currency is provided, it retrieves all symbols under that currency.
-          4) Searching for specific symbols under a currency needs both symbols and currency parameter.</p>
+<p><strong>NOTE</strong>:<br>
+1) symbol and currency cannot both be empty.<br> 
+2) When the symbol parameter is present, searching by symbol is prioritised.<br> 
+3) If only the currency is provided, it retrieves all symbols under that currency.<br>
+4) Searching for specific symbols under a currency needs both symbols and currency parameter.<br></p>
 <h2 id='query-funding-rate-history-2'>Query funding rate history</h2>
 <blockquote>
 <p>Request format</p>
@@ -9905,32 +10042,350 @@ Response sample
 </blockquote>
 <h2 id='account-order-position-aop-message-sample'>Account-Order-Position (AOP) Message Sample:</h2>
 <blockquote>
-<p>Response sample
-```json
-{&quot;index_market24h&quot;: {&quot;highEp&quot;: 10009,&quot;lastEp&quot;: 10007,&quot;lowEp&quot;: 10004, &quot;openEp&quot;: 10004,&quot;symbol&quot;: &quot;.USDT&quot;},&quot;timestamp&quot;: 1681496204104375396}
-{&quot;accounts_p&quot;:[{&quot;accountBalanceRv&quot;:&quot;1508.452588802237&quot;,&quot;accountID&quot;:9328670003,&quot;bonusBalanceRv&quot;:&quot;0&quot;,&quot;currency&quot;:&quot;USDT&quot;,&quot;totalUsedBalanceRv&quot;:&quot;343.132599666883&quot;,&quot;userID&quot;:932867}],&quot;orders_p&quot;:[{&quot;accountID&quot;:9328670003,&quot;action&quot;:&quot;New&quot;,&quot;actionBy&quot;:&quot;ByUser&quot;,&quot;actionTimeNs&quot;:1666858780876924611,&quot;addedSeq&quot;:77751555,&quot;apRp&quot;:&quot;0&quot;,&quot;bonusChangedAmountRv&quot;:&quot;0&quot;,&quot;bpRp&quot;:&quot;0&quot;,&quot;clOrdID&quot;:&quot;c0327a7d-9064-62a9-28f6-2db9aaaa04e0&quot;,&quot;closedPnlRv&quot;:&quot;0&quot;,&quot;closedSize&quot;:&quot;0&quot;,&quot;code&quot;:0,&quot;cumFeeRv&quot;:&quot;0&quot;,&quot;cumQty&quot;:&quot;0&quot;,&quot;cumValueRv&quot;:&quot;0&quot;,&quot;curAccBalanceRv&quot;:&quot;1508.489893982237&quot;,&quot;curAssignedPosBalanceRv&quot;:&quot;24.62786650928&quot;,&quot;curBonusBalanceRv&quot;:&quot;0&quot;,&quot;curLeverageRr&quot;:&quot;-10&quot;,&quot;curPosSide&quot;:&quot;Buy&quot;,&quot;curPosSize&quot;:&quot;0.043&quot;,&quot;curPosTerm&quot;:1,&quot;curPosValueRv&quot;:&quot;894.0689&quot;,&quot;curRiskLimitRv&quot;:&quot;1000000&quot;,&quot;currency&quot;:&quot;USDT&quot;,&quot;cxlRejReason&quot;:0,&quot;displayQty&quot;:&quot;0.003&quot;,&quot;execFeeRv&quot;:&quot;0&quot;,&quot;execID&quot;:&quot;00000000-0000-0000-0000-000000000000&quot;,&quot;execPriceRp&quot;:&quot;20723.7&quot;,&quot;execQty&quot;:&quot;0&quot;,&quot;execSeq&quot;:77751555,&quot;execStatus&quot;:&quot;New&quot;,&quot;execValueRv&quot;:&quot;0&quot;,&quot;feeRateRr&quot;:&quot;0&quot;,&quot;leavesQty&quot;:&quot;0.003&quot;,&quot;leavesValueRv&quot;:&quot;63.4503&quot;,&quot;message&quot;:&quot;No error&quot;,&quot;ordStatus&quot;:&quot;New&quot;,&quot;ordType&quot;:&quot;Market&quot;,&quot;orderID&quot;:&quot;fa64c6f2-47a4-4929-aab4-b7fa9bbc4323&quot;,&quot;orderQty&quot;:&quot;0.003&quot;,&quot;pegOffsetValueRp&quot;:&quot;0&quot;,&quot;posSide&quot;:&quot;Long&quot;,&quot;priceRp&quot;:&quot;21150.1&quot;,&quot;relatedPosTerm&quot;:1,&quot;relatedReqNum&quot;:11,&quot;side&quot;:&quot;Buy&quot;,&quot;slTrigger&quot;:&quot;ByMarkPrice&quot;,&quot;stopLossRp&quot;:&quot;0&quot;,&quot;stopPxRp&quot;:&quot;0&quot;,&quot;symbol&quot;:&quot;BTCUSDT&quot;,&quot;takeProfitRp&quot;:&quot;0&quot;,&quot;timeInForce&quot;:&quot;ImmediateOrCancel&quot;,&quot;tpTrigger&quot;:&quot;ByLastPrice&quot;,&quot;tradeType&quot;:&quot;Amend&quot;,&quot;transactTimeNs&quot;:1666858780881545305,&quot;userID&quot;:932867},{&quot;accountID&quot;:9328670003,&quot;action&quot;:&quot;New&quot;,&quot;actionBy&quot;:&quot;ByUser&quot;,&quot;actionTimeNs&quot;:1666858780876924611,&quot;addedSeq&quot;:77751555,&quot;apRp&quot;:&quot;0&quot;,&quot;bonusChangedAmountRv&quot;:&quot;0&quot;,&quot;bpRp&quot;:&quot;0&quot;,&quot;clOrdID&quot;:&quot;c0327a7d-9064-62a9-28f6-2db9aaaa04e0&quot;,&quot;closedPnlRv&quot;:&quot;0&quot;,&quot;closedSize&quot;:&quot;0&quot;,&quot;code&quot;:0,&quot;cumFeeRv&quot;:&quot;0&quot;,&quot;cumQty&quot;:&quot;0.003&quot;,&quot;cumValueRv&quot;:&quot;62.1753&quot;,&quot;curAccBalanceRv&quot;:&quot;1508.452588802237&quot;,&quot;curAssignedPosBalanceRv&quot;:&quot;24.62786650928&quot;,&quot;curBonusBalanceRv&quot;:&quot;0&quot;,&quot;curLeverageRr&quot;:&quot;-10&quot;,&quot;curPosSide&quot;:&quot;Buy&quot;,&quot;curPosSize&quot;:&quot;0.046&quot;,&quot;curPosTerm&quot;:1,&quot;curPosValueRv&quot;:&quot;956.2442&quot;,&quot;curRiskLimitRv&quot;:&quot;1000000&quot;,&quot;currency&quot;:&quot;USDT&quot;,&quot;cxlRejReason&quot;:0,&quot;displayQty&quot;:&quot;0.003&quot;,&quot;execFeeRv&quot;:&quot;0.03730518&quot;,&quot;execID&quot;:&quot;b6c8d16b-c777-510c-8476-80f399b2d5ad&quot;,&quot;execPriceRp&quot;:&quot;20725.1&quot;,&quot;execQty&quot;:&quot;0.003&quot;,&quot;execSeq&quot;:77751555,&quot;execStatus&quot;:&quot;TakerFill&quot;,&quot;execValueRv&quot;:&quot;62.1753&quot;,&quot;feeRateRr&quot;:&quot;0.0006&quot;,&quot;lastLiquidityInd&quot;:&quot;RemovedLiquidity&quot;,&quot;leavesQty&quot;:&quot;0&quot;,&quot;leavesValueRv&quot;:&quot;0&quot;,&quot;message&quot;:&quot;No error&quot;,&quot;ordStatus&quot;:&quot;Filled&quot;,&quot;ordType&quot;:&quot;Market&quot;,&quot;orderID&quot;:&quot;fa64c6f2-47a4-4929-aab4-b7fa9bbc4323&quot;,&quot;orderQty&quot;:&quot;0.003&quot;,&quot;pegOffsetValueRp&quot;:&quot;0&quot;,&quot;posSide&quot;:&quot;Long&quot;,&quot;priceRp&quot;:&quot;21150.1&quot;,&quot;relatedPosTerm&quot;:1,&quot;relatedReqNum&quot;:11,&quot;side&quot;:&quot;Buy&quot;,&quot;slTrigger&quot;:&quot;ByMarkPrice&quot;,&quot;stopLossRp&quot;:&quot;0&quot;,&quot;stopPxRp&quot;:&quot;0&quot;,&quot;symbol&quot;:&quot;BTCUSDT&quot;,&quot;takeProfitRp&quot;:&quot;0&quot;,&quot;timeInForce&quot;:&quot;ImmediateOrCancel&quot;,&quot;tpTrigger&quot;:&quot;ByLastPrice&quot;,&quot;tradeType&quot;:&quot;Trade&quot;,&quot;transactTimeNs&quot;:1666858780881545305,&quot;userID&quot;:932867}],&quot;positions_p&quot;:[{&quot;accountID&quot;:9328670003,&quot;assignedPosBalanceRv&quot;:&quot;30.861734862748&quot;,&quot;avgEntryPriceRp&quot;:&quot;20787.917391304&quot;,&quot;bankruptCommRv&quot;:&quot;0.0000006&quot;,&quot;bankruptPriceRp&quot;:&quot;0.1&quot;,&quot;buyLeavesQty&quot;:&quot;0&quot;,&quot;buyLeavesValueRv&quot;:&quot;0&quot;,&quot;buyValueToCostRr&quot;:&quot;0.10114&quot;,&quot;createdAtNs&quot;:0,&quot;crossSharedBalanceRv&quot;:&quot;1165.319989135354&quot;,&quot;cumClosedPnlRv&quot;:&quot;0&quot;,&quot;cumFundingFeeRv&quot;:&quot;0.089061821453&quot;,&quot;cumTransactFeeRv&quot;:&quot;0.57374652&quot;,&quot;curTermRealisedPnlRv&quot;:&quot;-0.662808341453&quot;,&quot;currency&quot;:&quot;USDT&quot;,&quot;dataVer&quot;:11,&quot;deleveragePercentileRr&quot;:&quot;0&quot;,&quot;displayLeverageRr&quot;:&quot;0.79941382&quot;,&quot;estimatedOrdLossRv&quot;:&quot;0&quot;,&quot;execSeq&quot;:77751555,&quot;freeCostRv&quot;:&quot;0&quot;,&quot;freeQty&quot;:&quot;-0.046&quot;,&quot;initMarginReqRr&quot;:&quot;0.1&quot;,&quot;lastFundingTime&quot;:1666857600000000000,&quot;lastTermEndTime&quot;:0,&quot;leverageRr&quot;:&quot;-10&quot;,&quot;liquidationPriceRp&quot;:&quot;0.1&quot;,&quot;maintMarginReqRr&quot;:&quot;0.01&quot;,&quot;makerFeeRateRr&quot;:&quot;-1&quot;,&quot;markPriceRp&quot;:&quot;20735.47347096&quot;,&quot;minPosCostRv&quot;:&quot;0&quot;,&quot;orderCostRv&quot;:&quot;0&quot;,&quot;posCostRv&quot;:&quot;30.284669572349&quot;,&quot;posMode&quot;:&quot;Hedged&quot;,&quot;posSide&quot;:&quot;Long&quot;,&quot;positionMarginRv&quot;:&quot;1196.181723398102&quot;,&quot;positionStatus&quot;:&quot;Normal&quot;,&quot;riskLimitRv&quot;:&quot;1000000&quot;,&quot;sellLeavesQty&quot;:&quot;0&quot;,&quot;sellLeavesValueRv&quot;:&quot;0&quot;,&quot;sellValueToCostRr&quot;:&quot;0.10126&quot;,&quot;side&quot;:&quot;Buy&quot;,&quot;size&quot;:&quot;0.046&quot;,&quot;symbol&quot;:&quot;BTCUSDT&quot;,&quot;takerFeeRateRr&quot;:&quot;-1&quot;,&quot;term&quot;:1,&quot;transactTimeNs&quot;:1666858780881545305,&quot;unrealisedPnlRv&quot;:&quot;-2.41242033584&quot;,&quot;updatedAtNs&quot;:0,&quot;usedBalanceRv&quot;:&quot;30.861734862748&quot;,&quot;userID&quot;:932867,&quot;valueRv&quot;:&quot;956.2442&quot;},{&quot;accountID&quot;:9328670003,&quot;assignedPosBalanceRv&quot;:&quot;9.473634984&quot;,&quot;avgEntryPriceRp&quot;:&quot;20786.455555556&quot;,&quot;bankruptCommRv&quot;:&quot;1.153171711445&quot;,&quot;bankruptPriceRp&quot;:&quot;1000000&quot;,&quot;buyLeavesQty&quot;:&quot;0&quot;,&quot;buyLeavesValueRv&quot;:&quot;0&quot;,&quot;buyValueToCostRr&quot;:&quot;0.10114&quot;,&quot;createdAtNs&quot;:0,&quot;crossSharedBalanceRv&quot;:&quot;1165.319989135354&quot;,&quot;cumClosedPnlRv&quot;:&quot;0&quot;,&quot;cumFundingFeeRv&quot;:&quot;-0.074563385402&quot;,&quot;cumTransactFeeRv&quot;:&quot;0.44898744&quot;,&quot;curTermRealisedPnlRv&quot;:&quot;-0.374424054598&quot;,&quot;currency&quot;:&quot;USDT&quot;,&quot;dataVer&quot;:10,&quot;deleveragePercentileRr&quot;:&quot;0&quot;,&quot;displayLeverageRr&quot;:&quot;0.63759936&quot;,&quot;estimatedOrdLossRv&quot;:&quot;0&quot;,&quot;execSeq&quot;:77731059,&quot;freeCostRv&quot;:&quot;0&quot;,&quot;freeQty&quot;:&quot;0.036&quot;,&quot;initMarginReqRr&quot;:&quot;0.1&quot;,&quot;lastFundingTime&quot;:1666857600000000000,&quot;lastTermEndTime&quot;:0,&quot;leverageRr&quot;:&quot;-10&quot;,&quot;liquidationPriceRp&quot;:&quot;1000000&quot;,&quot;maintMarginReqRr&quot;:&quot;0.01&quot;,&quot;makerFeeRateRr&quot;:&quot;-1&quot;,&quot;markPriceRp&quot;:&quot;20735.47347096&quot;,&quot;minPosCostRv&quot;:&quot;0&quot;,&quot;orderCostRv&quot;:&quot;0&quot;,&quot;posCostRv&quot;:&quot;9.473634984&quot;,&quot;posMode&quot;:&quot;Hedged&quot;,&quot;posSide&quot;:&quot;Short&quot;,&quot;positionMarginRv&quot;:&quot;1173.640452407909&quot;,&quot;positionStatus&quot;:&quot;Normal&quot;,&quot;riskLimitRv&quot;:&quot;1000000&quot;,&quot;sellLeavesQty&quot;:&quot;0&quot;,&quot;sellLeavesValueRv&quot;:&quot;0&quot;,&quot;sellValueToCostRr&quot;:&quot;0.10126&quot;,&quot;side&quot;:&quot;Sell&quot;,&quot;size&quot;:&quot;0.036&quot;,&quot;symbol&quot;:&quot;BTCUSDT&quot;,&quot;takerFeeRateRr&quot;:&quot;-1&quot;,&quot;term&quot;:1,&quot;transactTimeNs&quot;:1666858780876924611,&quot;unrealisedPnlRv&quot;:&quot;1.83535504544&quot;,&quot;updatedAtNs&quot;:0,&quot;usedBalanceRv&quot;:&quot;9.473634984&quot;,&quot;userID&quot;:932867,&quot;valueRv&quot;:&quot;748.3124&quot;},{&quot;accountID&quot;:9328670003,&quot;assignedPosBalanceRv&quot;:&quot;156.56916092763&quot;,&quot;avgEntryPriceRp&quot;:&quot;1563.815&quot;,&quot;bankruptCommRv&quot;:&quot;0.187657798123&quot;,&quot;bankruptPriceRp&quot;:&quot;1042.55&quot;,&quot;buyLeavesQty&quot;:&quot;0&quot;,&quot;buyLeavesValueRv&quot;:&quot;0&quot;,&quot;buyValueToCostRr&quot;:&quot;0.33433334&quot;,&quot;createdAtNs&quot;:0,&quot;crossSharedBalanceRv&quot;:&quot;1165.319989135354&quot;,&quot;cumClosedPnlRv&quot;:&quot;-89.82&quot;,&quot;cumFundingFeeRv&quot;:&quot;0.104061681397&quot;,&quot;cumTransactFeeRv&quot;:&quot;0.4835887&quot;,&quot;curTermRealisedPnlRv&quot;:&quot;-0.328183513333&quot;,&quot;currency&quot;:&quot;USDT&quot;,&quot;dataVer&quot;:14,&quot;deleveragePercentileRr&quot;:&quot;0&quot;,&quot;displayLeverageRr&quot;:&quot;2.99999994&quot;,&quot;estimatedOrdLossRv&quot;:&quot;0&quot;,&quot;execSeq&quot;:77731060,&quot;freeCostRv&quot;:&quot;0&quot;,&quot;freeQty&quot;:&quot;-0.3&quot;,&quot;initMarginReqRr&quot;:&quot;0.33333333&quot;,&quot;lastFundingTime&quot;:1666857600000000000,&quot;lastTermEndTime&quot;:1666755074905395643,&quot;leverageRr&quot;:&quot;3&quot;,&quot;liquidationPriceRp&quot;:&quot;1058.2&quot;,&quot;maintMarginReqRr&quot;:&quot;0.01&quot;,&quot;makerFeeRateRr&quot;:&quot;-1&quot;,&quot;markPriceRp&quot;:&quot;1558.51230846&quot;,&quot;minPosCostRv&quot;:&quot;0&quot;,&quot;orderCostRv&quot;:&quot;0&quot;,&quot;posCostRv&quot;:&quot;156.56916092763&quot;,&quot;posMode&quot;:&quot;Hedged&quot;,&quot;posSide&quot;:&quot;Long&quot;,&quot;positionMarginRv&quot;:&quot;156.381503129507&quot;,&quot;positionStatus&quot;:&quot;Normal&quot;,&quot;riskLimitRv&quot;:&quot;500000&quot;,&quot;sellLeavesQty&quot;:&quot;0&quot;,&quot;sellLeavesValueRv&quot;:&quot;0&quot;,&quot;sellValueToCostRr&quot;:&quot;0.33473333&quot;,&quot;side&quot;:&quot;Buy&quot;,&quot;size&quot;:&quot;0.3&quot;,&quot;symbol&quot;:&quot;ETHUSDT&quot;,&quot;takerFeeRateRr&quot;:&quot;-1&quot;,&quot;term&quot;:2,&quot;transactTimeNs&quot;:1666858780876924611,&quot;unrealisedPnlRv&quot;:&quot;-1.590807462&quot;,&quot;updatedAtNs&quot;:0,&quot;usedBalanceRv&quot;:&quot;156.56916092763&quot;,&quot;userID&quot;:932867,&quot;valueRv&quot;:&quot;469.1445&quot;},{&quot;accountID&quot;:9328670003,&quot;assignedPosBalanceRv&quot;:&quot;146.228068892505&quot;,&quot;avgEntryPriceRp&quot;:&quot;1455.495&quot;,&quot;bankruptCommRv&quot;:&quot;0.349516231597&quot;,&quot;bankruptPriceRp&quot;:&quot;1941.75&quot;,&quot;buyLeavesQty&quot;:&quot;0&quot;,&quot;buyLeavesValueRv&quot;:&quot;0&quot;,&quot;buyValueToCostRr&quot;:&quot;0.33433334&quot;,&quot;createdAtNs&quot;:0,&quot;crossSharedBalanceRv&quot;:&quot;1165.319989135354&quot;,&quot;cumClosedPnlRv&quot;:&quot;0&quot;,&quot;cumFundingFeeRv&quot;:&quot;-0.159460679685&quot;,&quot;cumTransactFeeRv&quot;:&quot;0.2619891&quot;,&quot;curTermRealisedPnlRv&quot;:&quot;-0.102528420315&quot;,&quot;currency&quot;:&quot;USDT&quot;,&quot;dataVer&quot;:14,&quot;deleveragePercentileRr&quot;:&quot;0&quot;,&quot;displayLeverageRr&quot;:&quot;2.99323302&quot;,&quot;estimatedOrdLossRv&quot;:&quot;0&quot;,&quot;execSeq&quot;:77731060,&quot;freeCostRv&quot;:&quot;0&quot;,&quot;freeQty&quot;:&quot;0.3&quot;,&quot;initMarginReqRr&quot;:&quot;0.33333333&quot;,&quot;lastFundingTime&quot;:1666857600000000000,&quot;lastTermEndTime&quot;:0,&quot;leverageRr&quot;:&quot;3&quot;,&quot;liquidationPriceRp&quot;:&quot;1927.21&quot;,&quot;maintMarginReqRr&quot;:&quot;0.01&quot;,&quot;makerFeeRateRr&quot;:&quot;-1&quot;,&quot;markPriceRp&quot;:&quot;1558.51230846&quot;,&quot;minPosCostRv&quot;:&quot;0&quot;,&quot;orderCostRv&quot;:&quot;0&quot;,&quot;posCostRv&quot;:&quot;145.898817344505&quot;,&quot;posMode&quot;:&quot;Hedged&quot;,&quot;posSide&quot;:&quot;Short&quot;,&quot;positionMarginRv&quot;:&quot;145.878552660908&quot;,&quot;positionStatus&quot;:&quot;Normal&quot;,&quot;riskLimitRv&quot;:&quot;500000&quot;,&quot;sellLeavesQty&quot;:&quot;0&quot;,&quot;sellLeavesValueRv&quot;:&quot;0&quot;,&quot;sellValueToCostRr&quot;:&quot;0.33473333&quot;,&quot;side&quot;:&quot;Sell&quot;,&quot;size&quot;:&quot;0.3&quot;,&quot;symbol&quot;:&quot;ETHUSDT&quot;,&quot;takerFeeRateRr&quot;:&quot;-1&quot;,&quot;term&quot;:1,&quot;transactTimeNs&quot;:1666858780876924611,&quot;unrealisedPnlRv&quot;:&quot;-30.905192538&quot;,&quot;updatedAtNs&quot;:0,&quot;usedBalanceRv&quot;:&quot;146.228068892505&quot;,&quot;userID&quot;:932867,&quot;valueRv&quot;:&quot;436.6485&quot;}],&quot;sequence&quot;:68744,&quot;timestamp&quot;:1666858780883525030,&quot;type&quot;:&quot;incremental&quot;,&quot;version&quot;:0}</p>
+<p>Message sample: snapshot</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>
-| Field       | Type   | Description      | Possible values |
-|-------------|--------|------------------|-----------------|
-| timestamp   | Integer| Transaction timestamp in nanoseconds | |
-| sequence    | Integer| Latest message sequence |          |
-| symbol      | String | Contract symbol name    |          |
-| type        | String | Message type     | snapshot, incremental |
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"index_market24h"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"highEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">10009</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"lastEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">10007</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"lowEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">10004</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"openEp"</span><span class="p">:</span><span class="w"> </span><span class="mi">10004</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">".USDT"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1681496204104375396</span><span class="p">}</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"accounts_p"</span><span class="p">:[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"accountBalanceRv"</span><span class="p">:</span><span class="s2">"1508.452588802237"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"accountID"</span><span class="p">:</span><span class="mi">9328670003</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"bonusBalanceRv"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"currency"</span><span class="p">:</span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"totalUsedBalanceRv"</span><span class="p">:</span><span class="s2">"343.132599666883"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"userID"</span><span class="p">:</span><span class="mi">932867</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"orders_p"</span><span class="p">:[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"accountID"</span><span class="p">:</span><span class="mi">9328670003</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"action"</span><span class="p">:</span><span class="s2">"New"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"actionBy"</span><span class="p">:</span><span class="s2">"ByUser"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"actionTimeNs"</span><span class="p">:</span><span class="mi">1666858780876924611</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"addedSeq"</span><span class="p">:</span><span class="mi">77751555</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"apRp"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"bonusChangedAmountRv"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"bpRp"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"clOrdID"</span><span class="p">:</span><span class="s2">"c0327a7d-9064-62a9-28f6-2db9aaaa04e0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"closedPnlRv"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"closedSize"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"code"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cumFeeRv"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cumQty"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cumValueRv"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curAccBalanceRv"</span><span class="p">:</span><span class="s2">"1508.489893982237"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curAssignedPosBalanceRv"</span><span class="p">:</span><span class="s2">"24.62786650928"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curBonusBalanceRv"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curLeverageRr"</span><span class="p">:</span><span class="s2">"-10"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curPosSide"</span><span class="p">:</span><span class="s2">"Buy"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curPosSize"</span><span class="p">:</span><span class="s2">"0.043"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curPosTerm"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curPosValueRv"</span><span class="p">:</span><span class="s2">"894.0689"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curRiskLimitRv"</span><span class="p">:</span><span class="s2">"1000000"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"currency"</span><span class="p">:</span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cxlRejReason"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"displayQty"</span><span class="p">:</span><span class="s2">"0.003"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execFeeRv"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execID"</span><span class="p">:</span><span class="s2">"00000000-0000-0000-0000-000000000000"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execPriceRp"</span><span class="p">:</span><span class="s2">"20723.7"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execQty"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execSeq"</span><span class="p">:</span><span class="mi">77751555</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execStatus"</span><span class="p">:</span><span class="s2">"New"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execValueRv"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"feeRateRr"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"leavesQty"</span><span class="p">:</span><span class="s2">"0.003"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"leavesValueRv"</span><span class="p">:</span><span class="s2">"63.4503"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"message"</span><span class="p">:</span><span class="s2">"No error"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"ordStatus"</span><span class="p">:</span><span class="s2">"New"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"ordType"</span><span class="p">:</span><span class="s2">"Market"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"orderID"</span><span class="p">:</span><span class="s2">"fa64c6f2-47a4-4929-aab4-b7fa9bbc4323"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"orderQty"</span><span class="p">:</span><span class="s2">"0.003"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"pegOffsetValueRp"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"posSide"</span><span class="p">:</span><span class="s2">"Long"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"priceRp"</span><span class="p">:</span><span class="s2">"21150.1"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"relatedPosTerm"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"relatedReqNum"</span><span class="p">:</span><span class="mi">11</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"side"</span><span class="p">:</span><span class="s2">"Buy"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"slTrigger"</span><span class="p">:</span><span class="s2">"ByMarkPrice"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"stopLossRp"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"stopPxRp"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"symbol"</span><span class="p">:</span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"takeProfitRp"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"timeInForce"</span><span class="p">:</span><span class="s2">"ImmediateOrCancel"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"tpTrigger"</span><span class="p">:</span><span class="s2">"ByLastPrice"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"tradeType"</span><span class="p">:</span><span class="s2">"Amend"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"transactTimeNs"</span><span class="p">:</span><span class="mi">1666858780881545305</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"userID"</span><span class="p">:</span><span class="mi">932867</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"positions_p"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"accountID"</span><span class="p">:</span><span class="w"> </span><span class="mi">9328670003</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"assignedPosBalanceRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"avgEntryPriceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"bankruptCommRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"bankruptPriceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"buyLeavesQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"buyLeavesValueRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"buyValueToCostRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.10114"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"createdAtNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"crossSharedBalanceRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"266.079483950342"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cumClosedPnlRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.8092"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cumFundingFeeRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.013573252307"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cumPtFeeRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cumTransactFeeRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.27247008"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curTermRealisedPnlRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.11368032"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"dataVer"</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"deleveragePercentileRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"displayLeverageRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-10"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"estimatedOrdLossRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execSeq"</span><span class="p">:</span><span class="w"> </span><span class="mi">7659244869</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"freeCostRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"freeQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"initMarginReqRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"lastFundingTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1699833600000000000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"lastTermEndTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1699545458473086582</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"leverageRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-10"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"liquidationPriceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"maintMarginReqRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.005"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"makerFeeRateRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0001"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"markPriceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"37214.088278684"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"minPosCostRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"orderCostRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"posCostRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"posMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OneWay"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"posSide"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Long"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"positionMarginRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"positionStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Normal"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"riskLimitRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2000000"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"sellLeavesQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"sellLeavesValueRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"sellValueToCostRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.10126"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"takerFeeRateRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0006"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"term"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"transactTimeNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">1699833600004313941</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"unrealisedPnlRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"updatedAtNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"usedBalanceRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"userID"</span><span class="p">:</span><span class="w"> </span><span class="mi">932867</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"valueRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="mi">59553602</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1701414172164093977</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"snapshot"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">&gt;</span><span class="w"> </span><span class="err">Message</span><span class="w"> </span><span class="err">sample:</span><span class="w"> </span><span class="err">incremental</span><span class="w">
+
+</span><span class="err">```json</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"accounts_p"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"accountBalanceRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"512.097102123158"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"accountID"</span><span class="p">:</span><span class="w"> </span><span class="mi">9328670003</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"bonusBalanceRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"197.754035960875"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"totalUsedBalanceRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0074407494"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"tradeLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"userID"</span><span class="p">:</span><span class="w"> </span><span class="mi">932867</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"orders_p"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"accountID"</span><span class="p">:</span><span class="w"> </span><span class="mi">9328670003</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"actionBy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ByUser"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"actionTimeNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">1701414861467927198</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"addedSeq"</span><span class="p">:</span><span class="w"> </span><span class="mi">7757755866</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"bonusChangedAmountRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"clOrdID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3811d9a0-96e4-2150-6f9a-686514cbb266"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"cl_req_code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"closedPnlRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"closedSize"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"cumFeeRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"cumPtFeeRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"cumQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"cumValueRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"curAccBalanceRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"511.465393303158"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"curAssignedPosBalanceRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.04508414"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"curBonusBalanceRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"197.760331550875"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"curLeverageRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-10"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"curPosSide"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Buy"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"curPosSize"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.01"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"curPosTerm"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"curPosValueRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20.341"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"curRiskLimitRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1000000"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"cxlRejReason"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"displayQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.01"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"execFeeRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"execID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00000000-0000-0000-0000-000000000000"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"execInst"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CloseOnTrigger"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"execPriceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"execQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"execSeq"</span><span class="p">:</span><span class="w"> </span><span class="mi">7757755866</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"execStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"execValueRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"feeRateRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"leavesQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.01"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"leavesValueRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15.7389"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"No error"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"ordStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"ordType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Market"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2ce8a2ae-fda4-44d0-af70-bca632fd9869"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"orderQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.01"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"pegOffsetProportionRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"pegOffsetValueRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"posSide"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Merged"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"priceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1573.89"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"ptFeeRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"ptPriceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"relatedPosTerm"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"relatedReqNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">78</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sell"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"slPxRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"slTimeInForce"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ImmediateOrCancel"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"slTrigger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ByMarkPrice"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"stopLossRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"stopPxRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETHUSDT"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"takeProfitRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"timeInForce"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ImmediateOrCancel"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"tpPxRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"tpTimeInForce"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ImmediateOrCancel"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"tpTrigger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ByLastPrice"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"transactTimeNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">1701414861472716784</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"userID"</span><span class="p">:</span><span class="w"> </span><span class="mi">932867</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"positions_p"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"accountID"</span><span class="p">:</span><span class="w"> </span><span class="mi">9328670003</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"assignedPosBalanceRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"avgEntryPriceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"bankruptCommRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"bankruptPriceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"buyLeavesQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"buyLeavesValueRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"buyValueToCostRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.10114"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"createdAtNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"crossSharedBalanceRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"512.089661373758"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cumClosedPnlRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.2114"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cumFundingFeeRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.038701322568"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cumPtFeeRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cumTransactFeeRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0668598"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"curTermRealisedPnlRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.613379890738"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"dataVer"</span><span class="p">:</span><span class="w"> </span><span class="mi">78</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"deleveragePercentileRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"displayLeverageRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-10"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"estimatedOrdLossRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"execSeq"</span><span class="p">:</span><span class="w"> </span><span class="mi">7757755866</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"freeCostRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"freeQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"initMarginReqRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"lastFundingTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1701388800000000000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"lastTermEndTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1701414861472716784</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"leverageRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-10"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"liquidationPriceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"maintMarginReqRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.005"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"makerFeeRateRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0001"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"markPriceRp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2100.851224773"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"minPosCostRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"orderCostRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"posCostRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"posMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OneWay"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"posSide"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Merged"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"positionMarginRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"positionStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Normal"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"riskLimitRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1000000"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"sellLeavesQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"sellLeavesValueRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"sellValueToCostRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.10126"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"None"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETHUSDT"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"takerFeeRateRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0006"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"term"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"transactTimeNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">1701414861472716784</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"unrealisedPnlRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"updatedAtNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"usedBalanceRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"userID"</span><span class="p">:</span><span class="w"> </span><span class="mi">932867</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"valueRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="mi">59555555</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1701414861475827540</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"incremental"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
 
 
 
-## Unsubscribe Account-Order-Position (AOP)
-
-&gt; Request format
-```javascript
-{
-  "id": &lt;id&gt;,
-  "method": "aop_p.unsubscribe",
-  "params": []
-}
-</code></pre></div>
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Possible values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>timestamp</td>
+<td>Integer</td>
+<td>Transaction timestamp in nanoseconds</td>
+<td></td>
+</tr>
+<tr>
+<td>sequence</td>
+<td>Integer</td>
+<td>Latest message sequence</td>
+<td></td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>String</td>
+<td>Contract symbol name</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>Message type</td>
+<td>snapshot, incremental</td>
+</tr>
+</tbody></table>
+<h2 id='unsubscribe-account-order-position-aop-2'>Unsubscribe Account-Order-Position (AOP)</h2>
 <blockquote>
+<p>Request format
+<code>javascript
+{
+  &quot;id&quot;: &lt;id&gt;,
+  &quot;method&quot;: &quot;aop_p.unsubscribe&quot;,
+  &quot;params&quot;: []
+}
+</code></p>
+
 <p>Response format
 <code>javascript
 {
@@ -14123,6 +14578,13 @@ the same as the spot api</p>
 <td>True</td>
 <td>Business type</td>
 <td>11 - futures to spot, 10 - spot to futures</td>
+</tr>
+<tr>
+<td>status</td>
+<td>Integer</td>
+<td>True</td>
+<td>transfer status</td>
+<td>0 - PENDING, 10 - DONE, 11 - FAILED</td>
 </tr>
 </tbody></table>
 <h2 id='spot-sub-to-main-transfer-for-sub-account-only'>Spot sub to main transfer (for sub-account only)</h2>
