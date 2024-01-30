@@ -63,12 +63,13 @@ GET /assets/transfer?currency=<currency>
 | Field    | Type    | Required | Description               | Possible Values                            |
 |----------|---------|----------|---------------------------|--------------------------------------------|
 | currency | String  | True     | The currency to query     | BTC,ETH ...                                |
-| start    | Long    | False    | Start time in millisecond | Default to 2 days ago from the end            |
-| end      | Long    | False    | End time in millisecond   | Default to now                                |
+| start    | Long    | False    | Start time in millisecond | Default to 2 days ago from the end         |
+| end      | Long    | False    | End time in millisecond   | Default to now                             |
 | offset   | Integer | False    | Page start from 0         | Start from 0, default 0                    |
-| limit    | Integer | False    | Page size                 | Default to 20, max 200                        |
+| limit    | Integer | False    | Page size                 | Default to 20, max 200                     |
 | side     | Integer | True     | Direction                 | 1 - futures to spot, 2 - spot to futures   |
 | bizType  | Integer | True     | Business type             | 11 - futures to spot, 10 - spot to futures |
+| status   | Integer | True     | transfer status           | 0 - PENDING, 10 - DONE, 11 - FAILED        |
 
 
 ## Spot sub to main transfer (for sub-account only)

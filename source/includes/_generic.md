@@ -99,7 +99,7 @@ Every HTTP Rest Request must have the following Headers:
 | /orders/activeList | GET | 1 | Query open orders by symbol |
 | /orders/active | GET | 1 | Query open order by orderID  |
 | /accounts/accountPositions | GET | 1 | Query account & position by currency |
-| /accounts/positions | GET | 25 | Query positions with un-realized-pnl |
+| /accounts/positions | GET | 25 | Query positions with unrealized PNL |
 | /g-orders | POST | 1 | Place new order |
 | /g-orders/replace | PUT | 1 | Amend order |
 | /g-orders/cancel | DELETE | 1 | Cancel order |
@@ -144,10 +144,10 @@ Every HTTP Rest Request must have the following Headers:
 * [CCXT GitHub](https://github.com/ccxt/ccxt)
 
 ## Code samples
-[Java Sample Client](https://github.com/phemex/java-client)
-[Python Sample Client](https://github.com/phemex/phemex-python-api)
-[NodeJS Sample Client](https://github.com/phemex/phemex-node-example)
-[C++ Market Data Sample Client](https://github.com/phemex/phemex-cpp-api)
+[Java Sample Client](https://github.com/phemex/java-client)<br>   
+[Python Sample Client](https://github.com/phemex/phemex-python-api)<br>    
+[NodeJS Sample Client](https://github.com/phemex/phemex-node-example)<br>  
+[C++ Market Data Sample Client](https://github.com/phemex/phemex-cpp-api)<br>    
 
 ## Error codes
 ### CxlRejReason field
