@@ -6,6 +6,7 @@ includes:
   - contract
   - spot
   - transfer
+  - transferV2
   - withdraw
 
 logo:
