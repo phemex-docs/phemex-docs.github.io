@@ -14,5 +14,7 @@ en:
   # transfer
   transfer: Transfer
 
+  transferV2: Transfer
+
   # withdraw
   withdraw: Withdraw

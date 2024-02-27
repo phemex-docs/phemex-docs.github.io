@@ -1,4 +1,4 @@
-# Universal Transfer REST API
+# New Transfer REST API (Universal Transfer REST API)
 
 ## Transfer between wallets within an account
 
@@ -85,15 +85,15 @@ POST /wallets/account/main-sub-transfer
 }
 ```
 
-| Field         | Type   | Required | Description               | Possible Values               |
-|---------------|--------|----------|---------------------------|-------------------------------|
-| `fromUid`     | Long   | True     | Uid for transfer out      |                               |
-| `fromAccType` | String | True     | Transfer out wallet type  | `SPOT`, `CONTRACT`, `MARGIN`  |
-| `toUid`       |        |          | Uid for transfer in       |                               |
-| `toAccType`   | String | True     | Transfer in wallet type   | `SPOT`, `CONTRACT`, `MARGIN`  |
-| `amountEv`    | Long   | True     | AmountEv to transfer      | 100000000                     |
-| `amount`      | String | True     | Origin amount to transfer | 1                             |
-| `currency`    | String | True     | Currency to transfer      | BTC,ETH,USDT ...              |
+| Field         | Type        | Required | Description               | Possible Values               |
+|---------------|-------------|----------|---------------------------|-------------------------------|
+| `fromUid`     | Long        | True     | Uid for transfer out      |                               |
+| `fromAccType` | String      | True     | Transfer out wallet type  | `SPOT`, `CONTRACT`, `MARGIN`  |
+| `toUid`       | Long        | True     | Uid for transfer in       |                               |
+| `toAccType`   | String      | True     | Transfer in wallet type   | `SPOT`, `CONTRACT`, `MARGIN`  |
+| `amountEv`    | Long        | True     | AmountEv to transfer      | 100000000                     |
+| `amount`      | String      | True     | Origin amount to transfer | 1                             |
+| `currency`    | String      | True     | Currency to transfer      | BTC,ETH,USDT ...              |
 
 ## Query account wallet transfer history
 
