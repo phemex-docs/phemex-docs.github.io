@@ -642,9 +642,9 @@
   color: #859900;
 }
     </style>
-    <link href="stylesheets/screen-21df3573.css" rel="stylesheet" media="screen" />
-    <link href="stylesheets/print-41ffbffc.css" rel="stylesheet" media="print" />
-      <script src="javascripts/all-52d563e0.js"></script>
+    <link href="stylesheets/screen-1812ab24.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print-12392e7b.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all-050a2927.js"></script>
     <script>
       $(function() { setupCodeCopy(); });
     </script>
@@ -1311,6 +1311,20 @@
                   </li>
                   <li>
                     <a href="#query-convert-history" class="toc-h2 toc-link" data-title="Query convert history">Query convert history</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#new-transfer-rest-api-universal-transfer-rest-api" class="toc-h1 toc-link" data-title="New Transfer REST API (Universal Transfer REST API)">New Transfer REST API (Universal Transfer REST API)</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#transfer-between-wallets-within-an-account" class="toc-h2 toc-link" data-title="Transfer between wallets within an account">Transfer between wallets within an account</a>
+                  </li>
+                  <li>
+                    <a href="#transfer-between-main-and-sub-accounts" class="toc-h2 toc-link" data-title="Transfer between main and sub-accounts">Transfer between main and sub-accounts</a>
+                  </li>
+                  <li>
+                    <a href="#query-account-wallet-transfer-history" class="toc-h2 toc-link" data-title="Query account wallet transfer history">Query account wallet transfer history</a>
                   </li>
               </ul>
           </li>
@@ -15134,7 +15148,272 @@ the same as the spot api</p>
 <td>Default to 20, max 200</td>
 </tr>
 </tbody></table>
-<h1 id='deposit-and-withdraw-rest-api'>Deposit And Withdraw REST API</h1><h2 id='endpoint-security-type-4'>Endpoint Security Type</h2>
+<h1 id='new-transfer-rest-api-universal-transfer-rest-api'>New Transfer REST API (Universal Transfer REST API)</h1><h2 id='transfer-between-wallets-within-an-account'>Transfer between wallets within an account</h2>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>POST /wallets/account/transfer
+</code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"fromAccType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SPOT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"toAccType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CONTRACT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"amountEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000000</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Response format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"amountEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"bizCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"createTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1706601733000</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<ol>
+<li>During the transfer, the <code>fromAccType</code> and <code>toAccType</code> cannot be the same value.</li>
+<li>The <code>amountEv</code> is the scaled-up value of the original amount <code>amount</code>. Both values are required and are used to verify the correctness of the amount.</li>
+</ol>
+</blockquote>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Possible Values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>fromAccType</code></td>
+<td>String</td>
+<td>True</td>
+<td>Transfer out wallet type</td>
+<td><code>SPOT</code>, <code>CONTRACT</code>, <code>MARGIN</code>, <code>COPY_TRADE</code></td>
+</tr>
+<tr>
+<td><code>toAccType</code></td>
+<td>String</td>
+<td>True</td>
+<td>Transfer in wallet type</td>
+<td><code>SPOT</code>, <code>CONTRACT</code>, <code>MARGIN</code>, <code>COPY_TRADE</code></td>
+</tr>
+<tr>
+<td><code>amountEv</code></td>
+<td>Long</td>
+<td>True</td>
+<td>AmountEv to transfer</td>
+<td>100000000</td>
+</tr>
+<tr>
+<td><code>amount</code></td>
+<td>String</td>
+<td>True</td>
+<td>Origin amount to transfer</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>currency</code></td>
+<td>String</td>
+<td>True</td>
+<td>Currency to transfer</td>
+<td>BTC,ETH,USDT ...</td>
+</tr>
+</tbody></table>
+<h2 id='transfer-between-main-and-sub-accounts'>Transfer between main and sub-accounts</h2>
+<blockquote>
+<ol>
+<li>Under main account login, transfers between sub-accounts and the main account or between sub-accounts are supported</li>
+<li>When logged in under a non-main account: Only transfers from the current account to the main account are allowed</li>
+</ol>
+
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>POST /wallets/account/main-sub-transfer
+</code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"fromUid"</span><span class="p">:</span><span class="w"> </span><span class="mi">99900001</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"fromAccType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SPOT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"toUid"</span><span class="p">:</span><span class="w"> </span><span class="mi">99900002</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"toAccType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SPOT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"amountEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000000</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Response format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"amountEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"bizCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"createTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1706601733000</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Possible Values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>fromUid</code></td>
+<td>Long</td>
+<td>True</td>
+<td>Uid for transfer out</td>
+<td></td>
+</tr>
+<tr>
+<td><code>fromAccType</code></td>
+<td>String</td>
+<td>True</td>
+<td>Transfer out wallet type</td>
+<td><code>SPOT</code>, <code>CONTRACT</code>, <code>MARGIN</code></td>
+</tr>
+<tr>
+<td><code>toUid</code></td>
+<td>Long</td>
+<td>True</td>
+<td>Uid for transfer in</td>
+<td></td>
+</tr>
+<tr>
+<td><code>toAccType</code></td>
+<td>String</td>
+<td>True</td>
+<td>Transfer in wallet type</td>
+<td><code>SPOT</code>, <code>CONTRACT</code>, <code>MARGIN</code></td>
+</tr>
+<tr>
+<td><code>amountEv</code></td>
+<td>Long</td>
+<td>True</td>
+<td>AmountEv to transfer</td>
+<td>100000000</td>
+</tr>
+<tr>
+<td><code>amount</code></td>
+<td>String</td>
+<td>True</td>
+<td>Origin amount to transfer</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>currency</code></td>
+<td>String</td>
+<td>True</td>
+<td>Currency to transfer</td>
+<td>BTC,ETH,USDT ...</td>
+</tr>
+</tbody></table>
+<h2 id='query-account-wallet-transfer-history'>Query account wallet transfer history</h2>
+<blockquote>
+<p>Currently, only transfer records from the past 3 months is supported for queries.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /wallets/account/transfer
+</code></pre></div>
+<ul>
+<li>Request parameters</li>
+</ul>
+
+<blockquote>
+<p>Supports multiple bizTypes parameters separated by &#39;,&#39;  for example: bizTypes=3,4</p>
+</blockquote>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Possible Values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td>False</td>
+<td>The currency to query</td>
+<td>BTC,ETH ...</td>
+</tr>
+<tr>
+<td>bizTypes</td>
+<td>Array</td>
+<td>False</td>
+<td>Business type for transfer</td>
+<td><code>3</code>: transfer to sub-accounts<br/><code>4</code>: transfer to main account<br/><code>10</code>: Spot transfer to Contract wallet<br/><code>11</code>: Contract transfer to Spot wallet<br/><code>90</code>: Copy trade transfer<br/><code>213</code>: Margin wallet transfer<br/></td>
+</tr>
+<tr>
+<td>start</td>
+<td>Long</td>
+<td>False</td>
+<td>Start time in millisecond</td>
+<td>Default to 3 months ago from the end</td>
+</tr>
+<tr>
+<td>end</td>
+<td>Long</td>
+<td>False</td>
+<td>End time in millisecond</td>
+<td>Default to now</td>
+</tr>
+<tr>
+<td>pageNum</td>
+<td>Integer</td>
+<td>False</td>
+<td>Page start from 0</td>
+<td>Start from 1, default 1</td>
+</tr>
+<tr>
+<td>pageSize</td>
+<td>Integer</td>
+<td>False</td>
+<td>Page size</td>
+<td>Default to 20, max 20</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"rows"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"formUserId"</span><span class="p">:</span><span class="w"> </span><span class="mi">99900001</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"toUserId"</span><span class="p">:</span><span class="w"> </span><span class="mi">99900001</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fromAccType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SPOT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"toAccType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CONTRACT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"amountEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000000</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"bizCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"requestKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"13adf"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"requestTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1706601733000</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h1 id='deposit-and-withdraw-rest-api'>Deposit And Withdraw REST API</h1><h2 id='endpoint-security-type-4'>Endpoint Security Type</h2>
 <ul>
 <li>Please raise API Key via web and choose <code>Read &amp; Trade &amp; Withdraw permission</code>, btw IP Address is mandatory.</li>
 <li>Each API call must be signed and pass to server in HTTP header <code>x-phemex-request-signature</code>.</li>
