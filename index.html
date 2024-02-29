@@ -7754,47 +7754,51 @@ penalty.</p>
 </tr>
 </tbody></table>
 <h2 id='set-risklimit'>Set RiskLimit</h2>
-<blockquote>
-<p>Request format</p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>PUT /g-positions/riskLimit?posSide=&lt;posSide&gt;&amp;riskLimitRv=&lt;riskLimitRv&gt;&amp;symbol=&lt;symbol&gt;
-</code></pre></div>
-<blockquote>
-<p>Response sample</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>symbol</td>
-<td>String</td>
-<td>Yes</td>
-<td>symbol to be set risk limt</td>
-</tr>
-<tr>
-<td>riskLimitRv</td>
-<td>String</td>
-<td>Yes</td>
-<td>real value of risk limit to be set</td>
-</tr>
-<tr>
-<td>posSide</td>
-<td>String</td>
-<td>Yes</td>
-<td>position side to set risk limit</td>
-</tr>
-</tbody></table>
+<p>Risk Limit Modification Notice:
+For hedged contracts, the &#39;Set Position Risk Limit API&#39; has been deprecated. It is no longer possible to manually set the &#39;Risk Limit&#39;. Instead, simply adjust the leverage multiplier as required, and the &#39;Risk Limit&#39; will be
+automatically adjusted.</p>
+
+<p>New Risk Limit Configuration Explanation:
+A new attribute called leverageMargin has been added to the properties of symbol pairs. By locating the corresponding index_id within the leverageMargins node, one can find the associated &#39;Risk Limit&#39; information. The
+configuration is as follows:
+<code>json
+{
+  &quot;index_id&quot;: 1,
+  &quot;items&quot;: [
+    {
+      &quot;notionalValueRv&quot;: 50000,
+      &quot;maxLeverage&quot;: 20,
+      &quot;maintenanceMarginRateRr&quot;: &quot;0.01&quot;,
+      &quot;maintenanceAmountRv&quot;: &quot;0&quot;
+    },
+    {
+      &quot;notionalValueRv&quot;: 100000,
+      &quot;maxLeverage&quot;: 10,
+      &quot;maintenanceMarginRateRr&quot;: &quot;0.06&quot;,
+      &quot;maintenanceAmountRv&quot;: &quot;0&quot;
+    },
+    {
+      &quot;notionalValueRv&quot;: 200000,
+      &quot;maxLeverage&quot;: 5,
+      &quot;maintenanceMarginRateRr&quot;: &quot;0.16&quot;,
+      &quot;maintenanceAmountRv&quot;: &quot;0&quot;
+    },
+    {
+      &quot;notionalValueRv&quot;: 300000,
+      &quot;maxLeverage&quot;: 2,
+      &quot;maintenanceMarginRateRr&quot;: &quot;0.46&quot;,
+      &quot;maintenanceAmountRv&quot;: &quot;0&quot;
+    },
+    {
+      &quot;notionalValueRv&quot;: 500000,
+      &quot;maxLeverage&quot;: 1,
+      &quot;maintenanceMarginRateRr&quot;: &quot;0.5&quot;,
+      &quot;maintenanceAmountRv&quot;: &quot;0&quot;
+    }
+  ]
+}
+</code>
+For more information, please refer to the link: https://phemex.com/contract/leverage-margin</p>
 <h2 id='assign-position-balance'>Assign Position Balance</h2>
 <blockquote>
 <p>Request format</p>
