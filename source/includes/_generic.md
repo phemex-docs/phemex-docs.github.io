@@ -30,6 +30,41 @@ Every HTTP Rest Request must have the following Headers:
 * **x-phemex-request-signature** : This is HMAC SHA256 signature of the http request. Secret is *API Secret*, its formula is : HMacSha256(URL Path + QueryString + Expiry + body)
 * (Optional) **x-phemex-request-tracing**: a unique string to trace http-request, less than 40 bytes. This header is a must in resolving latency issues.
 
+### Endpoint security type
+
+* Each API call must be signed and pass to server in HTTP header `x-phemex-request-signature`.
+* Endpoints use `HMAC SHA256` signatures. The `HMAC SHA256 signature` is a keyed `HMAC SHA256` operation. Use your `apiSecret` as the key and the string `URL Path + QueryString + Expiry + body )` as the value for the HMAC operation.
+* The `signature` is **case sensitive**.
+
+#### Signature example 1: HTTP GET request
+
+* API REST Request URL: https://api.phemex.com/accounts/accountPositions?currency=BTC
+   * Request Path: /accounts/accountPositions
+   * Request Query: currency=BTC
+   * Request Body: <null>
+   * Request Expiry: 1575735514
+   * Signature: HMacSha256( /accounts/accountPositions + currency=BTC + 1575735514 )
+
+#### Singature example 2: HTTP GET request with multiple query string
+
+* API REST Request URL: https://api.phemex.com/orders/activeList?ordStatus=New&ordStatus=PartiallyFilled&ordStatus=Untriggered&symbol=BTCUSD
+    * Request Path: /orders/activeList
+    * Request Query: ordStatus=New&ordStatus=PartiallyFilled&ordStatus=Untriggered&symbol=BTCUSD
+    * Request Body: <null>
+    * Request Expire: 1575735951
+    * Signature: HMacSha256(/orders/activeList + ordStatus=New&ordStatus=PartiallyFilled&ordStatus=Untriggered&symbol=BTCUSD + 1575735951)
+    * signed string is `/orders/activeListordStatus=New&ordStatus=PartiallyFilled&ordStatus=Untriggered&symbol=BTCUSD1575735951`
+
+#### Signature example 3: HTTP POST request
+
+* API REST Request URL: https://api.phemex.com/orders
+   * Request Path: /orders
+   * Request Query: <null>
+   * Request Body: {"symbol":"BTCUSD","clOrdID":"uuid-1573058952273","side":"Sell","priceEp":93185000,"orderQty":7,"ordType":"Limit","reduceOnly":false,"timeInForce":"GoodTillCancel","takeProfitEp":0,"stopLossEp":0}
+   * Request Expiry: 1575735514
+   * Signature: HMacSha256( /orders + 1575735514 + {"symbol":"BTCUSD","clOrdID":"uuid-1573058952273","side":"Sell","priceEp":93185000,"orderQty":7,"ordType":"Limit","reduceOnly":false,"timeInForce":"GoodTillCancel","takeProfitEp":0,"stopLossEp":0})
+   * signed string is `/orders1575735514{"symbol":"BTCUSD","clOrdID":"uuid-1573058952273","side":"Sell","priceEp":93185000,"orderQty":7,"ordType":"Limit","reduceOnly":false,"timeInForce":"GoodTillCancel","takeProfitEp":0,"stopLossEp":0}`
+
 ### REST response format
 
 > Response general format
@@ -84,6 +119,27 @@ Every HTTP Rest Request must have the following Headers:
 | Contract   |  500/minute |
 | SpotOrder  |  500/minute |
 | Others     |  100/minute |
+
+### New Contract API RateLimit Rules (for VAPI/VIP only)
+* Contract API currently employs new rate-limit rules based on symbols, according to Phemex internal configuration of uid individually.
+* Under the new throttling rules, Contract API consumes both contract group capacity (5000/minute) and symbol group capacity (500/minute) at the same time, but the each capacity of different symbols are independent from one another.
+* Contract API that may involve all symbols like 'cancel all' consumes request capacity under a special group named 'CONTACT_ALL_SYM'.
+
+* Ratelimit headers added in the symbol dimension. 
+
+| Header name                                     | Description                                                               |
+|-------------------------------------------------|---------------------------------------------------------------------------|
+| x-ratelimit-remaining-*groupName_symbol*        | Remaining request ratelimit in the symbol group in this minute              |
+| x-ratelimit-capacity-*groupName_symbol*         | Total request capacity in the symbol group                            |
+| x-ratelimit-retry-after-*groupName_symbol*      | Reset timeout in seconds for current ratelimited user in the symbol group |
+
+* Special Contract Group Capacity
+
+| Group Name      | Capacity    |
+|-----------------|-------------|
+| Contract        | 5000/minute |
+| Contract_SYMBOL | 500/minute  |
+| CONTACT_ALL_SYM | 500/minute  |
 
 ### API groups
 * Contract group
