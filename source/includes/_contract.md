@@ -1,42 +1,19 @@
 # Contract REST API
 
-## Endpoint security type
+## Query product information
 
-* Each API call must be signed and pass to server in HTTP header `x-phemex-request-signature`.
-* Endpoints use `HMAC SHA256` signatures. The `HMAC SHA256 signature` is a keyed `HMAC SHA256` operation. Use your `apiSecret` as the key and the string `URL Path + QueryString + Expiry + body )` as the value for the HMAC operation.
-* The `signature` is **case sensitive**.
+> Request
 
-### Signature example 1: HTTP GET request
+```
+GET /public/products
+```
 
-* API REST Request URL: https://api.phemex.com/accounts/accountPositions?currency=BTC
-   * Request Path: /accounts/accountPositions
-   * Request Query: currency=BTC
-   * Request Body: <null>
-   * Request Expiry: 1575735514
-   * Signature: HMacSha256( /accounts/accountPositions + currency=BTC + 1575735514 )
+* USD-M perpetual contracts using USD as margin or COIN-M perpetual contracts using COIN as margin
+* Contract symbols are defined in `.products[]` with **type=Perpetual**.
+* Contract risklimit information are defined in `.risklimits[]`.
+* Contract which delisted has status with 'Delisted' .
 
-### Singature example 2: HTTP GET request with multiple query string
-
-* API REST Request URL: https://api.phemex.com/orders/activeList?ordStatus=New&ordStatus=PartiallyFilled&ordStatus=Untriggered&symbol=BTCUSD
-    * Request Path: /orders/activeList
-    * Request Query: ordStatus=New&ordStatus=PartiallyFilled&ordStatus=Untriggered&symbol=BTCUSD
-    * Request Body: <null>
-    * Request Expire: 1575735951
-    * Signature: HMacSha256(/orders/activeList + ordStatus=New&ordStatus=PartiallyFilled&ordStatus=Untriggered&symbol=BTCUSD + 1575735951)
-    * signed string is `/orders/activeListordStatus=New&ordStatus=PartiallyFilled&ordStatus=Untriggered&symbol=BTCUSD1575735951`
-
-### Signature example 3: HTTP POST request
-
-* API REST Request URL: https://api.phemex.com/orders
-   * Request Path: /orders
-   * Request Query: <null>
-   * Request Body: {"symbol":"BTCUSD","clOrdID":"uuid-1573058952273","side":"Sell","priceEp":93185000,"orderQty":7,"ordType":"Limit","reduceOnly":false,"timeInForce":"GoodTillCancel","takeProfitEp":0,"stopLossEp":0}
-   * Request Expiry: 1575735514
-   * Signature: HMacSha256( /orders + 1575735514 + {"symbol":"BTCUSD","clOrdID":"uuid-1573058952273","side":"Sell","priceEp":93185000,"orderQty":7,"ordType":"Limit","reduceOnly":false,"timeInForce":"GoodTillCancel","takeProfitEp":0,"stopLossEp":0})
-   * signed string is `/orders1575735514{"symbol":"BTCUSD","clOrdID":"uuid-1573058952273","side":"Sell","priceEp":93185000,"orderQty":7,"ordType":"Limit","reduceOnly":false,"timeInForce":"GoodTillCancel","takeProfitEp":0,"stopLossEp":0}`
-
-
-## Request/Response field explaination
+## Request/Response field explanation
 
 ### Leverage
    * The absolute value of `leverageEr` determines initial-margin-rate, i.e. `initialMarginRate = 1/abs(leverage)`
@@ -58,20 +35,6 @@ Fields with post-fix "Ep", "Er" or "Ev" have been scaled based on symbol setting
 * Fields with post-fix "Ep" are scaled prices, `priceScale` in [products](#query-product-information)
 * Fields with post-fix "Er" are scaled ratios, `ratioScale` in [products](#query-product-information)
 * Fields with post-fix "Ev" are scaled values, `valueScale` of `settleCurrency` in [products](#query-product-information)
-
-## Query product information
-
-> Request
-
-```
-GET /public/products
-```
-
-* USD-M perpetual contracts using USD as margin or COIN-M perpetual contracts using COIN as margin
-* Contract symbols are defined in `.products[]` with **type=Perpetual**.
-* Contract risklimit information are defined in `.risklimits[]`.
-* Contract which delisted has status with 'Delisted' .
-
 
 ## Query server time
 
@@ -479,7 +442,9 @@ PUT
 | pegOffsetValueEp | No | New trailing offset |
 | pegPriceType | No | New peg price type |
 
-orderID and origClOrdID can not be both empty
+**NOTE**:  
+1\) orderID and origClOrdID cannot both be empty.<br> 
+
 
 ## Cancel order by order ID or client order ID
 
@@ -2981,7 +2946,7 @@ PUT /g-orders/create?clOrdID=<clOrdID>&symbol=<symbol>&reduceOnly=<reduceOnly>&c
     "orderType": "Limit",
     "pegOffsetValueRp": "1271.9",
     "pegPriceType": "LastPeg",
-    "priceRq": "98970000",
+    "priceRp": "98970000",
     "reduceOnly": true,
     "side": "Sell",
     "stopDirection": "Rising",
@@ -3108,8 +3073,10 @@ body:
 | text             | String  | -        | Order comments                                               |                                                              |
 | timeInForce      | String  | -        | Time in force. default to GoodTillCancel                     | GoodTillCancel, ImmediateOrCancel, FillOrKill, PostOnly      |
 | stopPxRp         | String  | -        | Trigger price of conditional order                          | "1"                                                          |
-| takeProfitRp     | String  | -        | Real take profit price                                       | "1"                                                          |
-| stopLossRp       | String  | -        | Real stop loss price                                         | "1"                                                          |
+| takeProfitRp     | String  | -        | trigger price of take-profit order attached to position opening          | "1"                                                          |
+| tpPxRp           | String  | -        | limit price of take-profit order attached to position opening            | "1"                                                          |
+| stopLossRp       | String  | -        | trigger price of stop-loss order attached to position opening            | "1"                                                          |
+| slPxRp           | String  | -        | limit price of stop-loss order attached to position opening              | "1"                           
 | pegOffsetValueRp | String  | -        | Trailing offset from current price. Negative value when position is long, positive when position is short | "1"                                                          |
 | pegPriceType     | String  | -        | Trailing order price type                                    | LastPeg, MidPricePeg, MarketPeg, PrimaryPeg, TrailingStopPeg, TrailingTakeProfitPeg |
 | triggerType      | String  | -        | Trigger source                                               | ByMarkPrice, ByIndexPrice, ByLastPrice, ByAskPrice, ByBidPrice, ByMarkPriceLimit, ByLastPriceLimit |
@@ -3180,7 +3147,8 @@ PUT /g-orders/replace?symbol=<symbol>&orderID=<orderID>&origClOrdID=<origClOrdID
 | triggerType      | -        | new triggerType                       |
 | posSide          | Yes      | posSide to check, can not be changed  |
 
-orderID and origClOrdID can not be both empty
+**NOTE**:  
+1\) orderID and origClOrdID cannot both be empty.<br> 
 
 
 ## Cancel Single Order by orderID
@@ -3231,11 +3199,13 @@ DELETE /g-orders/cancel?orderID=<orderID>&posSide=<posSide>&symbol=<symbol>
 
 | Field   | Type   | Required | Description                  |
 | ------- | ------ | -------- | ---------------------------- |
-| orderID | String | No      | order id, cannot be changed, orderID and clOrdID can not be both empty  |
-| clOrdID | String | No      | clOrdID id, cannot be changed  |
+| orderID | String | No       | order id, cannot be changed, |
+| clOrdID | String | No       | clOrdID id, cannot be changed|
 | symbol  | String | Yes      | which symbol to cancel order |
 | posSide | String | Yes      | position direction           |
 
+**NOTE**:  
+1\) orderID and clOrdID cannot both be empty.<br> 
 
 ## Bulk Cancel Orders
 
@@ -3283,12 +3253,15 @@ DELETE /g-orders?symbol=<symbol>&orderID=<orderID1>,<orderID2>,<orderID3>&posSid
 }
 ```
 
-| Field   | Type   | Required | Description                                          |
+| Field   | Type   | Required | Description|                                       
 | ------- | ------ | -------- | ---------------------------------------------------- |
-| orderID | String | No      | list of order ids to be cancelled, cannot be changed, orderID and clOrdID can not be both empty|
-| clOrdID | String | No      | list of clOrdIDs to be cancelled, cannot be changed  |
+| orderID | String | No      | list of order ids to be cancelled|
+| clOrdID | String | No      | list of clOrdIDs to be cancelled |
 | symbol  | String | Yes      | which symbol to cancel order                         |
 | posSide | String | Yes      | position direction                                   |
+
+**NOTE**:  
+1\) orderID and clOrdID cannot both be empty.<br> 
 
 
 ## Cancel All Orders
@@ -3898,7 +3871,10 @@ GET /exchange/order/v2/tradingList?symbol=<symbol>&currency=<currency>&execType=
                 "execFeeRv": "0.0012719",
                 "ordType": 2,
                 "execId": "8718cae",
-                "execStatus": 6
+                "execStatus": 6,
+                "posSide": 3,
+                "ptFeeRv": 0,
+                "ptPriceRp": 0
             },
             {
                 "createdAt": 1666226903754,
@@ -3916,7 +3892,10 @@ GET /exchange/order/v2/tradingList?symbol=<symbol>&currency=<currency>&execType=
                 "execFeeRv": "0.0089033",
                 "ordType": 2,
                 "execId": "8b8a8a0",
-                "execStatus": 6
+                "execStatus": 6,
+                "posSide": 3,
+                "ptFeeRv": 0,
+                "ptPriceRp": 0
             }
         ]
     }

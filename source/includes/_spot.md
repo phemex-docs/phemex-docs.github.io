@@ -45,9 +45,17 @@ GET /public/time
 
 Fields with post-fix "Ep", "Er" or "Ev" have been scaled based on symbol setting.
 
-* Fields with post-fix "Ep" are scaled prices, `priceScale` in [products](#query-product-information-2)
-* Fields with post-fix "Er" are scaled ratios, `ratioScale` in [products](#query-product-information-2)
-* Fields with post-fix "Ev" are scaled values, `valueScale` of corresponding `Currency` in [products](#query-product-information-2)
+* Fields with post-fix "Ep" are scaled prices, `priceScale` in [products](#query-product-information)
+* Fields with post-fix "Er" are scaled ratios, `ratioScale` in [products](#query-product-information)
+* Fields with post-fix "Ev" are scaled values, `valueScale` of `settleCurrency` in [products](#query-product-information)
+
+**NOTE**:<br>
+1\) `ratioScale` is always scaled 8.<br>
+2\) `priceScale` follows the `valueScale` of quote-currency, and must follow quote-ticksize criteria.<br> 
+  e.g. `priceScale` of sBTCUSDT and sPEPEUSDT follow USDT-valueScale, i.e. 1e8; the scaled price of sBTCUSDT must be multiple times of `quoteTickSizeEv=1e6`. <br>
+3\) `qtySale` follows the valueScale of base-currency, and must follow base-tickSize criteria.<br> 
+  e.g. `qtyScale` of sETHUSDT follows ETH-valueScale, i.e. 1e8; the scaled qty of sETHUSDT must be mulitple times of  `baseTickSizeEv=10000`.<br>
+
 
 ## Common order fields
 
