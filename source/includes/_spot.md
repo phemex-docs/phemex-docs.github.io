@@ -52,7 +52,7 @@ Fields with post-fix "Ep", "Er" or "Ev" have been scaled based on symbol setting
 **NOTE**:<br>
 1\) `ratioScale` is always scaled 8.<br>
 2\) `priceScale` follows the `valueScale` of quote-currency, and must follow quote-ticksize criteria.<br> 
-  e.g. `priceScale` of sBTCUSDT and sPEPEUSDT follow USDT-valueScale, i.e. 1e8; the scaled price of sBTCUSDT must be multiple times of `quoteTickSizeEv=1e6`. <br>
+  e.g. `priceScale` of sBTCUSDT follows USDT-valueScale, i.e. 1e8; the scaled price of sBTCUSDT must be multiple times of `quoteTickSizeEv=1e6`. <br>
 3\) `qtySale` follows the valueScale of base-currency, and must follow base-tickSize criteria.<br> 
   e.g. `qtyScale` of sETHUSDT follows ETH-valueScale, i.e. 1e8; the scaled qty of sETHUSDT must be mulitple times of  `baseTickSizeEv=10000`.<br>
 
@@ -147,7 +147,7 @@ PUT /spot/orders/create?symbol=<symbol>&trigger=<trigger>&clOrdID=<clOrdID>&pric
 
 | Field       | Type   | Required | Description               | Possible values |
 |----------   |--------|----------|---------------------------|-----------------|
-| symbol      | String | Yes      |                           |                 |
+| symbol      | String | Yes      |                           | [Spot Symbols](#spot_symbols)     |
 | side        | Enum   | Yes      |                           |  Sell, Buy     | 
 | qtyType     | Enum   | Yes      | Set order quantity by base or quote currency | ByBase, ByQuote|
 | quoteQtyEv  | Integer| --       | Required if qtyType = ByQuote|  |
@@ -187,18 +187,20 @@ POST /spot/orders
 > Request format
 
 ```
-PUT /spot/orders?symbol=<symbol>&orderID=<orderID>&origClOrdID=<origClOrdID>&priceEp=<priceEp>&baseQtyEV=<baseQtyEV>&quoteQtyEv=<quoteQtyEv>&stopPxEp=<stopPxEp> 
+PUT /spot/orders?symbol=<symbol>&orderID=<orderID>&origClOrdID=<origClOrdID>&priceEp=<priceEp>&baseQtyEv=<baseQtyEv>&quoteQtyEv=<quoteQtyEv>&stopPxEp=<stopPxEp> 
 ```
 | Field       | Type | Required | Description                           |
 |-------------|------|----------|---------------------------------------|
 | symbol      |      | Yes      | order symbol, cannot be changed       |
 | orderID     |      | -        | order id, cannot be changed           |
 | origClOrdID |      | -        | origClOrdID , cannot be changed       |
-| priceRp     |      | -        | new order price, real value           |
-| orderQtyRq  |      | Yes      | new orderQty, real value              |
-| stopPxRp    |      | Yes      | new stop price, real value            |
+| priceEp     |      | -        | scaled price                          |
+| baseQtyEv   |      | Yes      | scaled base-currency quantity         |
+| quoteQtyEv  |      | Yes      | scaled quote-currency quantity        |
+| stopPxEp    |      | Yes      | used in conditionalorder              |
 
-orderID and origClOrdID can't both be empty
+1\) orderID and origClOrdID can't both be empty
+2\) The quantity to be changed must be the same currency as placing order. e.g. If placing order is by baseQtyEv, amending order can be only by baseQtyEv as.
 
 ## Cancel order
 
@@ -858,18 +860,21 @@ GET /md/spot/ticker/24hr/all
   "id": 0,
   "result": [
     {
-      "openEp": <open priceEp>,
+      "askEp": <ask priceEp>,
+      "bidEp": <bid priceEp>,
       "highEp": <high priceEp>,
-      "lowEp": <low priceEp>, 
       "indexEp": <index priceEp>,
       "lastEp": <last priceEp>,
-      "bidEp": <bid priceEp>,
-      "askEp": <ask priceEp>,
-      "symbol": "<symbol>",
+      "lowEp": <low priceEp>,
+      "openEp": <open priceEp>,
+      "symbol": <symbol>,
+      "timestamp": <timestamp>,
       "turnoverEv": <turnoverEv>,
-      "volumeEv": <volumeEv>,
-      "timestamp": <timestamp>
-    }
+      "volumeEv": <volumeEv>
+    },
+    ...
+    // other more symbols
+    ...
   ]
 }
 ```
@@ -884,7 +889,7 @@ GET /md/spot/ticker/24hr/all
 | bid priceEp   | Integer | Scaled bid price                           |                                 |
 | ask priceEp   | Integer | Scaled ask price                           |                                 |
 | timestamp     | Integer | Timestamp in nanoseconds                   |                                 |
-| symbol        | String  | symbol name                                | [Trading symbols](#productinfo) |
+| symbol        | String  | symbol name                                | [Spot Symbols](#spot_symbols)   |
 | turnoverEv    | Integer | The scaled turnover value in last 24 hours |                                 |
 | volumeEv      | Integer | The scaled trade volume in last 24 hours   |                                 |
 
@@ -899,7 +904,7 @@ GET /md/spot/ticker/24hr?symbol=<symbol>
 
 > Response format
 
-```javascript
+```json
 {
   "error": null,
   "id": 0,
@@ -910,7 +915,7 @@ GET /md/spot/ticker/24hr?symbol=<symbol>
     "lastEp": <last priceEp>,
     "bidEp": <bid priceEp>,
     "askEp": <ask priceEp>,
-    "symbol": "<symbol>",
+    "symbol": <symbol>,
     "turnoverEv": <turnoverEv>,
     "volumeEv": <volumeEv>,
     "timestamp": <timestamp>
@@ -918,18 +923,18 @@ GET /md/spot/ticker/24hr?symbol=<symbol>
 }
 ```
 
-| Field         | Type   | Description                                | Possible values |
-|---------------|--------|--------------------------------------------|--------------|
-| open priceEp  | Integer| The scaled open price in last 24 hours     |              |
-| high priceEp  | Integer| The scaled highest price in last 24 hours  |              |
-| low priceEp   | Integer| The scaled lowest price in last 24 hours   |              |
-| last priceEp  | Integer| The scaled last price                      |              |
-| bid priceEp   | Integer| Scaled bid price                           |              |
-| ask priceEp   | Integer| Scaled ask price                           |              |
-| timestamp     | Integer| Timestamp in nanoseconds                   |              |
+| Field         | Type   | Description                                | Possible values                 |
+|---------------|--------|--------------------------------------------|---------------------------------|
+| open priceEp  | Integer| The scaled open price in last 24 hours     |                                 |
+| high priceEp  | Integer| The scaled highest price in last 24 hours  |                                 |
+| low priceEp   | Integer| The scaled lowest price in last 24 hours   |                                 |
+| last priceEp  | Integer| The scaled last price                      |                                 |
+| bid priceEp   | Integer| Scaled bid price                           |                                 | 
+| ask priceEp   | Integer| Scaled ask price                           |                                 |
+| timestamp     | Integer| Timestamp in nanoseconds                   |                                 |
 | symbol        | String | symbol name                                | [Trading symbols](#productinfo) |
-| turnoverEv    | Integer| The scaled turnover value in last 24 hours |              |
-| volumeEv      | Integer| The scaled trade volume in last 24 hours   |              |
+| turnoverEv    | Integer| The scaled turnover value in last 24 hours |                                 |
+| volumeEv      | Integer| The scaled trade volume in last 24 hours   |                                 |
 
 > Request sample
 
@@ -1938,6 +1943,8 @@ On subscription to investment account then you will get your investment informat
 * Endpoints use `HMAC SHA256` signatures. The `HMAC SHA256 signature` is a keyed `HMAC SHA256` operation. Use your `apiSecret` as the key and the string `URL Path + QueryString + Expiry + body )` as the value for the HMAC operation.
 * The `signature` is **case sensitive**.
 
+<a id="spot_symbols"></a>
+
 ## Query product information
 
 > Request
@@ -2054,7 +2061,7 @@ PUT /margin-trade/orders/create?symbol=<symbol>&trigger=<trigger>&clOrdID=<clOrd
 
 | Field       | Type   | Required | Description               | Possible values |
 |----------   |--------|----------|---------------------------|-----------------|
-| symbol      | String | Yes      |                           |                 |
+| symbol      | String | Yes      |                           | [Spot Symbols](#spot_symbols) |
 | side        | Enum   | Yes      |                           |  Sell, Buy     | 
 | qtyType     | Enum   | Yes      | Set order quantity by base or quote currency | ByBase, ByQuote|
 | quoteQtyRq  | String| --       | Required if qtyType = ByQuote|  |

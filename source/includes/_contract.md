@@ -1,5 +1,7 @@
 # Contract REST API
 
+<a id="contract_symbols"></a>
+
 ## Query product information
 
 > Request
@@ -1584,7 +1586,7 @@ GET /api-data/public/data/funding-rate-history?symbol=<symbol>&start=<start>&end
 
 | Field  | Type    | Required | Description                                       | Possible Values |
 |--------|---------|----------|---------------------------------------------------|-----------------|
-| symbol | String  | True     | funding rate symbol                               | .BTCFR8H        |
+| symbol | String  | True     | funding rate symbol                               | [fundingRateSymbol](#contract_symbols) |
 | start  | Long    | False    | start timestamp in ms of funding time (INCLUSIVE) | 1679852520918   |
 | end    | Long    | False    | end timestamp in ms of funding time (INCLUSIVE)   | 1679852520918   |
 | limit  | Integer | False    | default 100, max 100                              | 100             |
@@ -1606,7 +1608,7 @@ GET /api-data/futures/funding-fees?symbol=<symbol>
 
 | Parameter | Type    | Required | Description                   | Case                |
 |-----------|---------|----------|-------------------------------|---------------------|
-| symbol    | String  | True     | the currency to query         | uBTCUSDT...         |
+| symbol    | String  | True     | the currency to query         | uBTCUSD...          |
 | offset    | Integer | False    | page starts from 0            | default 0           |
 | limit     | Integer | False    | page size                     | default 20, max 200 |
 
@@ -1699,6 +1701,9 @@ GET /api-data/futures/v2/tradeAccountDetail?currency=<currecny>&type=<type>&limi
 
 > Request
 
+* Each client is required to actively send heartbeat (ping) message to Phemex data gateway ('DataGW' in short) with interval less than 30 seconds, otherwise DataGW will drop the connection. If a client sends a ping message, DataGW will reply with a pong message.
+* Clients can use WS built-in ping message or the application level ping message to DataGW as heartbeat. The heartbeat interval is recommended to be set as *5 seconds*, and actively reconnect to DataGW if don't receive messages in *3 heartbeat intervals*.
+
 ```json
 {
   "id": 0,
@@ -1717,8 +1722,11 @@ GET /api-data/futures/v2/tradeAccountDetail?currency=<currecny>&type=<type>&limi
 }
 ```
 
-* Each client is required to actively send heartbeat (ping) message to Phemex data gateway ('DataGW' in short) with interval less than 30 seconds, otherwise DataGW will drop the connection. If a client sends a ping message, DataGW will reply with a pong message.
-* Clients can use WS built-in ping message or the application level ping message to DataGW as heartbeat. The heartbeat interval is recommended to be set as *5 seconds*, and actively reconnect to DataGW if don't receive messages in *3 heartbeat intervals*.
+## API Rate Limits
+
+* Each Client has concurrent connection limit to *5* in maximum.
+* Each connection has subscription limit to *20* in maximum.
+* Each connection has throttle limit to *20* request/s.
 
 ## User authentication
 
@@ -4488,7 +4496,7 @@ GET /api-data/public/data/funding-rate-history?symbol=<symbol>&start=<start>&end
 
 | Field  | Type    | Required | Description                                       | Possible Values |
 |--------|---------|----------|---------------------------------------------------|-----------------|
-| symbol | String  | True     | funding rate symbol                               | .ETHUSDTFR8H    |
+| symbol | String  | True     | funding rate symbol                               | [funding rate symbols](#symbpricesub)    |
 | start  | Long    | False    | start timestamp in ms of funding time (INCLUSIVE) | 1679852520918   |
 | end    | Long    | False    | end timestamp in ms of funding time (INCLUSIVE)   | 1679852520918   |
 | limit  | Integer | False    | default 100, max 100                              | 100             |
@@ -4534,36 +4542,37 @@ GET /api-data/g-futures/funding-fees?symbol=<symbol>
 ```
 
 # Hedged Contract Websocket API
-* Each client is required to actively send heartbeat (ping) message to Phemex data gateway ('DataGW' in short) with interval less than 30 seconds, otherwise DataGW will drop the connection. If a client sends a ping message, DataGW will reply with a pong message.
-* Clients can use WS built-in ping message or the application level ping message to DataGW as heartbeat. The heartbeat interval is recommended to be set as *5 seconds*, and actively reconnect to DataGW if don't receive messages in *3 heartbeat intervals*.
- 
-
-API Rate Limits
-
-* Each Client has concurrent connection limit to *5* in maximum.
-* Each connection has subscription limit to *20* in maximum.
-* Each connection has throttle limit to *20* request/s.
 
 ## Heartbeat
 
-> Request format
+* Each client is required to actively send heartbeat (ping) message to Phemex data gateway ('DataGW' in short) with interval less than 30 seconds, otherwise DataGW will drop the connection. If a client sends a ping message, DataGW will reply with a pong message.
+* Clients can use WS built-in ping message or the application level ping message to DataGW as heartbeat. The heartbeat interval is recommended to be set as *5 seconds*, and actively reconnect to DataGW if don't receive messages in *3 heartbeat intervals*.
+
+> Request
+
 ```json
 {
-  "id": 1234,
+  "id": 0,
   "method": "server.ping",
   "params": []
 }
 ```
 
-> Response sample
+> Response
 
 ```json
 {
   "error": null,
-  "id": 1234,
+  "id": 0,
   "result": "pong"
 }
 ```
+
+## API Rate Limits
+
+* Each Client has concurrent connection limit to *5* in maximum.
+* Each connection has subscription limit to *20* in maximum.
+* Each connection has throttle limit to *20* request/s.
 
 ## API User Authentication
 
