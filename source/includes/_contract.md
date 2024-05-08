@@ -4496,7 +4496,7 @@ GET /api-data/public/data/funding-rate-history?symbol=<symbol>&start=<start>&end
 
 | Field  | Type    | Required | Description                                       | Possible Values |
 |--------|---------|----------|---------------------------------------------------|-----------------|
-| symbol | String  | True     | funding rate symbol                               | [funding rate symbols](#symbpricesub)    |
+| symbol | String  | True     | funding rate symbol                               | [fundingRateSymbol](#contract_symbols) |
 | start  | Long    | False    | start timestamp in ms of funding time (INCLUSIVE) | 1679852520918   |
 | end    | Long    | False    | end timestamp in ms of funding time (INCLUSIVE)   | 1679852520918   |
 | limit  | Integer | False    | default 100, max 100                              | 100             |
