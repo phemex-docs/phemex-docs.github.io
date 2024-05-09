@@ -862,6 +862,9 @@
                     <a href="#heartbeat" class="toc-h2 toc-link" data-title="Heartbeat">Heartbeat</a>
                   </li>
                   <li>
+                    <a href="#api-rate-limits" class="toc-h2 toc-link" data-title="API Rate Limits">API Rate Limits</a>
+                  </li>
+                  <li>
                     <a href="#user-authentication" class="toc-h2 toc-link" data-title="User authentication">User authentication</a>
                   </li>
                   <li>
@@ -1008,6 +1011,9 @@
               <ul class="toc-list-h2">
                   <li>
                     <a href="#heartbeat-2" class="toc-h2 toc-link" data-title="Heartbeat">Heartbeat</a>
+                  </li>
+                  <li>
+                    <a href="#api-rate-limits-2" class="toc-h2 toc-link" data-title="API Rate Limits">API Rate Limits</a>
                   </li>
                   <li>
                     <a href="#api-user-authentication" class="toc-h2 toc-link" data-title="API User Authentication">API User Authentication</a>
@@ -2583,7 +2589,9 @@ Because the number of interfaces in Other group may grow over time, the list bel
 <td>Cancel bracket take profit order due main order canceled.</td>
 </tr>
 </tbody></table>
-<h1 id='contract-rest-api'>Contract REST API</h1><h2 id='query-product-information'>Query product information</h2>
+<h1 id='contract-rest-api'>Contract REST API</h1>
+<p><a id="contract_symbols"></a></p>
+<h2 id='query-product-information'>Query product information</h2>
 <blockquote>
 <p>Request</p>
 </blockquote>
@@ -5080,7 +5088,7 @@ The API has <a href="#rate-limits">ratelimits</a> rule, and please check the <i>
 <td>String</td>
 <td>True</td>
 <td>funding rate symbol</td>
-<td>.BTCFR8H</td>
+<td><a href="#contract_symbols">fundingRateSymbol</a></td>
 </tr>
 <tr>
 <td>start</td>
@@ -5135,7 +5143,7 @@ The API has <a href="#rate-limits">ratelimits</a> rule, and please check the <i>
 <td>String</td>
 <td>True</td>
 <td>the currency to query</td>
-<td>uBTCUSDT...</td>
+<td>uBTCUSD...</td>
 </tr>
 <tr>
 <td>offset</td>
@@ -5298,6 +5306,11 @@ The API has <a href="#rate-limits">ratelimits</a> rule, and please check the <i>
 <blockquote>
 <p>Request</p>
 </blockquote>
+
+<ul>
+<li>Each client is required to actively send heartbeat (ping) message to Phemex data gateway (&#39;DataGW&#39; in short) with interval less than 30 seconds, otherwise DataGW will drop the connection. If a client sends a ping message, DataGW will reply with a pong message.</li>
+<li>Clients can use WS built-in ping message or the application level ping message to DataGW as heartbeat. The heartbeat interval is recommended to be set as <em>5 seconds</em>, and actively reconnect to DataGW if don&#39;t receive messages in <em>3 heartbeat intervals</em>.</li>
+</ul>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"server.ping"</span><span class="p">,</span><span class="w">
@@ -5312,10 +5325,11 @@ The API has <a href="#rate-limits">ratelimits</a> rule, and please check the <i>
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pong"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div>
+</span></code></pre></div><h2 id='api-rate-limits'>API Rate Limits</h2>
 <ul>
-<li>Each client is required to actively send heartbeat (ping) message to Phemex data gateway (&#39;DataGW&#39; in short) with interval less than 30 seconds, otherwise DataGW will drop the connection. If a client sends a ping message, DataGW will reply with a pong message.</li>
-<li>Clients can use WS built-in ping message or the application level ping message to DataGW as heartbeat. The heartbeat interval is recommended to be set as <em>5 seconds</em>, and actively reconnect to DataGW if don&#39;t receive messages in <em>3 heartbeat intervals</em>.</li>
+<li>Each Client has concurrent connection limit to <em>5</em> in maximum.</li>
+<li>Each connection has subscription limit to <em>20</em> in maximum.</li>
+<li>Each connection has throttle limit to <em>20</em> request/s.</li>
 </ul>
 <h2 id='user-authentication'>User authentication</h2>
 <blockquote>
@@ -9336,7 +9350,7 @@ For more information, please refer to the link: https://phemex.com/contract/leve
 <td>String</td>
 <td>True</td>
 <td>funding rate symbol</td>
-<td>.ETHUSDTFR8H</td>
+<td><a href="#contract_symbols">fundingRateSymbol</a></td>
 </tr>
 <tr>
 <td>start</td>
@@ -9426,38 +9440,36 @@ For more information, please refer to the link: https://phemex.com/contract/leve
     </span><span class="nl">"createTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1671004800021</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre></div><h1 id='hedged-contract-websocket-api'>Hedged Contract Websocket API</h1>
+</span></code></pre></div><h1 id='hedged-contract-websocket-api'>Hedged Contract Websocket API</h1><h2 id='heartbeat-2'>Heartbeat</h2>
 <ul>
 <li>Each client is required to actively send heartbeat (ping) message to Phemex data gateway (&#39;DataGW&#39; in short) with interval less than 30 seconds, otherwise DataGW will drop the connection. If a client sends a ping message, DataGW will reply with a pong message.</li>
 <li>Clients can use WS built-in ping message or the application level ping message to DataGW as heartbeat. The heartbeat interval is recommended to be set as <em>5 seconds</em>, and actively reconnect to DataGW if don&#39;t receive messages in <em>3 heartbeat intervals</em>.</li>
 </ul>
 
-<p>API Rate Limits</p>
-
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"server.ping"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pong"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='api-rate-limits-2'>API Rate Limits</h2>
 <ul>
 <li>Each Client has concurrent connection limit to <em>5</em> in maximum.</li>
 <li>Each connection has subscription limit to <em>20</em> in maximum.</li>
 <li>Each connection has throttle limit to <em>20</em> request/s.</li>
 </ul>
-<h2 id='heartbeat-2'>Heartbeat</h2>
-<blockquote>
-<p>Request format
-<code>json
-{
-  &quot;id&quot;: 1234,
-  &quot;method&quot;: &quot;server.ping&quot;,
-  &quot;params&quot;: []
-}
-</code></p>
-
-<p>Response sample</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pong"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div><h2 id='api-user-authentication'>API User Authentication</h2>
+<h2 id='api-user-authentication'>API User Authentication</h2>
 <p>Market trade/orderbook are published publicly without user authentication.
 While for client private account/position/order data, the client should send user.auth message to Data Gateway to authenticate the session.</p>
 
@@ -10872,7 +10884,7 @@ while funding rate symbol follows a pattern <code>.&lt;BASECURRENCY&gt;&lt;QUOTE
 <p><strong>NOTE</strong>:<br>
 1) <code>ratioScale</code> is always scaled 8.<br>
 2) <code>priceScale</code> follows the <code>valueScale</code> of quote-currency, and must follow quote-ticksize criteria.<br> 
-  e.g. <code>priceScale</code> of sBTCUSDT and sPEPEUSDT follow USDT-valueScale, i.e. 1e8; the scaled price of sBTCUSDT must be multiple times of <code>quoteTickSizeEv=1e6</code>. <br>
+  e.g. <code>priceScale</code> of sBTCUSDT follows USDT-valueScale, i.e. 1e8; the scaled price of sBTCUSDT must be multiple times of <code>quoteTickSizeEv=1e6</code>. <br>
 3) <code>qtySale</code> follows the valueScale of base-currency, and must follow base-tickSize criteria.<br> 
   e.g. <code>qtyScale</code> of sETHUSDT follows ETH-valueScale, i.e. 1e8; the scaled qty of sETHUSDT must be mulitple times of  <code>baseTickSizeEv=10000</code>.<br></p>
 <h2 id='common-order-fields-2'>Common order fields</h2>
@@ -11063,7 +11075,7 @@ while funding rate symbol follows a pattern <code>.&lt;BASECURRENCY&gt;&lt;QUOTE
 <td>String</td>
 <td>Yes</td>
 <td></td>
-<td></td>
+<td><a href="#spot_symbols">Spot Symbols</a></td>
 </tr>
 <tr>
 <td>side</td>
@@ -11151,7 +11163,7 @@ while funding rate symbol follows a pattern <code>.&lt;BASECURRENCY&gt;&lt;QUOTE
 <blockquote>
 <p>Request format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>PUT /spot/orders?symbol=&lt;symbol&gt;&amp;orderID=&lt;orderID&gt;&amp;origClOrdID=&lt;origClOrdID&gt;&amp;priceEp=&lt;priceEp&gt;&amp;baseQtyEV=&lt;baseQtyEV&gt;&amp;quoteQtyEv=&lt;quoteQtyEv&gt;&amp;stopPxEp=&lt;stopPxEp&gt; 
+<div class="highlight"><pre class="highlight plaintext"><code>PUT /spot/orders?symbol=&lt;symbol&gt;&amp;orderID=&lt;orderID&gt;&amp;origClOrdID=&lt;origClOrdID&gt;&amp;priceEp=&lt;priceEp&gt;&amp;baseQtyEv=&lt;baseQtyEv&gt;&amp;quoteQtyEv=&lt;quoteQtyEv&gt;&amp;stopPxEp=&lt;stopPxEp&gt; 
 </code></pre></div>
 <table><thead>
 <tr>
@@ -11180,26 +11192,33 @@ while funding rate symbol follows a pattern <code>.&lt;BASECURRENCY&gt;&lt;QUOTE
 <td>origClOrdID , cannot be changed</td>
 </tr>
 <tr>
-<td>priceRp</td>
+<td>priceEp</td>
 <td></td>
 <td>-</td>
-<td>new order price, real value</td>
+<td>scaled price</td>
 </tr>
 <tr>
-<td>orderQtyRq</td>
+<td>baseQtyEv</td>
 <td></td>
 <td>Yes</td>
-<td>new orderQty, real value</td>
+<td>scaled base-currency quantity</td>
 </tr>
 <tr>
-<td>stopPxRp</td>
+<td>quoteQtyEv</td>
 <td></td>
 <td>Yes</td>
-<td>new stop price, real value</td>
+<td>scaled quote-currency quantity</td>
+</tr>
+<tr>
+<td>stopPxEp</td>
+<td></td>
+<td>Yes</td>
+<td>used in conditionalorder</td>
 </tr>
 </tbody></table>
 
-<p>orderID and origClOrdID can&#39;t both be empty</p>
+<p>1) orderID and origClOrdID can&#39;t both be empty
+2) The quantity to be changed must be the same currency as placing order. e.g. If placing order is by baseQtyEv, amending order can be only by baseQtyEv as.</p>
 <h2 id='cancel-order'>Cancel order</h2>
 <blockquote>
 <p>Request format</p>
@@ -12109,18 +12128,21 @@ The depth value is 0 in full book response.
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"openEp"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;open</span><span class="w"> </span><span class="err">priceEp&gt;</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"askEp"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;ask</span><span class="w"> </span><span class="err">priceEp&gt;</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"bidEp"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;bid</span><span class="w"> </span><span class="err">priceEp&gt;</span><span class="p">,</span><span class="w">
       </span><span class="nl">"highEp"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;high</span><span class="w"> </span><span class="err">priceEp&gt;</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"lowEp"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;low</span><span class="w"> </span><span class="err">priceEp&gt;</span><span class="p">,</span><span class="w"> 
       </span><span class="nl">"indexEp"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;index</span><span class="w"> </span><span class="err">priceEp&gt;</span><span class="p">,</span><span class="w">
       </span><span class="nl">"lastEp"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;last</span><span class="w"> </span><span class="err">priceEp&gt;</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"bidEp"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;bid</span><span class="w"> </span><span class="err">priceEp&gt;</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"askEp"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;ask</span><span class="w"> </span><span class="err">priceEp&gt;</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;symbol&gt;"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"lowEp"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;low</span><span class="w"> </span><span class="err">priceEp&gt;</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"openEp"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;open</span><span class="w"> </span><span class="err">priceEp&gt;</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;symbol&gt;</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;timestamp&gt;</span><span class="p">,</span><span class="w">
       </span><span class="nl">"turnoverEv"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;turnoverEv&gt;</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"volumeEv"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;volumeEv&gt;</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;timestamp&gt;</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+      </span><span class="nl">"volumeEv"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;volumeEv&gt;</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+    </span><span class="err">//</span><span class="w"> </span><span class="err">other</span><span class="w"> </span><span class="err">more</span><span class="w"> </span><span class="err">symbols</span><span class="w">
+    </span><span class="err">...</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
@@ -12184,7 +12206,7 @@ The depth value is 0 in full book response.
 <td>symbol</td>
 <td>String</td>
 <td>symbol name</td>
-<td><a href="#productinfo">Trading symbols</a></td>
+<td><a href="#spot_symbols">Spot Symbols</a></td>
 </tr>
 <tr>
 <td>turnoverEv</td>
@@ -12208,23 +12230,23 @@ The depth value is 0 in full book response.
 <blockquote>
 <p>Response format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
-  <span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">result</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="dl">"</span><span class="s2">openEp</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">open</span> <span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
-    <span class="dl">"</span><span class="s2">highEp</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">high</span> <span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
-    <span class="dl">"</span><span class="s2">lowEp</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">low</span> <span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
-    <span class="dl">"</span><span class="s2">lastEp</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">last</span> <span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
-    <span class="dl">"</span><span class="s2">bidEp</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">bid</span> <span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
-    <span class="dl">"</span><span class="s2">askEp</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">ask</span> <span class="nx">priceEp</span><span class="o">&gt;</span><span class="p">,</span>
-    <span class="dl">"</span><span class="s2">symbol</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">&lt;symbol&gt;</span><span class="dl">"</span><span class="p">,</span>
-    <span class="dl">"</span><span class="s2">turnoverEv</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">turnoverEv</span><span class="o">&gt;</span><span class="p">,</span>
-    <span class="dl">"</span><span class="s2">volumeEv</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">volumeEv</span><span class="o">&gt;</span><span class="p">,</span>
-    <span class="dl">"</span><span class="s2">timestamp</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">timestamp</span><span class="o">&gt;</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"openEp"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;open</span><span class="w"> </span><span class="err">priceEp&gt;</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"highEp"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;high</span><span class="w"> </span><span class="err">priceEp&gt;</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"lowEp"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;low</span><span class="w"> </span><span class="err">priceEp&gt;</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"lastEp"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;last</span><span class="w"> </span><span class="err">priceEp&gt;</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"bidEp"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;bid</span><span class="w"> </span><span class="err">priceEp&gt;</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"askEp"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;ask</span><span class="w"> </span><span class="err">priceEp&gt;</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;symbol&gt;</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"turnoverEv"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;turnoverEv&gt;</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"volumeEv"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;volumeEv&gt;</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;timestamp&gt;</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -13512,6 +13534,8 @@ While for private channels like account/position/order data, the client should s
 <li>Endpoints use <code>HMAC SHA256</code> signatures. The <code>HMAC SHA256 signature</code> is a keyed <code>HMAC SHA256</code> operation. Use your <code>apiSecret</code> as the key and the string <code>URL Path + QueryString + Expiry + body )</code> as the value for the HMAC operation.</li>
 <li>The <code>signature</code> is <strong>case sensitive</strong>.</li>
 </ul>
+
+<p><a id="spot_symbols"></a></p>
 <h2 id='query-product-information-4'>Query product information</h2>
 <blockquote>
 <p>Request</p>
@@ -13723,7 +13747,7 @@ While for private channels like account/position/order data, the client should s
 <td>String</td>
 <td>Yes</td>
 <td></td>
-<td></td>
+<td><a href="#spot_symbols">Spot Symbols</a></td>
 </tr>
 <tr>
 <td>side</td>
@@ -15508,7 +15532,9 @@ the same as the spot api</p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h1 id='deposit-and-withdraw-rest-api'>Deposit And Withdraw REST API</h1><h2 id='endpoint-security-type-4'>Endpoint Security Type</h2>
 <ul>
-<li>Please raise API Key via web and choose <code>Read &amp; Trade &amp; Withdraw permission</code>, btw IP Address is mandatory.</li>
+<li>Please raise API Key via web, choose <code>Read &amp; Trade &amp; Withdraw permission</code>, and IP Address is mandatory.</li>
+<li>Only main account can request withdrawal.</li>
+<li>Only withdrawal address already added in the &quot;withdrawal address list&quot; on web would be allowed. No 2FA or email verificaiton via API withdrawal.</li>
 <li>Each API call must be signed and pass to server in HTTP header <code>x-phemex-request-signature</code>.</li>
 <li>Endpoints use <code>HMAC SHA256</code> signatures. The <code>HMAC SHA256 signature</code> is a keyed <code>HMAC SHA256</code> operation. Use your <code>apiSecret</code> as the key and the string <code>URL Path + QueryString + Expiry + body )</code> as the value for the HMAC operation.</li>
 <li>The <code>signature</code> is <strong>case-sensitive</strong>.</li>
