@@ -5125,14 +5125,22 @@ AOP subscription requires the session been authorized successfully. DataGW extra
 {
   "accounts_p":[
     {
-      "accountBalanceRv":"1508.452588802237",
-      "accountID":9328670003,
-      "bonusBalanceRv":"0",
-      "currency":"USDT",
-      "totalUsedBalanceRv":"343.132599666883",
-      "userID":932867
+      "accountBalanceRv": "79.893465892948",
+      "accountID": 9328670003,
+      "bonusBalanceRv": "6.84929505445",
+      "currency": "USDT",
+      "totalUsedBalanceRv": "0.080208046444",
+      "userID": 932867
+    },
+    {
+      "accountBalanceRv": "0",
+      "accountID": 9328670399,
+      "bonusBalanceRv": "0",
+      "currency": "PT",
+      "totalUsedBalanceRv": "0",
+      "userID": 932867
     }
-  ],
+  ]
   "orders_p":[
     {
       "accountID":9328670003,
