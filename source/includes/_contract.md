@@ -1608,7 +1608,7 @@ GET /api-data/futures/funding-fees?symbol=<symbol>
 
 | Parameter | Type    | Required | Description                   | Case                |
 |-----------|---------|----------|-------------------------------|---------------------|
-| symbol    | String  | True     | the currency to query         | uBTCUSD...          |
+| symbol    | String  | True     | the symbol to query           | uBTCUSD...          |
 | offset    | Integer | False    | page starts from 0            | default 0           |
 | limit     | Integer | False    | page size                     | default 20, max 200 |
 
@@ -1617,16 +1617,16 @@ GET /api-data/futures/funding-fees?symbol=<symbol>
 ```json
 [
   {
-    "createTime": 0,
-    "currency": "string",
-    "execFeeEv": 0,
-    "execPriceEp": 0,
+    "symbol": "uBTC"
+    "currency": "USD",
     "execQty": 0,
+    "side": "Sell",
+    "execPriceEp": 0,
     "execValueEv": 0,
-    "feeRateEr": 0,
     "fundingRateEr": 0,
-    "side": "string",
-    "symbol": "string"
+    "feeRateEr": 0,
+    "execFeeEv": 0,
+    "createTime": 0
   }
 ]
 ```
@@ -4518,7 +4518,7 @@ GET /api-data/g-futures/funding-fees?symbol=<symbol>
 
 | Parameter | Type    | Required | Description                   | Case                |
 |-----------|---------|----------|-------------------------------|---------------------|
-| symbol    | String  | True     | the currency to query         | BTCUSDT...          |
+| symbol    | String  | True     | the symbol to query           | BTCUSDT...          |
 | offset    | Integer | False    | page starts from 0            | default 0           |
 | limit     | Integer | False    | page size                     | default 20, max 200 |
 
