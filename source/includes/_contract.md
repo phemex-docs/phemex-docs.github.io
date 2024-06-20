@@ -607,7 +607,7 @@ GET /accounts/accountPositions?currency=<currency>
 
 | Field       | Type   | Description                                | Possible values |
 |-------------|--------|--------------------------------------------|--------------|
-| currency    | String | trading account's settle currency. Use to identify trading account. | BTC, USD, ETH |
+| currency    | String | trading account's settle currency. Use to identify trading account. | BTC, ETH |
 
 <aside class="notice">
 <i>unRealizedPnlEv</i> is not up to date and needs to be calculated in client side with latest <i>markPrice</i>. The formula is as below.
@@ -1259,7 +1259,7 @@ The API has <a href="#rate-limits">ratelimits</a> rule, and please check the <i>
 
 | Field      | Type    | Required | Description     | Possible Values                         |
 |------------|---------|----------|-----------------|-----------------------------------------|
-| symbol     | String  | Yes      | symbol name     | BTCUSD,ETHUSD,uBTCUSD,cETHUSD,XRPUSD... |
+| symbol     | String  | Yes      | symbol name     | BTCUSD,ETHUSD,cETHUSD,XRPUSD... |
 | resolution | Integer | Yes      | kline interval  | described as below                      |
 | limit      | Integer | No       | limit of result | described as below                      |
 
@@ -1303,7 +1303,7 @@ GET /exchange/public/md/kline?symbol=<symbol>&to=<to>&from=<from>&resolution=<re
 
 | Field       | Type    | Required    | Description            | Possible Values                                                                                                |
 |-------------|---------|-------------|------------------------|----------------------------------------------------------------------------------------------------------------|
-|symbol       | String  | Yes         | symbol name            | BTCUSD,ETHUSD,uBTCUSD,cETHUSD,XRPUSD...                                                                        |
+|symbol       | String  | Yes         | symbol name            | BTCUSD,ETHUSD,cETHUSD,XRPUSD...                                                                        |
 | from        | Integer | Yes         | start time in seconds  | value aligned in resolution boundary                                                                           |
 | to          | Integer | Yes         | end time in seconds    | value aligned in resolution boundary; Number of k-lines return between [`from`, `to`) should be less than 1000 |
 | resolution  | Integer | Yes         | kline interval         | the same as described above                                                                                    |
@@ -1608,7 +1608,7 @@ GET /api-data/futures/funding-fees?symbol=<symbol>
 
 | Parameter | Type    | Required | Description                   | Case                |
 |-----------|---------|----------|-------------------------------|---------------------|
-| symbol    | String  | True     | the symbol to query           | uBTCUSD...          |
+| symbol    | String  | True     | the symbol to query           | BTCUSD...          |
 | offset    | Integer | False    | page starts from 0            | default 0           |
 | limit     | Integer | False    | page size                     | default 20, max 200 |
 
@@ -1617,7 +1617,7 @@ GET /api-data/futures/funding-fees?symbol=<symbol>
 ```json
 [
   {
-    "symbol": "uBTC"
+    "symbol": "BTCUSD"
     "currency": "USD",
     "execQty": 0,
     "side": "Sell",
@@ -4117,7 +4117,7 @@ GET /exchange/public/md/v2/kline/list?symbol=<symbol>&to=<to>&from=<from>&resolu
 
 | Field       | Type    | Required    | Description            | Possible Values                                                                                                |
 |-------------|---------|-------------|------------------------|----------------------------------------------------------------------------------------------------------------|
-|symbol       | String  | Yes         | symbol name            | BTCUSD,ETHUSD,uBTCUSD,cETHUSD,XRPUSD...                                                                        | 
+|symbol       | String  | Yes         | symbol name            | BTCUSD,ETHUSD,cETHUSD,XRPUSD...                                                                        | 
 | from        | Integer | Yes         | start time in seconds  | value aligned in resolution boundary                                                                           |
 | to          | Integer | Yes         | end time in seconds    | value aligned in resolution boundary; Number of k-lines return between [`from`, `to`) should be less than 2000 | 
 | resolution  | Integer | Yes         | kline interval         | the same as described above                                                                                    |
