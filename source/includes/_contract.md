@@ -5412,20 +5412,20 @@ AOP subscription requires the session been authorized successfully. DataGW extra
   "sequence": 59555555,
   "timestamp": 1701414861475827540,
   "type": "incremental",
-  "version": 0
+  "version": 0 
 }
 
 
 
 ```
 
-| Field       | Type   | Description      | Possible values |
-|-------------|--------|------------------|-----------------|
-| timestamp   | Integer| Transaction timestamp in nanoseconds | |
-| sequence    | Integer| Latest message sequence |          |
-| symbol      | String | Contract symbol name    |          |
-| type        | String | Message type     | snapshot, incremental |
-
+| Field       |  Type   | Description      | Possible values |
+|-------------|---------|------------------|-----------------|
+| timestamp   | Integer | Transaction timestamp in nanoseconds | |
+| sequence    | Integer | Latest message sequence |          |
+| symbol      | String  | Contract symbol name    |          |
+| type        | String  | Message type     | snapshot, incremental |
+| light       | Integer | ADL alert        | [1, 5] |
 
 
 ## Unsubscribe Account-Order-Position (AOP)
