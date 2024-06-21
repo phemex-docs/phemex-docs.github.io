@@ -5442,6 +5442,167 @@ AOP subscription requires the session been authorized successfully. DataGW extra
 }
 ```
 
+## Subscribe account margin (RAS)
+
+RAS subscription requires the session been authorized successfully. DataGW extracts the user information from the given token and sends RAS messages back to client accordingly. Latest account snapshot messages will be sent to client immediately on subscription, and incremental messages will be sent for later updates. Each account snapshot contains one risk unit for cross margin positions, and each one risk unit for each isolated position. And also one risk wallet for each currency.
+
+> Request format
+
+```javascript
+{
+    "id": <id>,
+    "method": "ras_p.subscribe",
+    "params": {}
+}
+```
+
+> Response fromat
+
+```javascript
+{
+    "error": null,
+    "id": <id>,
+    "result": {
+        "stauts": "success"
+    }
+}
+```
+
+> Sample
+```javascript
+{
+    "id": 1234,
+    "method": "ras_p.subscribe",
+    "params": {}
+}
+
+{
+    "error": null,
+    "id": 1234,
+    "result": {
+        "stauts": "success"
+    }
+}
+```
+
+### account margin (RAS) Message Sample:
+
+```javascript
+{
+  "risk_units": [
+    {
+      "estAvailableBalanceRv": "1806.82960617341",
+      "lastUpdateTimeNs": "2024-06-07T02:01:51.246394043Z",
+      "marginRatioRr": "999",
+      "posSide": 0,
+      "riskMode": "CrossAsset",
+      "symbol": "",
+      "totalBalanceRv": "1806.82960617341",
+      "totalEquityRv": "1806.82960617341",
+      "userID": 944384,
+      "userStatus": "Normal",
+      "userType": "Normal",
+      "valuationCurrency": "USDT",
+      "version": 111
+    },
+    {
+      "estAvailableBalanceRv": "-7.866995297237",
+      "fixedUsedRv": "8.180373498854",
+      "lastUpdateTimeNs": "2024-06-07T02:01:51.246394134Z",
+      "marginRatioRr": "14.28230196",
+      "posSide": 3,
+      "riskMode": "Isolated",
+      "symbol": "BTCUSDT",
+      "totalBalanceRv": "1075.34407386659",
+      "totalEquityRv": "1075.657452068207",
+      "totalPosCostRv": "1075.34407386659",
+      "totalPosMMRv": "74.741248391009",
+      "totalPosUnpnlRv": "0.313378201617",
+      "userID": 944384,
+      "userStatus": "Normal",
+      "userType": "Normal",
+      "valuationCurrency": "USDT",
+      "version": 76
+    }
+  ],
+  "risk_wallets": [
+    {
+      "balanceRv": "2882.17368004",
+      "clReqVid": 1,
+      "currency": "USDT",
+      "lastUpdateTimeNs": "2024-06-07T02:01:51.246394235Z",
+      "userID": 944384,
+      "version": 51
+    }
+  ],
+  "sequence": 13144420,
+  "timestamp": 0,
+  "type": "snapshot"
+}
+```
+
+| Field       | Type   | Description      | Possible values |
+|-------------|--------|------------------|-----------------|
+| timestamp   | Integer| Transaction timestamp in nanoseconds | |
+| sequence    | Integer| Latest message sequence |          |
+| type        | String | Message type     | snapshot, incremental |
+
+### Fields in RiskUnit
+
+| Field    | Type     | Description    | Possible Values |
+|----------|----------|----------------|-----------------|
+| riskMode | String | "CrossAsset" for Cross Margin Positions, and "Isolated" for isolated position | CrossAsset, Isolated |
+| estAvailableBalanceRv | String | estimated available balance for new orders | |
+| fixedUsedRv | String | margins allocated to fully hedged positions and bankrupt commission | |
+| lastUpdateTimeNs | Integer | the time in ns the message is generated | |
+| MarginRatioRr | String | the margin ratio level for the current risk unit | | 
+| posSide | Integer | the position side | Long, Short, Merged |
+| symbol      | String | Contract symbol name    |          |
+| totalBalanceRv | String | sum of balanceRv of all risk wallet | |
+| totalEquityRv | String | total equity excluding debt and interest | |
+| totalPosCostRv | String | total initial margin of position(s) | |
+| totalPosMMRv | String | total maintainence margin of position(s) | |
+| totalPosUnpnlRv | String | sum of unrealised pnl of position(s) | |
+| userID | Integer | user id | |
+| userStatus | String | user status| "Unspecified/Normal" for normal, "Banned" for banned, "Liq*" for liquidation |
+| userType | String| user type | always "Normal" for user |
+| valuationCurrency | String | settle currency | |
+| version | Integer | risk unit version | |
+
+### Fields of RiskWallet 
+
+| Field    | Type    | Description   | Possible values |
+|----------|---------|---------------|-----------------|
+| balanceRv | String | available balance, including bonus and debt | | 
+| currency | String | wallet currency | |
+| lastUpdateTimeNs | Integer | the time in ns the message is generated | |
+| userID | Integer | user id | |
+| version | Integer | wallet version | |
+
+
+## Unsubscribe account margin (RAS)
+
+>  Request format
+
+```javascript
+{
+    "id": <id>,
+    "method": "ras_p.unsubscribe",
+    "params": []
+}
+```
+
+> Response format
+
+```javascript
+{
+    "error": null,
+    "id": <id>,
+    "result": {
+        "status": "success"
+    }
+}
+```
 
 ## Subscribe 24 Hours Ticker
 On each successful subscription, DataGW will publish 24-hour ticker metrics for all symbols every 1 second.
