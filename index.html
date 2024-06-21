@@ -1055,6 +1055,23 @@
                     <a href="#unsubscribe-account-order-position-aop-2" class="toc-h2 toc-link" data-title="Unsubscribe Account-Order-Position (AOP)">Unsubscribe Account-Order-Position (AOP)</a>
                   </li>
                   <li>
+                    <a href="#subscribe-account-margin-ras" class="toc-h2 toc-link" data-title="Subscribe account margin (RAS)">Subscribe account margin (RAS)</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#account-margin-ras-message-sample" class="toc-h3 toc-link" data-title="account margin (RAS) Message Sample:">account margin (RAS) Message Sample:</a>
+                          </li>
+                          <li>
+                            <a href="#fields-in-riskunit" class="toc-h3 toc-link" data-title="Fields in RiskUnit">Fields in RiskUnit</a>
+                          </li>
+                          <li>
+                            <a href="#fields-of-riskwallet" class="toc-h3 toc-link" data-title="Fields of RiskWallet">Fields of RiskWallet</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                    <a href="#unsubscribe-account-margin-ras" class="toc-h2 toc-link" data-title="Unsubscribe account margin (RAS)">Unsubscribe account margin (RAS)</a>
+                  </li>
+                  <li>
                     <a href="#subscribe-24-hours-ticker-2" class="toc-h2 toc-link" data-title="Subscribe 24 Hours Ticker">Subscribe 24 Hours Ticker</a>
                   </li>
                   <li>
@@ -10509,7 +10526,299 @@ Response sample
 }
 </code></p>
 </blockquote>
-<h2 id='subscribe-24-hours-ticker-2'>Subscribe 24 Hours Ticker</h2>
+<h2 id='subscribe-account-margin-ras'>Subscribe account margin (RAS)</h2>
+<p>RAS subscription requires the session been authorized successfully. DataGW extracts the user information from the given token and sends RAS messages back to client accordingly. Latest account snapshot messages will be sent to client immediately on subscription, and incremental messages will be sent for later updates. Each account snapshot contains one risk unit for cross margin positions, and each one risk unit for each isolated position. And also one risk wallet for each currency.</p>
+
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">id</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ras_p.subscribe</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">params</span><span class="dl">"</span><span class="p">:</span> <span class="p">{}</span>
+<span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<p>Response fromat</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">id</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">result</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="dl">"</span><span class="s2">stauts</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">success</span><span class="dl">"</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<p>Sample
+```javascript
+{
+    &quot;id&quot;: 1234,
+    &quot;method&quot;: &quot;ras_p.subscribe&quot;,
+    &quot;params&quot;: {}
+}</p>
+</blockquote>
+
+<p>{
+    &quot;error&quot;: null,
+    &quot;id&quot;: 1234,
+    &quot;result&quot;: {
+        &quot;stauts&quot;: &quot;success&quot;
+    }
+}
+```</p>
+<h3 id='account-margin-ras-message-sample'>account margin (RAS) Message Sample:</h3><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="dl">"</span><span class="s2">risk_units</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="dl">"</span><span class="s2">estAvailableBalanceRv</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1806.82960617341</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">lastUpdateTimeNs</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2024-06-07T02:01:51.246394043Z</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">marginRatioRr</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">999</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">posSide</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">riskMode</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">CrossAsset</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">symbol</span><span class="dl">"</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">totalBalanceRv</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1806.82960617341</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">totalEquityRv</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1806.82960617341</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">userID</span><span class="dl">"</span><span class="p">:</span> <span class="mi">944384</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">userStatus</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Normal</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">userType</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Normal</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">valuationCurrency</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">USDT</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">version</span><span class="dl">"</span><span class="p">:</span> <span class="mi">111</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="dl">"</span><span class="s2">estAvailableBalanceRv</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">-7.866995297237</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">fixedUsedRv</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">8.180373498854</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">lastUpdateTimeNs</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2024-06-07T02:01:51.246394134Z</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">marginRatioRr</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">14.28230196</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">posSide</span><span class="dl">"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">riskMode</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Isolated</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">symbol</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">BTCUSDT</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">totalBalanceRv</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1075.34407386659</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">totalEquityRv</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1075.657452068207</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">totalPosCostRv</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1075.34407386659</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">totalPosMMRv</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">74.741248391009</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">totalPosUnpnlRv</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0.313378201617</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">userID</span><span class="dl">"</span><span class="p">:</span> <span class="mi">944384</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">userStatus</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Normal</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">userType</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Normal</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">valuationCurrency</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">USDT</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">version</span><span class="dl">"</span><span class="p">:</span> <span class="mi">76</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="dl">"</span><span class="s2">risk_wallets</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="dl">"</span><span class="s2">balanceRv</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2882.17368004</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">clReqVid</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">currency</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">USDT</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">lastUpdateTimeNs</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2024-06-07T02:01:51.246394235Z</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">userID</span><span class="dl">"</span><span class="p">:</span> <span class="mi">944384</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">version</span><span class="dl">"</span><span class="p">:</span> <span class="mi">51</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="dl">"</span><span class="s2">sequence</span><span class="dl">"</span><span class="p">:</span> <span class="mi">13144420</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">timestamp</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">snapshot</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Possible values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>timestamp</td>
+<td>Integer</td>
+<td>Transaction timestamp in nanoseconds</td>
+<td></td>
+</tr>
+<tr>
+<td>sequence</td>
+<td>Integer</td>
+<td>Latest message sequence</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>Message type</td>
+<td>snapshot, incremental</td>
+</tr>
+</tbody></table>
+<h3 id='fields-in-riskunit'>Fields in RiskUnit</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Possible Values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>riskMode</td>
+<td>String</td>
+<td>&quot;CrossAsset&quot; for Cross Margin Positions, and &quot;Isolated&quot; for isolated position</td>
+<td>CrossAsset, Isolated</td>
+</tr>
+<tr>
+<td>estAvailableBalanceRv</td>
+<td>String</td>
+<td>estimated available balance for new orders</td>
+<td></td>
+</tr>
+<tr>
+<td>fixedUsedRv</td>
+<td>String</td>
+<td>margins allocated to fully hedged positions and bankrupt commission</td>
+<td></td>
+</tr>
+<tr>
+<td>lastUpdateTimeNs</td>
+<td>Integer</td>
+<td>the time in ns the message is generated</td>
+<td></td>
+</tr>
+<tr>
+<td>MarginRatioRr</td>
+<td>String</td>
+<td>the margin ratio level for the current risk unit</td>
+<td></td>
+</tr>
+<tr>
+<td>posSide</td>
+<td>Integer</td>
+<td>the position side</td>
+<td>Long, Short, Merged</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>String</td>
+<td>Contract symbol name</td>
+<td></td>
+</tr>
+<tr>
+<td>totalBalanceRv</td>
+<td>String</td>
+<td>sum of balanceRv of all risk wallet</td>
+<td></td>
+</tr>
+<tr>
+<td>totalEquityRv</td>
+<td>String</td>
+<td>total equity excluding debt and interest</td>
+<td></td>
+</tr>
+<tr>
+<td>totalPosCostRv</td>
+<td>String</td>
+<td>total initial margin of position(s)</td>
+<td></td>
+</tr>
+<tr>
+<td>totalPosMMRv</td>
+<td>String</td>
+<td>total maintainence margin of position(s)</td>
+<td></td>
+</tr>
+<tr>
+<td>totalPosUnpnlRv</td>
+<td>String</td>
+<td>sum of unrealised pnl of position(s)</td>
+<td></td>
+</tr>
+<tr>
+<td>userID</td>
+<td>Integer</td>
+<td>user id</td>
+<td></td>
+</tr>
+<tr>
+<td>userStatus</td>
+<td>String</td>
+<td>user status</td>
+<td>&quot;Unspecified/Normal&quot; for normal, &quot;Banned&quot; for banned, &quot;Liq*&quot; for liquidation</td>
+</tr>
+<tr>
+<td>userType</td>
+<td>String</td>
+<td>user type</td>
+<td>always &quot;Normal&quot; for user</td>
+</tr>
+<tr>
+<td>valuationCurrency</td>
+<td>String</td>
+<td>settle currency</td>
+<td></td>
+</tr>
+<tr>
+<td>version</td>
+<td>Integer</td>
+<td>risk unit version</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id='fields-of-riskwallet'>Fields of RiskWallet</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Possible values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>balanceRv</td>
+<td>String</td>
+<td>available balance, including bonus and debt</td>
+<td></td>
+</tr>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td>wallet currency</td>
+<td></td>
+</tr>
+<tr>
+<td>lastUpdateTimeNs</td>
+<td>Integer</td>
+<td>the time in ns the message is generated</td>
+<td></td>
+</tr>
+<tr>
+<td>userID</td>
+<td>Integer</td>
+<td>user id</td>
+<td></td>
+</tr>
+<tr>
+<td>version</td>
+<td>Integer</td>
+<td>wallet version</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id='unsubscribe-account-margin-ras'>Unsubscribe account margin (RAS)</h2>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">id</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ras_p.unsubscribe</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">params</span><span class="dl">"</span><span class="p">:</span> <span class="p">[]</span>
+<span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<p>Response format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="dl">"</span><span class="s2">error</span><span class="dl">"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">id</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">result</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="dl">"</span><span class="s2">status</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">success</span><span class="dl">"</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><h2 id='subscribe-24-hours-ticker-2'>Subscribe 24 Hours Ticker</h2>
 <p>On each successful subscription, DataGW will publish 24-hour ticker metrics for all symbols every 1 second.</p>
 
 <blockquote>
