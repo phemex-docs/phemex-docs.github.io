@@ -1060,7 +1060,7 @@ GET /exchange/order/trade?symbol=<symbol>&start=<start>&end=<end>&limit=<limit>&
 
 | Field     | Type     | Required | Description                                                     | Possible Values                 |
 |-----------|----------|----------|-----------------------------------------------------------------|---------------------------------|
-| symbol    | String   | Yes      | Trading symbol                                                  | BTCUSD, ETHUSD ...              |
+| symbol    | String   | Yes      | Trading symbol                                                  | BTCUSD, cETHUSD ...              |
 | tradeType | String   | No       | Trade type of execution order                                   | Trade,Funding,AdlTrade,LiqTrade |
 | start     | Integer  | No       | Epoch time in milli-seconds of range start. available only from the last 2 month                    | --                              |
 | end       | Integer  | No       | Epoch time in milli-seconds of range end                        | --                              |
@@ -1259,7 +1259,7 @@ The API has <a href="#rate-limits">ratelimits</a> rule, and please check the <i>
 
 | Field      | Type    | Required | Description     | Possible Values                         |
 |------------|---------|----------|-----------------|-----------------------------------------|
-| symbol     | String  | Yes      | symbol name     | BTCUSD,ETHUSD,cETHUSD,XRPUSD... |
+| symbol     | String  | Yes      | symbol name     | BTCUSD,cETHUSD... |
 | resolution | Integer | Yes      | kline interval  | described as below                      |
 | limit      | Integer | No       | limit of result | described as below                      |
 
@@ -1303,7 +1303,7 @@ GET /exchange/public/md/kline?symbol=<symbol>&to=<to>&from=<from>&resolution=<re
 
 | Field       | Type    | Required    | Description            | Possible Values                                                                                                |
 |-------------|---------|-------------|------------------------|----------------------------------------------------------------------------------------------------------------|
-|symbol       | String  | Yes         | symbol name            | BTCUSD,ETHUSD,cETHUSD,XRPUSD...                                                                        |
+|symbol       | String  | Yes         | symbol name            | BTCUSD,cETHUSD...                                                                        |
 | from        | Integer | Yes         | start time in seconds  | value aligned in resolution boundary                                                                           |
 | to          | Integer | Yes         | end time in seconds    | value aligned in resolution boundary; Number of k-lines return between [`from`, `to`) should be less than 1000 |
 | resolution  | Integer | Yes         | kline interval         | the same as described above                                                                                    |
@@ -4117,7 +4117,7 @@ GET /exchange/public/md/v2/kline/list?symbol=<symbol>&to=<to>&from=<from>&resolu
 
 | Field       | Type    | Required    | Description            | Possible Values                                                                                                |
 |-------------|---------|-------------|------------------------|----------------------------------------------------------------------------------------------------------------|
-|symbol       | String  | Yes         | symbol name            | BTCUSD,ETHUSD,cETHUSD,XRPUSD...                                                                        | 
+|symbol       | String  | Yes         | symbol name            | BTCUSD,cETHUSD...                                                                        | 
 | from        | Integer | Yes         | start time in seconds  | value aligned in resolution boundary                                                                           |
 | to          | Integer | Yes         | end time in seconds    | value aligned in resolution boundary; Number of k-lines return between [`from`, `to`) should be less than 2000 | 
 | resolution  | Integer | Yes         | kline interval         | the same as described above                                                                                    |
