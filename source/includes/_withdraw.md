@@ -3,8 +3,8 @@
 ## Endpoint Security Type
 
 * Please raise API Key via web, choose `Read & Trade & Withdraw permission`, and IP Address is mandatory.
-* Only main account can request withdrawal.
-* Only withdrawal address already added in the "withdrawal address list" on web would be allowed. No 2FA or email verificaiton via API withdrawal.
+* Only `main account` can request withdrawal.
+* Only withdrawal address already added in the `withdrawal address list` on web would be allowed. No 2FA or email verificaiton via API withdrawal.
 * Each API call must be signed and pass to server in HTTP header `x-phemex-request-signature`.
 * Endpoints use `HMAC SHA256` signatures. The `HMAC SHA256 signature` is a keyed `HMAC SHA256` operation. Use your `apiSecret` as the key and the string `URL Path + QueryString + Expiry + body )` as the value for the HMAC operation.
 * The `signature` is **case-sensitive**.
