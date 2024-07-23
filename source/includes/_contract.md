@@ -171,6 +171,16 @@ GET /public/time
 | COPY_TRADE_PROFIT_SHARE | 93   |
 | MARGIN_TRANSFER         | 213  |
 
+
+* Risk Mode (for Risk Unit only)
+
+| RiskMode       | Description |
+|----------------|-------------|
+| CrossAsset     | one RiskUnit is related to many RiskWallets    |
+| SingleAsset    | one RiskUnit is related to one RiskWallet    |
+| Isolated       | one RiskUnit is related to one position and not related to RiskWallet    |
+
+
 ## More order fields explained
 | Field | Description |
 |------|----------|
@@ -3513,6 +3523,43 @@ GET /g-accounts/positions?currency=<currency>
 
 <b>NOTE:</b> Highly recommend calculating `unRealisedPnlRv` in client side with latest `markPriceRp` to avoid ratelimit
 penalty.
+
+## Query risk unit
+
+> Request format
+
+```
+GET /g-accounts/risk-unit
+```
+
+> Response sample
+
+```json
+{
+  "code": 0,
+  "msg": "",
+  "data": [
+    {
+      "userId": 11339116,
+      "riskMode": "CrossAsset",
+      "valuationCcy": 3,
+      "symbol": "",
+      "posSide": "",
+      "marginRatioRr": 80.11309869,
+      "totalBalanceRv": 89552.96995523879,
+      "totalEquityRv": 93424.33406986,
+      "estAvailableBalanceRv": 72476.455163092,
+      "totalFreeRv": 0,
+      "totalPosUnpnlRv": 3871.36411462121,
+      "totalPosCostRv": 20947.878906768,
+      "totalPosMMRv": 1166.1555424824,
+      "totalOrdUsedBalanceRv": 0,
+      "totalOrdOpenLossRv": 0,
+      "fixedUsedRv": 0
+    }
+  ]
+}
+```
 
 ## Switch Position Mode Synchronously
 
