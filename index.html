@@ -951,6 +951,9 @@
                     <a href="#query-account-positions-with-unrealized-pnl" class="toc-h2 toc-link" data-title="Query Account Positions with unrealized PNL">Query Account Positions with unrealized PNL</a>
                   </li>
                   <li>
+                    <a href="#query-risk-unit" class="toc-h2 toc-link" data-title="Query risk unit">Query risk unit</a>
+                  </li>
+                  <li>
                     <a href="#switch-position-mode-synchronously" class="toc-h2 toc-link" data-title="Switch Position Mode Synchronously">Switch Position Mode Synchronously</a>
                   </li>
                   <li>
@@ -2982,6 +2985,30 @@ Because the number of interfaces in Other group may grow over time, the list bel
 <tr>
 <td>MARGIN_TRANSFER</td>
 <td>213</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>Risk Mode (for Risk Unit only)</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>RiskMode</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CrossAsset</td>
+<td>one RiskUnit is related to many RiskWallets</td>
+</tr>
+<tr>
+<td>SingleAsset</td>
+<td>one RiskUnit is related to one RiskWallet</td>
+</tr>
+<tr>
+<td>Isolated</td>
+<td>one RiskUnit is related to one position and not related to RiskWallet</td>
 </tr>
 </tbody></table>
 <h2 id='more-order-fields-explained'>More order fields explained</h2>
@@ -7773,7 +7800,40 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
 
 <p><b>NOTE:</b> Highly recommend calculating <code>unRealisedPnlRv</code> in client side with latest <code>markPriceRp</code> to avoid ratelimit
 penalty.</p>
-<h2 id='switch-position-mode-synchronously'>Switch Position Mode Synchronously</h2>
+<h2 id='query-risk-unit'>Query risk unit</h2>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /g-accounts/risk-unit
+</code></pre></div>
+<blockquote>
+<p>Response sample</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"userId"</span><span class="p">:</span><span class="w"> </span><span class="mi">11339116</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"riskMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CrossAsset"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"valuationCcy"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"posSide"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"marginRatioRr"</span><span class="p">:</span><span class="w"> </span><span class="mf">80.11309869</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"totalBalanceRv"</span><span class="p">:</span><span class="w"> </span><span class="mf">89552.96995523879</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"totalEquityRv"</span><span class="p">:</span><span class="w"> </span><span class="mf">93424.33406986</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"estAvailableBalanceRv"</span><span class="p">:</span><span class="w"> </span><span class="mf">72476.455163092</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"totalFreeRv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"totalPosUnpnlRv"</span><span class="p">:</span><span class="w"> </span><span class="mf">3871.36411462121</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"totalPosCostRv"</span><span class="p">:</span><span class="w"> </span><span class="mf">20947.878906768</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"totalPosMMRv"</span><span class="p">:</span><span class="w"> </span><span class="mf">1166.1555424824</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"totalOrdUsedBalanceRv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"totalOrdOpenLossRv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"fixedUsedRv"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='switch-position-mode-synchronously'>Switch Position Mode Synchronously</h2>
 <blockquote>
 <p>Request format</p>
 </blockquote>
