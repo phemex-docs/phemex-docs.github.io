@@ -10952,7 +10952,9 @@ Response sample
             &lt;indexRp&gt;,
             &lt;markRp&gt;,
             &lt;fundingRateRr&gt;,
-            &lt;predFundingRateRr&gt;
+            &lt;predFundingRateRr&gt;,
+            &lt;bidRp&gt;,
+            &lt;askRp&gt;
         ]
     ],
     &quot;fields&quot;: [
@@ -10967,7 +10969,9 @@ Response sample
         &quot;indexRp&quot;,
         &quot;markRp&quot;,
         &quot;fundingRateRr&quot;,
-        &quot;predFundingRateRr&quot;
+        &quot;predFundingRateRr&quot;,
+        &quot;bidRp&quot;,
+        &quot;askRp&quot;
     ],
     &quot;method&quot;: &quot;perp_market24h_pack_p.update&quot;,
     &quot;timestamp&quot;: 1666862556850547000,
@@ -10980,32 +10984,36 @@ Response sample
 {
     &quot;data&quot;: [
         [
-            &quot;ETHUSDT&quot;,
-            &quot;1533.72&quot;,
-            &quot;1594.17&quot;,
-            &quot;1510.05&quot;,
-            &quot;1547.52&quot;,
-            &quot;545942.34&quot;,
-            &quot;848127644.5712&quot;,
-            &quot;0&quot;,
-            &quot;1548.31694379&quot;,
-            &quot;1548.44513153&quot;,
-            &quot;0.0001&quot;,
-            &quot;0.0001&quot;
+          &quot;ETHUSDT&quot;
+          &quot;2741.72&quot;
+          &quot;2751.79&quot;
+          &quot;2665.64&quot;
+          &quot;2672.37&quot;
+          &quot;17602.76&quot;
+          &quot;47636475.2596&quot;
+          &quot;10136.8942265&quot;
+          &quot;2673.9822165&quot;
+          &quot;2672.68&quot;
+          &quot;0.0001&quot;
+          &quot;0.0001&quot;
+          &quot;2672.91&quot;
+          &quot;2672.92&quot;
         ],
         [
-            &quot;BTCUSDT&quot;,
-            &quot;20614.5&quot;,
-            &quot;21628.4&quot;,
-            &quot;19258.6&quot;,
-            &quot;20626.3&quot;,
-            &quot;8819.819&quot;,
-            &quot;182892627.4297&quot;,
-            &quot;0&quot;,
-            &quot;20641.8167574&quot;,
-            &quot;20643.52572781&quot;,
-            &quot;0.0001&quot;,
-            &quot;0.0001&quot;
+          &quot;BTCUSDT&quot;
+          &quot;64057.2&quot;
+          &quot;64181.9&quot;
+          &quot;62565&quot;
+          &quot;62799.9&quot;
+          &quot;3331.699&quot;
+          &quot;210947547.9712&quot;
+          &quot;1268.8391029&quot;
+          &quot;62831.82728394&quot;
+          &quot;62806.9&quot;
+          &quot;0.0001&quot;
+          &quot;0.0001&quot;
+          &quot;62799.9&quot;
+          &quot;62800&quot;
         ]
     ],
     &quot;fields&quot;: [
@@ -11020,7 +11028,9 @@ Response sample
         &quot;indexRp&quot;,
         &quot;markRp&quot;,
         &quot;fundingRateRr&quot;,
-        &quot;predFundingRateRr&quot;
+        &quot;predFundingRateRr&quot;,
+        &quot;bidRp&quot;,
+        &quot;askRp&quot;
     ],
     &quot;method&quot;: &quot;perp_market24h_pack_p.update&quot;,
     &quot;timestamp&quot;: 1666862556850547000,
@@ -11107,6 +11117,18 @@ Response sample
 <td>predFundingRateRr</td>
 <td>String</td>
 <td>Unscaled predicated funding rate</td>
+<td></td>
+</tr>
+<tr>
+<td>bidRp</td>
+<td>String</td>
+<td>best bid price</td>
+<td></td>
+</tr>
+<tr>
+<td>askRp</td>
+<td>String</td>
+<td>best ask price</td>
 <td></td>
 </tr>
 </tbody></table>
