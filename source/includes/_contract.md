@@ -5720,7 +5720,9 @@ On each successful subscription, DataGW will publish 24-hour ticker metrics for 
             <indexRp>,
             <markRp>,
             <fundingRateRr>,
-            <predFundingRateRr>
+            <predFundingRateRr>,
+            <bidRp>,
+            <askRp>
         ]
     ],
     "fields": [
@@ -5735,7 +5737,9 @@ On each successful subscription, DataGW will publish 24-hour ticker metrics for 
         "indexRp",
         "markRp",
         "fundingRateRr",
-        "predFundingRateRr"
+        "predFundingRateRr",
+        "bidRp",
+        "askRp"
     ],
     "method": "perp_market24h_pack_p.update",
     "timestamp": 1666862556850547000,
@@ -5749,32 +5753,36 @@ On each successful subscription, DataGW will publish 24-hour ticker metrics for 
 {
     "data": [
         [
-            "ETHUSDT",
-            "1533.72",
-            "1594.17",
-            "1510.05",
-            "1547.52",
-            "545942.34",
-            "848127644.5712",
-            "0",
-            "1548.31694379",
-            "1548.44513153",
-            "0.0001",
-            "0.0001"
+          "ETHUSDT"
+          "2741.72"
+          "2751.79"
+          "2665.64"
+          "2672.37"
+          "17602.76"
+          "47636475.2596"
+          "10136.8942265"
+          "2673.9822165"
+          "2672.68"
+          "0.0001"
+          "0.0001"
+          "2672.91"
+          "2672.92"
         ],
         [
-            "BTCUSDT",
-            "20614.5",
-            "21628.4",
-            "19258.6",
-            "20626.3",
-            "8819.819",
-            "182892627.4297",
-            "0",
-            "20641.8167574",
-            "20643.52572781",
-            "0.0001",
-            "0.0001"
+          "BTCUSDT"
+          "64057.2"
+          "64181.9"
+          "62565"
+          "62799.9"
+          "3331.699"
+          "210947547.9712"
+          "1268.8391029"
+          "62831.82728394"
+          "62806.9"
+          "0.0001"
+          "0.0001"
+          "62799.9"
+          "62800"
         ]
     ],
     "fields": [
@@ -5789,7 +5797,9 @@ On each successful subscription, DataGW will publish 24-hour ticker metrics for 
         "indexRp",
         "markRp",
         "fundingRateRr",
-        "predFundingRateRr"
+        "predFundingRateRr",
+        "bidRp",
+        "askRp"
     ],
     "method": "perp_market24h_pack_p.update",
     "timestamp": 1666862556850547000,
@@ -5811,6 +5821,8 @@ On each successful subscription, DataGW will publish 24-hour ticker metrics for 
 | markRp            | String  | Unscaled mark price                          |                                  |
 | fundingRateRr     | String  | Unscaled funding rate                        |                                  |
 | predFundingRateRr | String  | Unscaled predicated funding rate             |                                  |
+| bidRp             | String  | best bid price                  |
+| askRp             | String  | best ask price                  |
 
 
 
