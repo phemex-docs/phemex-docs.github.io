@@ -927,6 +927,9 @@
                     <a href="#query-product-information-2" class="toc-h2 toc-link" data-title="Query product information">Query product information</a>
                   </li>
                   <li>
+                    <a href="#query-product-information-plus" class="toc-h2 toc-link" data-title="Query product information plus">Query product information plus</a>
+                  </li>
+                  <li>
                     <a href="#place-order-http-put-prefered-2" class="toc-h2 toc-link" data-title="Place order (HTTP PUT, prefered)">Place order (HTTP PUT, <em>prefered</em>)</a>
                   </li>
                   <li>
@@ -1096,6 +1099,9 @@
                   </li>
                   <li>
                     <a href="#query-product-information-3" class="toc-h2 toc-link" data-title="Query product information">Query product information</a>
+                  </li>
+                  <li>
+                    <a href="#query-product-information-plus-2" class="toc-h2 toc-link" data-title="Query product information plus">Query product information plus</a>
                   </li>
                   <li>
                     <a href="#query-server-time-2" class="toc-h2 toc-link" data-title="Query server time">Query server time</a>
@@ -6779,6 +6785,23 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
 <li>Contract risklimit information are defined in <code>.riskLimitsV2[]</code>.</li>
 <li>Contract which delisted has status with &#39;Delisted&#39; .</li>
 </ul>
+<h2 id='query-product-information-plus'>Query product information plus</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /public/products-plus
+</code></pre></div>
+<ul>
+<li>USDT-M perpetual contracts using USDT as margin.</li>
+<li>You can find products info with hedged mode under node &#39;perpProductsV2&#39;.</li>
+<li>Contract risklimit information are defined in <code>.riskLimitsV2[]</code>.</li>
+<li>Contract which delisted has status with &#39;Delisted&#39; .
+
+<ul>
+<li><code>list time</code> is defined in timeline[1].</li>
+<li><code>delist time</code> is defined in timeline[3].</li>
+</ul></li>
+</ul>
 <h2 id='place-order-http-put-prefered-2'>Place order (HTTP PUT, <em>prefered</em>)</h2>
 <blockquote>
 <p>Request format</p>
@@ -11241,6 +11264,21 @@ while funding rate symbol follows a pattern <code>.&lt;BASECURRENCY&gt;&lt;QUOTE
 </code></pre></div>
 <ul>
 <li>Spot symbols are defined in <code>.products[]</code> with <strong>type=Spot</strong>.</li>
+<li>Spot currencies are defined in <code>.currencies[]</code>.</li>
+</ul>
+<h2 id='query-product-information-plus-2'>Query product information plus</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /public/products-plus
+</code></pre></div>
+<ul>
+<li>Spot symbols are defined in <code>.products[]</code> with <strong>type=Spot</strong>.
+
+<ul>
+<li><code>list time</code> is defined in timeline[1].</li>
+<li><code>delist time</code> is defined in timeline[3].</li>
+</ul></li>
 <li>Spot currencies are defined in <code>.currencies[]</code>.</li>
 </ul>
 <h2 id='query-server-time-2'>Query server time</h2>
