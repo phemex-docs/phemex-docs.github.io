@@ -2930,6 +2930,20 @@ GET /public/products
 * Contract which delisted has status with 'Delisted' .
 
 
+## Query product information plus
+
+> Request
+
+```
+GET /public/products-plus
+```
+
+* USDT-M perpetual contracts using USDT as margin.
+* You can find products info with hedged mode under node 'perpProductsV2'.
+* Contract risklimit information are defined in `.riskLimitsV2[]`.
+* Contract which delisted has status with 'Delisted' .
+  * `list time` is defined in timeline[1].
+  * `delist time` is defined in timeline[3].
 
 
 ## Place order (HTTP PUT, *prefered*)
