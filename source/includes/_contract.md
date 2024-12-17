@@ -1837,6 +1837,26 @@ On each successful subscription, DataGW will immediately send the current Order 
 2, lf there is the same price, compare the size. lf the size is 0, delete this depth data. lf the size changes replace the original data. (noted that if the price is within depth and the size is unchagned, the level will *NOT* published by incremental updates)
 3, lf it is not same price, sort by price (bid in descending order, ask in ascending order), and insert the depth information into the full load.
 4, Sort updated orderbook and keep top 5 levels (noted that the old price levels that falls behind the top 5 levels will not update anymore untill it comes back to top 5 levels).
+=======
+## Subscribe orderBook with Depth
+
+> Request format
+
+```javascript
+{
+  "id": <id>,
+  "method": "orderbook.subscribe",
+  "params": [
+    "<symbol>",
+    true,
+    "<depth>"
+  ]
+}
+```
+
+Subscribe orderbook update messages with **depth = <depth> and interval = 20ms**, depth can only be one of following number: 0, 1, 5, 10, 30. When depth=0, full orderbook will be published to client.
+
+On each successful subscription, DataGW will immediately send the current Order Book (with default depth=30) snapshot to client and all later order book updates will be published.
 
 ## Subscribe full orderBook
 
