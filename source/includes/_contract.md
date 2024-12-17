@@ -1810,6 +1810,25 @@ On each successful subscription, DataGW will immediately send the current Order 
   ]
 }
 ```
+## Subscribe orderBook with Depth
+
+> Request format
+
+```javascript
+{
+  "id": <id>,
+  "method": "orderbook.subscribe",
+  "params": [
+    "<symbol>",
+    true,
+    "<depth>"
+  ]
+}
+```
+
+Subscribe orderbook update messages with **depth = <depth> and interval = 20ms**, depth can only be one of following number: 0, 1, 5, 10, 30. When depth=0, full orderbook will be published to client.
+
+On each successful subscription, DataGW will immediately send the current Order Book (with default depth=30) snapshot to client and all later order book updates will be published.
 
 ## Subscribe full orderBook
 
@@ -4699,6 +4718,37 @@ On each successful subscription, DataGW will immediately send the current Order 
   "method": "orderbook_p.subscribe",
   "params": [
     "BTCUSDT"
+  ]
+}
+```
+> Response sample
+```json
+{
+  "error": null,
+  "id": 1234,
+  "result": {
+    "status": "success"
+  }
+}
+```
+
+## Subscribe orderBook with Depth for new Model
+
+
+Subscribe orderbook update messages with **depth = <depth> and interval = 20ms**, depth can only be one of following number: 0, 1, 5, 10, 30. When depth=0, full orderbook will be published to client.
+On each successful subscription, DataGW will immediately send the current Order Book snapshot to client and all later order book updates will be published.
+
+
+> Request format
+
+```javascript
+{
+  "id": 1234,,
+  "method": "orderbook_p.subscribe",
+  "params": [
+     "BTCUSDT",
+    true,
+    "<depth>"
   ]
 }
 ```
