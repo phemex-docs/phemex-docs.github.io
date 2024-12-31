@@ -1594,17 +1594,19 @@ GET /api-data/public/data/funding-rate-history?symbol=<symbol>&start=<start>&end
 }
 ```
 
-| Field  | Type    | Required | Description                                       | Possible Values |
-|--------|---------|----------|---------------------------------------------------|-----------------|
-| symbol | String  | True     | funding rate symbol                               | [fundingRateSymbol](#contract_symbols) |
-| start  | Long    | False    | start timestamp in ms of funding time (INCLUSIVE) | 1679852520918   |
-| end    | Long    | False    | end timestamp in ms of funding time (INCLUSIVE)   | 1679852520918   |
-| limit  | Integer | False    | default 100, max 100                              | 100             |
+| Field      | Type    | Required | Description                                       | Possible Values                        |
+|------------|---------|----------|---------------------------------------------------|----------------------------------------|
+| symbol     | String  | True     | funding rate symbol                               | [fundingRateSymbol](#contract_symbols) |
+| start      | Long    | False    | start timestamp in ms of funding time (INCLUSIVE) | 1679852520918                          |
+| end        | Long    | False    | end timestamp in ms of funding time (INCLUSIVE)   | 1679852520918                          |
+| limit      | Integer | False    | default 100, max 100                              | 100                                    |
+| latestOnly | Boolean | False    | returns the most recent record for each symbol    | default false     true                 |
 
 * If `start` and `end` parameters are not specified, the API will return the most recent data within the specified `limit`.
 * If the `start` parameter is provided while `end` is not, the API will return from `start` plus `limit` size of data.
 * If the number of items between `start` and `end` exceeds the specified `limit`, the API will return from `start` plus `limit` size of data.
 * The API returns data in ascending order based on the `fundingTime` attribute.
+* If latestOnly is true, other parameters are ignored and the most recent record of each symbol is returned. Otherwise, the query is performed based on other parameters.
 
 ## Query funding fee history
 
@@ -4540,51 +4542,6 @@ GET /api-data/g-futures/trades?symbol=<symbol>
 3\) If only the currency is provided, it retrieves all symbols under that currency.<br>
 4\) Searching for specific symbols under a currency needs both symbols and currency parameter.<br>
 
-
-## Query funding rate history
-
-> Request format
-
-```
-GET /api-data/public/data/funding-rate-history?symbol=<symbol>&start=<start>&end=<end>&limit=<limit>
-```
-
-> Response sample
-
-```json
-{
-  "code": 0,
-  "msg": "OK",
-  "data": {
-    "rows": [
-      {
-        "symbol": ".ETHUSDTFR8H",
-        "fundingRate": "0.0001",
-        "fundingTime": 1680768000000,
-        "intervalSeconds": 28800
-      },
-      {
-        "symbol": ".ETHUSDTFR8H",
-        "fundingRate": "0.0001",
-        "fundingTime": 1680796800000,
-        "intervalSeconds": 28800
-      }
-    ]
-  }
-}
-```
-
-| Field  | Type    | Required | Description                                       | Possible Values |
-|--------|---------|----------|---------------------------------------------------|-----------------|
-| symbol | String  | True     | funding rate symbol                               | [fundingRateSymbol](#contract_symbols) |
-| start  | Long    | False    | start timestamp in ms of funding time (INCLUSIVE) | 1679852520918   |
-| end    | Long    | False    | end timestamp in ms of funding time (INCLUSIVE)   | 1679852520918   |
-| limit  | Integer | False    | default 100, max 100                              | 100             |
-
-* If `start` and `end` parameters are not specified, the API will return the most recent data within the specified `limit`.
-* If the `start` parameter is provided while `end` is not, the API will return from `start` plus `limit` size of data.
-* If the number of items between `start` and `end` exceeds the specified `limit`, the API will return from `start` plus `limit` size of data.
-* The API returns data in ascending order based on the `fundingTime` attribute.
 
 ## Query funding fee history
 
