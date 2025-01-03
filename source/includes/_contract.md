@@ -1,4 +1,4 @@
-# Contract REST API
+# COIN-M Perpetual REST API 
 
 <a id="contract_symbols"></a>
 
@@ -10,7 +10,7 @@
 GET /public/products
 ```
 
-* USD-M perpetual contracts using USD as margin or COIN-M perpetual contracts using COIN as margin
+* COIN-M perpetual contracts using COIN as margin
 * Contract symbols are defined in `.products[]` with **type=Perpetual**.
 * Contract risklimit information are defined in `.risklimits[]`.
 * Contract which delisted has status with 'Delisted' .
@@ -1707,7 +1707,7 @@ GET /api-data/futures/v2/tradeAccountDetail?currency=<currecny>&type=<type>&limi
 ]
 ```
 
-# Contract Websocket API
+# COIN-M Perpetual Websocket API 
 
 ## Heartbeat
 
@@ -2940,7 +2940,7 @@ i.e. `index` symbol follows a pattern `.<BASECURRENCY>`,
 | symbol   | String | Symbol                                          |              |
 
 
-# Hedged Contract Rest API
+#  USDT-M Perpetual Rest API 
 
 
 ## Query product information
@@ -3424,10 +3424,11 @@ GET /g-accounts/accountPositions?currency=<currency>&symbol=<symbol>
 ```
 * Request parameters
 
-| Field    | Type   | Required | Description |
-| -------- | ------ | -------- | ----------- |
-| symbol   | String | -        |             |
-| currency | String | Yes      |             |
+
+| Field    | Type   | Required | Description | Possible values |
+| -------- | ------ | -------- | ----------- | --------------- |
+| symbol   | String | -        |             | BTCUSDT         |
+| currency | String | Yes      |             | USDT            |
 
 * Response Fields 
 
@@ -4584,7 +4585,7 @@ GET /api-data/g-futures/funding-fees?symbol=<symbol>
 ]
 ```
 
-# Hedged Contract Websocket API
+# USDT-M Perpetual Websocket API
 
 ## Heartbeat
 
