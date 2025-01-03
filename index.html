@@ -741,7 +741,7 @@
               </ul>
           </li>
           <li>
-            <a href="#contract-rest-api" class="toc-h1 toc-link" data-title="Contract REST API">Contract REST API</a>
+            <a href="#coin-m-perpetual-rest-api" class="toc-h1 toc-link" data-title="COIN-M Perpetual REST API">COIN-M Perpetual REST API</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#query-product-information" class="toc-h2 toc-link" data-title="Query product information">Query product information</a>
@@ -856,7 +856,7 @@
               </ul>
           </li>
           <li>
-            <a href="#contract-websocket-api" class="toc-h1 toc-link" data-title="Contract Websocket API">Contract Websocket API</a>
+            <a href="#coin-m-perpetual-websocket-api" class="toc-h1 toc-link" data-title="COIN-M Perpetual Websocket API">COIN-M Perpetual Websocket API</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#heartbeat" class="toc-h2 toc-link" data-title="Heartbeat">Heartbeat</a>
@@ -924,7 +924,7 @@
               </ul>
           </li>
           <li>
-            <a href="#hedged-contract-rest-api" class="toc-h1 toc-link" data-title="Hedged Contract Rest API">Hedged Contract Rest API</a>
+            <a href="#usdt-m-perpetual-rest-api" class="toc-h1 toc-link" data-title="USDT-M Perpetual Rest API">USDT-M Perpetual Rest API</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#query-product-information-2" class="toc-h2 toc-link" data-title="Query product information">Query product information</a>
@@ -1013,7 +1013,7 @@
               </ul>
           </li>
           <li>
-            <a href="#hedged-contract-websocket-api" class="toc-h1 toc-link" data-title="Hedged Contract Websocket API">Hedged Contract Websocket API</a>
+            <a href="#usdt-m-perpetual-websocket-api" class="toc-h1 toc-link" data-title="USDT-M Perpetual Websocket API">USDT-M Perpetual Websocket API</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#heartbeat-2" class="toc-h2 toc-link" data-title="Heartbeat">Heartbeat</a>
@@ -2618,7 +2618,7 @@ Because the number of interfaces in Other group may grow over time, the list bel
 <td>Cancel bracket take profit order due main order canceled.</td>
 </tr>
 </tbody></table>
-<h1 id='contract-rest-api'>Contract REST API</h1>
+<h1 id='coin-m-perpetual-rest-api'>COIN-M Perpetual REST API</h1>
 <p><a id="contract_symbols"></a></p>
 <h2 id='query-product-information'>Query product information</h2>
 <blockquote>
@@ -2627,7 +2627,7 @@ Because the number of interfaces in Other group may grow over time, the list bel
 <div class="highlight"><pre class="highlight plaintext"><code>GET /public/products
 </code></pre></div>
 <ul>
-<li>USD-M perpetual contracts using USD as margin or COIN-M perpetual contracts using COIN as margin</li>
+<li>COIN-M perpetual contracts using COIN as margin</li>
 <li>Contract symbols are defined in <code>.products[]</code> with <strong>type=Perpetual</strong>.</li>
 <li>Contract risklimit information are defined in <code>.risklimits[]</code>.</li>
 <li>Contract which delisted has status with &#39;Delisted&#39; .</li>
@@ -5363,7 +5363,7 @@ The API has <a href="#rate-limits">ratelimits</a> rule, and please check the <i>
     </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre></div><h1 id='contract-websocket-api'>Contract Websocket API</h1><h2 id='heartbeat'>Heartbeat</h2>
+</span></code></pre></div><h1 id='coin-m-perpetual-websocket-api'>COIN-M Perpetual Websocket API</h1><h2 id='heartbeat'>Heartbeat</h2>
 <blockquote>
 <p>Request</p>
 </blockquote>
@@ -5488,19 +5488,25 @@ While for private channels like account/position/order data, the client should s
 <blockquote>
 <p>Request format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
-  <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">id</span><span class="o">&gt;</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">orderbook.subscribe</span><span class="dl">"</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">params</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
-    <span class="dl">"</span><span class="s2">&lt;symbol&gt;</span><span class="dl">"</span><span class="p">,</span>
-    <span class="kc">true</span><span class="p">,</span>
-    <span class="dl">"</span><span class="s2">&lt;depth&gt;</span><span class="dl">"</span>
-  <span class="p">]</span>
-<span class="p">}</span>
-</code></pre></div>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;id&gt;</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orderbook.subscribe"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"&lt;symbol&gt;"</span><span class="p">,</span><span class="w">
+    </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"&lt;depth&gt;"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <p>Subscribe orderbook update messages with <strong>depth = <depth> and interval = 20ms</strong>, depth can only be one of following number: 0, 1, 5, 10, 30. When depth=0, full orderbook will be published to client.</p>
 
 <p>On each successful subscription, DataGW will immediately send the current Order Book (with default depth=30) snapshot to client and all later order book updates will be published.</p>
+
+<p><strong>How to manage local orderbook?</strong>
+1, After subscribing to the incremental load push (such as books 5 levels) of Order Book Channel, users firstreceive the initial full load of market depth. After the incremental load is subsequently received, update thelocal full load.
+2, lf there is the same price, compare the size. lf the size is 0, delete this depth data. lf the size changes replace the original data. (noted that if the price is within depth and the size is unchagned, the level will <em>NOT</em> published by incremental updates)
+3, lf it is not same price, sort by price (bid in descending order, ask in ascending order), and insert the depth information into the full load.
+4, Sort updated orderbook and keep top 5 levels (noted that the old price levels that falls behind the top 5 levels will not update anymore untill it comes back to top 5 levels).</p>
 <h2 id='subscribe-full-orderbook'>Subscribe full orderBook</h2>
 <blockquote>
 <p>Request format</p>
@@ -6801,7 +6807,7 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
 <td></td>
 </tr>
 </tbody></table>
-<h1 id='hedged-contract-rest-api'>Hedged Contract Rest API</h1><h2 id='query-product-information-2'>Query product information</h2>
+<h1 id='usdt-m-perpetual-rest-api'>USDT-M Perpetual Rest API</h1><h2 id='query-product-information-2'>Query product information</h2>
 <blockquote>
 <p>Request</p>
 </blockquote>
@@ -7665,6 +7671,7 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
 <th>Type</th>
 <th>Required</th>
 <th>Description</th>
+<th>Possible values</th>
 </tr>
 </thead><tbody>
 <tr>
@@ -7672,12 +7679,14 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
 <td>String</td>
 <td>-</td>
 <td></td>
+<td>BTCUSDT</td>
 </tr>
 <tr>
 <td>currency</td>
 <td>String</td>
 <td>Yes</td>
 <td></td>
+<td>USDT</td>
 </tr>
 </tbody></table>
 
@@ -9493,7 +9502,7 @@ For more information, please refer to the link: https://phemex.com/contract/leve
     </span><span class="nl">"createTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1671004800021</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre></div><h1 id='hedged-contract-websocket-api'>Hedged Contract Websocket API</h1><h2 id='heartbeat-2'>Heartbeat</h2>
+</span></code></pre></div><h1 id='usdt-m-perpetual-websocket-api'>USDT-M Perpetual Websocket API</h1><h2 id='heartbeat-2'>Heartbeat</h2>
 <ul>
 <li>Each client is required to actively send heartbeat (ping) message to Phemex data gateway (&#39;DataGW&#39; in short) with interval less than 30 seconds, otherwise DataGW will drop the connection. If a client sends a ping message, DataGW will reply with a pong message.</li>
 <li>Clients can use WS built-in ping message or the application level ping message to DataGW as heartbeat. The heartbeat interval is recommended to be set as <em>5 seconds</em>, and actively reconnect to DataGW if don&#39;t receive messages in <em>3 heartbeat intervals</em>.</li>
@@ -9629,19 +9638,25 @@ Response sample
 <p>Subscribe orderbook update messages with <strong>depth = <depth> and interval = 20ms</strong>, depth can only be one of following number: 0, 1, 5, 10, 30. When depth=0, full orderbook will be published to client.
 On each successful subscription, DataGW will immediately send the current Order Book snapshot to client and all later order book updates will be published.</p>
 
+<p><strong>How to manage local orderbook?</strong>
+1, After subscribing to the incremental load push (such as books 5 levels) of Order Book Channel, users firstreceive the initial full load of market depth. After the incremental load is subsequently received, update thelocal full load.
+2, lf there is the same price, compare the size. lf the size is 0, delete this depth data. lf the size changes replace the original data. (noted that if the price is within depth and the size is unchagned, the level will <em>NOT</em> published by incremental updates)
+3, lf it is not same price, sort by price (bid in descending order, ask in ascending order), and insert the depth information into the full load.
+4, Sort updated orderbook and keep top 5 levels (noted that the old price levels that falls behind the top 5 levels will not update anymore untill it comes back to top 5 levels).</p>
+
 <blockquote>
 <p>Request format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
-  <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1234</span><span class="p">,,</span>
-  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">orderbook_p.subscribe</span><span class="dl">"</span><span class="p">,</span>
-  <span class="dl">"</span><span class="s2">params</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
-     <span class="dl">"</span><span class="s2">BTCUSDT</span><span class="dl">"</span><span class="p">,</span>
-    <span class="kc">true</span><span class="p">,</span>
-    <span class="dl">"</span><span class="s2">&lt;depth&gt;</span><span class="dl">"</span>
-  <span class="p">]</span>
-<span class="p">}</span>
-</code></pre></div>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orderbook_p.subscribe"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+     </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
+     </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"&lt;depth&gt;"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <blockquote>
 <p>Response sample
 <code>json
