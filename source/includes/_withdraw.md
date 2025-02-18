@@ -164,7 +164,8 @@ GET /phemex-deposit/wallets/api/chainCfg?currency=<currency>
             "confirmations": 1,
             "chainCode": 11,
             "chainName": "TRX",
-            "status": "Active"
+            "status": "Active",
+            "contractAddress": "Ta7NHqjeKQxPTCi8q8ZY5pL8otSzgjLj6t"
         }
     ]
 }
@@ -172,15 +173,16 @@ GET /phemex-deposit/wallets/api/chainCfg?currency=<currency>
 
 * Response fields
 
-| Field         | Type    | Required | Description                     | Case |
-|---------------|---------|----------|---------------------------------|------|
-| currency      | String  | YES      | coin name                       | TRX  |
-| currencyCode  | Integer | YES      | coin code                       | 11   |
-| minAmountRv   | String  |          | minimal deposit amount          |      |
-| confirmations | Long    |          | chain confirmation height       |      |
-| chainCode     | Integer | YES      | chain code                      |      |
-| chainName     | String  | YES      | chain name                      |      |
-| status        | String  | YES      | chain status, Active Or Suspend |      |
+| Field           | Type    | Required | Description                                                                                | Case |
+|-----------------|---------|----------|--------------------------------------------------------------------------------------------|------|
+| currency        | String  | YES      | coin name                                                                                  | TRX  |
+| currencyCode    | Integer | YES      | coin code                                                                                  | 11   |
+| minAmountRv     | String  |          | minimal deposit amount                                                                     |      |
+| confirmations   | Long    |          | chain confirmation height                                                                  |      |
+| chainCode       | Integer | YES      | chain code                                                                                 |      |
+| chainName       | String  | YES      | chain name                                                                                 |      |
+| status          | String  | YES      | Active or Suspend.Active mean available for deposit,Suspend mean not available for deposit |      |
+| contractAddress | String  |          | contract address                                                                           |      |
 
 
 ## Query withdraw history records
@@ -390,6 +392,8 @@ GET /phemex-withdraw/wallets/api/asset/info?currency=<currency>&amount=<amount>
       {
         "chainCode": 4,
         "chainName": "ETH",
+        "status": "Suspend",
+        "contractAddress": null,
         "minWithdrawAmountRv": "2",
         "minWithdrawAmountWithFeeRv": "6",
         "withdrawFeeRv": "4",
@@ -398,6 +402,8 @@ GET /phemex-withdraw/wallets/api/asset/info?currency=<currency>&amount=<amount>
       {
         "chainCode": 11,
         "chainName": "TRX",
+        "status": "Active",
+        "contractAddress": "TX7NHqjeKQxPTCi8q8ZY5pL8otSzgjLj6t",
         "minWithdrawAmountRv": "2",
         "minWithdrawAmountWithFeeRv": "3",
         "withdrawFeeRv": "1",
@@ -410,19 +416,21 @@ GET /phemex-withdraw/wallets/api/asset/info?currency=<currency>&amount=<amount>
 
 * Response fields
 
-| Field                      | Type    | Required | Description                                                                                 | Possible Value |
-|----------------------------|---------|----------|---------------------------------------------------------------------------------------------|----------------|
-| currency                   | String  | YES      | coin name                                                                                   | ETH            |
-| currencyCode               | Integer | YES      | coin code                                                                                   | 4              |
-| balanceRv                  | String  | YES      | total balance                                                                               |                |
-| confirmAmountRv            | String  |          | apply for non kyc user only, lifetime remaining amount left                                 |                |
+| Field                      | Type    | Required | Description                                                                            | Possible Value |
+|----------------------------|---------|----------|----------------------------------------------------------------------------------------|----------------|
+| currency                   | String  | YES      | coin name                                                                              | ETH            |
+| currencyCode               | Integer | YES      | coin code                                                                              | 4              |
+| balanceRv                  | String  | YES      | total balance                                                                          |                |
+| confirmAmountRv            | String  |          | apply for non kyc user only, lifetime remaining amount left                            |                |
 | allAvailableBalanceRv      | String  | YES      | total balance minus locked trading balance, locked withdraw balance and frozen balance |                |
-| chainCode                  | Integer | YES      | chain code                                                                                  |                |
-| chainName                  | String  | YES      | chain name                                                                                  |                |
-| minWithdrawAmountRv        | String  |          | minimal withdraw amount                                                                     |                |
-| minWithdrawAmountWithFeeRv | String  |          | minimal withdraw amount with fee                                                            |                |
-| withdrawFeeRv              | String  |          | withdraw fee required for user input withdraw amount                                        |                |
-| receiveAmountRv            | String  |          | received withdraw amount for user input withdraw amount                                     |                |
+| chainCode                  | Integer | YES      | chain code                                                                             |                |
+| chainName                  | String  | YES      | chain name                                                                             |                |
+| status                     | String  | YES      | Active or Suspend.Active mean Withdrawable, Suspend mean Non-withdrawable              |                |
+| contractAddress            | String  |          | contract address                                                                       |                |
+| minWithdrawAmountRv        | String  |          | minimal withdraw amount                                                                |                |
+| minWithdrawAmountWithFeeRv | String  |          | minimal withdraw amount with fee                                                       |                |
+| withdrawFeeRv              | String  |          | withdraw fee required for user input withdraw amount                                   |                |
+| receiveAmountRv            | String  |          | received withdraw amount for user input withdraw amount                                |                |
 
 
 
