@@ -16344,7 +16344,8 @@ the same as the spot api</p>
             </span><span class="nl">"confirmations"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
             </span><span class="nl">"chainCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
             </span><span class="nl">"chainName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TRX"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Active"</span><span class="w">
+            </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Active"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"contractAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ta7NHqjeKQxPTCi8q8ZY5pL8otSzgjLj6t"</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -16408,7 +16409,14 @@ the same as the spot api</p>
 <td>status</td>
 <td>String</td>
 <td>YES</td>
-<td>chain status, Active Or Suspend</td>
+<td>Active or Suspend.Active mean available for deposit,Suspend mean not available for deposit</td>
+<td></td>
+</tr>
+<tr>
+<td>contractAddress</td>
+<td>String</td>
+<td></td>
+<td>contract address</td>
 <td></td>
 </tr>
 </tbody></table>
@@ -16963,6 +16971,8 @@ the same as the spot api</p>
       </span><span class="p">{</span><span class="w">
         </span><span class="nl">"chainCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
         </span><span class="nl">"chainName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Suspend"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"contractAddress"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
         </span><span class="nl">"minWithdrawAmountRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"minWithdrawAmountWithFeeRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"withdrawFeeRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4"</span><span class="p">,</span><span class="w">
@@ -16971,6 +16981,8 @@ the same as the spot api</p>
       </span><span class="p">{</span><span class="w">
         </span><span class="nl">"chainCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
         </span><span class="nl">"chainName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TRX"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Active"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"contractAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TX7NHqjeKQxPTCi8q8ZY5pL8otSzgjLj6t"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"minWithdrawAmountRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"minWithdrawAmountWithFeeRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"withdrawFeeRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
@@ -17040,6 +17052,20 @@ the same as the spot api</p>
 <td>String</td>
 <td>YES</td>
 <td>chain name</td>
+<td></td>
+</tr>
+<tr>
+<td>status</td>
+<td>String</td>
+<td>YES</td>
+<td>Active or Suspend.Active mean Withdrawable, Suspend mean Non-withdrawable</td>
+<td></td>
+</tr>
+<tr>
+<td>contractAddress</td>
+<td>String</td>
+<td></td>
+<td>contract address</td>
 <td></td>
 </tr>
 <tr>
