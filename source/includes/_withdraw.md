@@ -373,7 +373,7 @@ GET /phemex-withdraw/wallets/api/asset/info?currency=<currency>&amount=<amount>
 
 | Parameter | Type   | Required | Description              | Case     |
 |-----------|--------|----------|--------------------------|----------|
-| currency  | String | NO       | coin name                | "ETH"    |
+| currency  | String | YES      | coin name                | "ETH"    |
 | amount    | String | NO       | withdraw amount with fee | "0.1234" |
 
 > Response format
