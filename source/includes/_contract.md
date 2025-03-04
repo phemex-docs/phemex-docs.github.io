@@ -2978,8 +2978,15 @@ GET /public/products-plus
 > Request format
 
 ```
-PUT /g-orders/create?clOrdID=<clOrdID>&symbol=<symbol>&reduceOnly=<reduceOnly>&closeOnTrigger=<closeOnTrigger>&orderQtyRq=<orderQtyRq>&ordType=<ordType>&priceRp=<priceRp>&side=<side>&posSide=<posSide>&text=<text>&timeInForce=<timeInForce>&stopPxRp=<stopPxRp>&takeProfitRp=<takeProfitRp>&stopLossRp=<stopLossRp>&pegOffsetValueRp=<pegOffsetValueRp>&pegPriceType=<pegPriceType>&triggerType=<triggerType>&tpTrigger=<tpTrigger>&tpSlTs=<tpSlTs>&slTrigger=<slTrigger>
+PUT /g-orders/create?clOrdID=<clOrdID>&symbol=<symbol>&reduceOnly=<reduceOnly>&closeOnTrigger=<closeOnTrigger>&orderQtyRq=<orderQtyRq>&ordType=<ordType>&priceRp=<priceRp>&side=<side>&posSide=<posSide>&text=<text>&timeInForce=<timeInForce>&stopPxRp=<stopPxRp>&takeProfitRp=<takeProfitRp>&stopLossRp=<stopLossRp>&pegOffsetValueRp=<pegOffsetValueRp>&pegPriceType=<pegPriceType>&triggerType=<triggerType>&tpTrigger=<tpTrigger>&tpSlTs=<tpSlTs>&slTrigger=<slTrigger>&stpInstruction=<stpInstruction>
 ```
+
+* Order creation supports self trade prevention (STP).
+  * Contact the CS team to enable `stpGroupId` for your account.
+  * Once `stpGroupId` is enabled, the parent account and sub-accounts will, by default, share the same `stpGroupId`.
+  * Users **ONLY** need to provide `stpInstruction` as an order parameter; the `stpGroupId` is automatically assigned once enabled.
+  * The `stpInstruction` in the taker order will have the priority to determine STP action when STP is triggered and both taker and maker orders have `stpInstruction` set.
+  * Both `stpGroupId` and `stpInstruction` are required to activate STP.
 
 > Response sample
 
@@ -3019,36 +3026,44 @@ PUT /g-orders/create?clOrdID=<clOrdID>&symbol=<symbol>&reduceOnly=<reduceOnly>&c
 }
 ```
 
-| Field            | Type    | Required | Description                                                  | Possible values                                              |
-| ---------------- | ------- | -------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| clOrdID          | String  | -        | client order id, max length is 40                            |                                                              |
-| symbol           | String  | Yes      | Which symbol to place order                                  | [Trading symbols](#symbpricesub)                             |
-| reduceOnly       | Boolean | -        | whether reduce position side only. Enable this flag, i.e. reduceOnly=true, position side won't change | true, false                                                  |
-| closeOnTrigger   | Boolean | -        | implicitly reduceOnly, plus cancel other orders in the same direction(side) when necessary | true, false                                                  |
-| orderQtyRq       | String  | -        | Order real quantity                                          | "1"                                                          |
+| Field            | Type    | Required | Description                                                  | Possible values                                                                                                                                                                |
+| ---------------- | ------- | -------- | ------------------------------------------------------------ |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| clOrdID          | String  | -        | client order id, max length is 40                            |                                                                                                                                                                                |
+| symbol           | String  | Yes      | Which symbol to place order                                  | [Trading symbols](#symbpricesub)                                                                                                                                               |
+| reduceOnly       | Boolean | -        | whether reduce position side only. Enable this flag, i.e. reduceOnly=true, position side won't change | true, false                                                                                                                                                                    |
+| closeOnTrigger   | Boolean | -        | implicitly reduceOnly, plus cancel other orders in the same direction(side) when necessary | true, false                                                                                                                                                                    |
+| orderQtyRq       | String  | -        | Order real quantity                                          | "1"                                                                                                                                                                            |
 | ordType          | String  | -        | Order type, default to Limit                                 | Market,Limit,Stop,StopLimit,MarketIfTouched,LimitIfTouched,<br />ProtectedMarket,MarketAsLimit,StopAsLimit,<br />MarketIfTouchedAsLimit,Bracket,BoTpLimit,BoSlLimit,BoSlMarket |
-| priceRp          | String  | -        | Real price, required for limit order                         | "1"                                                          |
-| side             | String  | Yes      | Order direction, Buy or Sell                                 | Buy, Sell                                                    |
-| posSide          | String  | Yes      | Position direction                                           | "Merged" for oneway mode , <br />"Long" / "Short" for hedge mode |
-| text             | String  | -        | Order comments                                               |                                                              |
-| timeInForce      | String  | -        | Time in force. default to GoodTillCancel                     | GoodTillCancel, ImmediateOrCancel, FillOrKill, PostOnly      |
-| stopPxRp         | String  | -        | Trigger price of conditional order                           | "1"                                                          |
-| takeProfitRp     | String  | -        | trigger price of take-profit order attached to position opening          | "1"                                                          |
-| tpPxRp           | String  | -        | limit price of take-profit order attached to position opening            | "1"                                                          |
-| stopLossRp       | String  | -        | trigger price of stop-loss order attached to position opening            | "1"                                                          |
-| slPxRp           | String  | -        | limit price of stop-loss order attached to position opening              | "1"                                                          |
-| pegOffsetValueRp | String  | -        | Trailing offset from current price. Negative value when position is long, positive when position is short | "1"                         |
-| pegPriceType     | String  | -        | Trailing order price type                                    | LastPeg, MidPricePeg, MarketPeg, PrimaryPeg, TrailingStopPeg, TrailingTakeProfitPeg |
-| triggerType      | String  | -        | Trigger source                                               | ByMarkPrice, ByIndexPrice, ByLastPrice, ByAskPrice, ByBidPrice, ByMarkPriceLimit, ByLastPriceLimit |
-| tpTrigger        | String  | -        | Trigger source                                               | ByMarkPrice, ByIndexPrice, ByLastPrice, ByAskPrice, ByBidPrice, ByMarkPriceLimit, ByLastPriceLimit |
-| slTrigger        | String  | -        | Trigger source                                               | ByMarkPrice, ByIndexPrice, ByLastPrice, ByAskPrice, ByBidPrice, ByMarkPriceLimit, ByLastPriceLimit |
-
+| priceRp          | String  | -        | Real price, required for limit order                         | "1"                                                                                                                                                                            |
+| side             | String  | Yes      | Order direction, Buy or Sell                                 | Buy, Sell                                                                                                                                                                      |
+| posSide          | String  | Yes      | Position direction                                           | "Merged" for oneway mode , <br />"Long" / "Short" for hedge mode                                                                                                               |
+| text             | String  | -        | Order comments                                               |                                                                                                                                                                                |
+| timeInForce      | String  | -        | Time in force. default to GoodTillCancel                     | GoodTillCancel, ImmediateOrCancel, FillOrKill, PostOnly                                                                                                                        |
+| stopPxRp         | String  | -        | Trigger price of conditional order                           | "1"                                                                                                                                                                            |
+| takeProfitRp     | String  | -        | trigger price of take-profit order attached to position opening          | "1"                                                                                                                                                                            |
+| tpPxRp           | String  | -        | limit price of take-profit order attached to position opening            | "1"                                                                                                                                                                            |
+| stopLossRp       | String  | -        | trigger price of stop-loss order attached to position opening            | "1"                                                                                                                                                                            |
+| slPxRp           | String  | -        | limit price of stop-loss order attached to position opening              | "1"                                                                                                                                                                            |
+| pegOffsetValueRp | String  | -        | Trailing offset from current price. Negative value when position is long, positive when position is short | "1"                                                                                                                                                                            |
+| pegPriceType     | String  | -        | Trailing order price type                                    | LastPeg, MidPricePeg, MarketPeg, PrimaryPeg, TrailingStopPeg, TrailingTakeProfitPeg                                                                                            |
+| triggerType      | String  | -        | Trigger source                                               | ByMarkPrice, ByIndexPrice, ByLastPrice, ByAskPrice, ByBidPrice, ByMarkPriceLimit, ByLastPriceLimit                                                                             |
+| tpTrigger        | String  | -        | Trigger source                                               | ByMarkPrice, ByIndexPrice, ByLastPrice, ByAskPrice, ByBidPrice, ByMarkPriceLimit, ByLastPriceLimit                                                                             |
+| slTrigger        | String  | -        | Trigger source                                               | ByMarkPrice, ByIndexPrice, ByLastPrice, ByAskPrice, ByBidPrice, ByMarkPriceLimit, ByLastPriceLimit                                                                             |
+| stpInstruction   | String  | -        | Self trade prevention(STP) instruction, order action when stp triggered                                   | None, CancelMaker, CancelTaker, CancelBoth                                                                                                                                     |
 
 ## Place order (HTTP POST)
 
 * HTTP Request:
 
   Request fields are the same as [above place-order](#placeorderwithput)
+
+* Order creation supports self trade prevention (STP).
+  * Contact the CS team to enable `stpGroupId` for your account.
+  * Once `stpGroupId` is enabled, the parent account and sub-accounts will, by default, share the same `stpGroupId`.
+  * Users **ONLY** need to provide `stpInstruction` as an order parameter; the `stpGroupId` is automatically assigned once enabled.
+  * The `stpInstruction` in the taker order will have the priority to determine STP action when STP is triggered and both taker and maker orders have `stpInstruction` set.
+  * Both `stpGroupId` and `stpInstruction` are required to activate STP.
+  
 > Request format
 
 ```
@@ -3076,7 +3091,8 @@ body:
   "text": "string",
   "timeInForce": "GoodTillCancel",
   "tpTrigger": "ByMarkPrice",
-  "triggerType": "ByMarkPrice"
+  "triggerType": "ByMarkPrice",
+  "stpInstruction": "CancelBoth"
 }
 ```
 
@@ -3118,30 +3134,30 @@ body:
 }
 ```
 
-| Field            | Type    | Required | Description                                                  | Possible values                                              |
-| ---------------- | ------- | -------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| clOrdID          | String  | -        | client order id, max length is 40                            |                                                              |
-| symbol           | String  | Yes      | Which symbol to place order                                  | [Trading symbols](#symbpricesub)                             |
-| reduceOnly       | Boolean | -        | whether reduce position side only. Enable this flag, i.e. reduceOnly=true, position side won't change | true, false                                                  |
-| closeOnTrigger   | Boolean | -        | implicitly reduceOnly, plus cancel other orders in the same direction(side) when necessary | true, false                                                  |
-| orderQtyRq       | String  | -        | Order real quantity                                          | "1"                                                          |
+| Field            | Type    | Required | Description                                                  | Possible values                                                                                                                                                                |
+| ---------------- | ------- | -------- | ------------------------------------------------------------ |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| clOrdID          | String  | -        | client order id, max length is 40                            |                                                                                                                                                                                |
+| symbol           | String  | Yes      | Which symbol to place order                                  | [Trading symbols](#symbpricesub)                                                                                                                                               |
+| reduceOnly       | Boolean | -        | whether reduce position side only. Enable this flag, i.e. reduceOnly=true, position side won't change | true, false                                                                                                                                                                    |
+| closeOnTrigger   | Boolean | -        | implicitly reduceOnly, plus cancel other orders in the same direction(side) when necessary | true, false                                                                                                                                                                    |
+| orderQtyRq       | String  | -        | Order real quantity                                          | "1"                                                                                                                                                                            |
 | ordType          | String  | -        | Order type, default to Limit                                 | Market,Limit,Stop,StopLimit,MarketIfTouched,LimitIfTouched,<br />ProtectedMarket,MarketAsLimit,StopAsLimit,<br />MarketIfTouchedAsLimit,Bracket,BoTpLimit,BoSlLimit,BoSlMarket |
-| priceRp          | String  | -        | Real price, required for limit order                         | "1"                                                          |
-| side             | String  | Yes      | Order direction, Buy or Sell                                 | Buy, Sell                                                    |
-| posSide          | String  | Yes      | Position direction                                           | "Merged" for oneway mode , <br />"Long" / "Short" for hedge mode |
-| text             | String  | -        | Order comments                                               |                                                              |
-| timeInForce      | String  | -        | Time in force. default to GoodTillCancel                     | GoodTillCancel, ImmediateOrCancel, FillOrKill, PostOnly      |
-| stopPxRp         | String  | -        | Trigger price of conditional order                          | "1"                                                          |
-| takeProfitRp     | String  | -        | trigger price of take-profit order attached to position opening          | "1"                                                          |
-| tpPxRp           | String  | -        | limit price of take-profit order attached to position opening            | "1"                                                          |
-| stopLossRp       | String  | -        | trigger price of stop-loss order attached to position opening            | "1"                                                          |
-| slPxRp           | String  | -        | limit price of stop-loss order attached to position opening              | "1"                           
-| pegOffsetValueRp | String  | -        | Trailing offset from current price. Negative value when position is long, positive when position is short | "1"                                                          |
-| pegPriceType     | String  | -        | Trailing order price type                                    | LastPeg, MidPricePeg, MarketPeg, PrimaryPeg, TrailingStopPeg, TrailingTakeProfitPeg |
-| triggerType      | String  | -        | Trigger source                                               | ByMarkPrice, ByIndexPrice, ByLastPrice, ByAskPrice, ByBidPrice, ByMarkPriceLimit, ByLastPriceLimit |
-| tpTrigger        | String  | -        | Trigger source                                               | ByMarkPrice, ByIndexPrice, ByLastPrice, ByAskPrice, ByBidPrice, ByMarkPriceLimit, ByLastPriceLimit |
-| slTrigger        | String  | -        | Trigger source                                               | ByMarkPrice, ByIndexPrice, ByLastPrice, ByAskPrice, ByBidPrice, ByMarkPriceLimit, ByLastPriceLimit |
-
+| priceRp          | String  | -        | Real price, required for limit order                         | "1"                                                                                                                                                                            |
+| side             | String  | Yes      | Order direction, Buy or Sell                                 | Buy, Sell                                                                                                                                                                      |
+| posSide          | String  | Yes      | Position direction                                           | "Merged" for oneway mode , <br />"Long" / "Short" for hedge mode                                                                                                               |
+| text             | String  | -        | Order comments                                               |                                                                                                                                                                                |
+| timeInForce      | String  | -        | Time in force. default to GoodTillCancel                     | GoodTillCancel, ImmediateOrCancel, FillOrKill, PostOnly                                                                                                                        |
+| stopPxRp         | String  | -        | Trigger price of conditional order                          | "1"                                                                                                                                                                            |
+| takeProfitRp     | String  | -        | trigger price of take-profit order attached to position opening          | "1"                                                                                                                                                                            |
+| tpPxRp           | String  | -        | limit price of take-profit order attached to position opening            | "1"                                                                                                                                                                            |
+| stopLossRp       | String  | -        | trigger price of stop-loss order attached to position opening            | "1"                                                                                                                                                                            |
+| slPxRp           | String  | -        | limit price of stop-loss order attached to position opening              | "1"                                                                                                                                                                            
+| pegOffsetValueRp | String  | -        | Trailing offset from current price. Negative value when position is long, positive when position is short | "1"                                                                                                                                                                            |
+| pegPriceType     | String  | -        | Trailing order price type                                    | LastPeg, MidPricePeg, MarketPeg, PrimaryPeg, TrailingStopPeg, TrailingTakeProfitPeg                                                                                            |
+| triggerType      | String  | -        | Trigger source                                               | ByMarkPrice, ByIndexPrice, ByLastPrice, ByAskPrice, ByBidPrice, ByMarkPriceLimit, ByLastPriceLimit                                                                             |
+| tpTrigger        | String  | -        | Trigger source                                               | ByMarkPrice, ByIndexPrice, ByLastPrice, ByAskPrice, ByBidPrice, ByMarkPriceLimit, ByLastPriceLimit                                                                             |
+| slTrigger        | String  | -        | Trigger source                                               | ByMarkPrice, ByIndexPrice, ByLastPrice, ByAskPrice, ByBidPrice, ByMarkPriceLimit, ByLastPriceLimit                                                                             |
+| stpInstruction   | String  | -        | Self trade prevention(STP) instruction, order action when stp triggered                                   | None, CancelMaker, CancelTaker, CancelBoth                                                                                                                                     |
 
 ## Amend order by orderID
 
