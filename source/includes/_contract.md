@@ -2978,8 +2978,15 @@ GET /public/products-plus
 > Request format
 
 ```
-PUT /g-orders/create?clOrdID=<clOrdID>&symbol=<symbol>&reduceOnly=<reduceOnly>&closeOnTrigger=<closeOnTrigger>&orderQtyRq=<orderQtyRq>&ordType=<ordType>&priceRp=<priceRp>&side=<side>&posSide=<posSide>&text=<text>&timeInForce=<timeInForce>&stopPxRp=<stopPxRp>&takeProfitRp=<takeProfitRp>&stopLossRp=<stopLossRp>&pegOffsetValueRp=<pegOffsetValueRp>&pegPriceType=<pegPriceType>&triggerType=<triggerType>&tpTrigger=<tpTrigger>&tpSlTs=<tpSlTs>&slTrigger=<slTrigger>
+PUT /g-orders/create?clOrdID=<clOrdID>&symbol=<symbol>&reduceOnly=<reduceOnly>&closeOnTrigger=<closeOnTrigger>&orderQtyRq=<orderQtyRq>&ordType=<ordType>&priceRp=<priceRp>&side=<side>&posSide=<posSide>&text=<text>&timeInForce=<timeInForce>&stopPxRp=<stopPxRp>&takeProfitRp=<takeProfitRp>&stopLossRp=<stopLossRp>&pegOffsetValueRp=<pegOffsetValueRp>&pegPriceType=<pegPriceType>&triggerType=<triggerType>&tpTrigger=<tpTrigger>&tpSlTs=<tpSlTs>&slTrigger=<slTrigger>&stpInstruction=<stpInstruction>
 ```
+
+* Order creation supports self trade prevention (STP).
+  * Contact the CS team to enable `stpGroupId` for your account.
+  * Once `stpGroupId` is enabled, the parent account and sub-accounts will, by default, share the same `stpGroupId`.
+  * Users only need to provide `stpInstruction` as an order parameter; the `stpGroupId` is automatically assigned once enabled.
+  * The `stpInstruction` in the subsequent order will determine the action when STP is triggered.
+  * Both `stpGroupId` and `stpInstruction` are required to activate STP.
 
 > Response sample
 
@@ -3042,13 +3049,21 @@ PUT /g-orders/create?clOrdID=<clOrdID>&symbol=<symbol>&reduceOnly=<reduceOnly>&c
 | triggerType      | String  | -        | Trigger source                                               | ByMarkPrice, ByIndexPrice, ByLastPrice, ByAskPrice, ByBidPrice, ByMarkPriceLimit, ByLastPriceLimit |
 | tpTrigger        | String  | -        | Trigger source                                               | ByMarkPrice, ByIndexPrice, ByLastPrice, ByAskPrice, ByBidPrice, ByMarkPriceLimit, ByLastPriceLimit |
 | slTrigger        | String  | -        | Trigger source                                               | ByMarkPrice, ByIndexPrice, ByLastPrice, ByAskPrice, ByBidPrice, ByMarkPriceLimit, ByLastPriceLimit |
-
+| stpInstruction   | String  | -        | Self trade prevention(STP) instruction, order action when stp triggered                                   | CancelMaker, CancelTaker, CancelBoth   |
 
 ## Place order (HTTP POST)
 
 * HTTP Request:
 
   Request fields are the same as [above place-order](#placeorderwithput)
+
+* Order creation supports self trade prevention (STP).
+  * Contact the CS team to enable `stpGroupId` for your account.
+  * Once `stpGroupId` is enabled, the parent account and sub-accounts will, by default, share the same `stpGroupId`.
+  * Users only need to provide `stpInstruction` as an order parameter; the `stpGroupId` is automatically assigned once enabled.
+  * The `stpInstruction` in the subsequent order will determine the action when STP is triggered.
+  * Both `stpGroupId` and `stpInstruction` are required to activate STP.
+  
 > Request format
 
 ```
@@ -3076,7 +3091,8 @@ body:
   "text": "string",
   "timeInForce": "GoodTillCancel",
   "tpTrigger": "ByMarkPrice",
-  "triggerType": "ByMarkPrice"
+  "triggerType": "ByMarkPrice",
+  "stpInstruction": "CancelBoth"
 }
 ```
 
@@ -3141,7 +3157,7 @@ body:
 | triggerType      | String  | -        | Trigger source                                               | ByMarkPrice, ByIndexPrice, ByLastPrice, ByAskPrice, ByBidPrice, ByMarkPriceLimit, ByLastPriceLimit |
 | tpTrigger        | String  | -        | Trigger source                                               | ByMarkPrice, ByIndexPrice, ByLastPrice, ByAskPrice, ByBidPrice, ByMarkPriceLimit, ByLastPriceLimit |
 | slTrigger        | String  | -        | Trigger source                                               | ByMarkPrice, ByIndexPrice, ByLastPrice, ByAskPrice, ByBidPrice, ByMarkPriceLimit, ByLastPriceLimit |
-
+| stpInstruction   | String  | -        | Self trade prevention(STP) instruction, order action when stp triggered                                   | CancelMaker, CancelTaker, CancelBoth   |
 
 ## Amend order by orderID
 
