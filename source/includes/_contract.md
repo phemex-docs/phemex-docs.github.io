@@ -4568,7 +4568,9 @@ API Rate Limits
 Market trade/orderbook are published publicly without user authentication.
 While for client private account/position/order data, the client should send user.auth message to Data Gateway to authenticate the session.
 
+
 > Request format
+
 ```json
 {
   "method": "user.auth",
@@ -4582,7 +4584,9 @@ While for client private account/position/order data, the client should send use
 }
 ```
 
+
 > Request sample
+
 ```json
 {
   "method": "user.auth",
@@ -4596,7 +4600,9 @@ While for client private account/position/order data, the client should send use
 }
 ```
 
+
 > Response sample
+
 ```json
 {
   "error": null,
@@ -4621,6 +4627,7 @@ On each successful subscription, DataGW will immediately send the current Order 
 
 
 > Request sample
+
 ```json
 {
   "id": 1234,
@@ -4630,7 +4637,9 @@ On each successful subscription, DataGW will immediately send the current Order 
   ]
 }
 ```
+
 > Response sample
+
 ```json
 {
   "error": null,
@@ -4647,34 +4656,29 @@ On each successful subscription, DataGW will immediately send the current Order 
 DataGW publishes order book message with types: incremental, snapshot. Incremental messages are published with 20ms interval. And snapshot messages are published with 60-second interval for client self-verification.
 
 > Response format
-```javascript
+```json
 {
   "book": {
     "asks": [
       [
-        <priceEp>,
-        <qty>
+        "<priceEp>",
+        "<qty>"
       ],
-      .
-      .
-      .
+      "..."
     ],
     "bids": [
       [
-        <priceEp>,
-        <qty>
+        "<priceEp>",
+        "<qty>"
       ],
-      .
-      .
-      .
+      "..."
     ]
   },
-  "depth": <depth>,
-  "sequence": <sequence>,
-  "timestamp": <timestamp>,
-  "symbol": "<symbol>",
+  "depth": "<depth>",
+  "sequence": "<sequence>",
+  "timestamp": "<timestamp>",
+  "symbol": "<symbol>"
 }
-
 ```
 
 * Sample：
