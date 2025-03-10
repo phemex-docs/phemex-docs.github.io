@@ -207,12 +207,50 @@ PUT /spot/orders?symbol=<symbol>&orderID=<orderID>&origClOrdID=<origClOrdID>&pri
 | orderID     |      | -        | order id, cannot be changed           |
 | origClOrdID |      | -        | origClOrdID , cannot be changed       |
 | priceEp     |      | -        | scaled price                          |
-| baseQtyEv   |      | Yes      | scaled base-currency quantity         |
-| quoteQtyEv  |      | Yes      | scaled quote-currency quantity        |
-| stopPxEp    |      | Yes      | used in conditionalorder              |
+| baseQtyEv   |      | -        | scaled base-currency quantity         |
+| quoteQtyEv  |      | -        | scaled quote-currency quantity        |
+| stopPxEp    |      | -        | used in conditionalorder              |
 
-1\) orderID and origClOrdID can't both be empty
-2\) The quantity to be changed must be the same currency as placing order. e.g. If placing order is by baseQtyEv, amending order can be only by baseQtyEv as.
+1\) orderID and origClOrdID can't both be empty.<br> 
+2\) The quantity to be changed must be the same currency as placing order. e.g. If placing order is by baseQtyEv, amending order can be only by baseQtyEv.<br> 
+
+> Response format
+
+```json
+{
+  "code": 0,
+  "msg": "",
+  "data": {
+    "orderID": "52fd0898-c3fa-4cb0-bb6e-74a404996472",
+    "clOrdID": "085a4e93-54a1-46c8-8adb-e02499d1fb9c",
+    "priceEp": 45000000,
+    "action": "Replace",
+    "execInst": "None",
+    "trigger": "UNSPECIFIED",
+    "pegPriceType": "UNSPECIFIED",
+    "stopDirection": "UNSPECIFIED",
+    "bizError": 0,
+    "symbol": "sPTUSDT",
+    "side": "Buy",
+    "baseQtyEv": 310000000,
+    "ordType": "Limit",
+    "timeInForce": "PostOnly",
+    "ordStatus": "New",
+    "cumFeeEv": 0,
+    "cumBaseQtyEv": 0,
+    "cumQuoteQtyEv": 0,
+    "leavesBaseQtyEv": 300000000,
+    "leavesQuoteQtyEv": 120000000,
+    "avgPriceEp": 0,
+    "cumBaseAmountEv": 0,
+    "cumQuoteAmountEv": 0,
+    "quoteQtyEv": 139500000,
+    "qtyType": "ByBase",
+    "stopPxEp": 0,
+    "pegOffsetValueEp": 0
+  }
+}
+```
 
 ## Cancel order
 
