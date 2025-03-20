@@ -1010,6 +1010,9 @@
                   <li>
                     <a href="#query-funding-fee-history-2" class="toc-h2 toc-link" data-title="Query funding fee history">Query funding fee history</a>
                   </li>
+                  <li>
+                    <a href="#query-real-funding-rates" class="toc-h2 toc-link" data-title="Query real funding rates">Query real funding rates</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -9500,6 +9503,77 @@ For more information, please refer to the link: https://phemex.com/contract/leve
     </span><span class="nl">"feeRateRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0001"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"execFeeRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.02116552"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"createTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1671004800021</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div><h2 id='query-real-funding-rates'>Query real funding rates</h2>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET contract-biz/public/real-funding-rates?symbol=&lt;symbol&gt;
+</code></pre></div>
+<ul>
+<li>Request parameters</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Case</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>String</td>
+<td>False</td>
+<td>the symbol to query</td>
+<td>BTCUSDT...,defaultValue &#39;ALL&#39;</td>
+</tr>
+<tr>
+<td>orderByColumn</td>
+<td>String</td>
+<td>False</td>
+<td>order by column</td>
+<td>symbol,fundingInterval,toNextfundingInterval,fundingRate,interestRate,default &#39;symbol&#39;</td>
+</tr>
+<tr>
+<td>orderBy</td>
+<td>String</td>
+<td>False</td>
+<td>asc or desc</td>
+<td>asc,desc,default &#39;asc&#39;</td>
+</tr>
+<tr>
+<td>pageNum</td>
+<td>Integer</td>
+<td>False</td>
+<td>page number</td>
+<td>default 1</td>
+</tr>
+<tr>
+<td>pageSize</td>
+<td>Integer</td>
+<td>False</td>
+<td>page size</td>
+<td>default 20</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response sample</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fundingInterval"</span><span class="p">:</span><span class="w"> </span><span class="mi">28800</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"toNextfundingInterval"</span><span class="p">:</span><span class="w"> </span><span class="mi">2519</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"nextfundingTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1742457600000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fundingRate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00001369"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"interestRate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0001"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fundingRateCap"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.02"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fundingRateFloor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.02"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div><h1 id='usdt-m-perpetual-websocket-api'>USDT-M Perpetual Websocket API</h1><h2 id='heartbeat-2'>Heartbeat</h2>
