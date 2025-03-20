@@ -4585,6 +4585,41 @@ GET /api-data/g-futures/funding-fees?symbol=<symbol>
 ]
 ```
 
+## Query real funding rates
+
+> Request format
+
+```
+GET contract-biz/public/real-funding-rates?symbol=<symbol>
+```
+
+* Request parameters
+
+| Parameter     | Type    | Required | Description         | Case                                                                                   |
+|---------------|---------|----------|---------------------|----------------------------------------------------------------------------------------|
+| symbol        | String  | False    | the symbol to query | BTCUSDT...,defaultValue 'ALL'                                                          |
+| orderByColumn | String  | False    | order by column     | symbol,fundingInterval,toNextfundingInterval,fundingRate,interestRate,default 'symbol' |
+| orderBy       | String  | False    | asc or desc         | asc,desc,default 'asc'                                                                 |
+| pageNum       | Integer | False    | page number         | default 1                                                                              |
+| pageSize      | Integer | False    | page size           | default 20                                                                             |
+
+> Response sample
+
+```json
+[
+  {
+    "symbol": "BTCUSDT",
+    "fundingInterval": 28800,
+    "toNextfundingInterval": 2519,
+    "nextfundingTime": 1742457600000,
+    "fundingRate": "0.00001369",
+    "interestRate": "0.0001",
+    "fundingRateCap": "0.02",
+    "fundingRateFloor": "-0.02"
+  }
+]
+```
+
 # USDT-M Perpetual Websocket API
 
 ## Heartbeat
