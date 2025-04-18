@@ -1832,11 +1832,17 @@ Subscribe orderbook update messages with **depth = <depth> and interval = 20ms**
 
 On each successful subscription, DataGW will immediately send the current Order Book (with default depth=30) snapshot to client and all later order book updates will be published.
 
-**How to manage local orderbook?**
-1, After subscribing to the incremental load push (such as books 5 levels) of Order Book Channel, users firstreceive the initial full load of market depth. After the incremental load is subsequently received, update thelocal full load.
-2, lf there is the same price, compare the size. lf the size is 0, delete this depth data. lf the size changes replace the original data. (noted that if the price is within depth and the size is unchagned, the level will *NOT* published by incremental updates)
-3, lf it is not same price, sort by price (bid in descending order, ask in ascending order), and insert the depth information into the full load.
-4, Sort updated orderbook and keep top 5 levels (noted that the old price levels that falls behind the top 5 levels will not update anymore untill it comes back to top 5 levels).
+### **How to manage local orderbook?**
+1. After subscribing to the incremental updates of the Order Book Channel (e.g., 5-level order book), users first receive the initial full snapshot of market depth. As incremental loads are received, update the local full snapshot accordingly.
+2. if the update type is “incremental” ,  you can update your local order book by following rule: 
+    * If there is an existing price level, compare the sizes:
+        * If the size is 0, remove this price level from the order book.
+        * If the size changes, update the original data with the new size.
+    * Inserting New Prices:
+        * If the size is 0,  ignore it.
+        * If the price level does not exist, insert the new depth information.
+        * Ensure bids are sorted in descending order and asks in ascending order.               
+3. If the update type is “snapshot,” compare it with your existing local order book and update the local one if necessary. Please check if there's any discrepancy between the newly pushed order book and the local one.
 
 ## Subscribe full orderBook
 
@@ -2940,7 +2946,7 @@ i.e. `index` symbol follows a pattern `.<BASECURRENCY>`,
 | symbol   | String | Symbol                                          |              |
 
 
-#  USDT-M Perpetual Rest API 
+# USDT-M Perpetual Rest API 
 
 
 ## Query product information
@@ -4746,12 +4752,17 @@ On each successful subscription, DataGW will immediately send the current Order 
 Subscribe orderbook update messages with **depth = <depth> and interval = 20ms**, depth can only be one of following number: 0, 1, 5, 10, 30. When depth=0, full orderbook will be published to client.
 On each successful subscription, DataGW will immediately send the current Order Book snapshot to client and all later order book updates will be published.
 
-**How to manage local orderbook?**
-1, After subscribing to the incremental load push (such as books 5 levels) of Order Book Channel, users firstreceive the initial full load of market depth. After the incremental load is subsequently received, update thelocal full load.
-2, lf there is the same price, compare the size. lf the size is 0, delete this depth data. lf the size changes replace the original data. (noted that if the price is within depth and the size is unchagned, the level will *NOT* published by incremental updates)
-3, lf it is not same price, sort by price (bid in descending order, ask in ascending order), and insert the depth information into the full load.
-4, Sort updated orderbook and keep top 5 levels (noted that the old price levels that falls behind the top 5 levels will not update anymore untill it comes back to top 5 levels).
-
+### **How to manage local orderbook?**
+1. After subscribing to the incremental updates of the Order Book Channel (e.g., 5-level order book), users first receive the initial full snapshot of market depth. As incremental loads are received, update the local full snapshot accordingly.
+2. if the update type is “incremental” ,  you can update your local order book by following rule: 
+    * If there is an existing price level, compare the sizes:
+        * If the size is 0, remove this price level from the order book.
+        * If the size changes, update the original data with the new size.
+    * Inserting New Prices:
+        * If the size is 0,  ignore it.
+        * If the price level does not exist, insert the new depth information.
+        * Ensure bids are sorted in descending order and asks in ascending order.               
+3. If the update type is “snapshot,” compare it with your existing local order book and update the local one if necessary. Please check if there's any discrepancy between the newly pushed order book and the local one.
 
 > Request format
 
