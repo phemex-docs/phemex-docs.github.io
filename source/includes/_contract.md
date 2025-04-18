@@ -617,7 +617,7 @@ GET /accounts/accountPositions?currency=<currency>
 
 | Field       | Type   | Description                                | Possible values |
 |-------------|--------|--------------------------------------------|--------------|
-| currency    | String | trading account's settle currency. Use to identify trading account. | BTC, USD, ETH |
+| currency    | String | trading account's settle currency. Use to identify trading account. | BTC, ETH |
 
 <aside class="notice">
 <i>unRealizedPnlEv</i> is not up to date and needs to be calculated in client side with latest <i>markPrice</i>. The formula is as below.
@@ -1070,7 +1070,7 @@ GET /exchange/order/trade?symbol=<symbol>&start=<start>&end=<end>&limit=<limit>&
 
 | Field     | Type     | Required | Description                                                     | Possible Values                 |
 |-----------|----------|----------|-----------------------------------------------------------------|---------------------------------|
-| symbol    | String   | Yes      | Trading symbol                                                  | BTCUSD, ETHUSD ...              |
+| symbol    | String   | Yes      | Trading symbol                                                  | BTCUSD, cETHUSD ...              |
 | tradeType | String   | No       | Trade type of execution order                                   | Trade,Funding,AdlTrade,LiqTrade |
 | start     | Integer  | No       | Epoch time in milli-seconds of range start. available only from the last 2 month                    | --                              |
 | end       | Integer  | No       | Epoch time in milli-seconds of range end                        | --                              |
@@ -1269,7 +1269,7 @@ The API has <a href="#rate-limits">ratelimits</a> rule, and please check the <i>
 
 | Field      | Type    | Required | Description     | Possible Values                         |
 |------------|---------|----------|-----------------|-----------------------------------------|
-| symbol     | String  | Yes      | symbol name     | BTCUSD,ETHUSD,uBTCUSD,cETHUSD,XRPUSD... |
+| symbol     | String  | Yes      | symbol name     | BTCUSD,cETHUSD... |
 | resolution | Integer | Yes      | kline interval  | described as below                      |
 | limit      | Integer | No       | limit of result | described as below                      |
 
@@ -1313,7 +1313,7 @@ GET /exchange/public/md/kline?symbol=<symbol>&to=<to>&from=<from>&resolution=<re
 
 | Field       | Type    | Required    | Description            | Possible Values                                                                                                |
 |-------------|---------|-------------|------------------------|----------------------------------------------------------------------------------------------------------------|
-|symbol       | String  | Yes         | symbol name            | BTCUSD,ETHUSD,uBTCUSD,cETHUSD,XRPUSD...                                                                        |
+|symbol       | String  | Yes         | symbol name            | BTCUSD,cETHUSD...                                                                        |
 | from        | Integer | Yes         | start time in seconds  | value aligned in resolution boundary                                                                           |
 | to          | Integer | Yes         | end time in seconds    | value aligned in resolution boundary; Number of k-lines return between [`from`, `to`) should be less than 1000 |
 | resolution  | Integer | Yes         | kline interval         | the same as described above                                                                                    |
@@ -1620,7 +1620,7 @@ GET /api-data/futures/funding-fees?symbol=<symbol>
 
 | Parameter | Type    | Required | Description                   | Case                |
 |-----------|---------|----------|-------------------------------|---------------------|
-| symbol    | String  | True     | the currency to query         | uBTCUSD...          |
+| symbol    | String  | True     | the symbol to query           | BTCUSD...          |
 | offset    | Integer | False    | page starts from 0            | default 0           |
 | limit     | Integer | False    | page size                     | default 20, max 200 |
 
@@ -1629,16 +1629,16 @@ GET /api-data/futures/funding-fees?symbol=<symbol>
 ```json
 [
   {
-    "createTime": 0,
-    "currency": "string",
-    "execFeeEv": 0,
-    "execPriceEp": 0,
+    "symbol": "BTCUSD"
+    "currency": "USD",
     "execQty": 0,
+    "side": "Sell",
+    "execPriceEp": 0,
     "execValueEv": 0,
-    "feeRateEr": 0,
     "fundingRateEr": 0,
-    "side": "string",
-    "symbol": "string"
+    "feeRateEr": 0,
+    "execFeeEv": 0,
+    "createTime": 0
   }
 ]
 ```
@@ -4206,7 +4206,7 @@ GET /exchange/public/md/v2/kline/list?symbol=<symbol>&to=<to>&from=<from>&resolu
 
 | Field       | Type    | Required    | Description            | Possible Values                                                                                                |
 |-------------|---------|-------------|------------------------|----------------------------------------------------------------------------------------------------------------|
-|symbol       | String  | Yes         | symbol name            | BTCUSD,ETHUSD,uBTCUSD,cETHUSD,XRPUSD...                                                                        | 
+|symbol       | String  | Yes         | symbol name            | BTCUSD,cETHUSD...                                                                        | 
 | from        | Integer | Yes         | start time in seconds  | value aligned in resolution boundary                                                                           |
 | to          | Integer | Yes         | end time in seconds    | value aligned in resolution boundary; Number of k-lines return between [`from`, `to`) should be less than 2000 | 
 | resolution  | Integer | Yes         | kline interval         | the same as described above                                                                                    |
@@ -4562,7 +4562,7 @@ GET /api-data/g-futures/funding-fees?symbol=<symbol>
 
 | Parameter | Type    | Required | Description                   | Case                |
 |-----------|---------|----------|-------------------------------|---------------------|
-| symbol    | String  | True     | the currency to query         | BTCUSDT...          |
+| symbol    | String  | True     | the symbol to query           | BTCUSDT...          |
 | offset    | Integer | False    | page starts from 0            | default 0           |
 | limit     | Integer | False    | page size                     | default 20, max 200 |
 
@@ -5245,14 +5245,22 @@ AOP subscription requires the session been authorized successfully. DataGW extra
 {
   "accounts_p":[
     {
-      "accountBalanceRv":"1508.452588802237",
-      "accountID":9328670003,
-      "bonusBalanceRv":"0",
-      "currency":"USDT",
-      "totalUsedBalanceRv":"343.132599666883",
-      "userID":932867
+      "accountBalanceRv": "79.893465892948",
+      "accountID": 9328670003,
+      "bonusBalanceRv": "6.84929505445",
+      "currency": "USDT",
+      "totalUsedBalanceRv": "0.080208046444",
+      "userID": 932867
+    },
+    {
+      "accountBalanceRv": "0",
+      "accountID": 9328670399,
+      "bonusBalanceRv": "0",
+      "currency": "PT",
+      "totalUsedBalanceRv": "0",
+      "userID": 932867
     }
-  ],
+  ]
   "orders_p":[
     {
       "accountID":9328670003,
@@ -5524,20 +5532,20 @@ AOP subscription requires the session been authorized successfully. DataGW extra
   "sequence": 59555555,
   "timestamp": 1701414861475827540,
   "type": "incremental",
-  "version": 0
+  "version": 0 
 }
 
 
 
 ```
 
-| Field       | Type   | Description      | Possible values |
-|-------------|--------|------------------|-----------------|
-| timestamp   | Integer| Transaction timestamp in nanoseconds | |
-| sequence    | Integer| Latest message sequence |          |
-| symbol      | String | Contract symbol name    |          |
-| type        | String | Message type     | snapshot, incremental |
-
+| Field       |  Type   | Description      | Possible values |
+|-------------|---------|------------------|-----------------|
+| timestamp   | Integer | Transaction timestamp in nanoseconds | |
+| sequence    | Integer | Latest message sequence |          |
+| symbol      | String  | Contract symbol name    |          |
+| type        | String  | Message type     | snapshot, incremental |
+| light       | Integer | ADL alert        | [1, 5] |
 
 
 ## Unsubscribe Account-Order-Position (AOP)
