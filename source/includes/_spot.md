@@ -17,6 +17,18 @@ GET /public/products
 * Spot symbols are defined in `.products[]` with **type=Spot**.
 * Spot currencies are defined in `.currencies[]`.
 
+## Query product information plus
+
+> Request
+
+```
+GET /public/products-plus
+```
+
+* Spot symbols are defined in `.products[]` with **type=Spot**.
+  * `list time` is defined in timeline[1].
+  * `delist time` is defined in timeline[3].
+* Spot currencies are defined in `.currencies[]`.
 
 ## Query server time
 

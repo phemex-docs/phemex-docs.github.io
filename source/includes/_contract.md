@@ -1,4 +1,4 @@
-# Contract REST API
+# COIN-M Perpetual REST API 
 
 <a id="contract_symbols"></a>
 
@@ -10,7 +10,7 @@
 GET /public/products
 ```
 
-* USD-M perpetual contracts using USD as margin or COIN-M perpetual contracts using COIN as margin
+* COIN-M perpetual contracts using COIN as margin
 * Contract symbols are defined in `.products[]` with **type=Perpetual**.
 * Contract risklimit information are defined in `.risklimits[]`.
 * Contract which delisted has status with 'Delisted' .
@@ -170,6 +170,16 @@ GET /public/time
 | COPY_TRADE_REFUNDS      | 92   |
 | COPY_TRADE_PROFIT_SHARE | 93   |
 | MARGIN_TRANSFER         | 213  |
+
+
+* Risk Mode (for Risk Unit only)
+
+| RiskMode       | Description |
+|----------------|-------------|
+| CrossAsset     | one RiskUnit is related to many RiskWallets    |
+| SingleAsset    | one RiskUnit is related to one RiskWallet    |
+| Isolated       | one RiskUnit is related to one position and not related to RiskWallet    |
+
 
 ## More order fields explained
 | Field | Description |
@@ -1584,17 +1594,19 @@ GET /api-data/public/data/funding-rate-history?symbol=<symbol>&start=<start>&end
 }
 ```
 
-| Field  | Type    | Required | Description                                       | Possible Values |
-|--------|---------|----------|---------------------------------------------------|-----------------|
-| symbol | String  | True     | funding rate symbol                               | [fundingRateSymbol](#contract_symbols) |
-| start  | Long    | False    | start timestamp in ms of funding time (INCLUSIVE) | 1679852520918   |
-| end    | Long    | False    | end timestamp in ms of funding time (INCLUSIVE)   | 1679852520918   |
-| limit  | Integer | False    | default 100, max 100                              | 100             |
+| Field      | Type    | Required | Description                                                   | Possible Values                        |
+|------------|---------|----------|---------------------------------------------------------------|----------------------------------------|
+| symbol     | String  | True     | funding rate symbol                                           | [fundingRateSymbol](#contract_symbols) |
+| start      | Long    | False    | start timestamp in ms of funding time (INCLUSIVE)             | 1679852520918                          |
+| end        | Long    | False    | end timestamp in ms of funding time (INCLUSIVE)               | 1679852520918                          |
+| limit      | Integer | False    | default 100, max 100                                          | 100                                    |
+| latestOnly | Boolean | False    | returns the most recent record for each symbol, default false | true                                   |
 
 * If `start` and `end` parameters are not specified, the API will return the most recent data within the specified `limit`.
 * If the `start` parameter is provided while `end` is not, the API will return from `start` plus `limit` size of data.
 * If the number of items between `start` and `end` exceeds the specified `limit`, the API will return from `start` plus `limit` size of data.
 * The API returns data in ascending order based on the `fundingTime` attribute.
+* If `latestOnly` is true, other parameters are ignored and the most recent record of each symbol is returned. Otherwise, the query is performed based on other parameters.
 
 ## Query funding fee history
 
@@ -1695,7 +1707,7 @@ GET /api-data/futures/v2/tradeAccountDetail?currency=<currecny>&type=<type>&limi
 ]
 ```
 
-# Contract Websocket API
+# COIN-M Perpetual Websocket API 
 
 ## Heartbeat
 
@@ -1800,6 +1812,31 @@ On each successful subscription, DataGW will immediately send the current Order 
   ]
 }
 ```
+## Subscribe orderBook with Depth
+
+> Request format
+
+```json
+{
+  "id": <id>,
+  "method": "orderbook.subscribe",
+  "params": [
+    "<symbol>",
+    false,
+    "<depth>"
+  ]
+}
+```
+
+Subscribe orderbook update messages with **depth = <depth> and interval = 20ms**, depth can only be one of following number: 0, 1, 5, 10, 30. When depth=0, full orderbook will be published to client.
+
+On each successful subscription, DataGW will immediately send the current Order Book (with default depth=30) snapshot to client and all later order book updates will be published.
+
+**How to manage local orderbook?**
+1, After subscribing to the incremental load push (such as books 5 levels) of Order Book Channel, users firstreceive the initial full load of market depth. After the incremental load is subsequently received, update thelocal full load.
+2, lf there is the same price, compare the size. lf the size is 0, delete this depth data. lf the size changes replace the original data. (noted that if the price is within depth and the size is unchagned, the level will *NOT* published by incremental updates)
+3, lf it is not same price, sort by price (bid in descending order, ask in ascending order), and insert the depth information into the full load.
+4, Sort updated orderbook and keep top 5 levels (noted that the old price levels that falls behind the top 5 levels will not update anymore untill it comes back to top 5 levels).
 
 ## Subscribe full orderBook
 
@@ -2903,7 +2940,7 @@ i.e. `index` symbol follows a pattern `.<BASECURRENCY>`,
 | symbol   | String | Symbol                                          |              |
 
 
-# Hedged Contract Rest API
+#  USDT-M Perpetual Rest API 
 
 
 ## Query product information
@@ -2920,6 +2957,20 @@ GET /public/products
 * Contract which delisted has status with 'Delisted' .
 
 
+## Query product information plus
+
+> Request
+
+```
+GET /public/products-plus
+```
+
+* USDT-M perpetual contracts using USDT as margin.
+* You can find products info with hedged mode under node 'perpProductsV2'.
+* Contract risklimit information are defined in `.riskLimitsV2[]`.
+* Contract which delisted has status with 'Delisted' .
+  * `list time` is defined in timeline[1].
+  * `delist time` is defined in timeline[3].
 
 
 ## Place order (HTTP PUT, *prefered*)
@@ -3373,10 +3424,11 @@ GET /g-accounts/accountPositions?currency=<currency>&symbol=<symbol>
 ```
 * Request parameters
 
-| Field    | Type   | Required | Description |
-| -------- | ------ | -------- | ----------- |
-| symbol   | String | -        |             |
-| currency | String | Yes      |             |
+
+| Field    | Type   | Required | Description | Possible values |
+| -------- | ------ | -------- | ----------- | --------------- |
+| symbol   | String | -        |             | BTCUSDT         |
+| currency | String | Yes      |             | USDT            |
 
 * Response Fields 
 
@@ -3513,6 +3565,43 @@ GET /g-accounts/positions?currency=<currency>
 
 <b>NOTE:</b> Highly recommend calculating `unRealisedPnlRv` in client side with latest `markPriceRp` to avoid ratelimit
 penalty.
+
+## Query risk unit
+
+> Request format
+
+```
+GET /g-accounts/risk-unit
+```
+
+> Response sample
+
+```json
+{
+  "code": 0,
+  "msg": "",
+  "data": [
+    {
+      "userId": 11339116,
+      "riskMode": "CrossAsset",
+      "valuationCcy": 3,
+      "symbol": "",
+      "posSide": "",
+      "marginRatioRr": 80.11309869,
+      "totalBalanceRv": 89552.96995523879,
+      "totalEquityRv": 93424.33406986,
+      "estAvailableBalanceRv": 72476.455163092,
+      "totalFreeRv": 0,
+      "totalPosUnpnlRv": 3871.36411462121,
+      "totalPosCostRv": 20947.878906768,
+      "totalPosMMRv": 1166.1555424824,
+      "totalOrdUsedBalanceRv": 0,
+      "totalOrdOpenLossRv": 0,
+      "fixedUsedRv": 0
+    }
+  ]
+}
+```
 
 ## Switch Position Mode Synchronously
 
@@ -4461,51 +4550,6 @@ GET /api-data/g-futures/trades?symbol=<symbol>
 4\) Searching for specific symbols under a currency needs both symbols and currency parameter.<br>
 
 
-## Query funding rate history
-
-> Request format
-
-```
-GET /api-data/public/data/funding-rate-history?symbol=<symbol>&start=<start>&end=<end>&limit=<limit>
-```
-
-> Response sample
-
-```json
-{
-  "code": 0,
-  "msg": "OK",
-  "data": {
-    "rows": [
-      {
-        "symbol": ".ETHUSDTFR8H",
-        "fundingRate": "0.0001",
-        "fundingTime": 1680768000000,
-        "intervalSeconds": 28800
-      },
-      {
-        "symbol": ".ETHUSDTFR8H",
-        "fundingRate": "0.0001",
-        "fundingTime": 1680796800000,
-        "intervalSeconds": 28800
-      }
-    ]
-  }
-}
-```
-
-| Field  | Type    | Required | Description                                       | Possible Values |
-|--------|---------|----------|---------------------------------------------------|-----------------|
-| symbol | String  | True     | funding rate symbol                               | [fundingRateSymbol](#contract_symbols) |
-| start  | Long    | False    | start timestamp in ms of funding time (INCLUSIVE) | 1679852520918   |
-| end    | Long    | False    | end timestamp in ms of funding time (INCLUSIVE)   | 1679852520918   |
-| limit  | Integer | False    | default 100, max 100                              | 100             |
-
-* If `start` and `end` parameters are not specified, the API will return the most recent data within the specified `limit`.
-* If the `start` parameter is provided while `end` is not, the API will return from `start` plus `limit` size of data.
-* If the number of items between `start` and `end` exceeds the specified `limit`, the API will return from `start` plus `limit` size of data.
-* The API returns data in ascending order based on the `fundingTime` attribute.
-
 ## Query funding fee history
 
 > Request format
@@ -4541,7 +4585,42 @@ GET /api-data/g-futures/funding-fees?symbol=<symbol>
 ]
 ```
 
-# Hedged Contract Websocket API
+## Query real funding rates
+
+> Request format
+
+```
+GET contract-biz/public/real-funding-rates?symbol=<symbol>
+```
+
+* Request parameters
+
+| Parameter     | Type    | Required | Description         | Case                                                                                   |
+|---------------|---------|----------|---------------------|----------------------------------------------------------------------------------------|
+| symbol        | String  | False    | the symbol to query | BTCUSDT...,defaultValue 'ALL'                                                          |
+| orderByColumn | String  | False    | order by column     | symbol,fundingInterval,toNextfundingInterval,fundingRate,interestRate,default 'symbol' |
+| orderBy       | String  | False    | asc or desc         | asc,desc,default 'asc'                                                                 |
+| pageNum       | Integer | False    | page number         | default 1                                                                              |
+| pageSize      | Integer | False    | page size           | default 20                                                                             |
+
+> Response sample
+
+```json
+[
+  {
+    "symbol": "BTCUSDT",
+    "fundingInterval": 28800,
+    "toNextfundingInterval": 2519,
+    "nextfundingTime": 1742457600000,
+    "fundingRate": "0.00001369",
+    "interestRate": "0.0001",
+    "fundingRateCap": "0.02",
+    "fundingRateFloor": "-0.02"
+  }
+]
+```
+
+# USDT-M Perpetual Websocket API
 
 ## Heartbeat
 
@@ -4579,7 +4658,9 @@ GET /api-data/g-futures/funding-fees?symbol=<symbol>
 Market trade/orderbook are published publicly without user authentication.
 While for client private account/position/order data, the client should send user.auth message to Data Gateway to authenticate the session.
 
+
 > Request format
+
 ```json
 {
   "method": "user.auth",
@@ -4593,7 +4674,9 @@ While for client private account/position/order data, the client should send use
 }
 ```
 
+
 > Request sample
+
 ```json
 {
   "method": "user.auth",
@@ -4607,7 +4690,9 @@ While for client private account/position/order data, the client should send use
 }
 ```
 
+
 > Response sample
+
 ```json
 {
   "error": null,
@@ -4632,12 +4717,52 @@ On each successful subscription, DataGW will immediately send the current Order 
 
 
 > Request sample
+
 ```json
 {
   "id": 1234,
   "method": "orderbook_p.subscribe",
   "params": [
     "BTCUSDT"
+  ]
+}
+```
+
+> Response sample
+
+```json
+{
+  "error": null,
+  "id": 1234,
+  "result": {
+    "status": "success"
+  }
+}
+```
+
+## Subscribe orderBook with Depth for new Model
+
+
+Subscribe orderbook update messages with **depth = <depth> and interval = 20ms**, depth can only be one of following number: 0, 1, 5, 10, 30. When depth=0, full orderbook will be published to client.
+On each successful subscription, DataGW will immediately send the current Order Book snapshot to client and all later order book updates will be published.
+
+**How to manage local orderbook?**
+1, After subscribing to the incremental load push (such as books 5 levels) of Order Book Channel, users firstreceive the initial full load of market depth. After the incremental load is subsequently received, update thelocal full load.
+2, lf there is the same price, compare the size. lf the size is 0, delete this depth data. lf the size changes replace the original data. (noted that if the price is within depth and the size is unchagned, the level will *NOT* published by incremental updates)
+3, lf it is not same price, sort by price (bid in descending order, ask in ascending order), and insert the depth information into the full load.
+4, Sort updated orderbook and keep top 5 levels (noted that the old price levels that falls behind the top 5 levels will not update anymore untill it comes back to top 5 levels).
+
+
+> Request format
+
+```json
+{
+  "id": 1234,
+  "method": "orderbook_p.subscribe",
+  "params": [
+     "BTCUSDT",
+     false,
+    "<depth>"
   ]
 }
 ```
@@ -4658,34 +4783,29 @@ On each successful subscription, DataGW will immediately send the current Order 
 DataGW publishes order book message with types: incremental, snapshot. Incremental messages are published with 20ms interval. And snapshot messages are published with 60-second interval for client self-verification.
 
 > Response format
-```javascript
+```json
 {
   "book": {
     "asks": [
       [
-        <priceEp>,
-        <qty>
+        "<priceEp>",
+        "<qty>"
       ],
-      .
-      .
-      .
+      "..."
     ],
     "bids": [
       [
-        <priceEp>,
-        <qty>
+        "<priceEp>",
+        "<qty>"
       ],
-      .
-      .
-      .
+      "..."
     ]
   },
-  "depth": <depth>,
-  "sequence": <sequence>,
-  "timestamp": <timestamp>,
-  "symbol": "<symbol>",
+  "depth": "<depth>",
+  "sequence": "<sequence>",
+  "timestamp": "<timestamp>",
+  "symbol": "<symbol>"
 }
-
 ```
 
 * Sample：
@@ -5450,6 +5570,167 @@ AOP subscription requires the session been authorized successfully. DataGW extra
 }
 ```
 
+## Subscribe account margin (RAS)
+
+RAS subscription requires the session been authorized successfully. DataGW extracts the user information from the given token and sends RAS messages back to client accordingly. Latest account snapshot messages will be sent to client immediately on subscription, and incremental messages will be sent for later updates. Each account snapshot contains one risk unit for cross margin positions, and each one risk unit for each isolated position. And also one risk wallet for each currency.
+
+> Request format
+
+```javascript
+{
+    "id": <id>,
+    "method": "ras_p.subscribe",
+    "params": {}
+}
+```
+
+> Response fromat
+
+```javascript
+{
+    "error": null,
+    "id": <id>,
+    "result": {
+        "stauts": "success"
+    }
+}
+```
+
+> Sample
+```javascript
+{
+    "id": 1234,
+    "method": "ras_p.subscribe",
+    "params": {}
+}
+
+{
+    "error": null,
+    "id": 1234,
+    "result": {
+        "stauts": "success"
+    }
+}
+```
+
+### account margin (RAS) Message Sample:
+
+```javascript
+{
+  "risk_units": [
+    {
+      "estAvailableBalanceRv": "1806.82960617341",
+      "lastUpdateTimeNs": "2024-06-07T02:01:51.246394043Z",
+      "marginRatioRr": "999",
+      "posSide": 0,
+      "riskMode": "CrossAsset",
+      "symbol": "",
+      "totalBalanceRv": "1806.82960617341",
+      "totalEquityRv": "1806.82960617341",
+      "userID": 944384,
+      "userStatus": "Normal",
+      "userType": "Normal",
+      "valuationCurrency": "USDT",
+      "version": 111
+    },
+    {
+      "estAvailableBalanceRv": "-7.866995297237",
+      "fixedUsedRv": "8.180373498854",
+      "lastUpdateTimeNs": "2024-06-07T02:01:51.246394134Z",
+      "marginRatioRr": "14.28230196",
+      "posSide": 3,
+      "riskMode": "Isolated",
+      "symbol": "BTCUSDT",
+      "totalBalanceRv": "1075.34407386659",
+      "totalEquityRv": "1075.657452068207",
+      "totalPosCostRv": "1075.34407386659",
+      "totalPosMMRv": "74.741248391009",
+      "totalPosUnpnlRv": "0.313378201617",
+      "userID": 944384,
+      "userStatus": "Normal",
+      "userType": "Normal",
+      "valuationCurrency": "USDT",
+      "version": 76
+    }
+  ],
+  "risk_wallets": [
+    {
+      "balanceRv": "2882.17368004",
+      "clReqVid": 1,
+      "currency": "USDT",
+      "lastUpdateTimeNs": "2024-06-07T02:01:51.246394235Z",
+      "userID": 944384,
+      "version": 51
+    }
+  ],
+  "sequence": 13144420,
+  "timestamp": 0,
+  "type": "snapshot"
+}
+```
+
+| Field       | Type   | Description      | Possible values |
+|-------------|--------|------------------|-----------------|
+| timestamp   | Integer| Transaction timestamp in nanoseconds | |
+| sequence    | Integer| Latest message sequence |          |
+| type        | String | Message type     | snapshot, incremental |
+
+### Fields in RiskUnit
+
+| Field    | Type     | Description    | Possible Values |
+|----------|----------|----------------|-----------------|
+| riskMode | String | "CrossAsset" for Cross Margin Positions, and "Isolated" for isolated position | CrossAsset, Isolated |
+| estAvailableBalanceRv | String | estimated available balance for new orders | |
+| fixedUsedRv | String | margins allocated to fully hedged positions and bankrupt commission | |
+| lastUpdateTimeNs | Integer | the time in ns the message is generated | |
+| MarginRatioRr | String | the margin ratio level for the current risk unit | | 
+| posSide | Integer | the position side | Long, Short, Merged |
+| symbol      | String | Contract symbol name    |          |
+| totalBalanceRv | String | sum of balanceRv of all risk wallet | |
+| totalEquityRv | String | total equity excluding debt and interest | |
+| totalPosCostRv | String | total initial margin of position(s) | |
+| totalPosMMRv | String | total maintainence margin of position(s) | |
+| totalPosUnpnlRv | String | sum of unrealised pnl of position(s) | |
+| userID | Integer | user id | |
+| userStatus | String | user status| "Unspecified/Normal" for normal, "Banned" for banned, "Liq*" for liquidation |
+| userType | String| user type | always "Normal" for user |
+| valuationCurrency | String | settle currency | |
+| version | Integer | risk unit version | |
+
+### Fields of RiskWallet 
+
+| Field    | Type    | Description   | Possible values |
+|----------|---------|---------------|-----------------|
+| balanceRv | String | available balance, including bonus and debt | | 
+| currency | String | wallet currency | |
+| lastUpdateTimeNs | Integer | the time in ns the message is generated | |
+| userID | Integer | user id | |
+| version | Integer | wallet version | |
+
+
+## Unsubscribe account margin (RAS)
+
+>  Request format
+
+```javascript
+{
+    "id": <id>,
+    "method": "ras_p.unsubscribe",
+    "params": []
+}
+```
+
+> Response format
+
+```javascript
+{
+    "error": null,
+    "id": <id>,
+    "result": {
+        "status": "success"
+    }
+}
+```
 
 ## Subscribe 24 Hours Ticker
 On each successful subscription, DataGW will publish 24-hour ticker metrics for all symbols every 1 second.
@@ -5520,7 +5801,9 @@ On each successful subscription, DataGW will publish 24-hour ticker metrics for 
             <indexRp>,
             <markRp>,
             <fundingRateRr>,
-            <predFundingRateRr>
+            <predFundingRateRr>,
+            <bidRp>,
+            <askRp>
         ]
     ],
     "fields": [
@@ -5535,7 +5818,9 @@ On each successful subscription, DataGW will publish 24-hour ticker metrics for 
         "indexRp",
         "markRp",
         "fundingRateRr",
-        "predFundingRateRr"
+        "predFundingRateRr",
+        "bidRp",
+        "askRp"
     ],
     "method": "perp_market24h_pack_p.update",
     "timestamp": 1666862556850547000,
@@ -5549,32 +5834,36 @@ On each successful subscription, DataGW will publish 24-hour ticker metrics for 
 {
     "data": [
         [
-            "ETHUSDT",
-            "1533.72",
-            "1594.17",
-            "1510.05",
-            "1547.52",
-            "545942.34",
-            "848127644.5712",
-            "0",
-            "1548.31694379",
-            "1548.44513153",
-            "0.0001",
-            "0.0001"
+          "ETHUSDT"
+          "2741.72"
+          "2751.79"
+          "2665.64"
+          "2672.37"
+          "17602.76"
+          "47636475.2596"
+          "10136.8942265"
+          "2673.9822165"
+          "2672.68"
+          "0.0001"
+          "0.0001"
+          "2672.91"
+          "2672.92"
         ],
         [
-            "BTCUSDT",
-            "20614.5",
-            "21628.4",
-            "19258.6",
-            "20626.3",
-            "8819.819",
-            "182892627.4297",
-            "0",
-            "20641.8167574",
-            "20643.52572781",
-            "0.0001",
-            "0.0001"
+          "BTCUSDT"
+          "64057.2"
+          "64181.9"
+          "62565"
+          "62799.9"
+          "3331.699"
+          "210947547.9712"
+          "1268.8391029"
+          "62831.82728394"
+          "62806.9"
+          "0.0001"
+          "0.0001"
+          "62799.9"
+          "62800"
         ]
     ],
     "fields": [
@@ -5589,7 +5878,9 @@ On each successful subscription, DataGW will publish 24-hour ticker metrics for 
         "indexRp",
         "markRp",
         "fundingRateRr",
-        "predFundingRateRr"
+        "predFundingRateRr",
+        "bidRp",
+        "askRp"
     ],
     "method": "perp_market24h_pack_p.update",
     "timestamp": 1666862556850547000,
@@ -5611,6 +5902,8 @@ On each successful subscription, DataGW will publish 24-hour ticker metrics for 
 | markRp            | String  | Unscaled mark price                          |                                  |
 | fundingRateRr     | String  | Unscaled funding rate                        |                                  |
 | predFundingRateRr | String  | Unscaled predicated funding rate             |                                  |
+| bidRp             | String  | best bid price                  |
+| askRp             | String  | best ask price                  |
 
 
 
