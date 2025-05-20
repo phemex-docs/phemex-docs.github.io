@@ -2940,7 +2940,7 @@ i.e. `index` symbol follows a pattern `.<BASECURRENCY>`,
 | symbol   | String | Symbol                                          |              |
 
 
-#  USDT-M Perpetual Rest API 
+#  USDⓈ-M Perpetual Rest API 
 
 
 ## Query product information
@@ -2951,7 +2951,7 @@ i.e. `index` symbol follows a pattern `.<BASECURRENCY>`,
 GET /public/products
 ```
 
-* USDT-M perpetual contracts using USDT as margin.
+* USDⓈ-M perpetual contracts using USDT or USDC as margin.
 * You can find products info with hedged mode under node 'perpProductsV2'.
 * Contract risklimit information are defined in `.riskLimitsV2[]`.
 * Contract which delisted has status with 'Delisted' .
@@ -2965,7 +2965,7 @@ GET /public/products
 GET /public/products-plus
 ```
 
-* USDT-M perpetual contracts using USDT as margin.
+* USDⓈ-M perpetual contracts using USDT or USDC as margin.
 * You can find products info with hedged mode under node 'perpProductsV2'.
 * Contract risklimit information are defined in `.riskLimitsV2[]`.
 * Contract which delisted has status with 'Delisted' .
@@ -3426,9 +3426,9 @@ GET /g-accounts/accountPositions?currency=<currency>&symbol=<symbol>
 
 
 | Field    | Type   | Required | Description | Possible values |
-| -------- | ------ | -------- | ----------- | --------------- |
+| -------- | ------ | -------- | ----------- |-----------------|
 | symbol   | String | -        |             | BTCUSDT         |
-| currency | String | Yes      |             | USDT            |
+| currency | String | Yes      |             | USDT, USDC      |
 
 * Response Fields 
 
@@ -4620,7 +4620,7 @@ GET contract-biz/public/real-funding-rates?symbol=<symbol>
 ]
 ```
 
-# USDT-M Perpetual Websocket API
+# USDⓈ-M Perpetual Websocket API
 
 ## Heartbeat
 
