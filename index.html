@@ -924,7 +924,7 @@
               </ul>
           </li>
           <li>
-            <a href="#usdt-m-perpetual-rest-api" class="toc-h1 toc-link" data-title="USDT-M Perpetual Rest API">USDT-M Perpetual Rest API</a>
+            <a href="#usd-m-perpetual-rest-api" class="toc-h1 toc-link" data-title="USDⓈ-M Perpetual Rest API">USDⓈ-M Perpetual Rest API</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#query-product-information-2" class="toc-h2 toc-link" data-title="Query product information">Query product information</a>
@@ -1016,7 +1016,7 @@
               </ul>
           </li>
           <li>
-            <a href="#usdt-m-perpetual-websocket-api" class="toc-h1 toc-link" data-title="USDT-M Perpetual Websocket API">USDT-M Perpetual Websocket API</a>
+            <a href="#usd-m-perpetual-websocket-api" class="toc-h1 toc-link" data-title="USDⓈ-M Perpetual Websocket API">USDⓈ-M Perpetual Websocket API</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#heartbeat-2" class="toc-h2 toc-link" data-title="Heartbeat">Heartbeat</a>
@@ -6810,14 +6810,14 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
 <td></td>
 </tr>
 </tbody></table>
-<h1 id='usdt-m-perpetual-rest-api'>USDT-M Perpetual Rest API</h1><h2 id='query-product-information-2'>Query product information</h2>
+<h1 id='usd-m-perpetual-rest-api'>USDⓈ-M Perpetual Rest API</h1><h2 id='query-product-information-2'>Query product information</h2>
 <blockquote>
 <p>Request</p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>GET /public/products
 </code></pre></div>
 <ul>
-<li>USDT-M perpetual contracts using USDT as margin.</li>
+<li>USDⓈ-M perpetual contracts using USDT or USDC as margin.</li>
 <li>You can find products info with hedged mode under node &#39;perpProductsV2&#39;.</li>
 <li>Contract risklimit information are defined in <code>.riskLimitsV2[]</code>.</li>
 <li>Contract which delisted has status with &#39;Delisted&#39; .</li>
@@ -6829,7 +6829,7 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
 <div class="highlight"><pre class="highlight plaintext"><code>GET /public/products-plus
 </code></pre></div>
 <ul>
-<li>USDT-M perpetual contracts using USDT as margin.</li>
+<li>USDⓈ-M perpetual contracts using USDT or USDC as margin.</li>
 <li>You can find products info with hedged mode under node &#39;perpProductsV2&#39;.</li>
 <li>Contract risklimit information are defined in <code>.riskLimitsV2[]</code>.</li>
 <li>Contract which delisted has status with &#39;Delisted&#39; .
@@ -7689,7 +7689,7 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
 <td>String</td>
 <td>Yes</td>
 <td></td>
-<td>USDT</td>
+<td>USDT, USDC</td>
 </tr>
 </tbody></table>
 
@@ -9576,7 +9576,7 @@ For more information, please refer to the link: https://phemex.com/contract/leve
     </span><span class="nl">"fundingRateFloor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.02"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre></div><h1 id='usdt-m-perpetual-websocket-api'>USDT-M Perpetual Websocket API</h1><h2 id='heartbeat-2'>Heartbeat</h2>
+</span></code></pre></div><h1 id='usd-m-perpetual-websocket-api'>USDⓈ-M Perpetual Websocket API</h1><h2 id='heartbeat-2'>Heartbeat</h2>
 <ul>
 <li>Each client is required to actively send heartbeat (ping) message to Phemex data gateway (&#39;DataGW&#39; in short) with interval less than 30 seconds, otherwise DataGW will drop the connection. If a client sends a ping message, DataGW will reply with a pong message.</li>
 <li>Clients can use WS built-in ping message or the application level ping message to DataGW as heartbeat. The heartbeat interval is recommended to be set as <em>5 seconds</em>, and actively reconnect to DataGW if don&#39;t receive messages in <em>3 heartbeat intervals</em>.</li>
