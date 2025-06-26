@@ -6843,8 +6843,20 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
 <blockquote>
 <p>Request format</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>PUT /g-orders/create?clOrdID=&lt;clOrdID&gt;&amp;symbol=&lt;symbol&gt;&amp;reduceOnly=&lt;reduceOnly&gt;&amp;closeOnTrigger=&lt;closeOnTrigger&gt;&amp;orderQtyRq=&lt;orderQtyRq&gt;&amp;ordType=&lt;ordType&gt;&amp;priceRp=&lt;priceRp&gt;&amp;side=&lt;side&gt;&amp;posSide=&lt;posSide&gt;&amp;text=&lt;text&gt;&amp;timeInForce=&lt;timeInForce&gt;&amp;stopPxRp=&lt;stopPxRp&gt;&amp;takeProfitRp=&lt;takeProfitRp&gt;&amp;stopLossRp=&lt;stopLossRp&gt;&amp;pegOffsetValueRp=&lt;pegOffsetValueRp&gt;&amp;pegPriceType=&lt;pegPriceType&gt;&amp;triggerType=&lt;triggerType&gt;&amp;tpTrigger=&lt;tpTrigger&gt;&amp;tpSlTs=&lt;tpSlTs&gt;&amp;slTrigger=&lt;slTrigger&gt;
+<div class="highlight"><pre class="highlight plaintext"><code>PUT /g-orders/create?clOrdID=&lt;clOrdID&gt;&amp;symbol=&lt;symbol&gt;&amp;reduceOnly=&lt;reduceOnly&gt;&amp;closeOnTrigger=&lt;closeOnTrigger&gt;&amp;orderQtyRq=&lt;orderQtyRq&gt;&amp;ordType=&lt;ordType&gt;&amp;priceRp=&lt;priceRp&gt;&amp;side=&lt;side&gt;&amp;posSide=&lt;posSide&gt;&amp;text=&lt;text&gt;&amp;timeInForce=&lt;timeInForce&gt;&amp;stopPxRp=&lt;stopPxRp&gt;&amp;takeProfitRp=&lt;takeProfitRp&gt;&amp;stopLossRp=&lt;stopLossRp&gt;&amp;pegOffsetValueRp=&lt;pegOffsetValueRp&gt;&amp;pegPriceType=&lt;pegPriceType&gt;&amp;triggerType=&lt;triggerType&gt;&amp;tpTrigger=&lt;tpTrigger&gt;&amp;tpSlTs=&lt;tpSlTs&gt;&amp;slTrigger=&lt;slTrigger&gt;&amp;stpInstruction=&lt;stpInstruction&gt;
 </code></pre></div>
+<ul>
+<li>Order creation supports self trade prevention (STP).
+
+<ul>
+<li>Contact the CS team to enable <code>stpGroupId</code> for your account.</li>
+<li>Once <code>stpGroupId</code> is enabled, the parent account and sub-accounts will, by default, share the same <code>stpGroupId</code>.</li>
+<li>Users <strong>ONLY</strong> need to provide <code>stpInstruction</code> as an order parameter; the <code>stpGroupId</code> is automatically assigned once enabled.</li>
+<li>The <code>stpInstruction</code> in the taker order will have the priority to determine STP action when STP is triggered and both taker and maker orders have <code>stpInstruction</code> set.</li>
+<li>Both <code>stpGroupId</code> and <code>stpInstruction</code> are required to activate STP.</li>
+</ul></li>
+</ul>
+
 <blockquote>
 <p>Response sample</p>
 </blockquote>
@@ -7038,6 +7050,13 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
 <td>Trigger source</td>
 <td>ByMarkPrice, ByIndexPrice, ByLastPrice, ByAskPrice, ByBidPrice, ByMarkPriceLimit, ByLastPriceLimit</td>
 </tr>
+<tr>
+<td>stpInstruction</td>
+<td>String</td>
+<td>-</td>
+<td>Self trade prevention(STP) instruction, order action when stp triggered</td>
+<td>None, CancelMaker, CancelTaker, CancelBoth</td>
+</tr>
 </tbody></table>
 <h2 id='place-order-http-post-2'>Place order (HTTP POST)</h2>
 <ul>
@@ -7045,6 +7064,18 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
 </ul>
 
 <p>Request fields are the same as <a href="#placeorderwithput">above place-order</a></p>
+
+<ul>
+<li>Order creation supports self trade prevention (STP).
+
+<ul>
+<li>Contact the CS team to enable <code>stpGroupId</code> for your account.</li>
+<li>Once <code>stpGroupId</code> is enabled, the parent account and sub-accounts will, by default, share the same <code>stpGroupId</code>.</li>
+<li>Users <strong>ONLY</strong> need to provide <code>stpInstruction</code> as an order parameter; the <code>stpGroupId</code> is automatically assigned once enabled.</li>
+<li>The <code>stpInstruction</code> in the taker order will have the priority to determine STP action when STP is triggered and both taker and maker orders have <code>stpInstruction</code> set.</li>
+<li>Both <code>stpGroupId</code> and <code>stpInstruction</code> are required to activate STP.</li>
+</ul></li>
+</ul>
 
 <blockquote>
 <p>Request format</p>
@@ -7073,7 +7104,8 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
   &quot;text&quot;: &quot;string&quot;,
   &quot;timeInForce&quot;: &quot;GoodTillCancel&quot;,
   &quot;tpTrigger&quot;: &quot;ByMarkPrice&quot;,
-  &quot;triggerType&quot;: &quot;ByMarkPrice&quot;
+  &quot;triggerType&quot;: &quot;ByMarkPrice&quot;,
+  &quot;stpInstruction&quot;: &quot;CancelBoth&quot;
 }
 </code></p>
 
@@ -7269,6 +7301,13 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
 <td>-</td>
 <td>Trigger source</td>
 <td>ByMarkPrice, ByIndexPrice, ByLastPrice, ByAskPrice, ByBidPrice, ByMarkPriceLimit, ByLastPriceLimit</td>
+</tr>
+<tr>
+<td>stpInstruction</td>
+<td>String</td>
+<td>-</td>
+<td>Self trade prevention(STP) instruction, order action when stp triggered</td>
+<td>None, CancelMaker, CancelTaker, CancelBoth</td>
 </tr>
 </tbody></table>
 <h2 id='amend-order-by-orderid'>Amend order by orderID</h2>
