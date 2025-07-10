@@ -5598,7 +5598,7 @@ The unique key of such risk unit is
  }
 
 MultiAsset RiskMode:
-This is another main riskMode type. Each type of contract (for example, usdt contract, btc inverse contract, eth inverse contract etc) has its own risk unit in MultiAsset riskMode, with a scope to evaluate the risk summary of all cross positions in this contract. Although each risk unit in each contract has a separate liquidation process, assets or balance in onecontract can beusedascollaterals to another contract, thus risk evaluation could be co
+This is another main risk mode type. Each type of contract (for example, usdt contract, btc inverse contract, eth inverse contract etc) has its own risk unit in MultiAsset riskMode, with a scope to evaluate the risk summary of all cross positions in this contract. Although each risk unit in each contract has a separate liquidation process, assets or balance in onecontract can beusedascollaterals to another contract, thus risk evaluation could be co
 related. For example, the margin ratio of the btc contract risk unit can change because part of its balance is used as collateral for usdt contract positions.
 The unique key of such riskunit is
  {
