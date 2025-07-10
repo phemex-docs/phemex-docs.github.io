@@ -198,6 +198,8 @@ GET /public/time
 PUT /orders/create?clOrdID=<clOrdID>&symbol=<symbol>&reduceOnly=<reduceOnly>&closeOnTrigger=<closeOnTrigger>&orderQty=<orderQty>&displayQty=<displayQty>&ordType=<ordType>&priceEp=<priceEp>&side=<side>&text=<text>&timeInForce=<timeInForce>&stopPxEp=<stopPxEp>&takeProfitEp=<takeProfitEp>&stopLossEp=<stopLossEp>&pegOffsetValueEp=<pegOffsetValueEp>&pegPriceType=<pegPriceType>&trailingStopEp=<trailingStopEp>&triggerType=<triggerType>&tpTrigger=<tpTrigger>&tpSlTs=<tpSlTs>&slTrigger=<slTrigger>
 ```
 
+* Order creation supports [self trade prevention (STP)](#STP).
+
 > Response sample
 
 ```json
@@ -1829,7 +1831,7 @@ On each successful subscription, DataGW will immediately send the current Order 
 ```
 
 Subscribe orderbook update messages with **depth = <depth> and interval = 20ms**, depth can only be one of following number: 0, 1, 5, 10, 30. When depth=0, full orderbook will be published to client.
-
+The 2nd parameter is either “false” or "true". “false” indicates about 20ms interval of orderbook change, and it is the minimum interval that the market data service publishing orderbook now. The “true” parameter indicates about 120ms interval, aggregation of 20 ms market data service interval + 100 ms WS service interval.
 On each successful subscription, DataGW will immediately send the current Order Book (with default depth=30) snapshot to client and all later order book updates will be published.
 
 **How to manage local orderbook?**
@@ -2981,8 +2983,9 @@ GET /public/products-plus
 PUT /g-orders/create?clOrdID=<clOrdID>&symbol=<symbol>&reduceOnly=<reduceOnly>&closeOnTrigger=<closeOnTrigger>&orderQtyRq=<orderQtyRq>&ordType=<ordType>&priceRp=<priceRp>&side=<side>&posSide=<posSide>&text=<text>&timeInForce=<timeInForce>&stopPxRp=<stopPxRp>&takeProfitRp=<takeProfitRp>&stopLossRp=<stopLossRp>&pegOffsetValueRp=<pegOffsetValueRp>&pegPriceType=<pegPriceType>&triggerType=<triggerType>&tpTrigger=<tpTrigger>&tpSlTs=<tpSlTs>&slTrigger=<slTrigger>&stpInstruction=<stpInstruction>
 ```
 
+<a id="STP"></a>
 * Order creation supports self trade prevention (STP).
-  * Contact the CS team to enable `stpGroupId` for your account.
+  * Contact the Phemex support to enable `stpGroupId` for your account.
   * Once `stpGroupId` is enabled, the parent account and sub-accounts will, by default, share the same `stpGroupId`.
   * Users **ONLY** need to provide `stpInstruction` as an order parameter; the `stpGroupId` is automatically assigned once enabled.
   * The `stpInstruction` in the taker order will have the priority to determine STP action when STP is triggered and both taker and maker orders have `stpInstruction` set.
@@ -3058,7 +3061,7 @@ PUT /g-orders/create?clOrdID=<clOrdID>&symbol=<symbol>&reduceOnly=<reduceOnly>&c
   Request fields are the same as [above place-order](#placeorderwithput)
 
 * Order creation supports self trade prevention (STP).
-  * Contact the CS team to enable `stpGroupId` for your account.
+  * Contact the Phemex support to enable `stpGroupId` for your account.
   * Once `stpGroupId` is enabled, the parent account and sub-accounts will, by default, share the same `stpGroupId`.
   * Users **ONLY** need to provide `stpInstruction` as an order parameter; the `stpGroupId` is automatically assigned once enabled.
   * The `stpInstruction` in the taker order will have the priority to determine STP action when STP is triggered and both taker and maker orders have `stpInstruction` set.
@@ -4727,7 +4730,7 @@ While for client private account/position/order data, the client should send use
 | expiry      | Integer| A future time after which request will be rejected, in epoch ***second***. Maximum expiry is request time plus 2 minutes ||
 
 
-## Subscribe OrderBook for new Model
+## Subscribe OrderBook
 
 On each successful subscription, DataGW will immediately send the current Order Book snapshot to client and all later order book updates will be published.
 
@@ -4756,10 +4759,11 @@ On each successful subscription, DataGW will immediately send the current Order 
 }
 ```
 
-## Subscribe orderBook with Depth for new Model
+## Subscribe orderBook with Depth
 
 
-Subscribe orderbook update messages with **depth = <depth> and interval = 20ms**, depth can only be one of following number: 0, 1, 5, 10, 30. When depth=0, full orderbook will be published to client.
+Subscribe orderbook update messages with **depth = <depth> and interval = 20ms**, depth can only be one of following number: 0, 1, 5, 10, 30. When depth=0, full orderbook will be published to client. 
+The 2nd parameter is either “false” or "true". “false” indicates about 20ms interval of orderbook change, and it is the minimum interval that the market data service publishing orderbook now. The “true” parameter indicates about 120ms interval, aggregation of 20 ms market data service interval + 100 ms WS service interval.
 On each successful subscription, DataGW will immediately send the current Order Book snapshot to client and all later order book updates will be published.
 
 **How to manage local orderbook?**
@@ -5580,6 +5584,39 @@ AOP subscription requires the session been authorized successfully. DataGW extra
 
 ## Subscribe account margin (RAS)
 
+RiskUnit is the unit of risk evaluation, which contains summary information of positions or assets within its scope.
+Each user must have at least one main riskMode riskunit, which could be Classic or MultiAsset. Besides the main riskMode, user may have isolated riskMode riskunits.
+
+Classic RiskMode
+This is the main riskMode type. Each type of contract (for example, usdt contract, btc inverse contract, eth inverse contract etc) has its own risk unit in Classic riskMode, with a scope to evaluate the risk summary of all cross positions in a this contract. User in this mode would trade different contracts separately, which means each contract has its own balance, risk evaluation and liquidation process.  
+The unique key of such risk unit is:  
+ {
+ riskMode : Classic ,
+ valuationCurrency : {thisContractSettleCcy} ,
+ symbol :{thisContractMajorSymbol},
+ posSide :0
+ }
+
+MultiAsset RiskMode:
+This is another main risk mode type. Each type of contract (for example, usdt contract, btc inverse contract, eth inverse contract etc) has its own risk unit in MultiAsset riskMode, with a scope to evaluate the risk summary of all cross positions in this contract. Although each risk unit in each contract has a separate liquidation process, assets or balance in one contract can be used as collaterals to another contract, thus risk evaluation could be correlated. For example, the margin ratio of the btc contract risk unit can change because part of its balance is used as collateral for usdt contract positions.  
+The unique key of such riskunit is:  
+ {
+ riskMode : MultiAsset ,
+ valuationCurrency : {thisContractSettleCcy} ,
+ symbol :{thisContractMajorSymbol},
+ posSide :0
+ }
+
+Isolated RiskMode:
+This is not a main risk mode type, so user doesnot necessarily have this riskunits under the main mode. When user has one riskuni tin IsolatedriskMode, it will be related to one isolated position.  
+The unique key of such riskunit is:  
+ {
+ riskMode : Isolated ,
+ valuationCurrency : {isolatedPosSettleCcy} ,
+ symbol :{isolatedPosSymbol},
+ posSide :{isolatedPosSide}
+ }
+
 RAS subscription requires the session been authorized successfully. DataGW extracts the user information from the given token and sends RAS messages back to client accordingly. Latest account snapshot messages will be sent to client immediately on subscription, and incremental messages will be sent for later updates. Each account snapshot contains one risk unit for cross margin positions, and each one risk unit for each isolated position. And also one risk wallet for each currency.
 
 > Request format
@@ -5627,7 +5664,6 @@ RAS subscription requires the session been authorized successfully. DataGW extra
 {
   "risk_units": [
     {
-      "estAvailableBalanceRv": "1806.82960617341",
       "lastUpdateTimeNs": "2024-06-07T02:01:51.246394043Z",
       "marginRatioRr": "999",
       "posSide": 0,
@@ -5637,13 +5673,10 @@ RAS subscription requires the session been authorized successfully. DataGW extra
       "totalEquityRv": "1806.82960617341",
       "userID": 944384,
       "userStatus": "Normal",
-      "userType": "Normal",
       "valuationCurrency": "USDT",
       "version": 111
     },
     {
-      "estAvailableBalanceRv": "-7.866995297237",
-      "fixedUsedRv": "8.180373498854",
       "lastUpdateTimeNs": "2024-06-07T02:01:51.246394134Z",
       "marginRatioRr": "14.28230196",
       "posSide": 3,
@@ -5651,14 +5684,27 @@ RAS subscription requires the session been authorized successfully. DataGW extra
       "symbol": "BTCUSDT",
       "totalBalanceRv": "1075.34407386659",
       "totalEquityRv": "1075.657452068207",
-      "totalPosCostRv": "1075.34407386659",
-      "totalPosMMRv": "74.741248391009",
-      "totalPosUnpnlRv": "0.313378201617",
       "userID": 944384,
       "userStatus": "Normal",
-      "userType": "Normal",
       "valuationCurrency": "USDT",
       "version": 76
+    },
+    {
+      "lastUpdateTimeNs" : 2024-06-07T02:01:51.246394134Z ,
+      "marginRatioRr" :"14.3917512113",
+      "posSide" :3,
+      "riskMode" : Isolated ,
+      "symbol" : BTCUSDT ,
+      "totalBalanceRv" :"1075.34407386659",
+      "totalEquityRv" :"1075.657452068207",
+      "totalPosCostRv" :"1075.34407386659",
+      "totalPosMMRv" :"74.741248391009",
+      "totalPosUnpnlRv" :"0.313378201617",
+      "userID":944384,
+      "userStatus" : Normal ,
+      "userType" : Normal ,
+      "valuationCurrency" : USDT ,
+      "version" :76
     }
   ],
   "risk_wallets": [
@@ -5714,6 +5760,8 @@ RAS subscription requires the session been authorized successfully. DataGW extra
 | lastUpdateTimeNs | Integer | the time in ns the message is generated | |
 | userID | Integer | user id | |
 | version | Integer | wallet version | |
+| totalContractDebtRv | String | the outstanding debt of the currency arising from trades | |
+| totalInterestRv | String | the outstanding interest of the currency | |
 
 
 ## Unsubscribe account margin (RAS)
