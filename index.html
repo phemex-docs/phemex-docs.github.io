@@ -1028,10 +1028,10 @@
                     <a href="#api-user-authentication" class="toc-h2 toc-link" data-title="API User Authentication">API User Authentication</a>
                   </li>
                   <li>
-                    <a href="#subscribe-orderbook-for-new-model" class="toc-h2 toc-link" data-title="Subscribe OrderBook for new Model">Subscribe OrderBook for new Model</a>
+                    <a href="#subscribe-orderbook-2" class="toc-h2 toc-link" data-title="Subscribe OrderBook">Subscribe OrderBook</a>
                   </li>
                   <li>
-                    <a href="#subscribe-orderbook-with-depth-for-new-model" class="toc-h2 toc-link" data-title="Subscribe orderBook with Depth for new Model">Subscribe orderBook with Depth for new Model</a>
+                    <a href="#subscribe-orderbook-with-depth-2" class="toc-h2 toc-link" data-title="Subscribe orderBook with Depth">Subscribe orderBook with Depth</a>
                   </li>
                   <li>
                     <a href="#orderbook-message-2" class="toc-h2 toc-link" data-title="OrderBook Message:">OrderBook Message:</a>
@@ -1199,7 +1199,7 @@
                     <a href="#user-authentication-2" class="toc-h2 toc-link" data-title="User authentication">User authentication</a>
                   </li>
                   <li>
-                    <a href="#subscribe-orderbook-2" class="toc-h2 toc-link" data-title="Subscribe orderBook">Subscribe orderBook</a>
+                    <a href="#subscribe-orderbook-3" class="toc-h2 toc-link" data-title="Subscribe orderBook">Subscribe orderBook</a>
                   </li>
                   <li>
                     <a href="#subscribe-full-orderbook-2" class="toc-h2 toc-link" data-title="Subscribe full orderBook">Subscribe full orderBook</a>
@@ -3057,6 +3057,10 @@ Because the number of interfaces in Other group may grow over time, the list bel
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>PUT /orders/create?clOrdID=&lt;clOrdID&gt;&amp;symbol=&lt;symbol&gt;&amp;reduceOnly=&lt;reduceOnly&gt;&amp;closeOnTrigger=&lt;closeOnTrigger&gt;&amp;orderQty=&lt;orderQty&gt;&amp;displayQty=&lt;displayQty&gt;&amp;ordType=&lt;ordType&gt;&amp;priceEp=&lt;priceEp&gt;&amp;side=&lt;side&gt;&amp;text=&lt;text&gt;&amp;timeInForce=&lt;timeInForce&gt;&amp;stopPxEp=&lt;stopPxEp&gt;&amp;takeProfitEp=&lt;takeProfitEp&gt;&amp;stopLossEp=&lt;stopLossEp&gt;&amp;pegOffsetValueEp=&lt;pegOffsetValueEp&gt;&amp;pegPriceType=&lt;pegPriceType&gt;&amp;trailingStopEp=&lt;trailingStopEp&gt;&amp;triggerType=&lt;triggerType&gt;&amp;tpTrigger=&lt;tpTrigger&gt;&amp;tpSlTs=&lt;tpSlTs&gt;&amp;slTrigger=&lt;slTrigger&gt;
 </code></pre></div>
+<ul>
+<li>Order creation supports <a href="#STP">self trade prevention (STP)</a>.</li>
+</ul>
+
 <blockquote>
 <p>Response sample</p>
 </blockquote>
@@ -5501,9 +5505,9 @@ While for private channels like account/position/order data, the client should s
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>Subscribe orderbook update messages with <strong>depth = <depth> and interval = 20ms</strong>, depth can only be one of following number: 0, 1, 5, 10, 30. When depth=0, full orderbook will be published to client.</p>
-
-<p>On each successful subscription, DataGW will immediately send the current Order Book (with default depth=30) snapshot to client and all later order book updates will be published.</p>
+<p>Subscribe orderbook update messages with <strong>depth = <depth> and interval = 20ms</strong>, depth can only be one of following number: 0, 1, 5, 10, 30. When depth=0, full orderbook will be published to client.
+The 2nd parameter is either “false” or &quot;true&quot;. “false” indicates about 20ms interval of orderbook change, and it is the minimum interval that the market data service publishing orderbook now. The “true” parameter indicates about 120ms interval, aggregation of 20 ms market data service interval + 100 ms WS service interval.
+On each successful subscription, DataGW will immediately send the current Order Book (with default depth=30) snapshot to client and all later order book updates will be published.</p>
 
 <p><strong>How to manage local orderbook?</strong>
 1, After subscribing to the incremental load push (such as books 5 levels) of Order Book Channel, users firstreceive the initial full load of market depth. After the incremental load is subsequently received, update thelocal full load.
@@ -6845,17 +6849,13 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>PUT /g-orders/create?clOrdID=&lt;clOrdID&gt;&amp;symbol=&lt;symbol&gt;&amp;reduceOnly=&lt;reduceOnly&gt;&amp;closeOnTrigger=&lt;closeOnTrigger&gt;&amp;orderQtyRq=&lt;orderQtyRq&gt;&amp;ordType=&lt;ordType&gt;&amp;priceRp=&lt;priceRp&gt;&amp;side=&lt;side&gt;&amp;posSide=&lt;posSide&gt;&amp;text=&lt;text&gt;&amp;timeInForce=&lt;timeInForce&gt;&amp;stopPxRp=&lt;stopPxRp&gt;&amp;takeProfitRp=&lt;takeProfitRp&gt;&amp;stopLossRp=&lt;stopLossRp&gt;&amp;pegOffsetValueRp=&lt;pegOffsetValueRp&gt;&amp;pegPriceType=&lt;pegPriceType&gt;&amp;triggerType=&lt;triggerType&gt;&amp;tpTrigger=&lt;tpTrigger&gt;&amp;tpSlTs=&lt;tpSlTs&gt;&amp;slTrigger=&lt;slTrigger&gt;&amp;stpInstruction=&lt;stpInstruction&gt;
 </code></pre></div>
-<ul>
-<li>Order creation supports self trade prevention (STP).
-
-<ul>
-<li>Contact the CS team to enable <code>stpGroupId</code> for your account.</li>
-<li>Once <code>stpGroupId</code> is enabled, the parent account and sub-accounts will, by default, share the same <code>stpGroupId</code>.</li>
-<li>Users <strong>ONLY</strong> need to provide <code>stpInstruction</code> as an order parameter; the <code>stpGroupId</code> is automatically assigned once enabled.</li>
-<li>The <code>stpInstruction</code> in the taker order will have the priority to determine STP action when STP is triggered and both taker and maker orders have <code>stpInstruction</code> set.</li>
-<li>Both <code>stpGroupId</code> and <code>stpInstruction</code> are required to activate STP.</li>
-</ul></li>
-</ul>
+<p><a id="STP"></a>
+* Order creation supports self trade prevention (STP).
+  * Contact the Phemex support to enable <code>stpGroupId</code> for your account.
+  * Once <code>stpGroupId</code> is enabled, the parent account and sub-accounts will, by default, share the same <code>stpGroupId</code>.
+  * Users <strong>ONLY</strong> need to provide <code>stpInstruction</code> as an order parameter; the <code>stpGroupId</code> is automatically assigned once enabled.
+  * The <code>stpInstruction</code> in the taker order will have the priority to determine STP action when STP is triggered and both taker and maker orders have <code>stpInstruction</code> set.
+  * Both <code>stpGroupId</code> and <code>stpInstruction</code> are required to activate STP.</p>
 
 <blockquote>
 <p>Response sample</p>
@@ -7069,7 +7069,7 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
 <li>Order creation supports self trade prevention (STP).
 
 <ul>
-<li>Contact the CS team to enable <code>stpGroupId</code> for your account.</li>
+<li>Contact the Phemex support to enable <code>stpGroupId</code> for your account.</li>
 <li>Once <code>stpGroupId</code> is enabled, the parent account and sub-accounts will, by default, share the same <code>stpGroupId</code>.</li>
 <li>Users <strong>ONLY</strong> need to provide <code>stpInstruction</code> as an order parameter; the <code>stpGroupId</code> is automatically assigned once enabled.</li>
 <li>The <code>stpInstruction</code> in the taker order will have the priority to determine STP action when STP is triggered and both taker and maker orders have <code>stpInstruction</code> set.</li>
@@ -9720,7 +9720,7 @@ While for client private account/position/order data, the client should send use
 <td></td>
 </tr>
 </tbody></table>
-<h2 id='subscribe-orderbook-for-new-model'>Subscribe OrderBook for new Model</h2>
+<h2 id='subscribe-orderbook-2'>Subscribe OrderBook</h2>
 <p>On each successful subscription, DataGW will immediately send the current Order Book snapshot to client and all later order book updates will be published.</p>
 
 <blockquote>
@@ -9744,8 +9744,9 @@ While for client private account/position/order data, the client should send use
     </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h2 id='subscribe-orderbook-with-depth-for-new-model'>Subscribe orderBook with Depth for new Model</h2>
-<p>Subscribe orderbook update messages with <strong>depth = <depth> and interval = 20ms</strong>, depth can only be one of following number: 0, 1, 5, 10, 30. When depth=0, full orderbook will be published to client.
+</span></code></pre></div><h2 id='subscribe-orderbook-with-depth-2'>Subscribe orderBook with Depth</h2>
+<p>Subscribe orderbook update messages with <strong>depth = <depth> and interval = 20ms</strong>, depth can only be one of following number: 0, 1, 5, 10, 30. When depth=0, full orderbook will be published to client. 
+The 2nd parameter is either “false” or &quot;true&quot;. “false” indicates about 20ms interval of orderbook change, and it is the minimum interval that the market data service publishing orderbook now. The “true” parameter indicates about 120ms interval, aggregation of 20 ms market data service interval + 100 ms WS service interval.
 On each successful subscription, DataGW will immediately send the current Order Book snapshot to client and all later order book updates will be published.</p>
 
 <p><strong>How to manage local orderbook?</strong>
@@ -10721,6 +10722,39 @@ Response sample
 </code></p>
 </blockquote>
 <h2 id='subscribe-account-margin-ras'>Subscribe account margin (RAS)</h2>
+<p>RiskUnit is the unit of risk evaluation, which contains summary information of positions or assets within its scope.
+Each user must have at least one main riskMode riskunit, which could be Classic or MultiAsset. Besides the main riskMode, user may have isolated riskMode riskunits.</p>
+
+<p>Classic RiskMode
+This is the main riskMode type. Each type of contract (for example, usdt contract, btc inverse contract, eth inverse contract etc) has its own risk unit in Classic riskMode, with a scope to evaluate the risk summary of all cross positions in a this contract. User in this mode would trade different contracts separately, which means each contract has its own balance, risk evaluation and liquidation process.<br>
+The unique key of such risk unit is:<br>
+ {
+ riskMode : Classic ,
+ valuationCurrency : {thisContractSettleCcy} ,
+ symbol :{thisContractMajorSymbol},
+ posSide :0
+ }</p>
+
+<p>MultiAsset RiskMode:
+This is another main risk mode type. Each type of contract (for example, usdt contract, btc inverse contract, eth inverse contract etc) has its own risk unit in MultiAsset riskMode, with a scope to evaluate the risk summary of all cross positions in this contract. Although each risk unit in each contract has a separate liquidation process, assets or balance in one contract can be used as collaterals to another contract, thus risk evaluation could be correlated. For example, the margin ratio of the btc contract risk unit can change because part of its balance is used as collateral for usdt contract positions.<br>
+The unique key of such riskunit is:<br>
+ {
+ riskMode : MultiAsset ,
+ valuationCurrency : {thisContractSettleCcy} ,
+ symbol :{thisContractMajorSymbol},
+ posSide :0
+ }</p>
+
+<p>Isolated RiskMode:
+This is not a main risk mode type, so user doesnot necessarily have this riskunits under the main mode. When user has one riskuni tin IsolatedriskMode, it will be related to one isolated position.<br>
+The unique key of such riskunit is:<br>
+ {
+ riskMode : Isolated ,
+ valuationCurrency : {isolatedPosSettleCcy} ,
+ symbol :{isolatedPosSymbol},
+ posSide :{isolatedPosSide}
+ }</p>
+
 <p>RAS subscription requires the session been authorized successfully. DataGW extracts the user information from the given token and sends RAS messages back to client accordingly. Latest account snapshot messages will be sent to client immediately on subscription, and incremental messages will be sent for later updates. Each account snapshot contains one risk unit for cross margin positions, and each one risk unit for each isolated position. And also one risk wallet for each currency.</p>
 
 <blockquote>
@@ -10764,7 +10798,6 @@ Response sample
 <h3 id='account-margin-ras-message-sample'>account margin (RAS) Message Sample:</h3><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
   <span class="dl">"</span><span class="s2">risk_units</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
-      <span class="dl">"</span><span class="s2">estAvailableBalanceRv</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1806.82960617341</span><span class="dl">"</span><span class="p">,</span>
       <span class="dl">"</span><span class="s2">lastUpdateTimeNs</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2024-06-07T02:01:51.246394043Z</span><span class="dl">"</span><span class="p">,</span>
       <span class="dl">"</span><span class="s2">marginRatioRr</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">999</span><span class="dl">"</span><span class="p">,</span>
       <span class="dl">"</span><span class="s2">posSide</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -10774,13 +10807,10 @@ Response sample
       <span class="dl">"</span><span class="s2">totalEquityRv</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1806.82960617341</span><span class="dl">"</span><span class="p">,</span>
       <span class="dl">"</span><span class="s2">userID</span><span class="dl">"</span><span class="p">:</span> <span class="mi">944384</span><span class="p">,</span>
       <span class="dl">"</span><span class="s2">userStatus</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Normal</span><span class="dl">"</span><span class="p">,</span>
-      <span class="dl">"</span><span class="s2">userType</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Normal</span><span class="dl">"</span><span class="p">,</span>
       <span class="dl">"</span><span class="s2">valuationCurrency</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">USDT</span><span class="dl">"</span><span class="p">,</span>
       <span class="dl">"</span><span class="s2">version</span><span class="dl">"</span><span class="p">:</span> <span class="mi">111</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="dl">"</span><span class="s2">estAvailableBalanceRv</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">-7.866995297237</span><span class="dl">"</span><span class="p">,</span>
-      <span class="dl">"</span><span class="s2">fixedUsedRv</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">8.180373498854</span><span class="dl">"</span><span class="p">,</span>
       <span class="dl">"</span><span class="s2">lastUpdateTimeNs</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2024-06-07T02:01:51.246394134Z</span><span class="dl">"</span><span class="p">,</span>
       <span class="dl">"</span><span class="s2">marginRatioRr</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">14.28230196</span><span class="dl">"</span><span class="p">,</span>
       <span class="dl">"</span><span class="s2">posSide</span><span class="dl">"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
@@ -10788,14 +10818,27 @@ Response sample
       <span class="dl">"</span><span class="s2">symbol</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">BTCUSDT</span><span class="dl">"</span><span class="p">,</span>
       <span class="dl">"</span><span class="s2">totalBalanceRv</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1075.34407386659</span><span class="dl">"</span><span class="p">,</span>
       <span class="dl">"</span><span class="s2">totalEquityRv</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1075.657452068207</span><span class="dl">"</span><span class="p">,</span>
-      <span class="dl">"</span><span class="s2">totalPosCostRv</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1075.34407386659</span><span class="dl">"</span><span class="p">,</span>
-      <span class="dl">"</span><span class="s2">totalPosMMRv</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">74.741248391009</span><span class="dl">"</span><span class="p">,</span>
-      <span class="dl">"</span><span class="s2">totalPosUnpnlRv</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0.313378201617</span><span class="dl">"</span><span class="p">,</span>
       <span class="dl">"</span><span class="s2">userID</span><span class="dl">"</span><span class="p">:</span> <span class="mi">944384</span><span class="p">,</span>
       <span class="dl">"</span><span class="s2">userStatus</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Normal</span><span class="dl">"</span><span class="p">,</span>
-      <span class="dl">"</span><span class="s2">userType</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Normal</span><span class="dl">"</span><span class="p">,</span>
       <span class="dl">"</span><span class="s2">valuationCurrency</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">USDT</span><span class="dl">"</span><span class="p">,</span>
       <span class="dl">"</span><span class="s2">version</span><span class="dl">"</span><span class="p">:</span> <span class="mi">76</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="dl">"</span><span class="s2">lastUpdateTimeNs</span><span class="dl">"</span> <span class="p">:</span> <span class="mi">2024</span><span class="o">-</span><span class="mi">06</span><span class="o">-</span><span class="mi">07</span><span class="na">T02</span><span class="p">:</span><span class="mi">01</span><span class="p">:</span><span class="mf">51.246394134</span><span class="nx">Z</span> <span class="p">,</span>
+      <span class="dl">"</span><span class="s2">marginRatioRr</span><span class="dl">"</span> <span class="p">:</span><span class="dl">"</span><span class="s2">14.3917512113</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">posSide</span><span class="dl">"</span> <span class="p">:</span><span class="mi">3</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">riskMode</span><span class="dl">"</span> <span class="p">:</span> <span class="nx">Isolated</span> <span class="p">,</span>
+      <span class="dl">"</span><span class="s2">symbol</span><span class="dl">"</span> <span class="p">:</span> <span class="nx">BTCUSDT</span> <span class="p">,</span>
+      <span class="dl">"</span><span class="s2">totalBalanceRv</span><span class="dl">"</span> <span class="p">:</span><span class="dl">"</span><span class="s2">1075.34407386659</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">totalEquityRv</span><span class="dl">"</span> <span class="p">:</span><span class="dl">"</span><span class="s2">1075.657452068207</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">totalPosCostRv</span><span class="dl">"</span> <span class="p">:</span><span class="dl">"</span><span class="s2">1075.34407386659</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">totalPosMMRv</span><span class="dl">"</span> <span class="p">:</span><span class="dl">"</span><span class="s2">74.741248391009</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">totalPosUnpnlRv</span><span class="dl">"</span> <span class="p">:</span><span class="dl">"</span><span class="s2">0.313378201617</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">userID</span><span class="dl">"</span><span class="p">:</span><span class="mi">944384</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">userStatus</span><span class="dl">"</span> <span class="p">:</span> <span class="nx">Normal</span> <span class="p">,</span>
+      <span class="dl">"</span><span class="s2">userType</span><span class="dl">"</span> <span class="p">:</span> <span class="nx">Normal</span> <span class="p">,</span>
+      <span class="dl">"</span><span class="s2">valuationCurrency</span><span class="dl">"</span> <span class="p">:</span> <span class="nx">USDT</span> <span class="p">,</span>
+      <span class="dl">"</span><span class="s2">version</span><span class="dl">"</span> <span class="p">:</span><span class="mi">76</span>
     <span class="p">}</span>
   <span class="p">],</span>
   <span class="dl">"</span><span class="s2">risk_wallets</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
@@ -10989,6 +11032,18 @@ Response sample
 <td>version</td>
 <td>Integer</td>
 <td>wallet version</td>
+<td></td>
+</tr>
+<tr>
+<td>totalContractDebtRv</td>
+<td>String</td>
+<td>the outstanding debt of the currency arising from trades</td>
+<td></td>
+</tr>
+<tr>
+<td>totalInterestRv</td>
+<td>String</td>
+<td>the outstanding interest of the currency</td>
 <td></td>
 </tr>
 </tbody></table>
@@ -12981,7 +13036,7 @@ While for private channels like account/position/order data, the client should s
 <td></td>
 </tr>
 </tbody></table>
-<h2 id='subscribe-orderbook-2'>Subscribe orderBook</h2>
+<h2 id='subscribe-orderbook-3'>Subscribe orderBook</h2>
 <blockquote>
 <p>Request format</p>
 </blockquote>
