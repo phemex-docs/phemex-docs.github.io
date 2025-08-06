@@ -2990,6 +2990,7 @@ PUT /g-orders/create?clOrdID=<clOrdID>&symbol=<symbol>&reduceOnly=<reduceOnly>&c
   * Users **ONLY** need to provide `stpInstruction` as an order parameter; the `stpGroupId` is automatically assigned once enabled.
   * The `stpInstruction` in the taker order will have the priority to determine STP action when STP is triggered and both taker and maker orders have `stpInstruction` set.
   * Both `stpGroupId` and `stpInstruction` are required to activate STP.
+  * FillOrKill and PostOnly orders would be rejected for stp.
 
 > Response sample
 
@@ -3066,6 +3067,7 @@ PUT /g-orders/create?clOrdID=<clOrdID>&symbol=<symbol>&reduceOnly=<reduceOnly>&c
   * Users **ONLY** need to provide `stpInstruction` as an order parameter; the `stpGroupId` is automatically assigned once enabled.
   * The `stpInstruction` in the taker order will have the priority to determine STP action when STP is triggered and both taker and maker orders have `stpInstruction` set.
   * Both `stpGroupId` and `stpInstruction` are required to activate STP.
+  * FillOrKill and PostOnly orders would be rejected for stp.
   
 > Request format
 
@@ -3606,7 +3608,7 @@ GET /g-accounts/risk-unit
       "valuationCcy": 3,
       "symbol": "",
       "posSide": "",
-      "marginRatioRr": 80.11309869,
+      "marginRatioRr": 0.01248235,
       "totalBalanceRv": 89552.96995523879,
       "totalEquityRv": 93424.33406986,
       "estAvailableBalanceRv": 72476.455163092,
@@ -5665,7 +5667,7 @@ RAS subscription requires the session been authorized successfully. DataGW extra
   "risk_units": [
     {
       "lastUpdateTimeNs": "2024-06-07T02:01:51.246394043Z",
-      "marginRatioRr": "999",
+      "marginRatioRr": "0.00100101",
       "posSide": 0,
       "riskMode": "CrossAsset",
       "symbol": "",
@@ -5678,7 +5680,7 @@ RAS subscription requires the session been authorized successfully. DataGW extra
     },
     {
       "lastUpdateTimeNs": "2024-06-07T02:01:51.246394134Z",
-      "marginRatioRr": "14.28230196",
+      "marginRatioRr": "0.28230196",
       "posSide": 3,
       "riskMode": "Isolated",
       "symbol": "BTCUSDT",
@@ -5689,23 +5691,6 @@ RAS subscription requires the session been authorized successfully. DataGW extra
       "valuationCurrency": "USDT",
       "version": 76
     },
-    {
-      "lastUpdateTimeNs" : 2024-06-07T02:01:51.246394134Z ,
-      "marginRatioRr" :"14.3917512113",
-      "posSide" :3,
-      "riskMode" : Isolated ,
-      "symbol" : BTCUSDT ,
-      "totalBalanceRv" :"1075.34407386659",
-      "totalEquityRv" :"1075.657452068207",
-      "totalPosCostRv" :"1075.34407386659",
-      "totalPosMMRv" :"74.741248391009",
-      "totalPosUnpnlRv" :"0.313378201617",
-      "userID":944384,
-      "userStatus" : Normal ,
-      "userType" : Normal ,
-      "valuationCurrency" : USDT ,
-      "version" :76
-    }
   ],
   "risk_wallets": [
     {
