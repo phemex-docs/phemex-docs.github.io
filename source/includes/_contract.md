@@ -3072,7 +3072,9 @@ PUT /g-orders/create?clOrdID=<clOrdID>&symbol=<symbol>&reduceOnly=<reduceOnly>&c
 ```
 POST /g-orders
 ```
-body:
+
+> Request body:
+
 ```json
 {
   "clOrdID": "137e1928-5d25-fecd-dbd1-705ded659a4f",
@@ -3679,6 +3681,9 @@ automatically adjusted.
 New Risk Limit Configuration Explanation:
 A new attribute called leverageMargin has been added to the properties of symbol pairs. By locating the corresponding index_id within the leverageMargins node, one can find the associated 'Risk Limit' information. The
 configuration is as follows:
+
+> Configuration
+
 ```json
 {
   "index_id": 1,
@@ -3716,6 +3721,7 @@ configuration is as follows:
   ]
 }
 ```
+
 For more information, please refer to the link: https://phemex.com/contract/leverage-margin
 
 
@@ -3757,7 +3763,8 @@ GET /g-orders/activeList?symbol=<symbol>
 
 > Response sample
   * Full order
-```
+
+```json
 {
     "code": 0,
     "msg": "",
@@ -4172,12 +4179,12 @@ GET /exchange/order/v2/tradingList?symbol=<symbol>&currency=<currency>&execType=
 
 ```javascript
 {
-"code": 0,
-"msg": "OK",
-"data": {
-"total": -1,
-"rows": [[<timestamp>, <interval>, <last_close>, <open>, <high>, <low>, <close>, <volume>, <turnover>], [...]]
-}
+  "code": 0,
+  "msg": "OK",
+  "data": {
+    "total": -1,
+    "rows": [[<timestamp>, <interval>, <last_close>, <open>, <high>, <low>, <close>, <volume>,<turnover>],[...]]
+  }
 }
 ```
 
