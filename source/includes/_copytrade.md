@@ -123,14 +123,14 @@ Request parameters
 
 * Response fields
 
-| Field              | Type       | Description                                                                       |
-|--------------------|------------|-----------------------------------------------------------------------------------|
-| strategyId         | Long       | trader UID                                                                        |
-| cycles             | List       | all cycles                                                                        |
-| updateTime         | String     | update timestamp of data                                                          |
-| cycle              | String     | time range of a single cycle                                                      |
-| profitSharingRatio | BigDecimal | profit sharing ratio at the end of the cycle, round to 2 decimal places           |
-| profitShareAmount  | BigDecimal | profit sharing amount(summarized in USD) for the cycle, round to 4 decimal places |
+| Field              | Type       | Description                                                                        |
+|--------------------|------------|------------------------------------------------------------------------------------|
+| strategyId         | Long       | trader UID                                                                         |
+| cycles             | List       | all cycles                                                                         |
+| updateTime         | String     | update timestamp of data                                                           |
+| cycle              | String     | time range of a single cycle                                                       |
+| profitSharingRatio | BigDecimal | profit sharing ratio at the end of the cycle, round to 2 decimal places            |
+| profitShareAmount  | BigDecimal | profit sharing amount (summarized in USD) for the cycle, round to 4 decimal places |
 
 ## Query commission information of traders
 
@@ -206,17 +206,17 @@ GET /phemex-lb/public/api/trader/commission-info?strategyIds=<strategyIds>&dataF
 
 * Response fields
 
-| Field              | Type       | Description                                                                          |
-|--------------------|------------|--------------------------------------------------------------------------------------|
-| strategyId         | Long       | trader UID                                                                           |
-| cycles             | List       | all cycles                                                                           |
-| updateTime         | String     | update timestamp of data                                                             |
-| cycle              | String     | time range of a single cycle                                                         |
-| totalCommissionFee | BigDecimal | total commission amount(summarized in USD) for the cycle, round to 4 decimal places  |
-| partnerCommisions  | List       | commision information for KOLs bound to Trader                                       |
-| partnerUid         | Long       | UID of KOL bound to trader                                                           |
-| commissionRate     | BigDecimal | commission rate of KOL for the cycle, round to 2 decimal places                      |
-| commissionFee      | BigDecimal | commission amount(summarized in USD) of KOL for the cycle, round to 4 decimal places |
+| Field              | Type       | Description                                                                           |
+|--------------------|------------|---------------------------------------------------------------------------------------|
+| strategyId         | Long       | trader UID                                                                            |
+| cycles             | List       | all cycles                                                                            |
+| updateTime         | String     | update timestamp of data                                                              |
+| cycle              | String     | time range of a single cycle                                                          |
+| totalCommissionFee | BigDecimal | total commission amount (summarized in USD) for the cycle, round to 4 decimal places  |
+| partnerCommisions  | List       | commision information for KOLs bound to Trader                                        |
+| partnerUid         | Long       | UID of KOL bound to trader                                                            |
+| commissionRate     | BigDecimal | commission rate of KOL for the cycle, round to 2 decimal places                       |
+| commissionFee      | BigDecimal | commission amount (summarized in USD) of KOL for the cycle, round to 4 decimal places |
 
 ## Query historical aum information of traders
 
@@ -300,12 +300,12 @@ GET /phemex-lb/public/api/trader/historical-aum-info?strategyIds=<strategyIds>&d
 
 * Response Fields
 
-| Field         | Type       | Description                                                                                 |
-|---------------|------------|---------------------------------------------------------------------------------------------|
-| strategyId    | Long       | trader UID                                                                                  |
-| cycles        | List       | all cycles                                                                                  |
-| updateTime    | String     | update timestamp of data                                                                    |
-| dateTimestamp | String     | a specific day                                                                              |
-| numOfCopiers  | Integer    | the latest number of copiers before UTC 0 on a specific day                                 |
-| periodAum     | BigDecimal | the latest aum(summarized in USD) before UTC 0 on a specific day, round to 2 decimal places |
+| Field         | Type       | Description                                                                                  |
+|---------------|------------|----------------------------------------------------------------------------------------------|
+| strategyId    | Long       | trader UID                                                                                   |
+| cycles        | List       | all cycles                                                                                   |
+| updateTime    | String     | update timestamp of data                                                                     |
+| dateTimestamp | String     | a specific day                                                                               |
+| numOfCopiers  | Integer    | the latest number of copiers before UTC 0 on a specific day                                  |
+| periodAum     | BigDecimal | the latest aum (summarized in USD) before UTC 0 on a specific day, round to 2 decimal places |
 
