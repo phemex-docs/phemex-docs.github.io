@@ -11,3 +11,5 @@ gem 'redcarpet', '~> 3.5.0'
 gem 'nokogiri', '~> 1.13.3'
 gem 'sass'
 gem 'webrick'
+
+gem 'rack', '>= 2.2.14'
