@@ -1249,7 +1249,6 @@ The depth value is 0 in full book response.
 
 ```
 GET /exchange/public/md/v2/kline?symbol=<symbol>&resolution=<resolution>&limit=<limit>
-
 ```
 
 > Response format
@@ -4067,7 +4066,6 @@ GET /exchange/order/v2/tradingList?symbol=<symbol>&currency=<currency>&execType=
 ```
 
   GET /md/v2/orderbook?symbol=<symbol>
-
 ```
 
 
@@ -4330,6 +4328,7 @@ there are two differnent response format for 24 ticker
 ```
   GET /md/v2/ticker/24hr?symbol=<symbol>
 ```
+
 ```
   GET /md/v2/ticker/24hr?symbol=<symbol>
 ```
@@ -4793,7 +4792,9 @@ On each successful subscription, DataGW will immediately send the current Order 
   ]
 }
 ```
+
 > Response sample
+
 ```json
 {
   "error": null,
@@ -4810,6 +4811,7 @@ On each successful subscription, DataGW will immediately send the current Order 
 DataGW publishes order book message with types: incremental, snapshot. Incremental messages are published with 20ms interval. And snapshot messages are published with 60-second interval for client self-verification.
 
 > Response format
+
 ```json
 {
   "book": {
@@ -4838,9 +4840,11 @@ DataGW publishes order book message with types: incremental, snapshot. Increment
 * Sample：
 
 > Response sample
+
 ```json
 {"depth":30,"orderbook_p":{"asks":[["20702.9","0.718"],["20703.9","0.524"],["20704.9","0"],["20720.8","0"]],"bids":[["20703.1","0"],["20701.3","0"],["20701.2","0"],["20700.5","1.622"],["20473.7","1.074"],["20441.3","0.904"]]},"sequence":77668172,"symbol":"BTCUSDT","timestamp":1666854171201355264,"type":"incremental"}
 ```
+
 ```json
 {"depth":30,"orderbook_p":{"asks":[],"bids":[["20700.5","0"],["20340.5","0.06"]]},"sequence":77668209,"symbol":"BTCUSDT","timestamp":1666854173705089711,"type":"incremental"}
 ```
@@ -4870,6 +4874,7 @@ It unsubscribes all orderbook related subscriptions.
 ```
 
 > Response format
+
 ```javascript
 {
   "error": null,
@@ -4915,6 +4920,7 @@ DataGW publishes trade message with types: incremental, snapshot. Incremental me
 
 
 > Response format
+
 ```javascript
 {
   "trades": [
@@ -4936,6 +4942,7 @@ DataGW publishes trade message with types: incremental, snapshot. Incremental me
 
 
 > Response sample
+
 ```json
 {
     "sequence": 77702250,
@@ -4951,6 +4958,7 @@ DataGW publishes trade message with types: incremental, snapshot. Incremental me
     "type": "incremental"
 }
 ```
+
 ```json
 {
     "sequence": 77663551,
@@ -5012,6 +5020,7 @@ It unsubscribes all trade subscriptions or for a symbol.
 ```
 
 > Response sample
+
 ```javascript
 {
   "error": null,
@@ -5027,6 +5036,7 @@ It unsubscribes all trade subscriptions or for a symbol.
 On each successful subscription, DataGW will send the 1000 history klines immediately for the subscribed symbol and all the later kline update will be published in real-time.
 
 > Request format
+
 ```javascript
 {
   "id": <id>,
@@ -5039,6 +5049,7 @@ On each successful subscription, DataGW will send the 1000 history klines immedi
 ```
 
 > Response format
+
 ```javascript
 {
   "error": null,
@@ -5064,6 +5075,7 @@ On each successful subscription, DataGW will send the 1000 history klines immedi
 ```
 
 > Response sample
+
 ```json
 {
   "error": null,
@@ -5079,6 +5091,7 @@ On each successful subscription, DataGW will send the 1000 history klines immedi
 DataGW publishes kline message with types: incremental, snapshot. Incremental messages are published with 20ms interval. And snapshot messages are published on connection initial setup for client recovery.
 
 > Response format
+
 ```javascript
 {
   "kline": [
@@ -5105,6 +5118,7 @@ DataGW publishes kline message with types: incremental, snapshot. Incremental me
 
 
 > Response sample
+
 ```json
 {
     "kline_p": [
@@ -5136,6 +5150,7 @@ DataGW publishes kline message with types: incremental, snapshot. Incremental me
     "type": "snapshot"
 }
 ```
+
 ```json
 {
     "kline_p": [
@@ -5200,6 +5215,7 @@ It unsubscribes all kline subscriptions or for a symbol.
 ```
 
 > Response sample
+
 ```javascript
 {
   "error": null,
@@ -5216,6 +5232,7 @@ It unsubscribes all kline subscriptions or for a symbol.
 AOP subscription requires the session been authorized successfully. DataGW extracts the user information from the given token and sends AOP messages back to client accordingly. 0 or more latest account snapshot messages will be sent to client immediately on subscription, and incremental messages will be sent for later updates. Each account snapshot contains a trading account information, holding positions, and open / max 100 closed / max 100 filled order event message history.
 
 > Request format
+
 ```javascript
 {
   "id": <id>,
@@ -5225,6 +5242,7 @@ AOP subscription requires the session been authorized successfully. DataGW extra
 ```
 
 > Response format
+
 ```javascript
 {
   "error": null,
@@ -5236,6 +5254,7 @@ AOP subscription requires the session been authorized successfully. DataGW extra
 ```
 
 > Request sample
+
 ```json
 {
   "id": 1234,
@@ -5244,6 +5263,7 @@ AOP subscription requires the session been authorized successfully. DataGW extra
 }
 ```
 > Response sample
+
 ```json
 {
   "error": null,
@@ -5570,6 +5590,7 @@ AOP subscription requires the session been authorized successfully. DataGW extra
 ## Unsubscribe Account-Order-Position (AOP)
 
 > Request format
+
 ```javascript
 {
   "id": <id>,
@@ -5579,6 +5600,7 @@ AOP subscription requires the session been authorized successfully. DataGW extra
 ```
 
 > Response format
+
 ```javascript
 {
   "error": null,
@@ -5649,6 +5671,7 @@ RAS subscription requires the session been authorized successfully. DataGW extra
 ```
 
 > Sample
+
 ```javascript
 {
     "id": 1234,
@@ -5799,6 +5822,7 @@ RAS subscription requires the session been authorized successfully. DataGW extra
 On each successful subscription, DataGW will publish 24-hour ticker metrics for all symbols every 1 second.
 
 > Request format
+
 ```javascript
 * Subscribe single symbol
 {
@@ -5816,6 +5840,7 @@ On each successful subscription, DataGW will publish 24-hour ticker metrics for 
 ```
 
 > Response format
+
 ```javascript
 {
   "error": null,
@@ -5827,6 +5852,7 @@ On each successful subscription, DataGW will publish 24-hour ticker metrics for 
 ```
 
 > Request sample
+
 ```json
 {
   "method": "perp_market24h_pack_p.subscribe",
@@ -5836,6 +5862,7 @@ On each successful subscription, DataGW will publish 24-hour ticker metrics for 
 ```
 
 > Response sample
+
 ```json
 {
   "error": null,
@@ -5849,6 +5876,7 @@ On each successful subscription, DataGW will publish 24-hour ticker metrics for 
 ## Hours Ticker Message Format：
 
 > Response format
+
 ```javascript
 {
     "data": [
@@ -5893,6 +5921,7 @@ On each successful subscription, DataGW will publish 24-hour ticker metrics for 
 
 
 > Response sample
+
 ```json
 {
     "data": [
@@ -6001,6 +6030,7 @@ On each successful subscription, DataGW will publish 24-hour ticker metrics for 
 ```
 
 > Response format
+
 ```javascript
 {
     "error": null,
@@ -6014,6 +6044,7 @@ On each successful subscription, DataGW will publish 24-hour ticker metrics for 
 ## push event
 
 > Response format
+
 ```javascript
 {
     "tick": {
@@ -6026,9 +6057,11 @@ On each successful subscription, DataGW will publish 24-hour ticker metrics for 
 
 
 > Response sample
+
 ```json
 {"tick_p":{"last":"20639.38692364","symbol":".BTCUSDT","timestamp":1666863393552000000}}
 ```
+
 ```json
 {"tick_p":{"last":"20639.15408363","symbol":".BTCUSDT","timestamp":1666863394538132741}}
 ```
