@@ -8,6 +8,7 @@ includes:
   - transfer
   - transferV2
   - withdraw
+  - copytrade
 
 logo:
   link: https://phemex.com
