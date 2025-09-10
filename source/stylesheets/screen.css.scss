@@ -20,9 +20,7 @@ License for the specific language governing permissions and limitations
 under the License.
 */
 
-/*////////////////////////////////////////////////////////////////////////////// */
 /* GENERAL STUFF */
-/*////////////////////////////////////////////////////////////////////////////// */
 
 html, body {
   /* Set height of body and the document to 100% for full page tabs */
@@ -40,9 +38,7 @@ html, body {
   -webkit-text-size-adjust: none; /* Never autoresize text */
 }
 
-/*////////////////////////////////////////////////////////////////////////////// */
 /* TABLE OF CONTENTS */
-/*////////////////////////////////////////////////////////////////////////////// */
 
 #toc > ul > li > a > span {
   float: right;
@@ -248,7 +244,7 @@ html, body {
     transform: rotate(-90deg) translate(-100%, 0);
     border-radius: 0 0 0 5px;
   }
-  padding: 0 1.5em 5em 0; // increase touch size area
+  padding: 0 1.5em 5em 0; /* increase touch size area */
   display: none;
   position: fixed;
   top: 0;
@@ -271,10 +267,7 @@ html, body {
   & {background-color: transparent;}
 }
 
-
-/*////////////////////////////////////////////////////////////////////////////// */
 /* PAGE LAYOUT AND CODE SAMPLE BACKGROUND */
-/*////////////////////////////////////////////////////////////////////////////// */
 
 .page-wrapper {
   margin-left: $nav-width;
@@ -284,7 +277,7 @@ html, body {
   background-color: $main-bg;
   min-height: 100%;
 
-  padding-bottom: 1px; // prevent margin overflow
+  padding-bottom: 1px; /* prevent margin overflow */
 
   /* The dark box is what gives the code samples their dark background. */
   /* It sits essentially under the actual content block, which has a */
@@ -339,9 +332,7 @@ html, body {
   }
 }
 
-/*////////////////////////////////////////////////////////////////////////////// */
 /* CONTENT STYLES */
-/*////////////////////////////////////////////////////////////////////////////// */
 /* This is all the stuff with the light background in the left half of the page */
 
 .content {
@@ -586,9 +577,7 @@ html, body {
   }
 }
 
-/*////////////////////////////////////////////////////////////////////////////// */
 /* CODE SAMPLE STYLES */
-/*////////////////////////////////////////////////////////////////////////////// */
 /* This is all the stuff that appears in the right half of the page */
 
 .content {
@@ -635,9 +624,7 @@ html, body {
   }
 }
 
-/*////////////////////////////////////////////////////////////////////////////// */
 /* RESPONSIVE DESIGN */
-/*////////////////////////////////////////////////////////////////////////////// */
 /* These are the styles for phones and tablets */
 /* There are also a couple styles disperesed */
 
@@ -708,7 +695,7 @@ html, body {
     clear: none !important;
     padding-top: 1em !important;
     margin-right: $examples-width !important;
-    width: 100% !important;     // May need to adjust this
+    width: 100% !important;     /* May need to adjust this */
     text-shadow: 0 0 0 rgba(0, 0, 0, 0) !important;
 }
 
@@ -722,7 +709,7 @@ html, body {
     padding-bottom: 1em !important;
     padding-left: 1em !important;
     margin-right: $examples-width !important;
-    width: $examples-width !important;     // May need to adjust this
+    width: $examples-width !important;     /* May need to adjust this */
     text-shadow: 0 0 0 rgba(0, 0, 0, 0) !important;
 }
 
@@ -736,7 +723,7 @@ html, body {
     padding-bottom: 1.5em !important;
     margin-right: $examples-width !important;
     margin-bottom: 2em !important;
-    width: 50% !important;     // May need to adjust this
+    width: 50% !important;     /* May need to adjust this */
     text-shadow: 0 0 0 rgba(0, 0, 0, 0) !important;
 }
 
