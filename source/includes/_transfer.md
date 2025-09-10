@@ -242,9 +242,9 @@ POST /assets/universal-transfer
 
 > Response format
 
-```
+```json
 {
-  "requestKey"
+  "requestKey": "string"
 }
 ```
 

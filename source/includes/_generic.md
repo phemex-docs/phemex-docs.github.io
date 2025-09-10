@@ -38,32 +38,42 @@ Every HTTP Rest Request must have the following Headers:
 
 #### Signature example 1: HTTP GET request
 
-* API REST Request URL: https://api.phemex.com/accounts/accountPositions?currency=BTC
-   * Request Path: /accounts/accountPositions
-   * Request Query: currency=BTC
-   * Request Body: <null>
-   * Request Expiry: 1575735514
-   * Signature: HMacSha256( /accounts/accountPositions + currency=BTC + 1575735514 )
+* API REST Request URL: `https://api.phemex.com/accounts/accountPositions?currency=BTC`
+   
+   
+| Field | Value |
+|------|-----|
+| Request Path | `/accounts/accountPositions` |
+| Request Query | `currency=BTC` |
+| Request Body | `<null>` |
+| Request Expiry | `1575735514` |
+| Signature | `HMacSha256(/accounts/accountPositions + currency=BTC + 1575735514)` |
 
 #### Singature example 2: HTTP GET request with multiple query string
 
-* API REST Request URL: https://api.phemex.com/orders/activeList?ordStatus=New&ordStatus=PartiallyFilled&ordStatus=Untriggered&symbol=BTCUSD
-    * Request Path: /orders/activeList
-    * Request Query: ordStatus=New&ordStatus=PartiallyFilled&ordStatus=Untriggered&symbol=BTCUSD
-    * Request Body: <null>
-    * Request Expire: 1575735951
-    * Signature: HMacSha256(/orders/activeList + ordStatus=New&ordStatus=PartiallyFilled&ordStatus=Untriggered&symbol=BTCUSD + 1575735951)
-    * signed string is `/orders/activeListordStatus=New&ordStatus=PartiallyFilled&ordStatus=Untriggered&symbol=BTCUSD1575735951`
+* API REST Request URL: `https://api.phemex.com/orders/activeList?ordStatus=New&ordStatus=PartiallyFilled&ordStatus=Untriggered&symbol=BTCUSD`
+    
+| Field | Value |
+|------|-----|
+| Request Path | `/orders/activeList` |
+| Request Query | `ordStatus=New&ordStatus=PartiallyFilled&ordStatus=Untriggered&symbol=BTCUSD` |
+| Request Body | `<null>` |
+| Request Expire | `1575735951` |
+| Signature | `HMacSha256(/orders/activeList + ordStatus=New&ordStatus=PartiallyFilled&ordStatus=Untriggered&symbol=BTCUSD + 1575735951)` |
+| Signed string | `/orders/activeListordStatus=New&ordStatus=PartiallyFilled&ordStatus=Untriggered&symbol=BTCUSD1575735951` |
 
 #### Signature example 3: HTTP POST request
 
-* API REST Request URL: https://api.phemex.com/orders
-   * Request Path: /orders
-   * Request Query: <null>
-   * Request Body: {"symbol":"BTCUSD","clOrdID":"uuid-1573058952273","side":"Sell","priceEp":93185000,"orderQty":7,"ordType":"Limit","reduceOnly":false,"timeInForce":"GoodTillCancel","takeProfitEp":0,"stopLossEp":0}
-   * Request Expiry: 1575735514
-   * Signature: HMacSha256( /orders + 1575735514 + {"symbol":"BTCUSD","clOrdID":"uuid-1573058952273","side":"Sell","priceEp":93185000,"orderQty":7,"ordType":"Limit","reduceOnly":false,"timeInForce":"GoodTillCancel","takeProfitEp":0,"stopLossEp":0})
-   * signed string is `/orders1575735514{"symbol":"BTCUSD","clOrdID":"uuid-1573058952273","side":"Sell","priceEp":93185000,"orderQty":7,"ordType":"Limit","reduceOnly":false,"timeInForce":"GoodTillCancel","takeProfitEp":0,"stopLossEp":0}`
+* API REST Request URL: `https://api.phemex.com/orders`
+
+| Field | Value |
+|------|-----|
+| Request Path | `/orders` |
+| Request Query | `<null>` |
+| Request Body | `{"symbol":"BTCUSD","clOrdID":"uuid-1573058952273","side":"Sell","priceEp":93185000,"orderQty":7,"ordType":"Limit","reduceOnly":false,"timeInForce":"GoodTillCancel","takeProfitEp":0,"stopLossEp":0}` |
+| Request Expiry | `1575735514` |
+| Signature | `HMacSha256( /orders + 1575735514 + {"symbol":"BTCUSD","clOrdID":"uuid-1573058952273","side":"Sell","priceEp":93185000,"orderQty":7,"ordType":"Limit","reduceOnly":false,"timeInForce":"GoodTillCancel","takeProfitEp":0,"stopLossEp":0})` |
+| Signed string | `/orders1575735514{"symbol":"BTCUSD","clOrdID":"uuid-1573058952273","side":"Sell","priceEp":93185000,"orderQty":7,"ordType":"Limit","reduceOnly":false,"timeInForce":"GoodTillCancel","takeProfitEp":0,"stopLossEp":0}` |
 
 ### REST response format
 
