@@ -1407,6 +1407,26 @@
                   </li>
               </ul>
           </li>
+          <li>
+            <a href="#copy-trade-rest-api" class="toc-h1 toc-link" data-title="Copy Trade REST API">Copy Trade REST API</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#endpoint-security-type-5" class="toc-h2 toc-link" data-title="Endpoint Security Type">Endpoint Security Type</a>
+                  </li>
+                  <li>
+                    <a href="#query-performance-information-of-traders" class="toc-h2 toc-link" data-title="Query performance information of traders">Query performance information of traders</a>
+                  </li>
+                  <li>
+                    <a href="#query-profit-sharing-information-of-traders" class="toc-h2 toc-link" data-title="Query profit sharing information of traders">Query profit sharing information of traders</a>
+                  </li>
+                  <li>
+                    <a href="#query-commission-information-of-traders" class="toc-h2 toc-link" data-title="Query commission information of traders">Query commission information of traders</a>
+                  </li>
+                  <li>
+                    <a href="#query-historical-aum-information-of-traders" class="toc-h2 toc-link" data-title="Query historical aum information of traders">Query historical aum information of traders</a>
+                  </li>
+              </ul>
+          </li>
       </ul>
     </div>
     <div class="page-wrapper">
@@ -17286,6 +17306,581 @@ the same as the spot api</p>
 <td></td>
 <td>received withdraw amount for user input withdraw amount</td>
 <td></td>
+</tr>
+</tbody></table>
+<h1 id='copy-trade-rest-api'>Copy Trade REST API</h1><h2 id='endpoint-security-type-5'>Endpoint Security Type</h2>
+<ul>
+<li>Please raise API Key via web using <code>Default API entry</code> type, choose <code>Read &amp; Trade Permission</code>, and IP Address is
+<code>Don&#39;t Bind</code>.</li>
+<li>Each API call must be signed and pass to server in HTTP header <code>x-phemex-request-signature</code>.</li>
+<li>Endpoints use <code>HMAC SHA256</code> signatures. The <code>HMAC SHA256 signature</code> is a keyed <code>HMAC SHA256</code> operation. Use your
+<code>apiSecret</code> as the key and the string <code>URL Path + QueryString + Expiry + body )</code> as the value for the HMAC operation.</li>
+<li>The <code>signature</code> is <strong>case-sensitive</strong>.</li>
+</ul>
+<h2 id='query-performance-information-of-traders'>Query performance information of traders</h2>
+<blockquote>
+<p>Request Format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /phemex-lb/public/api/trader/performance-info?strategyIds=&lt;strategyIds&gt;&amp;pageNum=&lt;pageNum&gt;&amp;pageSize=&lt;pageSize&gt;
+</code></pre></div>
+<ul>
+<li>Request parameters</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Case</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>strategyIds</td>
+<td>List</td>
+<td>YES</td>
+<td>one or more traders UID, separated by <code>,</code></td>
+<td>113762135,600285,1106201</td>
+</tr>
+<tr>
+<td>pageNum</td>
+<td>Integer</td>
+<td>NO</td>
+<td>page number, default 1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>pageSize</td>
+<td>Integer</td>
+<td>NO</td>
+<td>page size, default 100</td>
+<td>100</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response Format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-08-11T22:27:06.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"strategyId"</span><span class="p">:</span><span class="w"> </span><span class="mi">113762135</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"totalRoi"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-1.0005"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"totalPnL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"25.46"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"latestAum"</span><span class="p">:</span><span class="w"> </span><span class="s2">"43.32"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-08-11T00:09:25.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"strategyId"</span><span class="p">:</span><span class="w"> </span><span class="mi">600285</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"totalRoi"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"totalPnL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"latestAum"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-08-11T00:09:25.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"strategyId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1106201</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"totalRoi"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"totalPnL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"latestAum"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li>Response Fields</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>updateTime</td>
+<td>String</td>
+<td>update timestamp of data</td>
+</tr>
+<tr>
+<td>strategyId</td>
+<td>Long</td>
+<td>trader UID</td>
+</tr>
+<tr>
+<td>totalRoi</td>
+<td>BigDecimal</td>
+<td>total roi(summarized in USD) of trader, round to 4 decimal places</td>
+</tr>
+<tr>
+<td>totalPnL</td>
+<td>BigDecimal</td>
+<td>total pnl(summarized in USD) of trader, round to 2 decimal places</td>
+</tr>
+<tr>
+<td>latestAum</td>
+<td>BigDecimal</td>
+<td>lastest aum(summarized in USD) of trader, round to 2 decimal places</td>
+</tr>
+</tbody></table>
+<h2 id='query-profit-sharing-information-of-traders'>Query profit sharing information of traders</h2>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /phemex-lb/public/api/trader/profit-sharing-info?strategyIds=&lt;strategyIds&gt;&amp;dataFrom=&lt;dataFrom&gt;&amp;dataEnd=&lt;dataEnd&gt;&amp;pageNum=&lt;pageNum&gt;&amp;pageSize=&lt;pageSize&gt;
+</code></pre></div>
+<p>Request parameters</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Case</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>strategyIds</td>
+<td>List</td>
+<td>YES</td>
+<td>one or more traders UID, separated by <code>,</code></td>
+<td>113762135,600285,1106201</td>
+</tr>
+<tr>
+<td>dataFrom</td>
+<td>String</td>
+<td>NO</td>
+<td>starting date for querying data, the format is <code>yyyy-MM-dd</code>, default 2023-01-01</td>
+<td>2025-07-01</td>
+</tr>
+<tr>
+<td>dataEnd</td>
+<td>String</td>
+<td>NO</td>
+<td>end date of querying data, the format is <code>yyyy-MM-dd</code>, default today</td>
+<td>2025-08-11</td>
+</tr>
+<tr>
+<td>pageNum</td>
+<td>Integer</td>
+<td>NO</td>
+<td>page number, default 1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>pageSize</td>
+<td>Integer</td>
+<td>NO</td>
+<td>page size, default 100</td>
+<td>100</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response Format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"strategyId"</span><span class="p">:</span><span class="w"> </span><span class="mi">113762135</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cycles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-08-11T23:01:37.000Z"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"cycle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-08-03T16:00:00.001Z ~ 2025-08-10T16:00:00.000Z"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"profitSharingRatio"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.2"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"profitShareAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.5045"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-08-11T23:01:37.000Z"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"cycle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-07-27T16:00:00.001Z ~ 2025-08-03T16:00:00.000Z"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"profitSharingRatio"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.12"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"profitShareAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0116"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"strategyId"</span><span class="p">:</span><span class="w"> </span><span class="mi">600285</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cycles"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"strategyId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1106201</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cycles"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li>Response fields</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>strategyId</td>
+<td>Long</td>
+<td>trader UID</td>
+</tr>
+<tr>
+<td>cycles</td>
+<td>List</td>
+<td>all cycles</td>
+</tr>
+<tr>
+<td>updateTime</td>
+<td>String</td>
+<td>update timestamp of data</td>
+</tr>
+<tr>
+<td>cycle</td>
+<td>String</td>
+<td>time range of a single cycle</td>
+</tr>
+<tr>
+<td>profitSharingRatio</td>
+<td>BigDecimal</td>
+<td>profit sharing ratio at the end of the cycle, round to 2 decimal places</td>
+</tr>
+<tr>
+<td>profitShareAmount</td>
+<td>BigDecimal</td>
+<td>profit sharing amount (summarized in USD) for the cycle, round to 4 decimal places</td>
+</tr>
+</tbody></table>
+<h2 id='query-commission-information-of-traders'>Query commission information of traders</h2>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /phemex-lb/public/api/trader/commission-info?strategyIds=&lt;strategyIds&gt;&amp;dataFrom=&lt;dataFrom&gt;&amp;dataEnd=&lt;dataEnd&gt;&amp;pageNum=&lt;pageNum&gt;&amp;pageSize=&lt;pageSize&gt;
+</code></pre></div>
+<ul>
+<li>Request parameters</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Case</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>strategyIds</td>
+<td>List</td>
+<td>YES</td>
+<td>one or more traders UID, separated by <code>,</code></td>
+<td>113762135,600285,1106201</td>
+</tr>
+<tr>
+<td>dataFrom</td>
+<td>String</td>
+<td>NO</td>
+<td>starting date for querying data, the format is <code>yyyy-MM-dd</code>, default 2025-05-15</td>
+<td>2025-08-10</td>
+</tr>
+<tr>
+<td>dataEnd</td>
+<td>String</td>
+<td>NO</td>
+<td>end date of querying data, the format is <code>yyyy-MM-dd</code>, default today</td>
+<td>2025-08-11</td>
+</tr>
+<tr>
+<td>pageNum</td>
+<td>Integer</td>
+<td>NO</td>
+<td>page number, default 1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>pageSize</td>
+<td>Integer</td>
+<td>NO</td>
+<td>page size, default 100</td>
+<td>100</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response Format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"strategyId"</span><span class="p">:</span><span class="w"> </span><span class="mi">113762135</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cycles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-08-11T00:59:14.000Z"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"cycle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-08-10T00:00:00.001Z ~ 2025-08-11T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"totalCommissionFee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4.5"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"partnerCommisions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"partnerUid"</span><span class="p">:</span><span class="w"> </span><span class="mi">2001</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"commissionRate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.05"</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"commissionFee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"partnerUid"</span><span class="p">:</span><span class="w"> </span><span class="mi">3001</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"commissionRate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.04"</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"commissionFee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.5"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"strategyId"</span><span class="p">:</span><span class="w"> </span><span class="mi">600285</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cycles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-08-11T00:59:14.000Z"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"cycle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-08-10T00:00:00.001Z ~ 2025-08-11T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"totalCommissionFee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"partnerCommisions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"partnerUid"</span><span class="p">:</span><span class="w"> </span><span class="mi">2001</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"commissionRate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.05"</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"commissionFee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"strategyId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1106201</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cycles"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li>Response fields</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>strategyId</td>
+<td>Long</td>
+<td>trader UID</td>
+</tr>
+<tr>
+<td>cycles</td>
+<td>List</td>
+<td>all cycles</td>
+</tr>
+<tr>
+<td>updateTime</td>
+<td>String</td>
+<td>update timestamp of data</td>
+</tr>
+<tr>
+<td>cycle</td>
+<td>String</td>
+<td>time range of a single cycle</td>
+</tr>
+<tr>
+<td>totalCommissionFee</td>
+<td>BigDecimal</td>
+<td>total commission amount (summarized in USD) for the cycle, round to 4 decimal places</td>
+</tr>
+<tr>
+<td>partnerCommisions</td>
+<td>List</td>
+<td>commision information for KOLs bound to Trader</td>
+</tr>
+<tr>
+<td>partnerUid</td>
+<td>Long</td>
+<td>UID of KOL bound to trader</td>
+</tr>
+<tr>
+<td>commissionRate</td>
+<td>BigDecimal</td>
+<td>commission rate of KOL for the cycle, round to 2 decimal places</td>
+</tr>
+<tr>
+<td>commissionFee</td>
+<td>BigDecimal</td>
+<td>commission amount (summarized in USD) of KOL for the cycle, round to 4 decimal places</td>
+</tr>
+</tbody></table>
+<h2 id='query-historical-aum-information-of-traders'>Query historical aum information of traders</h2>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /phemex-lb/public/api/trader/historical-aum-info?strategyIds=&lt;strategyIds&gt;&amp;dataFrom=&lt;dataFrom&gt;&amp;dataEnd=&lt;dataEnd&gt;&amp;pageNum=&lt;pageNum&gt;&amp;pageSize=&lt;pageSize&gt;
+</code></pre></div>
+<ul>
+<li>Request Parameter</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Case</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>strategyIds</td>
+<td>List</td>
+<td>YES</td>
+<td>one or more traders UID, separated by <code>,</code></td>
+<td>113762135,600285,1106201</td>
+</tr>
+<tr>
+<td>dataFrom</td>
+<td>String</td>
+<td>NO</td>
+<td>starting date for querying data, the format is <code>yyyy-MM-dd</code>, default 2023-01-01</td>
+<td>2025-07-01</td>
+</tr>
+<tr>
+<td>dataEnd</td>
+<td>String</td>
+<td>NO</td>
+<td>end date of querying data, the format is <code>yyyy-MM-dd</code>, default today</td>
+<td>2025-08-11</td>
+</tr>
+<tr>
+<td>pageNum</td>
+<td>Integer</td>
+<td>NO</td>
+<td>page number, default 1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>pageSize</td>
+<td>Integer</td>
+<td>NO</td>
+<td>page size, default 100</td>
+<td>100</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response Format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"strategyId"</span><span class="p">:</span><span class="w"> </span><span class="mi">113762135</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cycles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-08-11T22:27:06.000Z"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"dateTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-08-11"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"numOfCopiers"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"periodAum"</span><span class="p">:</span><span class="w"> </span><span class="s2">"43.32"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-08-10T00:09:19.000Z"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"dateTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-08-10"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"numOfCopiers"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"periodAum"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"strategyId"</span><span class="p">:</span><span class="w"> </span><span class="mi">600285</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cycles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-08-11T00:09:25.000Z"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"dateTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-08-11"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"numOfCopiers"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"periodAum"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-08-09T00:25:47.000Z"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"dateTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-08-10"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"numOfCopiers"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"periodAum"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"strategyId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1106201</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cycles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-08-11T00:09:25.000Z"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"dateTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-08-11"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"numOfCopiers"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"periodAum"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-08-09T00:25:47.000Z"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"dateTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-08-10"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"numOfCopiers"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"periodAum"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li>Response Fields</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>strategyId</td>
+<td>Long</td>
+<td>trader UID</td>
+</tr>
+<tr>
+<td>cycles</td>
+<td>List</td>
+<td>all cycles</td>
+</tr>
+<tr>
+<td>updateTime</td>
+<td>String</td>
+<td>update timestamp of data</td>
+</tr>
+<tr>
+<td>dateTimestamp</td>
+<td>String</td>
+<td>a specific day</td>
+</tr>
+<tr>
+<td>numOfCopiers</td>
+<td>Integer</td>
+<td>the latest number of copiers before UTC 0 on a specific day</td>
+</tr>
+<tr>
+<td>periodAum</td>
+<td>BigDecimal</td>
+<td>the latest aum (summarized in USD) before UTC 0 on a specific day, round to 2 decimal places</td>
 </tr>
 </tbody></table>
 
