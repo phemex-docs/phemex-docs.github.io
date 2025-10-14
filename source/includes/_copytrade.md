@@ -80,7 +80,7 @@ Request parameters
 | Parameter   | Type    | Required | Description                                                                     | Case                     |
 |-------------|---------|----------|---------------------------------------------------------------------------------|--------------------------|
 | strategyIds | List    | YES      | one or more traders UID, separated by `,`                                       | 113762135,600285,1106201 |
-| dataFrom    | String  | NO       | starting date for querying data, the format is `yyyy-MM-dd`, default 2023-01-01 | 2025-07-01               |
+| dataFrom    | String  | NO       | starting date for querying data, the format is `yyyy-MM-dd`, default 2025-01-01 | 2025-07-01               |
 | dataEnd     | String  | NO       | end date of querying data, the format is `yyyy-MM-dd`, default today            | 2025-08-11               |
 | pageNum     | Integer | NO       | page number, default 1                                                          | 1                        |
 | pageSize    | Integer | NO       | page size, default 100                                                          | 100                      |
@@ -231,7 +231,7 @@ GET /phemex-lb/public/api/trader/historical-aum-info?strategyIds=<strategyIds>&d
 | Parameter   | Type    | Required | Description                                                                     | Case                     |
 |-------------|---------|----------|---------------------------------------------------------------------------------|--------------------------|
 | strategyIds | List    | YES      | one or more traders UID, separated by `,`                                       | 113762135,600285,1106201 |
-| dataFrom    | String  | NO       | starting date for querying data, the format is `yyyy-MM-dd`, default 2023-01-01 | 2025-07-01               |
+| dataFrom    | String  | NO       | starting date for querying data, the format is `yyyy-MM-dd`, default 2025-06-01 | 2025-07-01               |
 | dataEnd     | String  | NO       | end date of querying data, the format is `yyyy-MM-dd`, default today            | 2025-08-11               |
 | pageNum     | Integer | NO       | page number, default 1                                                          | 1                        |
 | pageSize    | Integer | NO       | page size, default 100                                                          | 100                      |
@@ -308,4 +308,116 @@ GET /phemex-lb/public/api/trader/historical-aum-info?strategyIds=<strategyIds>&d
 | dateTimestamp | String     | a specific day                                                                               |
 | numOfCopiers  | Integer    | the latest number of copiers before UTC 0 on a specific day                                  |
 | periodAum     | BigDecimal | the latest aum (summarized in USD) before UTC 0 on a specific day, round to 2 decimal places |
+
+## Query kpi information of traders
+
+> Request format
+
+```
+GET /phemex-lb/public/api/trader/kpi-info?strategyIds=<strategyIds>&dataFrom=<dataFrom>&dataEnd=<dataEnd>&pageNum=<pageNum>&pageSize=<pageSize>
+```
+
+* Request Parameter
+
+| Parameter   | Type    | Required | Description                                                                     | Case                     |
+|-------------|---------|----------|---------------------------------------------------------------------------------|--------------------------|
+| strategyIds | List    | YES      | one or more traders UID, separated by `,`                                       | 113762135,600285,1106201 |
+| dataFrom    | String  | NO       | starting date for querying data, the format is `yyyy-MM-dd`, default 2025-01-02 | 2025-07-01               |
+| dataEnd     | String  | NO       | end date of querying data, the format is `yyyy-MM-dd`, default today            | 2025-08-11               |
+| pageNum     | Integer | NO       | page number, default 1                                                          | 1                        |
+| pageSize    | Integer | NO       | page size, default 100                                                          | 100                      |
+
+> Response Format
+
+```json
+{
+  "code": 0,
+  "msg": "OK",
+  "data": [
+    {
+      "strategyId": 113762135,
+      "traderVolume": "0",
+      "copiersVolume": "0",
+      "tradingFee": "0",
+      "aumAdded": "0",
+      "aumRemoved": "0",
+      "updateTime": "2025-09-11T00:01:08.000Z",
+      "profitShare": "0",
+      "pnl": "0",
+      "aum": "96294.1169",
+      "aumIncrease": "0",
+      "newCopiers": 3,
+      "copierLeaves": 0,
+      "copiersPnl": "0",
+      "winningCopiers": 0,
+      "losingCopiers": 3,
+      "copiersRoi": "0",
+      "cycle": "2025-01-01T00:00:00.001Z ~ 2025-09-11T00:00:00.000Z"
+    },
+    {
+      "strategyId": 600285,
+      "traderVolume": "200",
+      "copiersVolume": "400",
+      "tradingFee": "70",
+      "aumAdded": "40",
+      "aumRemoved": "0",
+      "updateTime": "2025-09-11T00:01:08.000Z",
+      "profitShare": "1.234",
+      "pnl": "89979.6615",
+      "aum": "0",
+      "aumIncrease": "0",
+      "newCopiers": 1,
+      "copierLeaves": 0,
+      "copiersPnl": "5617.1677",
+      "winningCopiers": 1,
+      "losingCopiers": 0,
+      "copiersRoi": "25.3026",
+      "cycle": "2025-01-01T00:00:00.001Z ~ 2025-09-11T00:00:00.000Z"
+    },
+    {
+      "strategyId": 1106201,
+      "traderVolume": "0",
+      "copiersVolume": "0",
+      "tradingFee": "0",
+      "aumAdded": "0",
+      "aumRemoved": "0",
+      "updateTime": "2025-09-11T08:00:00.000Z",
+      "profitShare": "0",
+      "pnl": "0",
+      "aum": "0",
+      "aumIncrease": "0",
+      "newCopiers": 0,
+      "copierLeaves": 0,
+      "copiersPnl": "0",
+      "winningCopiers": 0,
+      "losingCopiers": 0,
+      "copiersRoi": "0",
+      "cycle": "2025-01-01T00:00:00.001Z ~ 2025-09-11T00:00:00.000Z"
+    }
+  ]
+}
+```
+
+* Response Fields
+
+| Field          | Type       | Description                                                    |
+|----------------|------------|----------------------------------------------------------------|
+| strategyId     | Long       | trader UID                                                     |
+| traderVolume   | BigDecimal | trader’s own copy-trading volume                               |
+| copiersVolume  | BigDecimal | total copy-trading volume executed by copiers under the trader |
+| tradingFee     | BigDecimal | total trading fees generated by copiers                        |
+| aumAdded       | BigDecimal | assets transferred in by copier accounts                       |
+| aumRemoved     | BigDecimal | assets withdrawn by copier accounts                            |
+| updateTime     | String     | update timestamp of data                                       |
+| profitShare    | BigDecimal | profit-sharing revenue earned by the trader                    |
+| pnl            | BigDecimal | trader’s incremental PNL                                       |
+| aum            | BigDecimal | trader’s AUM at the end of the query period                    |
+| aumIncrease    | BigDecimal | growth in AUM during the cycle                                 |
+| newCopiers     | Integer    | number of newly added copiers                                  |
+| copierLeaves   | Integer    | number of copiers who stopped copying                          |
+| copiersPnl     | BigDecimal | total PNL of all copiers under the trader                      |
+| winningCopiers | Integer    | number of copiers with positive PNL                            |
+| losingCopiers  | Integer    | number of copiers with negative PNL                            |
+| copiersRoi     | BigDecimal | overall ROI of copiers                                         |
+| cycle          | String     | statistical cycle range                                        |
 
