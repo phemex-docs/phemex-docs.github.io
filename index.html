@@ -1425,6 +1425,9 @@
                   <li>
                     <a href="#query-historical-aum-information-of-traders" class="toc-h2 toc-link" data-title="Query historical aum information of traders">Query historical aum information of traders</a>
                   </li>
+                  <li>
+                    <a href="#query-kpi-information-of-traders" class="toc-h2 toc-link" data-title="Query kpi information of traders">Query kpi information of traders</a>
+                  </li>
               </ul>
           </li>
       </ul>
@@ -17455,7 +17458,7 @@ the same as the spot api</p>
 <td>dataFrom</td>
 <td>String</td>
 <td>NO</td>
-<td>starting date for querying data, the format is <code>yyyy-MM-dd</code>, default 2023-01-01</td>
+<td>starting date for querying data, the format is <code>yyyy-MM-dd</code>, default 2025-01-01</td>
 <td>2025-07-01</td>
 </tr>
 <tr>
@@ -17754,7 +17757,7 @@ the same as the spot api</p>
 <td>dataFrom</td>
 <td>String</td>
 <td>NO</td>
-<td>starting date for querying data, the format is <code>yyyy-MM-dd</code>, default 2023-01-01</td>
+<td>starting date for querying data, the format is <code>yyyy-MM-dd</code>, default 2025-06-01</td>
 <td>2025-07-01</td>
 </tr>
 <tr>
@@ -17881,6 +17884,234 @@ the same as the spot api</p>
 <td>periodAum</td>
 <td>BigDecimal</td>
 <td>the latest aum (summarized in USD) before UTC 0 on a specific day, round to 2 decimal places</td>
+</tr>
+</tbody></table>
+<h2 id='query-kpi-information-of-traders'>Query kpi information of traders</h2>
+<blockquote>
+<p>Request format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /phemex-lb/public/api/trader/kpi-info?strategyIds=&lt;strategyIds&gt;&amp;dataFrom=&lt;dataFrom&gt;&amp;dataEnd=&lt;dataEnd&gt;&amp;pageNum=&lt;pageNum&gt;&amp;pageSize=&lt;pageSize&gt;
+</code></pre></div>
+<ul>
+<li>Request Parameter</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Case</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>strategyIds</td>
+<td>List</td>
+<td>YES</td>
+<td>one or more traders UID, separated by <code>,</code></td>
+<td>113762135,600285,1106201</td>
+</tr>
+<tr>
+<td>dataFrom</td>
+<td>String</td>
+<td>NO</td>
+<td>starting date for querying data, the format is <code>yyyy-MM-dd</code>, default 2025-01-02</td>
+<td>2025-07-01</td>
+</tr>
+<tr>
+<td>dataEnd</td>
+<td>String</td>
+<td>NO</td>
+<td>end date of querying data, the format is <code>yyyy-MM-dd</code>, default today</td>
+<td>2025-08-11</td>
+</tr>
+<tr>
+<td>pageNum</td>
+<td>Integer</td>
+<td>NO</td>
+<td>page number, default 1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>pageSize</td>
+<td>Integer</td>
+<td>NO</td>
+<td>page size, default 100</td>
+<td>100</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response Format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"strategyId"</span><span class="p">:</span><span class="w"> </span><span class="mi">113762135</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"traderVolume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"copiersVolume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"tradingFee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"aumAdded"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"aumRemoved"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-09-11T00:01:08.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"profitShare"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"pnl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"aum"</span><span class="p">:</span><span class="w"> </span><span class="s2">"96294.1169"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"aumIncrease"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"newCopiers"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"copierLeaves"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"copiersPnl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"winningCopiers"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"losingCopiers"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"copiersRoi"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cycle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-01-01T00:00:00.001Z ~ 2025-09-11T00:00:00.000Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"strategyId"</span><span class="p">:</span><span class="w"> </span><span class="mi">600285</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"traderVolume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"200"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"copiersVolume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"400"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"tradingFee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"70"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"aumAdded"</span><span class="p">:</span><span class="w"> </span><span class="s2">"40"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"aumRemoved"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-09-11T00:01:08.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"profitShare"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.234"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"pnl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"89979.6615"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"aum"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"aumIncrease"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"newCopiers"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"copierLeaves"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"copiersPnl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5617.1677"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"winningCopiers"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"losingCopiers"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"copiersRoi"</span><span class="p">:</span><span class="w"> </span><span class="s2">"25.3026"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cycle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-01-01T00:00:00.001Z ~ 2025-09-11T00:00:00.000Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"strategyId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1106201</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"traderVolume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"copiersVolume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"tradingFee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"aumAdded"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"aumRemoved"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-09-11T08:00:00.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"profitShare"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"pnl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"aum"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"aumIncrease"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"newCopiers"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"copierLeaves"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"copiersPnl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"winningCopiers"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"losingCopiers"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"copiersRoi"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cycle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-01-01T00:00:00.001Z ~ 2025-09-11T00:00:00.000Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li>Response Fields</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>strategyId</td>
+<td>Long</td>
+<td>trader UID</td>
+</tr>
+<tr>
+<td>traderVolume</td>
+<td>BigDecimal</td>
+<td>trader’s own copy-trading volume</td>
+</tr>
+<tr>
+<td>copiersVolume</td>
+<td>BigDecimal</td>
+<td>total copy-trading volume executed by copiers under the trader</td>
+</tr>
+<tr>
+<td>tradingFee</td>
+<td>BigDecimal</td>
+<td>total trading fees generated by copiers</td>
+</tr>
+<tr>
+<td>aumAdded</td>
+<td>BigDecimal</td>
+<td>assets transferred in by copier accounts</td>
+</tr>
+<tr>
+<td>aumRemoved</td>
+<td>BigDecimal</td>
+<td>assets withdrawn by copier accounts</td>
+</tr>
+<tr>
+<td>updateTime</td>
+<td>String</td>
+<td>update timestamp of data</td>
+</tr>
+<tr>
+<td>profitShare</td>
+<td>BigDecimal</td>
+<td>profit-sharing revenue earned by the trader</td>
+</tr>
+<tr>
+<td>pnl</td>
+<td>BigDecimal</td>
+<td>trader’s incremental PNL</td>
+</tr>
+<tr>
+<td>aum</td>
+<td>BigDecimal</td>
+<td>trader’s AUM at the end of the query period</td>
+</tr>
+<tr>
+<td>aumIncrease</td>
+<td>BigDecimal</td>
+<td>growth in AUM during the cycle</td>
+</tr>
+<tr>
+<td>newCopiers</td>
+<td>Integer</td>
+<td>number of newly added copiers</td>
+</tr>
+<tr>
+<td>copierLeaves</td>
+<td>Integer</td>
+<td>number of copiers who stopped copying</td>
+</tr>
+<tr>
+<td>copiersPnl</td>
+<td>BigDecimal</td>
+<td>total PNL of all copiers under the trader</td>
+</tr>
+<tr>
+<td>winningCopiers</td>
+<td>Integer</td>
+<td>number of copiers with positive PNL</td>
+</tr>
+<tr>
+<td>losingCopiers</td>
+<td>Integer</td>
+<td>number of copiers with negative PNL</td>
+</tr>
+<tr>
+<td>copiersRoi</td>
+<td>BigDecimal</td>
+<td>overall ROI of copiers</td>
+</tr>
+<tr>
+<td>cycle</td>
+<td>String</td>
+<td>statistical cycle range</td>
 </tr>
 </tbody></table>
 
