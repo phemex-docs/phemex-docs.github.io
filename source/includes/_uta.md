@@ -1,6 +1,6 @@
 # Unified Trading Account REST API
 
-## Query asset mode
+## Query risk mode
 
 > Request Format
 
@@ -15,7 +15,7 @@ GET /uta-api/risk/risk-mode
   "code": 0,
   "msg": "OK",
   "data": {
-    "assetMode": "MultiAsset",
+    "riskMode": "MultiAsset",
     "lastUpdateTimeNs": 1701414861472716784
   }
 }
@@ -23,12 +23,12 @@ GET /uta-api/risk/risk-mode
 
 * Response Fields
 
-| Field            | Type       | Description                               |
-|------------------|------------|-------------------------------------------|
-| assetMode        | String     | current asset mode(Classic, MultiAsset)   |
-| lastUpdateTimeNs | Long       | uta account update time in nanosecond     |
+| Field            | Type       | Description                              |
+|------------------|------------|------------------------------------------|
+| riskMode         | String     | current risk mode(Classic, MultiAsset)   |
+| lastUpdateTimeNs | Long       | uta account update time in nanosecond    |
 
-## Switch asset mode
+## Switch risk mode
 
 > Request Format
 
@@ -37,9 +37,9 @@ POST /uta-account/switch-mode?riskMode=<riskMode>
 ```
 * Request parameters
 
-| Parameter  | Type   | Required | Description       | Possible values            |
-|------------|--------|----------|-------------------|----------------------------|
-| riskMode   | String | YES      | target asset mode | SINGLE_ASSET, MULTI_ASSETS |
+| Parameter  | Type   | Required | Description      | Possible values            |
+|------------|--------|----------|------------------|----------------------------|
+| riskMode   | String | YES      | target risk mode | SINGLE_ASSET, MULTI_ASSETS |
 
 
 > Response Format
