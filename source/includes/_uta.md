@@ -23,10 +23,10 @@ GET /uta-api/risk/risk-mode
 
 * Response Fields
 
-| Field            | Type       | Description                              |
-|------------------|------------|------------------------------------------|
-| riskMode         | String     | current risk mode(Classic, MultiAsset)   |
-| lastUpdateTimeNs | Long       | uta account update time in nanosecond    |
+| Field            | Type       | Description                                                                             |
+|------------------|------------|-----------------------------------------------------------------------------------------|
+| riskMode         | String     | current risk mode: Classic (i.e., the traditional SingleAsset trading mode), MultiAsset |
+| lastUpdateTimeNs | Long       | uta account update time in nanosecond                                                   |
 
 ## Switch risk mode
 
@@ -61,12 +61,12 @@ POST /uta-account/switch-mode?riskMode=<riskMode>
 
 * Response Fields
 
-| Field                 | Type    | Description                                           |
-|-----------------------|---------|-------------------------------------------------------|
-| userId                | Long    | user ID                                               |
-| switchModeSuccess     | Boolean | Whether the switch action is successful               |
-| switchModeCheckPassed | Boolean | Whether the conditions are met for switching riskMode |
-| switchModeCheckDetail | Object  | Detailed information on switch mode check             |
+| Field                 | Type    | Description                                                                                                                                        |
+|-----------------------|---------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| userId                | Long    | user ID                                                                                                                                            |
+| switchModeSuccess     | Boolean | Whether the switch action is successful                                                                                                            |
+| switchModeCheckPassed | Boolean | Whether the conditions are met for switching riskMode                                                                                              |
+| switchModeCheckDetail | Object  | Detailed information on switch mode check: contractOrderPositionCheckPassed(check no active orders), contractDebtCheckPassed(check no unpaid debt) |
 
 ## Query asset
 
@@ -136,18 +136,21 @@ POST /uta-funds/contract/payback
 | amountRv  | String | YES      | Payback amount real value | 1000.12         |
 
 
-> Response Format
+> Response Format 
 
 ```json
 {
   "code": 0,
   "msg": "OK",
   "data": {
-    "borrowedAmountRq": "40",
+    "borrowedAmountRq": "60",
     "currency": "USDT"
   }
 }
 ```
+> **Example Explanation:**
+> - If the user originally owed **100 USDT** and pays back **40 USDT**, 
+>   the remaining debt (`borrowedAmountRq`) will be **60 USDT** in the response.
 
 * Response Fields
 
@@ -220,24 +223,24 @@ GET /uta-api/risk/risk-units?currency=<currency>&riskType=<riskType>
 
 * Response Fields
 
-| Field                  | Type      | Description                                                                                                                                                                    |
-|------------------------|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| userId                 | Long      | User ID                                                                                                                                                                        |
-| riskType               | String    | Type of the risk unit                                                                                                                                                          |
-| riskMode               | String    | Current risk mode (Classic, MultiAsset, Isolated)                                                                                                                              |
-| currency               | String    | Valuation currency of the risk unit                                                                                                                                            |
-| symbol                 | String    | Position symbol if the risk unit is `Isolated`; Major symbol of this currency contract if Cross                                                                                |
-| posSide                | String    | Position side (`Long`/`Short`/`Merge`), only used when risk mode is `Isolated`                                                                                                 |
-| userStatus             | String    | User current status (`Banned`, `Normal`)                                                                                                                                       |
-| marginRatioRr          | String    | To evaluate the risk of this user. If >= 1, the  the positions under this risk unit scope will be liquidated. <br /> margin ratio = totalPositionMaintenanceMargin/totalEquity |
-| totalBalanceRv         | String    | Total balance under this risk unit scope                                                                                                                                       |
-| totalEquityRv          | String    | Total equity under this risk unit scope                                                                                                                                        |
-| totalPosUnpnlRv        | String    | Total unreleased pnl under this risk unit unit scope                                                                                                                           |
-| totalDebtRv            | String    | Total borrowed under this risk unit unit scope + total interest                                                                                                                |
-| totalPosCostRv         | String    | Total position cost under this risk unit unit scope                                                                                                                            |
-| totalPosMMRv           | String    | Total maintenance margin under this risk unit unit scope                                                                                                                       |
-| totalOrdUsedBalanceRv  | String    | Total order used under this risk unit unit scope                                                                                                                               |
-| fixUsedRv              | String    | Total fixed used under this risk unit unit scope                                                                                                                               |
+| Field                  | Type      | Description                                                                                                                                                              | Possible Values                                                                          |
+|------------------------|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
+| userId                 | Long      | User ID                                                                                                                                                                  |                                                                                          |
+| riskType               | String    | Type of the risk unit                                                                                                                                                    | `MultiAssetContractCross`, `SingleAssetContractCross`, `Isolated`                        |
+| riskMode               | String    | Current risk mode                                                                                                                                                        | `Classic`(i.e., the traditional SingleAsset trading mode), `MultiAsset`, `Isolated`      |
+| currency               | String    | Valuation currency of the risk unit                                                                                                                                      |                                                                                          |
+| symbol                 | String    | Position symbol if the risk unit is `Isolated`; Major symbol of this currency contract if Cross                                                                          |                                                                                          |
+| posSide                | String    | Position side                                                                                                                                                            | `Long`/`Short`/`Merge`, only used when risk mode is `Isolated`                           |
+| userStatus             | String    | User current status                                                                                                                                                      | `Banned`, `Normal`                                                                       |
+| marginRatioRr          | String    | To evaluate the risk of this user. If >= 1, the  the positions under this risk unit scope will be liquidated. <br /> margin ratio = totalMaintenanceMargin / totalEquity |                                                                                          |
+| totalBalanceRv         | String    | Total balance under this risk unit scope                                                                                                                                 |                                                                                          |
+| totalEquityRv          | String    | Total equity under this risk unit scope                                                                                                                                  |                                                                                          |
+| totalPosUnpnlRv        | String    | Total unreleased pnl under this risk unit unit scope                                                                                                                     |                                                                                          |
+| totalDebtRv            | String    | Total borrowed under this risk unit unit scope + total interest                                                                                                          |                                                                                          |
+| totalPosCostRv         | String    | Total position cost under this risk unit unit scope                                                                                                                      |                                                                                          |
+| totalPosMMRv           | String    | Total maintenance margin under this risk unit unit scope                                                                                                                 |                                                                                          |
+| totalOrdUsedBalanceRv  | String    | Total order used under this risk unit unit scope                                                                                                                         |                                                                                          |
+| fixUsedRv              | String    | Total fixed used under this risk unit unit scope                                                                                                                         |                                                                                          |
 
 ## Query borrow history
 
@@ -293,13 +296,13 @@ GET /uta-funds/contract/payback?currency=<currency>&start=<start>&end=<end>&page
 ```
 * Request parameters
 
-| Parameter | Type    | Required | Description                              | Possible values  |
-|-----------|---------|----------|------------------------------------------|------------------|
-| currency  | String  | NO       | currency                                 | USDT,BTC         |
-| start     | Long    | NO       | Epoch milliseconds timestamp, default 0  |                  |
-| end       | Long    | NO       | Epoch milliseconds timestamp, default 0  |                  |
-| pageNum   | Long    | NO       | default 0                                |                  |
-| pageSize  | Integer | NO       | default 20                               |                  |
+| Parameter | Type    | Required | Description                             | Possible values  |
+|-----------|---------|----------|-----------------------------------------|------------------|
+| currency  | String  | NO       | The currency used for the repayment     | USDT,BTC         |
+| start     | Long    | NO       | Epoch milliseconds timestamp, default 0 |                  |
+| end       | Long    | NO       | Epoch milliseconds timestamp, default 0 |                  |
+| pageNum   | Long    | NO       | default 0                               |                  |
+| pageSize  | Integer | NO       | default 20                              |                  |
 
 
 > Response Format
@@ -322,6 +325,16 @@ GET /uta-funds/contract/payback?currency=<currency>&start=<start>&end=<end>&page
   }
 }
 ```
+* Response Fields
+
+| Field             | Type     | Description                                                                                                    |
+|-------------------|----------|----------------------------------------------------------------------------------------------------------------|
+| currency          | String   | The currency used for the repayment                                                                            |
+| repayTime         | String   | The timestamp (in milliseconds) when the repayment was made                                                    |
+| principalAmountRv | String   | The principal amount repaid in this transaction                                                                |
+| interestAmountRv  | String   | The interest amount repaid in this transaction                                                                 |
+| liqFeeRv          | String   | The liquidation fee paid during the repayment (applicable only when auto-repayment occurs during liquidation)  |
+
 
 ## Query interest history
 
@@ -362,6 +375,16 @@ GET /uta-funds/contract/borrow/interests?currency=<currencyList>&start=<start>&e
   }
 }
 ```
+* Response Fields
+
+| Field            | Type   | Description                                                       |
+|------------------|--------|-------------------------------------------------------------------|
+| borrowCurrency   | String | The currency in which the funds were borrowed                     |
+| interestCalcTime | Long   | The timestamp (in milliseconds) when the interest was calculated  |
+| interestCurrency | String | The currency in which the interest amount is denominated          |
+| hourlyInterestRv | String | The amount of interest accrued during the specified hour          |
+| hourlyRateRr     | String | The hourly interest rate applied during the calculation period    |
+| annualRateRr     | String | The equivalent annualized interest rate based on the hourly rate  |
 
 ## Query convert history
 
@@ -389,23 +412,43 @@ GET /uta-exchanger/assets/convert?fromCurrency=<currency>&toCurrency=<toCurrency
   "code": 0,
   "msg": "OK",
   "data": {
-    "total": 1,
+    "total": 2,
     "rows": [
       {
-        "conversionRate": 0,
-        "createTime": 0,
-        "errorCode": 0,
-        "fromAmountEv": 0,
-        "fromCurrency": "string",
-        "linkKey": "string",
-        "status": 0,
-        "toAmountEv": 0,
-        "toCurrency": "string"
+        "linkKey": "c5c1c6be-1cfc-41be-aa8d-f4e2429356b9",
+        "createTime": 1760603394000,
+        "fromCurrency": "USDT",
+        "toCurrency": "BTC",
+        "fromAmountEv": 1000000000000,
+        "toAmountEv": 9009468,
+        "conversionRate": 900
+      },
+      {
+        "linkKey": "789def56-305e-4f78-a18b-2c0b0108484d",
+        "createTime": 1760448181000,
+        "fromCurrency": "USDT",
+        "toCurrency": "BTC",
+        "fromAmountEv": 1000000000,
+        "toAmountEv": 8970,
+        "conversionRate": 897
       }
     ]
   }
 }
 ```
+* Response Fields
+
+| Field          | Type   | Description                                                                   |
+|----------------|--------|-------------------------------------------------------------------------------|
+| linkKey        | String | The unique identifier for the conversion record                               |
+| createTime     | Long   | The timestamp (in milliseconds) of the conversion                             |
+| fromCurrency   | String | The source currency used in the conversion                                    |
+| toCurrency     | String | The target currency received from the conversion                              |
+| fromAmountEv   | String | The converted amount of the source currency, represented as an enlarged value |
+| toAmountEv     | String | The converted amount of the target currency, represented as an enlarged value |
+| conversionRate | String | The exchange rate applied during the conversion                               |
+
+
 ## Other API
 Other APIs listed below are not changed and should be same as before
 * Transfer API
