@@ -1,5 +1,50 @@
 # Unified Trading Account REST API
 
+## Query collateral info
+
+> Request Format
+
+```
+GET public/products-plus
+```
+
+> Response Format
+
+```json
+{
+  "code": 0,
+  "msg": "OK",
+  "data": {
+    "collaterals": [
+      {
+        "currency": "BTC",
+        "coefficient": "0.98",
+        "defaultHourlyInterestRate": "0.00000210",
+        "liquidityInDescendingOrder": 2,
+        "perpCollateral": true,
+        "perpLoan": false,
+        "convertRate": "0.999",
+        "debtLimit": "1"
+      }
+    ]
+  }
+}
+```
+
+* Response Fields
+
+| Field                      | Type    | Description                                                                                                                                                                     |
+|----------------------------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| currency                   | String  | The currency name of the collateral configuration                                                                                                                               |
+| coefficient                | String  | The collateral coefficient used to calculate the collateral’s value in USDT. For example, if the BTC collateral coefficient is 0.9, then its value in USDT will be 0.9 × btcQty |
+| defaultHourlyInterestRate  | String  | The default hourly interest rate applied when incurring debt in this currency                                                                                                   |
+| liquidityInDescendingOrder | Integer | The liquidity ranking of the currency when selecting assets to convert for repayment. For example, if both BTC and BNB are collaterals, BTC will be converted before BNB        |
+| perpCollateral             | Integer | Indicates whether this currency can be used as collateral for perpetual trading                                                                                                 |
+| perpLoan                   | Boolean | Indicates whether this currency can be borrowed when a trade is settled. Currently, only USDT is supported                                                                      |
+| convertRate                | String  | The exchange rate applied when converting this collateral to another currency                                                                                                   |
+| debtLimit                  | String  | The maximum debt limit for this currency. When the debt reaches this limit, automatic conversion for repayment will be triggered                                                |
+
+
 ## Query risk mode
 
 > Request Format
