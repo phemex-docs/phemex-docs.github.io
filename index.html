@@ -1418,6 +1418,44 @@
                   </li>
               </ul>
           </li>
+          <li>
+            <a href="#unified-trading-account-rest-api" class="toc-h1 toc-link" data-title="Unified Trading Account REST API">Unified Trading Account REST API</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#query-collateral-info" class="toc-h2 toc-link" data-title="Query collateral info">Query collateral info</a>
+                  </li>
+                  <li>
+                    <a href="#query-risk-mode" class="toc-h2 toc-link" data-title="Query risk mode">Query risk mode</a>
+                  </li>
+                  <li>
+                    <a href="#switch-risk-mode" class="toc-h2 toc-link" data-title="Switch risk mode">Switch risk mode</a>
+                  </li>
+                  <li>
+                    <a href="#query-asset" class="toc-h2 toc-link" data-title="Query asset">Query asset</a>
+                  </li>
+                  <li>
+                    <a href="#payback-debts" class="toc-h2 toc-link" data-title="Payback debts">Payback debts</a>
+                  </li>
+                  <li>
+                    <a href="#query-risk-unit-2" class="toc-h2 toc-link" data-title="Query risk unit">Query risk unit</a>
+                  </li>
+                  <li>
+                    <a href="#query-borrow-history" class="toc-h2 toc-link" data-title="Query borrow history">Query borrow history</a>
+                  </li>
+                  <li>
+                    <a href="#query-payback-history" class="toc-h2 toc-link" data-title="Query payback history">Query payback history</a>
+                  </li>
+                  <li>
+                    <a href="#query-interest-history" class="toc-h2 toc-link" data-title="Query interest history">Query interest history</a>
+                  </li>
+                  <li>
+                    <a href="#query-convert-history-2" class="toc-h2 toc-link" data-title="Query convert history">Query convert history</a>
+                  </li>
+                  <li>
+                    <a href="#other-api" class="toc-h2 toc-link" data-title="Other API">Other API</a>
+                  </li>
+              </ul>
+          </li>
       </ul>
     </div>
     <div class="page-wrapper">
@@ -17418,6 +17456,1051 @@ the same as the spot api</p>
 <td>lastest aum(summarized in USD) of trader, round to 2 decimal places</td>
 </tr>
 </tbody></table>
+<h1 id='unified-trading-account-rest-api'>Unified Trading Account REST API</h1><h2 id='query-collateral-info'>Query collateral info</h2>
+<blockquote>
+<p>Request Format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET public/products-plus
+</code></pre></div>
+<blockquote>
+<p>Response Format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"collaterals"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"coefficient"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.98"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"defaultHourlyInterestRate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000210"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"liquidityInDescendingOrder"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"perpCollateral"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"perpLoan"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"convertRate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.999"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"debtLimit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li>Response Fields</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td>The currency name of the collateral configuration</td>
+</tr>
+<tr>
+<td>coefficient</td>
+<td>String</td>
+<td>The collateral coefficient used to calculate the collateral’s value in USDT. For example, if the BTC collateral coefficient is 0.9, then its value in USDT will be 0.9 × btcQty</td>
+</tr>
+<tr>
+<td>defaultHourlyInterestRate</td>
+<td>String</td>
+<td>The default hourly interest rate applied when incurring debt in this currency</td>
+</tr>
+<tr>
+<td>liquidityInDescendingOrder</td>
+<td>Integer</td>
+<td>The liquidity ranking of the currency when selecting assets to convert for repayment. For example, if both BTC and BNB are collaterals, BTC will be converted before BNB</td>
+</tr>
+<tr>
+<td>perpCollateral</td>
+<td>Integer</td>
+<td>Indicates whether this currency can be used as collateral for perpetual trading</td>
+</tr>
+<tr>
+<td>perpLoan</td>
+<td>Boolean</td>
+<td>Indicates whether this currency can be borrowed when a trade is settled. Currently, only USDT is supported</td>
+</tr>
+<tr>
+<td>convertRate</td>
+<td>String</td>
+<td>The exchange rate applied when converting this collateral to another currency</td>
+</tr>
+<tr>
+<td>debtLimit</td>
+<td>String</td>
+<td>The maximum debt limit for this currency. When the debt reaches this limit, automatic conversion for repayment will be triggered</td>
+</tr>
+</tbody></table>
+<h2 id='query-risk-mode'>Query risk mode</h2>
+<blockquote>
+<p>Request Format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /uta-api/risk/risk-mode
+</code></pre></div>
+<blockquote>
+<p>Response Format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"riskMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MultiAsset"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"lastUpdateTimeNs"</span><span class="p">:</span><span class="w"> </span><span class="mi">1701414861472716784</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li>Response Fields</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>riskMode</td>
+<td>String</td>
+<td>current risk mode: Classic (i.e., the traditional SingleAsset trading mode), MultiAsset</td>
+</tr>
+<tr>
+<td>lastUpdateTimeNs</td>
+<td>Long</td>
+<td>uta account update time in nanosecond</td>
+</tr>
+</tbody></table>
+<h2 id='switch-risk-mode'>Switch risk mode</h2>
+<blockquote>
+<p>Request Format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>POST /uta-account/switch-mode?riskMode=&lt;riskMode&gt;
+</code></pre></div>
+<ul>
+<li>Request parameters</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Possible values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>riskMode</td>
+<td>String</td>
+<td>YES</td>
+<td>target risk mode</td>
+<td>SINGLE_ASSET, MULTI_ASSETS</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response Format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"userId"</span><span class="p">:</span><span class="w"> </span><span class="mi">10002222</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"switchModeSuccess"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"switchModeCheckPassed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"switchModeCheckDetail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"contractOrderPositionCheckPassed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li>Response Fields</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>userId</td>
+<td>Long</td>
+<td>user ID</td>
+</tr>
+<tr>
+<td>switchModeSuccess</td>
+<td>Boolean</td>
+<td>Whether the switch action is successful</td>
+</tr>
+<tr>
+<td>switchModeCheckPassed</td>
+<td>Boolean</td>
+<td>Whether the conditions are met for switching riskMode</td>
+</tr>
+<tr>
+<td>switchModeCheckDetail</td>
+<td>Object</td>
+<td>Detailed information on switch mode check: contractOrderPositionCheckPassed(check no active orders), contractDebtCheckPassed(check no unpaid debt)</td>
+</tr>
+</tbody></table>
+<h2 id='query-asset'>Query asset</h2>
+<blockquote>
+<p>Request Format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /uta-biz/assets?currency=&lt;currency&gt;
+</code></pre></div>
+<ul>
+<li>Request parameters</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Possible values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td>YES</td>
+<td>Asset to query</td>
+<td>BTC, USDT, ETH ...</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response Format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"userId"</span><span class="p">:</span><span class="w"> </span><span class="mi">10002222</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"balanceRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"988.6059477872"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalBonusRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"borrowedRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"interestRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"frozenBalanceAsCollateralRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li>Response Fields</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>userId</td>
+<td>Long</td>
+<td>User ID</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td>Asset currency name</td>
+</tr>
+<tr>
+<td>balanceRv</td>
+<td>String</td>
+<td>Total balance of this currency</td>
+</tr>
+<tr>
+<td>totalBonusRv</td>
+<td>String</td>
+<td>Total bonus of this currency</td>
+</tr>
+<tr>
+<td>borrowedRv</td>
+<td>String</td>
+<td>Total borrowed balance of this currency wallet</td>
+</tr>
+<tr>
+<td>interestRv</td>
+<td>String</td>
+<td>Total unpaid interest of this currency wallet</td>
+</tr>
+<tr>
+<td>frozenBalanceAsCollateralRv</td>
+<td>String</td>
+<td>The frozen balance used as collateral for trading</td>
+</tr>
+</tbody></table>
+<h2 id='payback-debts'>Payback debts</h2>
+<blockquote>
+<p>Request Format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>POST /uta-funds/contract/payback
+</code></pre></div>
+<blockquote>
+<p>Request Format
+<code>json
+{
+    &quot;currency&quot;: &quot;USDT&quot;,
+    &quot;amountRv&quot;: &quot;40&quot;
+}
+</code>
+* Request parameters</p>
+</blockquote>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Possible values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td>YES</td>
+<td>Currency to payback</td>
+<td>USDT</td>
+</tr>
+<tr>
+<td>amountRv</td>
+<td>String</td>
+<td>YES</td>
+<td>Payback amount real value</td>
+<td>1000.12</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response Format </p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"borrowedAmountRq"</span><span class="p">:</span><span class="w"> </span><span class="s2">"60"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p><strong>Example Explanation:</strong>
+- If the user originally owed <strong>100 USDT</strong> and pays back <strong>40 USDT</strong>, 
+  the remaining debt (<code>borrowedAmountRq</code>) will be <strong>60 USDT</strong> in the response.</p>
+</blockquote>
+
+<ul>
+<li>Response Fields</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td>currency to payback</td>
+</tr>
+<tr>
+<td>borrowedAmountRq</td>
+<td>String</td>
+<td>Current borrowed amount after the payback</td>
+</tr>
+</tbody></table>
+<h2 id='query-risk-unit-2'>Query risk unit</h2>
+<blockquote>
+<p>Request Format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /uta-api/risk/risk-units?currency=&lt;currency&gt;&amp;riskType=&lt;riskType&gt;
+</code></pre></div>
+<ul>
+<li>Request parameters</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Possible values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td>No</td>
+<td>Valuation currency of the risk unit to query</td>
+<td>BTC, USDT, ETH ...</td>
+</tr>
+<tr>
+<td>riskType</td>
+<td>String</td>
+<td>No</td>
+<td>Type of the risk unit</td>
+<td>MultiAssetContractCross, SingleAssetContractCross, Isolated</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response Format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"userId"</span><span class="p">:</span><span class="w"> </span><span class="mi">10002222</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"riskMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Classic"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSD"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"posSide"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"userStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Normal"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"marginRatioRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.001"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"totalBalanceRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00108802"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"totalEquityRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00108802"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"totalPosUnpnlRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"totalDebtRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"totalPosCostRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"totalPosMMRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"totalOrdUsedBalanceRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"fixedUsedRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"riskType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SingleAssetContractCross"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"userId"</span><span class="p">:</span><span class="w"> </span><span class="mi">10002222</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"riskMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Classic"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"posSide"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"userStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Normal"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"marginRatioRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.001"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"totalBalanceRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5523.514992992124"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"totalEquityRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5538.429112992124"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"totalPosUnpnlRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"14.91412"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"totalDebtRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"totalPosCostRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"14.975552230788"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"totalPosMMRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5.63402034904"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"totalOrdUsedBalanceRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"fixedUsedRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"riskType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SingleAssetContractCross"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li>Response Fields</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+<th>Possible Values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>userId</td>
+<td>Long</td>
+<td>User ID</td>
+<td></td>
+</tr>
+<tr>
+<td>riskType</td>
+<td>String</td>
+<td>Type of the risk unit</td>
+<td><code>MultiAssetContractCross</code>, <code>SingleAssetContractCross</code>, <code>Isolated</code></td>
+</tr>
+<tr>
+<td>riskMode</td>
+<td>String</td>
+<td>Current risk mode</td>
+<td><code>Classic</code>(i.e., the traditional SingleAsset trading mode), <code>MultiAsset</code>, <code>Isolated</code></td>
+</tr>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td>Valuation currency of the risk unit</td>
+<td></td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>String</td>
+<td>Position symbol if the risk unit is <code>Isolated</code>; Major symbol of this currency contract if Cross</td>
+<td></td>
+</tr>
+<tr>
+<td>posSide</td>
+<td>String</td>
+<td>Position side</td>
+<td><code>Long</code>/<code>Short</code>/<code>Merge</code>, only used when risk mode is <code>Isolated</code></td>
+</tr>
+<tr>
+<td>userStatus</td>
+<td>String</td>
+<td>User current status</td>
+<td><code>Banned</code>, <code>Normal</code></td>
+</tr>
+<tr>
+<td>marginRatioRr</td>
+<td>String</td>
+<td>To evaluate the risk of this user. If &gt;= 1, the  the positions under this risk unit scope will be liquidated. <br /> margin ratio = totalMaintenanceMargin / totalEquity</td>
+<td></td>
+</tr>
+<tr>
+<td>totalBalanceRv</td>
+<td>String</td>
+<td>Total balance under this risk unit scope</td>
+<td></td>
+</tr>
+<tr>
+<td>totalEquityRv</td>
+<td>String</td>
+<td>Total equity under this risk unit scope</td>
+<td></td>
+</tr>
+<tr>
+<td>totalPosUnpnlRv</td>
+<td>String</td>
+<td>Total unreleased pnl under this risk unit unit scope</td>
+<td></td>
+</tr>
+<tr>
+<td>totalDebtRv</td>
+<td>String</td>
+<td>Total borrowed under this risk unit unit scope + total interest</td>
+<td></td>
+</tr>
+<tr>
+<td>totalPosCostRv</td>
+<td>String</td>
+<td>Total position cost under this risk unit unit scope</td>
+<td></td>
+</tr>
+<tr>
+<td>totalPosMMRv</td>
+<td>String</td>
+<td>Total maintenance margin under this risk unit unit scope</td>
+<td></td>
+</tr>
+<tr>
+<td>totalOrdUsedBalanceRv</td>
+<td>String</td>
+<td>Total order used under this risk unit unit scope</td>
+<td></td>
+</tr>
+<tr>
+<td>fixUsedRv</td>
+<td>String</td>
+<td>Total fixed used under this risk unit unit scope</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id='query-borrow-history'>Query borrow history</h2>
+<blockquote>
+<p>Request Format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /uta-funds/contract/borrow?currency=&lt;currency&gt;&amp;start=&lt;start&gt;&amp;end=&lt;end&gt;&amp;pageNum=&lt;pageNum&gt;&amp;pageSize=&lt;pageSize&gt;
+</code></pre></div>
+<ul>
+<li>Request parameters</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Possible values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td>NO</td>
+<td>currency</td>
+<td>USDT,BTC</td>
+</tr>
+<tr>
+<td>start</td>
+<td>Long</td>
+<td>NO</td>
+<td>Epoch milliseconds timestamp, default 0</td>
+<td></td>
+</tr>
+<tr>
+<td>end</td>
+<td>Long</td>
+<td>NO</td>
+<td>Epoch milliseconds timestamp, default 0</td>
+<td></td>
+</tr>
+<tr>
+<td>pageNum</td>
+<td>Long</td>
+<td>NO</td>
+<td>default 0</td>
+<td></td>
+</tr>
+<tr>
+<td>pageSize</td>
+<td>Integer</td>
+<td>NO</td>
+<td>default 20</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response Format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"rows"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"borrowTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1677211672675</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"amountRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"94.05"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li>Response Fields</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td>Borrow currency name</td>
+</tr>
+<tr>
+<td>borrowTime</td>
+<td>String</td>
+<td>Borrow timestamp</td>
+</tr>
+<tr>
+<td>amountRv</td>
+<td>String</td>
+<td>Amount borrowed</td>
+</tr>
+</tbody></table>
+<h2 id='query-payback-history'>Query payback history</h2>
+<blockquote>
+<p>Request Format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /uta-funds/contract/payback?currency=&lt;currency&gt;&amp;start=&lt;start&gt;&amp;end=&lt;end&gt;&amp;pageNum=&lt;pageNum&gt;&amp;pageSize=&lt;pageSize&gt;
+</code></pre></div>
+<ul>
+<li>Request parameters</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Possible values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td>NO</td>
+<td>The currency used for the repayment</td>
+<td>USDT,BTC</td>
+</tr>
+<tr>
+<td>start</td>
+<td>Long</td>
+<td>NO</td>
+<td>Epoch milliseconds timestamp, default 0</td>
+<td></td>
+</tr>
+<tr>
+<td>end</td>
+<td>Long</td>
+<td>NO</td>
+<td>Epoch milliseconds timestamp, default 0</td>
+<td></td>
+</tr>
+<tr>
+<td>pageNum</td>
+<td>Long</td>
+<td>NO</td>
+<td>default 0</td>
+<td></td>
+</tr>
+<tr>
+<td>pageSize</td>
+<td>Integer</td>
+<td>NO</td>
+<td>default 20</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response Format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"rows"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"repayTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1678976978535</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"principalAmountRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"24.05469895"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"interestAmountRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.019881"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"liqFeeRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li>Response Fields</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td>The currency used for the repayment</td>
+</tr>
+<tr>
+<td>repayTime</td>
+<td>String</td>
+<td>The timestamp (in milliseconds) when the repayment was made</td>
+</tr>
+<tr>
+<td>principalAmountRv</td>
+<td>String</td>
+<td>The principal amount repaid in this transaction</td>
+</tr>
+<tr>
+<td>interestAmountRv</td>
+<td>String</td>
+<td>The interest amount repaid in this transaction</td>
+</tr>
+<tr>
+<td>liqFeeRv</td>
+<td>String</td>
+<td>The liquidation fee paid during the repayment (applicable only when auto-repayment occurs during liquidation)</td>
+</tr>
+</tbody></table>
+<h2 id='query-interest-history'>Query interest history</h2>
+<blockquote>
+<p>Request Format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /uta-funds/contract/borrow/interests?currency=&lt;currencyList&gt;&amp;start=&lt;start&gt;&amp;end=&lt;end&gt;&amp;pageNum=&lt;pageNum&gt;&amp;pageSize=&lt;pageSize&gt;
+</code></pre></div>
+<ul>
+<li>Request parameters</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Possible values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td>NO</td>
+<td>currency</td>
+<td>USDT,BTC</td>
+</tr>
+<tr>
+<td>start</td>
+<td>Long</td>
+<td>NO</td>
+<td>Epoch milliseconds timestamp, default 0</td>
+<td></td>
+</tr>
+<tr>
+<td>end</td>
+<td>Long</td>
+<td>NO</td>
+<td>Epoch milliseconds timestamp, default 0</td>
+<td></td>
+</tr>
+<tr>
+<td>pageNum</td>
+<td>Long</td>
+<td>NO</td>
+<td>default 0</td>
+<td></td>
+</tr>
+<tr>
+<td>pageSize</td>
+<td>Integer</td>
+<td>NO</td>
+<td>default 20</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response Format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"rows"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"borrowCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"interestCalcTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1678975566487</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"interestCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"hourlyInterestRv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00013254"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"hourlyRateRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000551"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"annualRateRr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0482676"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li>Response Fields</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>borrowCurrency</td>
+<td>String</td>
+<td>The currency in which the funds were borrowed</td>
+</tr>
+<tr>
+<td>interestCalcTime</td>
+<td>Long</td>
+<td>The timestamp (in milliseconds) when the interest was calculated</td>
+</tr>
+<tr>
+<td>interestCurrency</td>
+<td>String</td>
+<td>The currency in which the interest amount is denominated</td>
+</tr>
+<tr>
+<td>hourlyInterestRv</td>
+<td>String</td>
+<td>The amount of interest accrued during the specified hour</td>
+</tr>
+<tr>
+<td>hourlyRateRr</td>
+<td>String</td>
+<td>The hourly interest rate applied during the calculation period</td>
+</tr>
+<tr>
+<td>annualRateRr</td>
+<td>String</td>
+<td>The equivalent annualized interest rate based on the hourly rate</td>
+</tr>
+</tbody></table>
+<h2 id='query-convert-history-2'>Query convert history</h2>
+<blockquote>
+<p>Request Format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /uta-exchanger/assets/convert?fromCurrency=&lt;currency&gt;&amp;toCurrency=&lt;toCurrency&gt;
+</code></pre></div>
+<ul>
+<li>Request parameters</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Possible values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>fromCurrency</td>
+<td>String</td>
+<td>NO</td>
+<td>From currency in the conversion</td>
+<td>USDT,BTC</td>
+</tr>
+<tr>
+<td>toCurrency</td>
+<td>String</td>
+<td>NO</td>
+<td>Target currency in the conversion</td>
+<td>USDT,BTC</td>
+</tr>
+<tr>
+<td>start</td>
+<td>Long</td>
+<td>NO</td>
+<td>Epoch milliseconds timestamp, default 0</td>
+<td></td>
+</tr>
+<tr>
+<td>end</td>
+<td>Long</td>
+<td>NO</td>
+<td>Epoch milliseconds timestamp, default 0</td>
+<td></td>
+</tr>
+<tr>
+<td>offset</td>
+<td>Integer</td>
+<td>NO</td>
+<td>Start from 0, default 0</td>
+<td></td>
+</tr>
+<tr>
+<td>limit</td>
+<td>Integer</td>
+<td>NO</td>
+<td>Page size, default to 20, max 200</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response Format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"rows"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"linkKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c5c1c6be-1cfc-41be-aa8d-f4e2429356b9"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"createTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1760603394000</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fromCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"toCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fromAmountEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000000000000</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"toAmountEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">9009468</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"conversionRate"</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"linkKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"789def56-305e-4f78-a18b-2c0b0108484d"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"createTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1760448181000</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fromCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"toCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fromAmountEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000000000</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"toAmountEv"</span><span class="p">:</span><span class="w"> </span><span class="mi">8970</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"conversionRate"</span><span class="p">:</span><span class="w"> </span><span class="mi">897</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li>Response Fields</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>linkKey</td>
+<td>String</td>
+<td>The unique identifier for the conversion record</td>
+</tr>
+<tr>
+<td>createTime</td>
+<td>Long</td>
+<td>The timestamp (in milliseconds) of the conversion</td>
+</tr>
+<tr>
+<td>fromCurrency</td>
+<td>String</td>
+<td>The source currency used in the conversion</td>
+</tr>
+<tr>
+<td>toCurrency</td>
+<td>String</td>
+<td>The target currency received from the conversion</td>
+</tr>
+<tr>
+<td>fromAmountEv</td>
+<td>String</td>
+<td>The converted amount of the source currency, represented as an enlarged value</td>
+</tr>
+<tr>
+<td>toAmountEv</td>
+<td>String</td>
+<td>The converted amount of the target currency, represented as an enlarged value</td>
+</tr>
+<tr>
+<td>conversionRate</td>
+<td>String</td>
+<td>The exchange rate applied during the conversion</td>
+</tr>
+</tbody></table>
+<h2 id='other-api'>Other API</h2>
+<p>Other APIs listed below are not changed and should be same as before
+* Transfer API
+* CreateOrder API
+* ReplaceOrder API
+* AssignIsolatedBalance API
+* WebSocket Related API</p>
+
+<p>The data and interface of websocket are same as before.
+But in SingleAsset mode, users may subscribe to AOPS (see https://phemex-docs.github.io/#subscribe-account-order-position-aop-2) to get the latest balance and positions.
+In MultiAsset mode, users need to subscribe to RAS (see https://phemex-docs.github.io/#subscribe-account-margin-rasO) to get the latest asset info in different currencies, while positions still need to get from AOPS</p>
 
       </div>
       <div class="dark-box">
