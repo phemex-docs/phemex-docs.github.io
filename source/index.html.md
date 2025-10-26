@@ -9,6 +9,7 @@ includes:
   - transferV2
   - withdraw
   - copytrade
+  - uta
 
 logo:
   link: https://phemex.com
