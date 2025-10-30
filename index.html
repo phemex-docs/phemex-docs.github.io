@@ -2909,6 +2909,10 @@ Because the number of interfaces in Other group may grow over time, the list bel
 <td>FillOrKill</td>
 <td>--</td>
 </tr>
+<tr>
+<td>RPIPostOnly</td>
+<td>Mark the order is an RPI(Retail Price Improvement) order, only valid for Approved Market Makers</td>
+</tr>
 </tbody></table>
 
 <ul>
@@ -3276,7 +3280,7 @@ Because the number of interfaces in Other group may grow over time, the list bel
 <td>Enum</td>
 <td>-</td>
 <td>Time in force. default to GoodTillCancel</td>
-<td>GoodTillCancel, ImmediateOrCancel, FillOrKill, PostOnly</td>
+<td>GoodTillCancel, ImmediateOrCancel, FillOrKill, PostOnly, RPIPostOnly</td>
 </tr>
 <tr>
 <td>reduceOnly</td>
@@ -7092,7 +7096,7 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
 <td>String</td>
 <td>-</td>
 <td>Time in force. default to GoodTillCancel</td>
-<td>GoodTillCancel, ImmediateOrCancel, FillOrKill, PostOnly</td>
+<td>GoodTillCancel, ImmediateOrCancel, FillOrKill, PostOnly, RPIPostOnly</td>
 </tr>
 <tr>
 <td>stopPxRp</td>
@@ -7344,7 +7348,7 @@ i.e. <code>index</code> symbol follows a pattern <code>.&lt;BASECURRENCY&gt;</co
 <td>String</td>
 <td>-</td>
 <td>Time in force. default to GoodTillCancel</td>
-<td>GoodTillCancel, ImmediateOrCancel, FillOrKill, PostOnly</td>
+<td>GoodTillCancel, ImmediateOrCancel, FillOrKill, PostOnly, RPIPostOnly</td>
 </tr>
 <tr>
 <td>stopPxRp</td>
