@@ -367,3 +367,4 @@ Every HTTP Rest Request must have the following Headers:
 |  11133  |  TE_BO_ABORT_BOSL_DUE_BOPO_CANCELED| Cancel bracket stop loss order due main order canceled.|
 |  11134  |  TE_BO_ABORT_BOTP_DUE_BOPO_CANCELED| Cancel bracket take profit order due main order canceled.|
 |  11143  |  TE_RPI_NOT_APPROVED_MARKET_MAKER| RPI orders are exclusively available to approved market makers. |
+|  11150  |  TE_OI_LIMIT_REDUCE_ONLY | Current symbol has reached maximum open interest, only reduce orders are accepted. |
