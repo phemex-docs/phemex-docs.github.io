@@ -225,11 +225,11 @@ under the License.
     <div class="toc-wrapper">
       <% if current_page.data.logo.present? %>
         <a href="<%= current_page.data.logo.link %>" class="logo-link" target="<%= current_page.data.logo.target %>">
-          <%= image_tag "logo.svg", class: 'logo' %>
+          <%= image_tag "logo-v1.svg", class: 'logo' %>
         </a>
         <div class="logo-subtitle"><%= current_page.data.logo.subtitle %></div>
       <% else %>
-        <%= image_tag "logo.svg", class: 'logo' %>
+        <%= image_tag "logo-v1.svg", class: 'logo' %>
       <% end %>
       <% if language_tabs.any? %>
         <div class="lang-selector">
