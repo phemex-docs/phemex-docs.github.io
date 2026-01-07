@@ -39,7 +39,7 @@ under the License.
       gtag('config', 'UA-158616893-1');
     </script>
 
-    <%= favicon_tag "favicon.ico" %>
+    <%= favicon_tag "https://static.phemex.com/s/home/logo/favicon-v4.ico" %>
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -225,11 +225,11 @@ under the License.
     <div class="toc-wrapper">
       <% if current_page.data.logo.present? %>
         <a href="<%= current_page.data.logo.link %>" class="logo-link" target="<%= current_page.data.logo.target %>">
-          <%= image_tag "logo.svg", class: 'logo' %>
+          <%= image_tag "logo-v1.svg", class: 'logo' %>
         </a>
         <div class="logo-subtitle"><%= current_page.data.logo.subtitle %></div>
       <% else %>
-        <%= image_tag "logo.svg", class: 'logo' %>
+        <%= image_tag "logo-v1.svg", class: 'logo' %>
       <% end %>
       <% if language_tabs.any? %>
         <div class="lang-selector">
