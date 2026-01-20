@@ -2073,7 +2073,7 @@ PUT /margin-trade/orders/create?symbol=<symbol>&trigger=<trigger>&clOrdID=<clOrd
 
 | Field       | Type   | Required | Description               | Possible values |
 |----------   |--------|----------|---------------------------|-----------------|
-| symbol      | String | Yes      |                           | [Spot Symbols](#spot_symbols) |
+| symbol      | String | Yes      |                           | [Spot Symbols](#spot_symbols) with "leverage": 5|
 | side        | Enum   | Yes      |                           |  Sell, Buy     | 
 | qtyType     | Enum   | Yes      | Set order quantity by base or quote currency | ByBase, ByQuote|
 | quoteQtyRq  | String| --       | Required if qtyType = ByQuote|  |
