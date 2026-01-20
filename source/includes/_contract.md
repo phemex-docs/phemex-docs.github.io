@@ -5612,6 +5612,564 @@ AOP subscription requires the session been authorized successfully. DataGW extra
 }
 ```
 
+## Subscribe USDT Settled Perpetual Account-Order-Position (AOP lite)
+AOP lite subscription requires the session been authorized successfully. DataGW extracts the user information from the given token and sends AOP messages back to client accordingly. 0 or more latest account snapshot messages will be sent to client immediately on subscription, and incremental messages will be sent for later updates. Each account snapshot contains a trading account information, holding positions, and open / max 100 closed / max 100 filled order event message history. 
+
+> Request format
+```javascript
+{
+  "id": <id>,
+  "method": "aop_v.subscribe",
+  "params": {}
+}
+```
+
+> Response format
+```javascript
+{
+  "error": null,
+  "id": <id>,
+  "result": {
+    "status": "success"
+  }
+}
+```
+
+> Subscribe param define
+
+|       Field      |        Type        |     Required    |     Description      |        MEMO          |
+|------------------|--------------------|-----------------|----------------------|----------------------|
+|       a          |        BOOL        |      N          |Whether to subscribe account info,default true||
+|       P          |        BOOL        |      N          |Whether to subscribe account positons,default true||
+|       O          |        BOOL        |      N          |Whether to subscribe account order information,default true||
+|       s          |        BOOL        |      N          |Whether to subscribe 'a','P','O' info,that specify symbol list,default null list,mean is all symbols
+
+> Response message field define
+
+> publish message header
+
+| Field  |  Field(old) |    Type    |          Description        |    MEMO    |
+|--------|-------------|------------|-----------------------------|------------|
+|  seq   |  sequence   |  int64_t   |message indexLatest message sequence       ||
+|  ts    |  timestamp  |  int64_t   |timestamp(nsTransaction timestamp in nanoseconds)||
+|  t     |  type       |  string    |message type, value:snapshot/incremental| |
+
+> data set define
+
+| Field  |    Type    |          Description        |    MEMO    |
+|--------|------------|-----------------------------|------------|
+| data   |array       |response datas,inclue ev(events), acc(accounts), pos(positions), ords(orders) |            |
+
+
+> event list define
+
+| Field  |    Type    |        Description  |    MEMO    |
+|--------|------------|---------------------|------------|
+|  ev    |json vector |  event lists        |If the data is empty, an empty object will be transmitted.|
+
+> event item define
+
+| Field  |  Field(old)          |    Type    |        Description          |    MEMO     |
+|--------|----------------------|------------|-----------------------------|-------------|
+|  u     |  userID              |  int64_t   |user id||
+|  a     |  accountID           |  int64_t   |account id ||
+|  os    |  ordStatus           |  string    |order status||
+|  cid   |  clOrdID             |  string    |client order ID||
+|  tts   |  transactTimeNs      |  int64_t   |transact time(nano secods)||
+|  es    |  execStatus          |  string    |execute status||
+|  psd   |  posSide             |  string    |position side ||
+|  cd    |  code                |  string    |error info    ||
+|  ats   |  actionTimeNs        |  int64_t   |actionTime(nano seconds) ||
+|  ev    |  execValueRv         |  string    |execute value ||
+|  epx   |  execPriceRp         |  string    |execute price ||
+|  eq    |  execQty             |  string    |execute quantity ||
+|  ef    |  execFeeRv           |  string    |execute fee ||
+|  rpt   |  relatedPosTerm      |  int64_t   |related position term ||
+|  fr    |  feeRateRr           |  string    |fee rate  ||
+|  q     |  orderQty            |  string    |order quantity||
+|  px    |  priceRp             |  string    |price   ||
+|  cmq   |  cumQty              |  string    |cumulative quantity ||
+|  seq   |  execSeq             |  int64_t   |execute seqence number ||
+|  pgop  | pegOffsetProportionRr|  string    |peg offset proportion ||
+|  s     |  symbol              |  string    |symbol   ||
+|  c     |  currency            |  string    |currency ||
+|  eid   |  execID              |  string    |execute ID ||
+|  ab    |  actionBy            |  string    |action by  ||
+|  an    |  action              |  string    |action     ||
+|  tt    |  tradeType           |  string    |trade type  ||
+
+> account info define
+
+> account datas
+
+| Field  |    Type    |        Description          |    MEMO     |
+|--------|------------|-----------------------------|-------------|
+|  acc   |json vector |  account informations       ||
+
+> account item message define
+
+| Field  |  Field(old)    |    Type    |        Description          |    MEMO     |
+|--------|----------------|------------|-----------------------------|-------------|
+|  u     |  userID        |  int64_t   |user id       ||
+|  a     |  accountID     |  int64_t   |account id    ||
+|  c     |  currency      |  string    |currency      ||
+|  B     |accountBalanceRv|  string    |balance       ||
+|  ub    |totalUsedBalanceRv|  string    |used balance  ||
+|  bb    | bonusBalanceRv|  string    |bonus balance |Do not push when it is 0.|
+
+> order data set define
+
+| Field  |    Type    |        Description          |    MEMO     |
+|--------|------------|-----------------------------|-------------|
+| ords   |json vector |account orders,include open order('O'), close order('C'), filled order('F')|A delegate with the field name 'O' will be received when the snapshot occurs. However, the close delegate (field name 'C') and the filled delegate (field name 'F') are not transmitted.All three datasets will be present during incremental. If the data is empty, an empty object will be transmitted.|
+
+> order data item define
+
+| Field  |    Field(old)     |    Type    |        Description          |    MEMO     |
+|--------|-------------------|------------|-----------------------------|-------------|
+|  u     |  userID           |    int64_t   |user id                      ||
+|  a     |  accountID        |    int64_t   |account id                   ||
+|  s     |  symbol           |    string    |symbol                       ||
+|  c     |  currency         |    string    |currency                     ||
+|  ats   |  actionTimeNs     |    int64_t   |action time(nano seconds)    ||
+|  oid   |  orderID          |    string    |order id                     ||
+|  sd    |  side             |    string    |side                         ||
+|  psd   |  posSide          |    string    |position side                ||
+|  stpx  |  stopPxRp         |    string    |stop price                   ||
+|  tppx  |  tpPxRp           |    string    |take profit limit price      ||
+|  slpx  |  slPxRp           |    string    |stop loss limit price        ||
+|  px    |  priceRp          |    string    |price                        ||
+|  q     |  orderQty         |    string    |order quantity               ||
+|  dq    |  displayQty       |    string    |display quantity             ||
+|  es    |  execStatus       |    string    |execute status               ||
+|  crj   |  cxlRejReason     |    string    |concel reject reason         |Do not push when it is null|
+|  cd    |  code             |    string    |error info                   ||
+|  lq    |  leavesQty        |    string    |leaves quantity              ||
+|  lv    |  leavesValueRv    |    string    |leaves value                 ||
+|  cmq   |  cumQty           |    string    |cumulative quantity          ||
+|  cmv   |  cumValueRv       |    string    |cumulative value             ||
+|  seq   |  execSeq          |    int64_t   |execute seqence number       ||
+|  tts   |  transactTimeNs   |    int64_t   |transact time(nano secods)   ||
+|  eid   |  execID           |    string    |execute ID                   ||
+|  epx   |  execPriceRp      |    string    |execute price                |Do not push when it is 0.|
+|  eq    |  execQty          |    string    |execute quantity             |Do not push when it is 0.|
+|  ev    |  execValueRv      |    string    |execute value                |Do not push when it is 0.|
+|  csz   |  closedSize       |    string    |closed size                  |Do not push when it is 0.|
+|  cpnl  |  closedPnlRv      |    string    |closed PNL                   |Do not push when it is 0.|
+|  fr    |  feeRateRr        |    string    |fee rate                     |Do not push when it is 0.|
+|  ef    |  execFeeRv        |    string    |execute fee                  |Do not push when it is 0.|
+|  cid   |  clOrdID          |    string    |client order id              ||
+|  tpx   |  takeProfitRp     |    string    |take profit price            |Do not push when it is 0.|
+|  spx   |  stopLossRp       |    string    |stop loss price              |Do not push when it is 0.|
+|  cpsd  |  curPosSide       |    string    |cur position side            |Do not push when it is 0.|
+|  cpsz  |  curPosSize       |    string    |cur position size            |Do not push when it is 0.|
+|  cpsv  |  curPosValueRv    |    string    |cur position value           |Do not push when it is 0.|
+|  os    |  ordStatus        |    string    |order status                 |Do not push when it is 0.|
+|  pgop  |pegOffsetProportionRr|    string    |peg offset proportion        |Do not push when it is 0.|
+|  pgov  |  pegOffsetValueRp |    string    |peg offset value             |Do not push when it is 0.|
+|  an    |  action           |    string    |action                       |Do not push when it is 0.|
+|  ab    |  actionBy         |    string    |action By                    |Do not push when it is 0.|
+|  ot    |  ordType          |    string    |order type                   |Do not push when it is 0.|
+|  tif   |  timeInForce      |    string    |time in force                |Do not push when it is 0.|
+|  inst  |  execInst         |    string    |execute inst                 |Do not push when it is 0.|
+|  tgt   |  trigger          |    string    |trigger                      |Do not push when it is 0.|
+|  pgpt  |  pegPriceType     |    string    |peg price type               |Do not push when it is 0.|
+|  tt    |  tradeType        |    string    |trade type                   |Do not push when it is 0.|
+|  tptgt |  tpTrigger        |    string    |take profit trigger          |Do not push when it is 0.|
+|  sltgt |  slTrigger        |    string    |stop loss trigger            |Do not push when it is 0.|
+|  tptif |  tpTimeInForce    |    string    |take profit time in force    |Do not push when it is 0.|
+|  sltif |  slTimeInForce    |    string    |stop loss time in force      |Do not push when it is 0.|
+
+> position data set define
+
+| Field  |    Type    |        Description          |    MEMO    |
+|--------|------------|-----------------------------|------------|
+| pos    |  array     |  position list              |If the data is empty, an empty object will be transmitted.|
+
+> position item data define
+
+| Field  |  Field(0ld)     |    Type    |        Description          |    MEMO     |
+|--------|-----------------|------------|-----------------------------|-------------|
+|  u     |  userID         |  int64_t   |user id                      ||
+|  a     |  accountID      |  int64_t   |account id                   ||
+|  s     |  symbol         |  string    |symbol                       ||
+|  c     |  currency       |  string    |currency                     ||
+|  sd    |  side           |  string    |side                         ||
+|  sz    |  size           |  string    |size                         ||
+|  seq   |  execSeq        |  int64_t   |execute sequence number      ||
+|  lft   |  lastFundingTime|  int64_t   |last funding time            ||
+|  l     |  leverageRv     |  string    |leverage                     ||
+|  lp    |liquidationPriceRp|  tring    |liquidation price            ||
+|  mp    |  markPriceRp    |  string    |mark price                   ||
+|  up    |  unrealisedPnlRv|  string    |unrealised PNL               ||
+|  ps    |  posSide        |  string    |position side                ||
+|  mmr   | maintMarginReqRr|  string    |maint margin req             |Do not push when it is 0.|
+|  v     |  valueRv        |  string    |value                        |Do not push when it is 0.|
+|  pc    |  posCostRv      |  string    |position cost                |Do not push when it is 0.|
+|  apb   |assignedPosBalanceRv|  string    |assigned position balance    |Do not push when it is 0.|
+|  pm    | positionMarginRv|  string    |position margin              |Do not push when it is 0.|
+|  bpx   |  bankruptPriceRp|  string    |bankrupt price               |Do not push when it is 0.|
+|  blq   |  buyLeavesQty   |  string    |buy leaves quantity          |Do not push when it is 0.|
+|  blv   | buyLeavesValueRv|  string    |buy leaves value             |Do not push when it is 0.|
+|  slq   |  sellLeavesQty  |  string    |sell leaves quantity         |Do not push when it is 0.|
+|  slv   |sellLeavesValueRv|  string    |sell leaves value            |Do not push when it is 0.|
+|  frq   |  freeQty        |  string    |free quantity                |Do not push when it is 0.|
+|  frc   |  freeCostRv     |  string    |free cost                    |Do not push when it is 0.|
+|  oc    |  orderCostRv    |  string    |order cost                   |Do not push when it is 0.|
+|  ols   |estimatedOrdLossRv|  string    |estimated order loss         |Do not push when it is 0.|
+|  ub    |  usedBalanceRv  |  string    |used balance                 |Do not push when it is 0.|
+
+## Account-Order-Position (AOP NEW) Message Sample:
+
+> Message sample: snapshot
+
+> subscribe  
+```javascript
+--- subscribe all
+{"method":"aop_v.subscribe","params":{},"id":1}
+
+--- subscribe position
+{"method":"aop_v.subscribe","params":{"a":false, "P":true, "O": false},"id":1}
+
+--- subscribe order
+{"method":"aop_v.subscribe","params":{"a":false, "P":false, "O": true},"id":1}
+
+--- subscribe account
+{"method":"aop_v.subscribe","params":{"a":true, "P":false, "O": false},"id":1}
+
+--- specify symbols
+{"method":"aop_v.subscribe","params":{"s":["BTCUSDT"]},"id":1}
+```
+
+> response data info
+```javascript
+{           --- first recv mark price
+    "index_market24h": {
+        "highEp": 10020,
+        "lastEp": 10018,
+        "lowEp": 9996,
+        "openEp": 9996,
+        "symbol": ".USDT"
+    },
+    "timestamp": 1726190149834135804
+}
+{        --- then recv snapshot datas
+    "seq": 434567360,
+    "ts": 1726190141939837497,
+    "t": "snapshot",
+    "data": {
+        "ev": [
+        ],
+        "acc": [              --- account datas
+            {
+                "u": 7002741,
+                "a": 70027410003,
+                "c": "USDT",
+                "B": "10001000"
+            }
+        ],
+        "pos": [             --- position datas
+ 
+        ],
+        "ords": {           --- order datas
+            "O": [          --- open orders
+            ]
+        }
+    }
+}
+```
+
+> Message sample: incremental
+```javascript
+{       --- open order incremental
+    "seq": 434567365,
+    "ts": 1726190169524522442,
+    "t": "incremental",
+    "data": {
+         "ev": [
+        ],
+        "acc": [
+            {
+                "u": 7002741,
+                "a": 70027410003,
+                "c": "USDT",
+                "B": "10001000",
+                "ub": "5.847924914"
+            }
+        ],
+        "pos": [
+        ],
+        "ords": {
+            "O": [
+                {
+                    "u": 7002741,
+                    "a": 70027410003,
+                    "s": "BTCUSDT",
+                    "c": "USDT",
+                    "ats": 1726190169521941216,
+                    "oid": "4d2ceb72-8782-4874-9a20-a248e1f92bd5",
+                    "sd": "Buy",
+                    "es": "New",
+                    "os": "New",
+                    "cid": "a230d7a7-fc7d-1e90-88c6-0c42671ef44f",
+                    "seq": 23509755787,
+                    "tts": 1726190169523185811,
+                    "eid": "00000000-0000-0000-0000-000000000000",
+                    "px": "57820.1",
+                    "q": "0.001",
+                    "dq": "0",
+                    "lq": "0.001",
+                    "lv": "57.8201",
+                    "cmq": "0",
+                    "cmv": "0",
+                    "stpx": "0",
+                    "psd": "Long",
+                    "an": "New",
+                    "ab": "FromOrderPlacement",
+                    "ot": "Limit",
+                    "tif": "GoodTillCancel",
+                    "tptgt": "ByLastPrice",
+                    "sltgt": "ByMarkPrice",
+                    "tptif": "ImmediateOrCancel",
+                    "sltif": "ImmediateOrCancel"
+                }
+            ],
+            "C": [      --- closed order
+            ],
+            "F": [      --- filled order  
+            ]
+        }
+    }
+}
+
+--- order status changed, then recv
+{
+    "seq": 434567368,
+    "ts": 1726190180268277288,
+    "t": "incremental",
+    "data": {
+         "ev": [
+        ],
+        "acc": [
+            {
+                "u": 7002741,
+                "a": 70027410003,
+                "c": "USDT",
+                "B": "10001000"
+            }
+        ],
+        "pos": [
+ 
+        ],
+        "ords": {
+            "O": [
+ 
+            ],
+            "C": [
+                {
+                    "u": 7002741,
+                    "a": 70027410003,
+                    "s": "BTCUSDT",
+                    "c": "USDT",
+                    "ats": 1726190180265948640,
+                    "oid": "4d2ceb72-8782-4874-9a20-a248e1f92bd5",
+                    "sd": "Buy",
+                    "es": "Canceled",
+                    "os": "Canceled",
+                    "cid": "a230d7a7-fc7d-1e90-88c6-0c42671ef44f",
+                    "seq": 23509756681,
+                    "tts": 1726190180267107171,
+                    "eid": "00000000-0000-0000-0000-000000000000",
+                    "px": "57820.1",
+                    "q": "0.001",
+                    "dq": "0",
+                    "lq": "0",
+                    "lv": "0",
+                    "cmq": "0",
+                    "cmv": "0",
+                    "stpx": "0",
+                    "eq": "0.001",
+                    "psd": "Long",
+                    "an": "Cancel",
+                    "ab": "ByUser",
+                    "ot": "Limit",
+                    "tif": "GoodTillCancel",
+                    "tptgt": "ByLastPrice",
+                    "sltgt": "ByMarkPrice",
+                    "tptif": "ImmediateOrCancel",
+                    "sltif": "ImmediateOrCancel"
+                }
+            ],
+            "F": [
+            ]
+        }
+    }
+}
+
+--- filled, and have position
+{
+    "seq": 434567369,
+    "ts": 1726190195189187344,
+    "t": "incremental",
+    "data": {
+        "ev": [
+        ],
+        "acc": [
+            {
+                "u": 7002741,
+                "a": 70027410003,
+                "c": "USDT",
+                "B": "10000999.96525574",
+                "ub": "5.821728484"
+            }
+        ],
+        "pos": [
+            {
+                "u": 7002741,
+                "a": 70027410003,
+                "c": "USDT",
+                "s": "BTCUSDT",
+                "sd": "Buy",
+                "sz": "0.001",
+                "seq": 23509757928,
+                "lft": 1726185600000000000,
+                "l": "-10",
+                "lp": "0.1",
+                "mp": "57904.6",
+                "up": "-0.0025",
+                "ps": "Long",
+                "mmr": "0.005",
+                "v": "57.9071",
+                "pc": "5.821728484",
+                "apb": "5.824228484",
+                "pm": "5.7871594378",
+                "bpx": "0.1",
+                "frq": "-0.001",
+                "ub": "5.821728484"
+            }
+        ],
+        "ords": {
+            "O": [
+            ],
+            "C": [
+                {
+                    "u": 7002741,
+                    "a": 70027410003,
+                    "s": "BTCUSDT",
+                    "c": "USDT",
+                    "ats": 1726190195185958934,
+                    "oid": "cd5568de-b915-4a16-a606-ba010f821147",
+                    "sd": "Buy",
+                    "es": "TakerFill",
+                    "os": "Filled",
+                    "cid": "03764714-faac-7a1d-02ef-9332854cd259",
+                    "seq": 23509757928,
+                    "tts": 1726190195187985053,
+                    "eid": "bc3cb372-53ff-5d15-b0a4-d5a13dcdb39e",
+                    "px": "59664",
+                    "q": "0.001",
+                    "dq": "0",
+                    "lq": "0",
+                    "lv": "0",
+                    "cmq": "0.001",
+                    "cmv": "57.9071",
+                    "stpx": "0",
+                    "epx": "57907.1",
+                    "eq": "0.001",
+                    "ev": "57.9071",
+                    "fr": "0.0006",
+                    "ef": "0.03474426",
+                    "cpsz": "0.001",
+                    "cpsv": "57.9071",
+                    "psd": "Long",
+                    "cpsd": "Buy",
+                    "an": "New",
+                    "ab": "FromOrderPlacement",
+                    "ot": "Market",
+                    "tif": "ImmediateOrCancel",
+                    "tt": "Trade",
+                    "tptgt": "ByLastPrice",
+                    "sltgt": "ByMarkPrice",
+                    "tptif": "ImmediateOrCancel",
+                    "sltif": "ImmediateOrCancel"
+                }
+            ],
+            "F": [
+                {
+                    "u": 7002741,
+                    "a": 70027410003,
+                    "s": "BTCUSDT",
+                    "c": "USDT",
+                    "ats": 1726190195185958934,
+                    "oid": "cd5568de-b915-4a16-a606-ba010f821147",
+                    "sd": "Buy",
+                    "es": "TakerFill",
+                    "os": "Filled",
+                    "cid": "03764714-faac-7a1d-02ef-9332854cd259",
+                    "seq": 23509757928,
+                    "tts": 1726190195187985053,
+                    "eid": "bc3cb372-53ff-5d15-b0a4-d5a13dcdb39e",
+                    "px": "59664",
+                    "q": "0.001",
+                    "dq": "0",
+                    "lq": "0",
+                    "lv": "0",
+                    "cmq": "0.001",
+                    "cmv": "57.9071",
+                    "stpx": "0",
+                    "epx": "57907.1",
+                    "eq": "0.001",
+                    "ev": "57.9071",
+                    "fr": "0.0006",
+                    "ef": "0.03474426",
+                    "cpsz": "0.001",
+                    "cpsv": "57.9071",
+                    "psd": "Long",
+                    "cpsd": "Buy",
+                    "an": "New",
+                    "ab": "FromOrderPlacement",
+                    "ot": "Market",
+                    "tif": "ImmediateOrCancel",
+                    "tt": "Trade",
+                    "tptgt": "ByLastPrice",
+                    "sltgt": "ByMarkPrice",
+                    "tptif": "ImmediateOrCancel",
+                    "sltif": "ImmediateOrCancel"
+                }
+            ]
+        }
+    }
+}
+```
+
+## Unsubscribe Account-Order-Position (AOP NEW)
+
+> Request format
+```javascript
+{
+  "id": <id>,
+  "method": "aop_v.unsubscribe",
+  "params": []
+}
+```
+
+> Response format
+```javascript
+{
+  "error": null,
+  "id": <id>,
+  "result": {
+    "status": "success"
+  }
+}
+```
+## Unsubscribe Account-Order-Position (AOP NEW) Message Sample:
+
+> request message
+```javascript
+{"method":"aop_v.unsubscribe","params":[],"id":1}
+```
+
 ## Subscribe account margin (RAS)
 
 RiskUnit is the unit of risk evaluation, which contains summary information of positions or assets within its scope.
