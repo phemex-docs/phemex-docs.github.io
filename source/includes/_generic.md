@@ -202,7 +202,7 @@ Every HTTP Rest Request must have the following Headers:
 | /exchange/public/md/kline | GET | 10      | kline query |
 
 ## Contact us
-* [Phemex API Telegram Group](https://t.me/Phemex_API)
+* [Phemex API Telegram Group](https://t.me/Phemex_API_Official)
 * [Phemex Customer Support](https://phemex.com/support)
 
 ## CCXT integration
