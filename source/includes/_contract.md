@@ -4646,6 +4646,66 @@ GET contract-biz/public/real-funding-rates?symbol=<symbol>
 ]
 ```
 
+## Query Index Price Sources
+
+> Request format
+
+```
+GET /public/index-sources
+```
+
+* This endpoint returns the reference exchanges and their weights used to calculate each index price.
+* No authentication required.
+
+> Response sample
+
+```json
+{
+  "code": 0,
+  "msg": "",
+  "data": [
+    {
+      "indexSymbol": ".BTCUSDT",
+      "references": [
+        {
+          "refSymbol": "BTCUSDT",
+          "exchange": "BINANCE",
+          "weight": 63
+        },
+        {
+          "refSymbol": "BTCUSDT",
+          "exchange": "OKEX",
+          "weight": 14
+        },
+        {
+          "refSymbol": "BTCUSD",
+          "exchange": "BITFINEX",
+          "weight": 1
+        },
+        {
+          "refSymbol": "BTCUSD",
+          "exchange": "COINBASE",
+          "weight": 1
+        },
+        {
+          "refSymbol": "BTCUSD",
+          "exchange": "KRAKEN",
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}
+```
+
+| Field       | Type    | Description                                        |
+|-------------|---------|----------------------------------------------------|
+| indexSymbol  | String  | Index price symbol, e.g. `.BTCUSDT`               |
+| references   | Array   | List of reference exchanges for this index         |
+| refSymbol    | String  | Trading pair symbol on the reference exchange      |
+| exchange     | String  | Reference exchange name, e.g. `BINANCE`, `OKEX`   |
+| weight       | Integer | Weight of this exchange in the index calculation   |
+
 # USDⓈ-M Perpetual Websocket API
 
 ## Heartbeat
